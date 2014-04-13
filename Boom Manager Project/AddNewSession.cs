@@ -61,20 +61,22 @@ namespace Boom_Manager_Project
         {
             if (tbDiscountCards.Text == "0")
             {
+                _repeatCallOfMethodCounter += 2;
                 numUpDHoursLeft.Value = 1;
                 numUpDMinutesLeft.Value = 0;
-                numUpDPaidPrice.Value = _addNewSessionController.SetPrice(tbDiscountCards.Text, cbPlaystationId.Text,
-                    1,
-                    0, numUpDPaidPrice.Maximum, numUpDPaidPrice.Minimum);
+                decimal t = _addNewSessionController.SetPrice(tbDiscountCards.Text, cbPlaystationId.Text, 1, 0);
+                numUpDPaidPrice.Minimum = t;
+                numUpDPaidPrice.Value = t;
             }
             else if (!String.IsNullOrWhiteSpace(tbDiscountCards.Text))
             {
                 numUpDClientMoneyLeft.Value = numUpDClientMoneyLeft.Maximum;
                 numUpDHoursRemainedOnCard.Value = numUpDHoursRemainedOnCard.Maximum;
                 numUpDMinutesRemainedOnCard.Value = numUpDMinutesRemainedOnCard.Maximum;
-                TimeSpan paidTime = _addNewSessionController.PaidPriceChanged(numUpDClientMoneyLeft.Value, cbPlaystationId.Text,
+                TimeSpan paidTime = _addNewSessionController.PaidPriceChanged(numUpDClientMoneyLeft.Value,
+                    cbPlaystationId.Text,
                     tbDiscountCards.Text, numUpDClientMoneyLeft.Minimum, numUpDClientMoneyLeft.Maximum);
-                numUpDHoursRemainedOnCard.Value = (decimal)(paidTime.TotalDays - paidTime.Hours);
+                numUpDHoursRemainedOnCard.Value = (decimal) (paidTime.TotalDays - paidTime.Hours);
             }
         }
         private void IsClientWithCardOrNot()
@@ -102,27 +104,79 @@ namespace Boom_Manager_Project
 
         private void numUpDHoursLeft_ValueChanged(object sender, EventArgs e)
         {
-            if (_repeatCallOfMethodCounter <= 1)
+            if (_repeatCallOfMethodCounter <= 0)
             {
-                _addNewSessionController.SetPrice(tbDiscountCards.Text, cbPlaystationId.Text, numUpDHoursLeft.Value,
-                    numUpDMinutesLeft.Value, numUpDPaidPrice.Maximum, numUpDPaidPrice.Minimum);
+                _repeatCallOfMethodCounter++;
+                decimal t = _addNewSessionController.SetPrice(tbDiscountCards.Text, cbPlaystationId.Text,
+                    numUpDHoursLeft.Value,
+                    numUpDMinutesLeft.Value);
+                if (t > numUpDPaidPrice.Maximum)
+                    numUpDPaidPrice.Value = numUpDPaidPrice.Maximum;
+                else if (t < numUpDPaidPrice.Minimum)
+                    numUpDPaidPrice.Value = numUpDPaidPrice.Minimum;
+                else
+                    numUpDPaidPrice.Value = t;
             }
+            _repeatCallOfMethodCounter = 0;
         }
 
         private void numUpDMinutesLeft_ValueChanged(object sender, EventArgs e)
         {
-            if (_repeatCallOfMethodCounter > 0)
+            if (_repeatCallOfMethodCounter <= 0)
             {
-
+                if (numUpDMinutesLeft.Value > 59)
+                {
+                    numUpDMinutesLeft.Value = 0;
+                    numUpDHoursLeft.Value++;
+                }
+                _repeatCallOfMethodCounter++;
+                decimal t = _addNewSessionController.SetPrice(tbDiscountCards.Text, cbPlaystationId.Text,
+                    numUpDHoursLeft.Value, numUpDMinutesLeft.Value);
+                if (t < numUpDPaidPrice.Minimum)
+                {
+                    numUpDPaidPrice.Value = numUpDPaidPrice.Minimum;
+                }
+                else if (t > numUpDPaidPrice.Maximum)
+                {
+                    numUpDPaidPrice.Value = numUpDPaidPrice.Maximum;
+                }
+                else
+                {
+                    numUpDPaidPrice.Value = t;
+                }
             }
+            _repeatCallOfMethodCounter = 0;
         }
 
         private void numUpDPaidPrice_ValueChanged(object sender, EventArgs e)
         {
-            if (_repeatCallOfMethodCounter > 0)
+            if (_repeatCallOfMethodCounter <= 0)
             {
-
+                _repeatCallOfMethodCounter++;
+                TimeSpan t = _addNewSessionController.PaidPriceChanged(numUpDPaidPrice.Value, cbPlaystationId.Text,
+                    tbDiscountCards.Text, numUpDPaidPrice.Minimum, numUpDPaidPrice.Maximum);
+                if (t.Hours > numUpDHoursLeft.Maximum)
+                {
+                    numUpDHoursLeft.Value = numUpDHoursLeft.Maximum;
+//                    numUpDMinutesLeft.Value = numUpDMinutesLeft.Maximum;
+                }
+                else if (t.Hours < numUpDHoursLeft.Minimum)
+                {
+                    numUpDHoursLeft.Value = numUpDHoursLeft.Minimum;
+//                    numUpDMinutesLeft.Value = numUpDMinutesLeft.Minimum;
+                }
+                else
+                {
+                    numUpDHoursLeft.Value = t.Hours + t.Days*24;
+                    numUpDMinutesLeft.Value = t.Minutes;
+                }
             }
+            _repeatCallOfMethodCounter = 0;
+        }
+
+        private void bCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

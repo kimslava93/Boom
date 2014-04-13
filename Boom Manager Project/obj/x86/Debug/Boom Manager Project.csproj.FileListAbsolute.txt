@@ -9,5 +9,4 @@ D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Pr
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.EnterPassword.resources
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ChangeShift.resources
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewStaffUser.resources
-D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csprojResolveAssemblyReference.cache
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.FAddNewSession.resources

@@ -86,6 +86,7 @@
             this.bCancel.TabIndex = 30;
             this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // numUpDHoursLeft
             // 

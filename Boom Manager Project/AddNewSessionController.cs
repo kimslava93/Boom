@@ -55,13 +55,11 @@ namespace Boom_Manager_Project
             return _addNewSessionModel.CurrentDateTime.ToString("dd MMMM");
         }
 
-        public decimal SetPrice(string discountCard, string playstationId, decimal hoursLeft, decimal minutesLeft, decimal maximumPrice, decimal minimumPrice)
+        public decimal SetPrice(string discountCard, string playstationId, decimal hoursLeft, decimal minutesLeft)
         {
             var currentDateTime = DateTime.Now;
-//            if (_repeatCallOfMethodCounter > 0) return 0;
             if (discountCard == "0")
             {
-//                _repeatCallOfMethodCounter++;
                 if (hoursLeft < 0 || minutesLeft < 0)
                 {
                     return 0;
@@ -75,19 +73,18 @@ namespace Boom_Manager_Project
                     {
                         return 0;
                     }
-                    if ((decimal) price < minimumPrice)
-                    {
-                        return minimumPrice;
-                            //"Price is lower than it's minimum It is too low price please check entered data");
-                    }
-                    if ((decimal) price > maximumPrice)
-                    {
-                        return maximumPrice;
-                            //"Price is higher than 30 000 \nIt is very high price please check entered data");*/
-                    } 
+//                    if ((decimal) price < minimumPrice)
+//                    {
+//                        return minimumPrice;
+//                            //"Price is lower than it's minimum It is too low price please check entered data");
+//                    }
+//                    if ((decimal) price > maximumPrice)
+//                    {
+//                        return maximumPrice;
+//                            //"Price is higher than 30 000 \nIt is very high price please check entered data");*/
+//                    } 
                     return Math.Round((decimal) price, 2);
                 }
-//                _repeatCallOfMethodCounter = 0;
             }
             else
             {
@@ -95,30 +92,25 @@ namespace Boom_Manager_Project
                 {
                     return 0;
                 }
-//                if (_repeatCallOfMethodCounter <= 1)
-//                {
-//                    _repeatCallOfMethodCounter++;
                     if (hoursLeft >= 0 || minutesLeft >= 0)
                     {
                         var toPlay = new TimeSpan((int) hoursLeft/24, (int) hoursLeft - ((int) hoursLeft/24)*24,
                             (int) minutesLeft, 0);
 
                         double price = _addNewSessionModel.GetSumToPay(playstationId, toPlay, currentDateTime);
-                        if ((decimal) price < minimumPrice)
-                        {
-                            return minimumPrice;
-                                //"Price is lower than 0\nIt is too low price please check entered data");
-                        }
-                        if ((decimal) price > maximumPrice)
-                        {
-                            return maximumPrice;
-                                //Price is higher than 30 000 \nIt is very high price please check entered data");                            
-                        }
+//                        if ((decimal) price < minimumPrice)
+//                        {
+//                            return minimumPrice;
+//                                //"Price is lower than 0\nIt is too low price please check entered data");
+//                        }
+//                        if ((decimal) price > maximumPrice)
+//                        {
+//                            return maximumPrice;
+//                                //Price is higher than 30 000 \nIt is very high price please check entered data");                            
+//                        }
                         return Math.Round((decimal) price, 2);
                     }
-//                    _repeatCallOfMethodCounter = 0;
                 }
-//            }
             return 0;
         }
         public TimeSpan PaidPriceChanged(decimal priceValue,string playstationId, string discountCard, decimal minimumValue, decimal maximumValue)
