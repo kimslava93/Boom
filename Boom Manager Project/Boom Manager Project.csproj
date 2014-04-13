@@ -62,6 +62,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddClientToSessionModel.cs" />
+    <Compile Include="AddDiscountCardToSession.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddDiscountCardToSession.Designer.cs">
+      <DependentUpon>AddDiscountCardToSession.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddNewSession.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +117,9 @@
     <Compile Include="MyClasses\MyString.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddDiscountCardToSession.resx">
+      <DependentUpon>AddDiscountCardToSession.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddNewSession.resx">
       <DependentUpon>AddNewSession.cs</DependentUpon>
     </EmbeddedResource>

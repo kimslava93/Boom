@@ -159,5 +159,13 @@ namespace Boom_Manager_Project.DataBaseClasses
             return (from t in db.GetTable<timezones_t>()
                 select t).ToList();
         }
+
+        public client_info_t GetClientInfoById(string id)
+        {
+            var db = new dbDataContext();
+            return (from c in db.GetTable<client_info_t>()
+                where c.client_id == id
+                select c).SingleOrDefault();
+        }
     }
 }

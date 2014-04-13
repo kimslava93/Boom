@@ -178,5 +178,38 @@ namespace Boom_Manager_Project
         {
             Close();
         }
+        private void AddClients()
+        {
+            AddDiscountCardToSession adcts = new AddDiscountCardToSession(_db, table_numComboBox.Text);
+            adcts.ShowDialog();
+            if (adcts.Result == "0" || String.IsNullOrWhiteSpace(adcts.Result))
+            {
+                textBoxBonusCards.Text = "0";
+            }
+            else
+            {
+                if (!IsRepeated(adcts.Result))
+                {
+                    if (String.IsNullOrWhiteSpace(textBoxBonusCards.Text) || textBoxBonusCards.Text == "0")
+                    {
+                        textBoxBonusCards.Text = adcts.Result;
+                        client_name_textBox.Text = adcts.Client;
+                        numericUpDownClientMoneyLeft.Minimum = (decimal)adcts.MoneyLeft;
+                        numericUpDownClientMoneyLeft.Maximum = (decimal)adcts.MoneyLeft;
+                        numericUpDownClientMoneyLeft.Value = (decimal)adcts.MoneyLeft;
+                    }
+                    else
+                    {
+                        textBoxBonusCards.Text += "; " + adcts.Result;
+                        client_name_textBox.Text += "; " + adcts.Client;
+                        numericUpDownClientMoneyLeft.Maximum = (decimal)((double)numericUpDownClientMoneyLeft.Value + adcts.MoneyLeft);
+                        numericUpDownClientMoneyLeft.Minimum = numericUpDownClientMoneyLeft.Maximum;
+                        numericUpDownClientMoneyLeft.Value = numericUpDownClientMoneyLeft.Maximum;
+                    }
+                    UpdateRemainedTimeOnPaidPriceChanged((double)numericUpDownClientMoneyLeft.Value);
+                }
+            }
+            CheckClientWithCardOtNot();
+        }
     }
 }
