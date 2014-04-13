@@ -71,7 +71,8 @@ namespace Boom_Manager_Project
 
         private void bAddNewClient_Click(object sender, EventArgs e)
         {
-
+            FAddNewSession newSessionForm = new FAddNewSession();
+            newSessionForm.ShowDialog();
         }
     }
 }

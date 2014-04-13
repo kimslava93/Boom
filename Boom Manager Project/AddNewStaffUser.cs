@@ -7,17 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
 {
     public partial class AddNewStaffUser : Form
     {
-        private Controller _controller; 
+        private AddNewUserController _addNewUserController; 
         public AddNewStaffUser()
         {
             InitializeComponent();
-            _controller = new Controller();
+            _addNewUserController = new AddNewUserController();
         }
 
         private void bSubmit_Click(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace Boom_Manager_Project
                 try
                 {
 
-                _controller.AddNewUser(newUser);
+                _addNewUserController.AddNewUser(newUser);
                 }
                 catch (Exception)
                 {

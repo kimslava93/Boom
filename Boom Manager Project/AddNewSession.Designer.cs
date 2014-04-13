@@ -1,6 +1,6 @@
 ﻿namespace Boom_Manager_Project
 {
-    partial class AddNewSession
+    partial class FAddNewSession
     {
         /// <summary>
         /// Required designer variable.
@@ -29,53 +29,54 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.numericUpDownMinutesLeft = new System.Windows.Forms.NumericUpDown();
+            this.numUpDMinutesLeft = new System.Windows.Forms.NumericUpDown();
             this.bCancel = new System.Windows.Forms.Button();
-            this.numericUpDownHoursLeft = new System.Windows.Forms.NumericUpDown();
-            this.OR_text_label = new System.Windows.Forms.Label();
+            this.numUpDHoursLeft = new System.Windows.Forms.NumericUpDown();
+            this.lOR = new System.Windows.Forms.Label();
             this.lMoneyToPay = new System.Windows.Forms.Label();
-            this.textBoxBonusCards = new System.Windows.Forms.TextBox();
+            this.tbDiscountCards = new System.Windows.Forms.TextBox();
             this.lTimeToPlay = new System.Windows.Forms.Label();
-            this.buttonAddCard = new System.Windows.Forms.Button();
-            this.client_info_group_box = new System.Windows.Forms.GroupBox();
-            this.numericUpDownMinutesRemainedOnCard = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownHoursRemainedOnCard = new System.Windows.Forms.NumericUpDown();
-            this.client_name_textBox = new System.Windows.Forms.TextBox();
-            this.numericUpDownClientMoneyLeft = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.bAddDiscountCard = new System.Windows.Forms.Button();
+            this.gbClientInfo = new System.Windows.Forms.GroupBox();
+            this.numUpDMinutesRemainedOnCard = new System.Windows.Forms.NumericUpDown();
+            this.numUpDHoursRemainedOnCard = new System.Windows.Forms.NumericUpDown();
+            this.tbClientName = new System.Windows.Forms.TextBox();
+            this.numUpDClientMoneyLeft = new System.Windows.Forms.NumericUpDown();
+            this.lClientName = new System.Windows.Forms.Label();
+            this.lMoneyOnCardLeft = new System.Windows.Forms.Label();
+            this.lTimeOnCardLeft = new System.Windows.Forms.Label();
             this.current_time_timer = new System.Windows.Forms.Timer(this.components);
-            this.labelcurrentTime = new System.Windows.Forms.Label();
-            this.current_time_label = new System.Windows.Forms.Label();
-            this.table_numComboBox = new System.Windows.Forms.ComboBox();
-            this.table_num_label = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.add_client_button = new System.Windows.Forms.Button();
-            this.paid_price_numeric_up_down = new System.Windows.Forms.NumericUpDown();
-            this.deposit_payment_groupBox = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinutesLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHoursLeft)).BeginInit();
-            this.client_info_group_box.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinutesRemainedOnCard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHoursRemainedOnCard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownClientMoneyLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paid_price_numeric_up_down)).BeginInit();
-            this.deposit_payment_groupBox.SuspendLayout();
+            this.lCurrentTime = new System.Windows.Forms.Label();
+            this.lCurrentDate = new System.Windows.Forms.Label();
+            this.cbPlaystationId = new System.Windows.Forms.ComboBox();
+            this.lPlaystationId = new System.Windows.Forms.Label();
+            this.lClientDiscountId = new System.Windows.Forms.Label();
+            this.bAddSession = new System.Windows.Forms.Button();
+            this.numUpDPaidPrice = new System.Windows.Forms.NumericUpDown();
+            this.gbDepositPayment = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).BeginInit();
+            this.gbClientInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesRemainedOnCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursRemainedOnCard)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDClientMoneyLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDPaidPrice)).BeginInit();
+            this.gbDepositPayment.SuspendLayout();
             this.SuspendLayout();
             // 
-            // numericUpDownMinutesLeft
+            // numUpDMinutesLeft
             // 
-            this.numericUpDownMinutesLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownMinutesLeft.Location = new System.Drawing.Point(222, 25);
-            this.numericUpDownMinutesLeft.Maximum = new decimal(new int[] {
+            this.numUpDMinutesLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDMinutesLeft.Location = new System.Drawing.Point(222, 25);
+            this.numUpDMinutesLeft.Maximum = new decimal(new int[] {
             60,
             0,
             0,
             0});
-            this.numericUpDownMinutesLeft.Name = "numericUpDownMinutesLeft";
-            this.numericUpDownMinutesLeft.Size = new System.Drawing.Size(54, 30);
-            this.numericUpDownMinutesLeft.TabIndex = 6;
+            this.numUpDMinutesLeft.Name = "numUpDMinutesLeft";
+            this.numUpDMinutesLeft.Size = new System.Drawing.Size(54, 30);
+            this.numUpDMinutesLeft.TabIndex = 6;
+            this.numUpDMinutesLeft.ValueChanged += new System.EventHandler(this.numUpDMinutesLeft_ValueChanged);
             // 
             // bCancel
             // 
@@ -86,38 +87,39 @@
             this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = true;
             // 
-            // numericUpDownHoursLeft
+            // numUpDHoursLeft
             // 
-            this.numericUpDownHoursLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownHoursLeft.Location = new System.Drawing.Point(163, 25);
-            this.numericUpDownHoursLeft.Maximum = new decimal(new int[] {
+            this.numUpDHoursLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDHoursLeft.Location = new System.Drawing.Point(163, 25);
+            this.numUpDHoursLeft.Maximum = new decimal(new int[] {
             120,
             0,
             0,
             0});
-            this.numericUpDownHoursLeft.Minimum = new decimal(new int[] {
+            this.numUpDHoursLeft.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDownHoursLeft.Name = "numericUpDownHoursLeft";
-            this.numericUpDownHoursLeft.Size = new System.Drawing.Size(54, 30);
-            this.numericUpDownHoursLeft.TabIndex = 5;
-            this.numericUpDownHoursLeft.ThousandsSeparator = true;
-            this.numericUpDownHoursLeft.Value = new decimal(new int[] {
+            this.numUpDHoursLeft.Name = "numUpDHoursLeft";
+            this.numUpDHoursLeft.Size = new System.Drawing.Size(54, 30);
+            this.numUpDHoursLeft.TabIndex = 5;
+            this.numUpDHoursLeft.ThousandsSeparator = true;
+            this.numUpDHoursLeft.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.numUpDHoursLeft.ValueChanged += new System.EventHandler(this.numUpDHoursLeft_ValueChanged);
             // 
-            // OR_text_label
+            // lOR
             // 
-            this.OR_text_label.AutoSize = true;
-            this.OR_text_label.Location = new System.Drawing.Point(76, 66);
-            this.OR_text_label.Name = "OR_text_label";
-            this.OR_text_label.Size = new System.Drawing.Size(32, 21);
-            this.OR_text_label.TabIndex = 2;
-            this.OR_text_label.Text = "OR";
+            this.lOR.AutoSize = true;
+            this.lOR.Location = new System.Drawing.Point(79, 62);
+            this.lOR.Name = "lOR";
+            this.lOR.Size = new System.Drawing.Size(32, 21);
+            this.lOR.TabIndex = 2;
+            this.lOR.Text = "OR";
             // 
             // lMoneyToPay
             // 
@@ -129,18 +131,20 @@
             this.lMoneyToPay.TabIndex = 8;
             this.lMoneyToPay.Text = "Money to pay";
             // 
-            // textBoxBonusCards
+            // tbDiscountCards
             // 
-            this.textBoxBonusCards.BackColor = System.Drawing.Color.White;
-            this.textBoxBonusCards.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBoxBonusCards.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxBonusCards.HideSelection = false;
-            this.textBoxBonusCards.Location = new System.Drawing.Point(140, 49);
-            this.textBoxBonusCards.Name = "textBoxBonusCards";
-            this.textBoxBonusCards.ReadOnly = true;
-            this.textBoxBonusCards.ShortcutsEnabled = false;
-            this.textBoxBonusCards.Size = new System.Drawing.Size(133, 30);
-            this.textBoxBonusCards.TabIndex = 28;
+            this.tbDiscountCards.BackColor = System.Drawing.Color.White;
+            this.tbDiscountCards.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbDiscountCards.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDiscountCards.HideSelection = false;
+            this.tbDiscountCards.Location = new System.Drawing.Point(140, 49);
+            this.tbDiscountCards.Name = "tbDiscountCards";
+            this.tbDiscountCards.ReadOnly = true;
+            this.tbDiscountCards.ShortcutsEnabled = false;
+            this.tbDiscountCards.Size = new System.Drawing.Size(133, 30);
+            this.tbDiscountCards.TabIndex = 28;
+            this.tbDiscountCards.Text = "0";
+            this.tbDiscountCards.TextChanged += new System.EventHandler(this.tbDiscountCards_TextChanged);
             // 
             // lTimeToPlay
             // 
@@ -152,257 +156,263 @@
             this.lTimeToPlay.TabIndex = 8;
             this.lTimeToPlay.Text = "Time to play";
             // 
-            // buttonAddCard
+            // bAddDiscountCard
             // 
-            this.buttonAddCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddCard.Location = new System.Drawing.Point(279, 47);
-            this.buttonAddCard.Name = "buttonAddCard";
-            this.buttonAddCard.Size = new System.Drawing.Size(61, 32);
-            this.buttonAddCard.TabIndex = 29;
-            this.buttonAddCard.Text = "Add card";
-            this.buttonAddCard.UseVisualStyleBackColor = true;
+            this.bAddDiscountCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bAddDiscountCard.Location = new System.Drawing.Point(279, 47);
+            this.bAddDiscountCard.Name = "bAddDiscountCard";
+            this.bAddDiscountCard.Size = new System.Drawing.Size(61, 32);
+            this.bAddDiscountCard.TabIndex = 29;
+            this.bAddDiscountCard.Text = "Add card";
+            this.bAddDiscountCard.UseVisualStyleBackColor = true;
             // 
-            // client_info_group_box
+            // gbClientInfo
             // 
-            this.client_info_group_box.Controls.Add(this.numericUpDownMinutesRemainedOnCard);
-            this.client_info_group_box.Controls.Add(this.numericUpDownHoursRemainedOnCard);
-            this.client_info_group_box.Controls.Add(this.client_name_textBox);
-            this.client_info_group_box.Controls.Add(this.numericUpDownClientMoneyLeft);
-            this.client_info_group_box.Controls.Add(this.label2);
-            this.client_info_group_box.Controls.Add(this.label4);
-            this.client_info_group_box.Controls.Add(this.label3);
-            this.client_info_group_box.Enabled = false;
-            this.client_info_group_box.Location = new System.Drawing.Point(388, 150);
-            this.client_info_group_box.Name = "client_info_group_box";
-            this.client_info_group_box.Size = new System.Drawing.Size(304, 190);
-            this.client_info_group_box.TabIndex = 27;
-            this.client_info_group_box.TabStop = false;
-            this.client_info_group_box.Text = "Client info";
+            this.gbClientInfo.Controls.Add(this.numUpDMinutesRemainedOnCard);
+            this.gbClientInfo.Controls.Add(this.numUpDHoursRemainedOnCard);
+            this.gbClientInfo.Controls.Add(this.tbClientName);
+            this.gbClientInfo.Controls.Add(this.numUpDClientMoneyLeft);
+            this.gbClientInfo.Controls.Add(this.lClientName);
+            this.gbClientInfo.Controls.Add(this.lMoneyOnCardLeft);
+            this.gbClientInfo.Controls.Add(this.lTimeOnCardLeft);
+            this.gbClientInfo.Enabled = false;
+            this.gbClientInfo.Location = new System.Drawing.Point(388, 150);
+            this.gbClientInfo.Name = "gbClientInfo";
+            this.gbClientInfo.Size = new System.Drawing.Size(304, 190);
+            this.gbClientInfo.TabIndex = 27;
+            this.gbClientInfo.TabStop = false;
+            this.gbClientInfo.Text = "Client info";
             // 
-            // numericUpDownMinutesRemainedOnCard
+            // numUpDMinutesRemainedOnCard
             // 
-            this.numericUpDownMinutesRemainedOnCard.Enabled = false;
-            this.numericUpDownMinutesRemainedOnCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownMinutesRemainedOnCard.Location = new System.Drawing.Point(228, 73);
-            this.numericUpDownMinutesRemainedOnCard.Maximum = new decimal(new int[] {
+            this.numUpDMinutesRemainedOnCard.Enabled = false;
+            this.numUpDMinutesRemainedOnCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDMinutesRemainedOnCard.Location = new System.Drawing.Point(228, 73);
+            this.numUpDMinutesRemainedOnCard.Maximum = new decimal(new int[] {
             60,
             0,
             0,
             0});
-            this.numericUpDownMinutesRemainedOnCard.Name = "numericUpDownMinutesRemainedOnCard";
-            this.numericUpDownMinutesRemainedOnCard.Size = new System.Drawing.Size(60, 30);
-            this.numericUpDownMinutesRemainedOnCard.TabIndex = 8;
+            this.numUpDMinutesRemainedOnCard.Name = "numUpDMinutesRemainedOnCard";
+            this.numUpDMinutesRemainedOnCard.ReadOnly = true;
+            this.numUpDMinutesRemainedOnCard.Size = new System.Drawing.Size(60, 30);
+            this.numUpDMinutesRemainedOnCard.TabIndex = 8;
             // 
-            // numericUpDownHoursRemainedOnCard
+            // numUpDHoursRemainedOnCard
             // 
-            this.numericUpDownHoursRemainedOnCard.Enabled = false;
-            this.numericUpDownHoursRemainedOnCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownHoursRemainedOnCard.Location = new System.Drawing.Point(162, 73);
-            this.numericUpDownHoursRemainedOnCard.Maximum = new decimal(new int[] {
+            this.numUpDHoursRemainedOnCard.Enabled = false;
+            this.numUpDHoursRemainedOnCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDHoursRemainedOnCard.Location = new System.Drawing.Point(162, 73);
+            this.numUpDHoursRemainedOnCard.Maximum = new decimal(new int[] {
             500,
             0,
             0,
             0});
-            this.numericUpDownHoursRemainedOnCard.Minimum = new decimal(new int[] {
+            this.numUpDHoursRemainedOnCard.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDownHoursRemainedOnCard.Name = "numericUpDownHoursRemainedOnCard";
-            this.numericUpDownHoursRemainedOnCard.Size = new System.Drawing.Size(60, 30);
-            this.numericUpDownHoursRemainedOnCard.TabIndex = 7;
-            this.numericUpDownHoursRemainedOnCard.Value = new decimal(new int[] {
+            this.numUpDHoursRemainedOnCard.Name = "numUpDHoursRemainedOnCard";
+            this.numUpDHoursRemainedOnCard.ReadOnly = true;
+            this.numUpDHoursRemainedOnCard.Size = new System.Drawing.Size(60, 30);
+            this.numUpDHoursRemainedOnCard.TabIndex = 7;
+            this.numUpDHoursRemainedOnCard.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // client_name_textBox
+            // tbClientName
             // 
-            this.client_name_textBox.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.client_name_textBox.Location = new System.Drawing.Point(116, 24);
-            this.client_name_textBox.Name = "client_name_textBox";
-            this.client_name_textBox.ReadOnly = true;
-            this.client_name_textBox.Size = new System.Drawing.Size(172, 30);
-            this.client_name_textBox.TabIndex = 3;
+            this.tbClientName.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbClientName.Location = new System.Drawing.Point(116, 24);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.ReadOnly = true;
+            this.tbClientName.Size = new System.Drawing.Size(172, 30);
+            this.tbClientName.TabIndex = 3;
             // 
-            // numericUpDownClientMoneyLeft
+            // numUpDClientMoneyLeft
             // 
-            this.numericUpDownClientMoneyLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numericUpDownClientMoneyLeft.DecimalPlaces = 2;
-            this.numericUpDownClientMoneyLeft.Enabled = false;
-            this.numericUpDownClientMoneyLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownClientMoneyLeft.Location = new System.Drawing.Point(162, 114);
-            this.numericUpDownClientMoneyLeft.Maximum = new decimal(new int[] {
+            this.numUpDClientMoneyLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpDClientMoneyLeft.DecimalPlaces = 2;
+            this.numUpDClientMoneyLeft.Enabled = false;
+            this.numUpDClientMoneyLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDClientMoneyLeft.Location = new System.Drawing.Point(162, 114);
+            this.numUpDClientMoneyLeft.Maximum = new decimal(new int[] {
             300000,
             0,
             0,
             0});
-            this.numericUpDownClientMoneyLeft.Name = "numericUpDownClientMoneyLeft";
-            this.numericUpDownClientMoneyLeft.Size = new System.Drawing.Size(126, 30);
-            this.numericUpDownClientMoneyLeft.TabIndex = 5;
+            this.numUpDClientMoneyLeft.Name = "numUpDClientMoneyLeft";
+            this.numUpDClientMoneyLeft.ReadOnly = true;
+            this.numUpDClientMoneyLeft.Size = new System.Drawing.Size(126, 30);
+            this.numUpDClientMoneyLeft.TabIndex = 5;
             // 
-            // label2
+            // lClientName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 22);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Client name";
+            this.lClientName.AutoSize = true;
+            this.lClientName.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lClientName.Location = new System.Drawing.Point(6, 27);
+            this.lClientName.Name = "lClientName";
+            this.lClientName.Size = new System.Drawing.Size(102, 22);
+            this.lClientName.TabIndex = 0;
+            this.lClientName.Text = "Client name";
             // 
-            // label4
+            // lMoneyOnCardLeft
             // 
-            this.label4.AutoSize = true;
-            this.label4.Enabled = false;
-            this.label4.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 116);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(96, 22);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Money left";
+            this.lMoneyOnCardLeft.AutoSize = true;
+            this.lMoneyOnCardLeft.Enabled = false;
+            this.lMoneyOnCardLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lMoneyOnCardLeft.Location = new System.Drawing.Point(12, 116);
+            this.lMoneyOnCardLeft.Name = "lMoneyOnCardLeft";
+            this.lMoneyOnCardLeft.Size = new System.Drawing.Size(96, 22);
+            this.lMoneyOnCardLeft.TabIndex = 8;
+            this.lMoneyOnCardLeft.Text = "Money left";
             // 
-            // label3
+            // lTimeOnCardLeft
             // 
-            this.label3.AutoSize = true;
-            this.label3.Enabled = false;
-            this.label3.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 75);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(138, 22);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Time to play left";
+            this.lTimeOnCardLeft.AutoSize = true;
+            this.lTimeOnCardLeft.Enabled = false;
+            this.lTimeOnCardLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lTimeOnCardLeft.Location = new System.Drawing.Point(6, 75);
+            this.lTimeOnCardLeft.Name = "lTimeOnCardLeft";
+            this.lTimeOnCardLeft.Size = new System.Drawing.Size(138, 22);
+            this.lTimeOnCardLeft.TabIndex = 8;
+            this.lTimeOnCardLeft.Text = "Time to play left";
             // 
             // current_time_timer
             // 
             this.current_time_timer.Enabled = true;
             this.current_time_timer.Interval = 1000;
             // 
-            // labelcurrentTime
+            // lCurrentTime
             // 
-            this.labelcurrentTime.AutoSize = true;
-            this.labelcurrentTime.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelcurrentTime.Location = new System.Drawing.Point(194, 9);
-            this.labelcurrentTime.Name = "labelcurrentTime";
-            this.labelcurrentTime.Size = new System.Drawing.Size(91, 20);
-            this.labelcurrentTime.TabIndex = 24;
-            this.labelcurrentTime.Text = "Current time";
+            this.lCurrentTime.AutoSize = true;
+            this.lCurrentTime.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lCurrentTime.Location = new System.Drawing.Point(194, 9);
+            this.lCurrentTime.Name = "lCurrentTime";
+            this.lCurrentTime.Size = new System.Drawing.Size(91, 20);
+            this.lCurrentTime.TabIndex = 24;
+            this.lCurrentTime.Text = "Current time";
             // 
-            // current_time_label
+            // lCurrentDate
             // 
-            this.current_time_label.AutoSize = true;
-            this.current_time_label.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.current_time_label.Location = new System.Drawing.Point(12, 9);
-            this.current_time_label.Name = "current_time_label";
-            this.current_time_label.Size = new System.Drawing.Size(91, 20);
-            this.current_time_label.TabIndex = 23;
-            this.current_time_label.Text = "Current date";
+            this.lCurrentDate.AutoSize = true;
+            this.lCurrentDate.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lCurrentDate.Location = new System.Drawing.Point(12, 9);
+            this.lCurrentDate.Name = "lCurrentDate";
+            this.lCurrentDate.Size = new System.Drawing.Size(91, 20);
+            this.lCurrentDate.TabIndex = 23;
+            this.lCurrentDate.Text = "Current date";
             // 
-            // table_numComboBox
+            // cbPlaystationId
             // 
-            this.table_numComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.table_numComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.table_numComboBox.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.table_numComboBox.Location = new System.Drawing.Point(140, 97);
-            this.table_numComboBox.Name = "table_numComboBox";
-            this.table_numComboBox.Size = new System.Drawing.Size(61, 30);
-            this.table_numComboBox.TabIndex = 21;
+            this.cbPlaystationId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbPlaystationId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbPlaystationId.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbPlaystationId.Location = new System.Drawing.Point(140, 97);
+            this.cbPlaystationId.Name = "cbPlaystationId";
+            this.cbPlaystationId.Size = new System.Drawing.Size(61, 30);
+            this.cbPlaystationId.TabIndex = 21;
+            this.cbPlaystationId.SelectedIndexChanged += new System.EventHandler(this.cbPlaystationId_SelectedIndexChanged);
             // 
-            // table_num_label
+            // lPlaystationId
             // 
-            this.table_num_label.AutoSize = true;
-            this.table_num_label.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.table_num_label.Location = new System.Drawing.Point(12, 100);
-            this.table_num_label.Name = "table_num_label";
-            this.table_num_label.Size = new System.Drawing.Size(118, 22);
-            this.table_num_label.TabIndex = 20;
-            this.table_num_label.Text = "Playstation #";
+            this.lPlaystationId.AutoSize = true;
+            this.lPlaystationId.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lPlaystationId.Location = new System.Drawing.Point(12, 100);
+            this.lPlaystationId.Name = "lPlaystationId";
+            this.lPlaystationId.Size = new System.Drawing.Size(118, 22);
+            this.lPlaystationId.TabIndex = 20;
+            this.lPlaystationId.Text = "Playstation #";
             // 
-            // label1
+            // lClientDiscountId
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 22);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Client Discount";
+            this.lClientDiscountId.AutoSize = true;
+            this.lClientDiscountId.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lClientDiscountId.Location = new System.Drawing.Point(12, 52);
+            this.lClientDiscountId.Name = "lClientDiscountId";
+            this.lClientDiscountId.Size = new System.Drawing.Size(122, 22);
+            this.lClientDiscountId.TabIndex = 26;
+            this.lClientDiscountId.Text = "Client Discount";
             // 
-            // add_client_button
+            // bAddSession
             // 
-            this.add_client_button.Location = new System.Drawing.Point(12, 334);
-            this.add_client_button.Name = "add_client_button";
-            this.add_client_button.Size = new System.Drawing.Size(111, 38);
-            this.add_client_button.TabIndex = 25;
-            this.add_client_button.Text = "Add new client";
-            this.add_client_button.UseVisualStyleBackColor = true;
+            this.bAddSession.Location = new System.Drawing.Point(12, 334);
+            this.bAddSession.Name = "bAddSession";
+            this.bAddSession.Size = new System.Drawing.Size(111, 38);
+            this.bAddSession.TabIndex = 25;
+            this.bAddSession.Text = "Add new client";
+            this.bAddSession.UseVisualStyleBackColor = true;
             // 
-            // paid_price_numeric_up_down
+            // numUpDPaidPrice
             // 
-            this.paid_price_numeric_up_down.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paid_price_numeric_up_down.Location = new System.Drawing.Point(163, 91);
-            this.paid_price_numeric_up_down.Maximum = new decimal(new int[] {
+            this.numUpDPaidPrice.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDPaidPrice.Location = new System.Drawing.Point(163, 91);
+            this.numUpDPaidPrice.Maximum = new decimal(new int[] {
             18900,
             0,
             0,
             0});
-            this.paid_price_numeric_up_down.Name = "paid_price_numeric_up_down";
-            this.paid_price_numeric_up_down.Size = new System.Drawing.Size(113, 30);
-            this.paid_price_numeric_up_down.TabIndex = 4;
+            this.numUpDPaidPrice.Name = "numUpDPaidPrice";
+            this.numUpDPaidPrice.Size = new System.Drawing.Size(113, 30);
+            this.numUpDPaidPrice.TabIndex = 4;
+            this.numUpDPaidPrice.ValueChanged += new System.EventHandler(this.numUpDPaidPrice_ValueChanged);
             // 
-            // deposit_payment_groupBox
+            // gbDepositPayment
             // 
-            this.deposit_payment_groupBox.Controls.Add(this.numericUpDownMinutesLeft);
-            this.deposit_payment_groupBox.Controls.Add(this.numericUpDownHoursLeft);
-            this.deposit_payment_groupBox.Controls.Add(this.paid_price_numeric_up_down);
-            this.deposit_payment_groupBox.Controls.Add(this.OR_text_label);
-            this.deposit_payment_groupBox.Controls.Add(this.lMoneyToPay);
-            this.deposit_payment_groupBox.Controls.Add(this.lTimeToPlay);
-            this.deposit_payment_groupBox.Location = new System.Drawing.Point(12, 150);
-            this.deposit_payment_groupBox.Name = "deposit_payment_groupBox";
-            this.deposit_payment_groupBox.Size = new System.Drawing.Size(328, 178);
-            this.deposit_payment_groupBox.TabIndex = 22;
-            this.deposit_payment_groupBox.TabStop = false;
-            this.deposit_payment_groupBox.Text = "Deposit payment";
+            this.gbDepositPayment.Controls.Add(this.numUpDMinutesLeft);
+            this.gbDepositPayment.Controls.Add(this.numUpDHoursLeft);
+            this.gbDepositPayment.Controls.Add(this.numUpDPaidPrice);
+            this.gbDepositPayment.Controls.Add(this.lOR);
+            this.gbDepositPayment.Controls.Add(this.lMoneyToPay);
+            this.gbDepositPayment.Controls.Add(this.lTimeToPlay);
+            this.gbDepositPayment.Location = new System.Drawing.Point(12, 150);
+            this.gbDepositPayment.Name = "gbDepositPayment";
+            this.gbDepositPayment.Size = new System.Drawing.Size(328, 178);
+            this.gbDepositPayment.TabIndex = 22;
+            this.gbDepositPayment.TabStop = false;
+            this.gbDepositPayment.Text = "Deposit payment";
             // 
-            // AddNewSession
+            // FAddNewSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(352, 384);
+            this.ClientSize = new System.Drawing.Size(349, 384);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
-            this.Controls.Add(this.textBoxBonusCards);
-            this.Controls.Add(this.buttonAddCard);
-            this.Controls.Add(this.client_info_group_box);
-            this.Controls.Add(this.labelcurrentTime);
-            this.Controls.Add(this.current_time_label);
-            this.Controls.Add(this.table_numComboBox);
-            this.Controls.Add(this.table_num_label);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.add_client_button);
-            this.Controls.Add(this.deposit_payment_groupBox);
+            this.Controls.Add(this.tbDiscountCards);
+            this.Controls.Add(this.bAddDiscountCard);
+            this.Controls.Add(this.gbClientInfo);
+            this.Controls.Add(this.lCurrentTime);
+            this.Controls.Add(this.lCurrentDate);
+            this.Controls.Add(this.cbPlaystationId);
+            this.Controls.Add(this.lPlaystationId);
+            this.Controls.Add(this.lClientDiscountId);
+            this.Controls.Add(this.bAddSession);
+            this.Controls.Add(this.gbDepositPayment);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AddNewSession";
+            this.Name = "FAddNewSession";
             this.Opacity = 0.98D;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddNewSession";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinutesLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHoursLeft)).EndInit();
-            this.client_info_group_box.ResumeLayout(false);
-            this.client_info_group_box.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinutesRemainedOnCard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHoursRemainedOnCard)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownClientMoneyLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paid_price_numeric_up_down)).EndInit();
-            this.deposit_payment_groupBox.ResumeLayout(false);
-            this.deposit_payment_groupBox.PerformLayout();
+            this.Load += new System.EventHandler(this.AddNewSession_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).EndInit();
+            this.gbClientInfo.ResumeLayout(false);
+            this.gbClientInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesRemainedOnCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursRemainedOnCard)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDClientMoneyLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDPaidPrice)).EndInit();
+            this.gbDepositPayment.ResumeLayout(false);
+            this.gbDepositPayment.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -410,30 +420,30 @@
 
         #endregion
 
-        private System.Windows.Forms.NumericUpDown numericUpDownMinutesLeft;
+        private System.Windows.Forms.NumericUpDown numUpDMinutesLeft;
         private System.Windows.Forms.Button bCancel;
-        private System.Windows.Forms.NumericUpDown numericUpDownHoursLeft;
-        private System.Windows.Forms.Label OR_text_label;
+        private System.Windows.Forms.NumericUpDown numUpDHoursLeft;
+        private System.Windows.Forms.Label lOR;
         private System.Windows.Forms.Label lMoneyToPay;
-        private System.Windows.Forms.TextBox textBoxBonusCards;
+        private System.Windows.Forms.TextBox tbDiscountCards;
         private System.Windows.Forms.Label lTimeToPlay;
-        private System.Windows.Forms.Button buttonAddCard;
-        private System.Windows.Forms.GroupBox client_info_group_box;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinutesRemainedOnCard;
-        private System.Windows.Forms.NumericUpDown numericUpDownHoursRemainedOnCard;
-        private System.Windows.Forms.TextBox client_name_textBox;
-        private System.Windows.Forms.NumericUpDown numericUpDownClientMoneyLeft;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button bAddDiscountCard;
+        private System.Windows.Forms.GroupBox gbClientInfo;
+        private System.Windows.Forms.NumericUpDown numUpDMinutesRemainedOnCard;
+        private System.Windows.Forms.NumericUpDown numUpDHoursRemainedOnCard;
+        private System.Windows.Forms.TextBox tbClientName;
+        private System.Windows.Forms.NumericUpDown numUpDClientMoneyLeft;
+        private System.Windows.Forms.Label lClientName;
+        private System.Windows.Forms.Label lMoneyOnCardLeft;
+        private System.Windows.Forms.Label lTimeOnCardLeft;
         private System.Windows.Forms.Timer current_time_timer;
-        private System.Windows.Forms.Label labelcurrentTime;
-        private System.Windows.Forms.Label current_time_label;
-        private System.Windows.Forms.ComboBox table_numComboBox;
-        private System.Windows.Forms.Label table_num_label;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button add_client_button;
-        private System.Windows.Forms.NumericUpDown paid_price_numeric_up_down;
-        private System.Windows.Forms.GroupBox deposit_payment_groupBox;
+        private System.Windows.Forms.Label lCurrentTime;
+        private System.Windows.Forms.Label lCurrentDate;
+        private System.Windows.Forms.ComboBox cbPlaystationId;
+        private System.Windows.Forms.Label lPlaystationId;
+        private System.Windows.Forms.Label lClientDiscountId;
+        private System.Windows.Forms.Button bAddSession;
+        private System.Windows.Forms.NumericUpDown numUpDPaidPrice;
+        private System.Windows.Forms.GroupBox gbDepositPayment;
     }
 }

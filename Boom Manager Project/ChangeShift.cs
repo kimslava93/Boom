@@ -4,34 +4,36 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
 {
     public partial class ChangeShift : Form
     {
-        private readonly dbDataContext _db;
-        private readonly Controller _controller;
+        private readonly ChangeShiftController _changeShiftController;
 
         public ChangeShift()
         {
             InitializeComponent();
-            _db = new dbDataContext();
-            _controller = new Controller();
+            _changeShiftController = new ChangeShiftController();
         }
 
-        private bool _shiftAccepted = false;
-        
         private void ChangeShift_Load(object sender, EventArgs e)
         {
-            lWarning.Text =
-                "Please input login and password to accept shift.\n" +
-                "By loging in you accept shift as it is, \nand take all responsibility for equipment itself";
+            lWarning.Text = _changeShiftController.WarningMessage("WarningLabel");
         }
 
         private void bCancel_Click(object sender, EventArgs e)
         {
-           ToCloseForm();
+            if (_changeShiftController.ToCloseForm())
+            {
+                Close();
+            }
+            else
+            {
+                MessageBox.Show(_changeShiftController.WarningMessage("FirstShift"));
+            }
         }
 
 
@@ -39,13 +41,7 @@ namespace Boom_Manager_Project
         {
             if (FieldsAreFulFilled())
             {
-                CheckPasswords();
-                if (_shiftAccepted)
-                {
-                    //create new Shift
-                    CreateNewShift();
-                    _shiftAccepted = true;
-                }
+                _changeShiftController.ShouldNewShiftBeCreated(tbInAdminLogin.Text, tbInAdminPassword.Text);
             }
         }
         private void bAddNewUser_Click(object sender, EventArgs e)
@@ -58,26 +54,26 @@ namespace Boom_Manager_Project
                 ansu.ShowDialog();
             }
         }
-        private void CreateNewShift()
-        {
-            var db = DataBaseClass.Instancedb();
-
-            var adminInfo = _controller.GetPersonInfoByLogin(tbInAdminLogin.Text);
-
-            var lastOpenedSession = db.GetOpenedSession();
-            if (lastOpenedSession != null)
-            {
-                MessageBox.Show(_controller.SessionIsOpened(lastOpenedSession.daily_id),
-                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (adminInfo != null)
-                {
-                    _controller.AddNewGlobalSession(adminInfo.person_id, "no operator", DateTime.Now);
-                }
-            }
-        }
+//        private void CreateNewShift()
+//        {
+//            var db = DataBaseClass.Instancedb();
+//
+//            var adminInfo = _addNewUserController.GetPersonInfoByLogin(tbInAdminLogin.Text);
+//
+//            var lastOpenedSession = db.GetOpenedSession();
+//            if (lastOpenedSession != null)
+//            {
+//                MessageBox.Show(_addNewUserController.SessionIsOpened(lastOpenedSession.daily_id),
+//                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+//            }
+//            else
+//            {
+//                if (adminInfo != null)
+//                {
+//                    _addNewUserController.AddNewGlobalSession(adminInfo.person_id, "no operator", DateTime.Now);
+//                }
+//            }
+//        }
 
 
         private bool FieldsAreFulFilled()
@@ -93,38 +89,36 @@ namespace Boom_Manager_Project
             }
             if (String.IsNullOrEmpty(tbInAdminLogin.Text))
             {
-                tbInAdminLogin.BackColor = Color.Red;
-                tbInAdminLogin.ForeColor = Color.White;
+                HighLightTb(tbInAdminLogin);
                 result = false;
             }
             if (String.IsNullOrEmpty(tbInAdminPassword.Text))
             {
-                tbInAdminPassword.BackColor = Color.Red;
-                tbInAdminPassword.ForeColor = Color.White;
+                HighLightTb(tbInAdminPassword);
                 result = false;
             }
             return result;
         }
 
-        private void CheckPasswords()
-        {
-            personal_info_t adminLogin = (from al in _db.GetTable<personal_info_t>()
-                where al.staff_login == tbInAdminLogin.Text
-                select al).SingleOrDefault();
-            if (adminLogin != null)
-            {
-                if (adminLogin.staff_password == tbInAdminPassword.Text)
-                {
-                    _shiftAccepted = true;
-                }
-                else
-                {
-                    HighLightTb(tbInAdminLogin);
-                    HighLightTb(tbInAdminPassword);
-                    _shiftAccepted = false;
-                }
-            }
-        }
+//        private void CheckPasswords(string login)
+//        {
+//            personal_info_t adminLogin = (from al in _db.GetTable<personal_info_t>()
+//                where al.staff_login == login
+//                select al).SingleOrDefault();
+//            if (adminLogin != null)
+//            {
+//                if (adminLogin.staff_password == tbInAdminPassword.Text)
+//                {
+//                    _shiftAccepted = true;
+//                }
+//                else
+//                {
+//                    HighLightTb(tbInAdminLogin);
+//                    HighLightTb(tbInAdminPassword);
+//                    _shiftAccepted = false;
+//                }
+//            }
+//        }
 
         private void HighLightTb(TextBox tb)
         {
@@ -134,28 +128,14 @@ namespace Boom_Manager_Project
 
         private void ChangeShift_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var db = DataBaseClass.Instancedb();
-            if (db.GetOpenedSession() != null)
+            if (_changeShiftController.ToCloseForm())
             {
                 Close();
             }
             else
             {
                 e.Cancel = true;
-                MessageBox.Show("Your shift is the first and there is no opened one.\nYou should login to continue!");
-            }
-        }
-
-        private void ToCloseForm()
-        {
-            var db = DataBaseClass.Instancedb();
-            if (db.GetOpenedSession() != null)
-            {
-                Close();
-            }
-            else
-            {
-                MessageBox.Show("Your shift is the first and there is no opened one.\nYou should login to continue!");
+                MessageBox.Show(_changeShiftController.WarningMessage("FirstShift"));
             }
         }
 

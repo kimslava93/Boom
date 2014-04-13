@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-using System.Text;
+using System.Windows.Forms.VisualStyles;
+using Boom_Manager_Project.MyClasses;
 
-namespace Boom_Manager_Project.MyClasses
+namespace Boom_Manager_Project.DataBaseClasses
 {
     public class DataBaseClass
     {
@@ -12,11 +13,7 @@ namespace Boom_Manager_Project.MyClasses
 //        private dbDataContext _db;
         public static DataBaseClass Instancedb()
         {
-            if (_dbClass == null)
-            {
-                _dbClass = new DataBaseClass();
-            }
-            return _dbClass;
+            return _dbClass ?? (_dbClass = new DataBaseClass());
         }
 
         public personal_info_t GetUserInfoByLogin(string login)
@@ -137,6 +134,30 @@ namespace Boom_Manager_Project.MyClasses
                 gst.InsertOnSubmit(globSess);
                 db.SubmitChanges();
             }
+        }
+        public List<tables_t> GetAllFreeTables()
+        {
+            var db = new dbDataContext();
+            return (from tb in db.GetTable<tables_t>()
+                orderby tb.playstation_id.Length ascending, tb.playstation_id ascending
+                where tb.playstation_state == "free"
+                select tb).ToList();
+        }
+
+        public double? GetPriceForPlaystation(string playstationId, string currentTimeZone)
+        {
+            var db = new dbDataContext();
+            double? price = (from p in db.GetTable<playstation_timezone>()
+                             where p.timezone_name == currentTimeZone
+                             where p.playstation_id == playstationId
+                             select p.timezone_cost_per_hour).SingleOrDefault();
+            return price;
+        }
+        public List<timezones_t> GetTimeZones()
+        {
+            var db = new dbDataContext();
+            return (from t in db.GetTable<timezones_t>()
+                select t).ToList();
         }
     }
 }

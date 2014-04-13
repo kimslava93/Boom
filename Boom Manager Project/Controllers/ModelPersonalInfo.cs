@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project.Controllers

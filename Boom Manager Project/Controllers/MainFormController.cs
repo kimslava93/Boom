@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Windows.Forms;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project.Controllers
@@ -56,6 +57,11 @@ namespace Boom_Manager_Project.Controllers
         {
             var db = DataBaseClass.Instancedb();
             return  db.GetDaySession(dailyId, clientsPerSessionList) /*))*/;
+        }
+
+        public void AddNewClient()
+        {
+
         }
     }
 }
