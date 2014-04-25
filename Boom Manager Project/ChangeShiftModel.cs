@@ -12,7 +12,7 @@ namespace Boom_Manager_Project
         {
             var db = DataBaseClass.Instancedb();
 
-            if (db.GetOpenedSession() != null)
+            if (db.GetOpenedGlobalSession() != null)
             {
                 return true;
             }

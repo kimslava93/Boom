@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-using System.Windows.Forms.VisualStyles;
+//using System.Windows.Forms.VisualStyles;
+using System.Text;
+using System.Text.RegularExpressions;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project.DataBaseClasses
@@ -28,7 +30,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        public global_session_t GetOpenedSession()
+        public global_session_t GetOpenedGlobalSession()
         {
             var db = new dbDataContext();
             lock (db)
@@ -51,7 +53,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        public List<DaySessionClass> GetDaySession(int dailyId, List<clients_per_session_t> clientsList)
+        public List<DaySessionClass> GetOpenedDaySessions(int dailyId, List<clients_per_session_t> clientsList)
         {
             var db = new dbDataContext();
             lock (db)
@@ -83,14 +85,14 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        private TimeSpan GetTimeLeft(DateTime end)
+        private static TimeSpan GetTimeLeft(DateTime end)
         {
             TimeSpan result = end.Subtract( DateTime.Now);
             return new TimeSpan(result.Days, result.Hours, result.Minutes, result.Seconds);
         }
 
 
-        private string ListToString(int sessionId, IEnumerable<clients_per_session_t> clientsList)
+        private static string ListToString(int sessionId, IEnumerable<clients_per_session_t> clientsList)
         {
             string result = "";
             var clientsInSession = (from c in clientsList
@@ -138,34 +140,205 @@ namespace Boom_Manager_Project.DataBaseClasses
         public List<tables_t> GetAllFreeTables()
         {
             var db = new dbDataContext();
-            return (from tb in db.GetTable<tables_t>()
-                orderby tb.playstation_id.Length ascending, tb.playstation_id ascending
-                where tb.playstation_state == "free"
-                select tb).ToList();
+            lock (db)
+            {
+                return (from tb in db.GetTable<tables_t>()
+                    orderby tb.playstation_id.Length ascending, tb.playstation_id ascending
+                    where tb.playstation_state == "free"
+                    select tb).ToList();
+            }
         }
 
         public double? GetPriceForPlaystation(string playstationId, string currentTimeZone)
         {
             var db = new dbDataContext();
-            double? price = (from p in db.GetTable<playstation_timezone>()
-                             where p.timezone_name == currentTimeZone
-                             where p.playstation_id == playstationId
-                             select p.timezone_cost_per_hour).SingleOrDefault();
-            return price;
+            lock (db)
+            {
+                double? price = (from p in db.GetTable<playstation_timezone>()
+                    where p.timezone_name == currentTimeZone
+                    where p.playstation_id == playstationId
+                    select p.timezone_cost_per_hour).SingleOrDefault();
+                return price;
+            }
         }
         public List<timezones_t> GetTimeZones()
         {
             var db = new dbDataContext();
-            return (from t in db.GetTable<timezones_t>()
-                select t).ToList();
+            lock (db)
+            {
+                return (from t in db.GetTable<timezones_t>()
+                    select t).ToList();
+            }
         }
 
         public client_info_t GetClientInfoById(string id)
         {
             var db = new dbDataContext();
-            return (from c in db.GetTable<client_info_t>()
-                where c.client_id == id
-                select c).SingleOrDefault();
+            lock (db)
+            {
+                return (from c in db.GetTable<client_info_t>()
+                    where c.client_id == id
+                    select c).SingleOrDefault();
+            }
         }
+
+        public account_savings_t GetClientSavingsById(string id)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from c in db.GetTable<account_savings_t>()
+                    where c.client_id == id
+                    select c).SingleOrDefault();
+            }
+        }
+
+        public List<client_info_t> GetAllClients()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from lc in db.GetTable<client_info_t>()
+                    select lc).ToList();
+            }
+        }
+
+        public int GetLastOpenedGlobalSession()//used to get last dailyID
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from gsession in db.GetTable<global_session_t>()
+                    where gsession.start_session == gsession.end_session
+                    orderby gsession.daily_id descending
+                    select gsession.daily_id).FirstOrDefault();
+            }
+        }
+
+        public int GetLastClientNumInSession(int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from days in db.GetTable<days_sessions_t>()
+                    where days.daily_id == dailyId
+                    orderby days.client_num descending
+                    select days.client_num).FirstOrDefault();
+            }
+        }
+
+        public tables_t GetTableInfo(string playstationId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from t in db.GetTable<tables_t>()
+                    where t.playstation_id == playstationId
+                    select t).SingleOrDefault();
+            }
+        }
+
+        public void InsertNewDaySession(days_sessions_t daySession)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<days_sessions_t> daysT = db.GetTable<days_sessions_t>();
+                var daysSessionT = new days_sessions_t
+                {
+                    daily_id = daySession.daily_id,
+                    client_num = daySession.client_num,
+                    start_game = daySession.start_game,
+                    end_game = daySession.end_game,
+                    playstation_id = daySession.playstation_id,
+                    session_state = "opened",
+                    payed_sum = daySession.payed_sum,
+                    money_left = daySession.money_left,
+                    session_discount = daySession.session_discount
+                };
+                daysT.InsertOnSubmit(daysSessionT);
+                db.SubmitChanges();
+            }
+        }
+
+        public void DeleteDaySession(int sessionId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var sessionToDelete = (from d in db.GetTable<days_sessions_t>()
+                    where d.session_id == sessionId
+                    select d).SingleOrDefault();
+                if (sessionToDelete != null)
+                {
+                    Table<days_sessions_t> deleteFromT = db.GetTable<days_sessions_t>();
+                    deleteFromT.DeleteOnSubmit(sessionToDelete);
+                    db.SubmitChanges();
+                }
+            }
+        }
+
+        public void UpdatePlaystationState(string playstationId, string state)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                tables_t t = GetTableInfo(playstationId);
+                if (t != null && t.playstation_id != null)
+                {
+                    t.playstation_state = state;
+                }
+                db.SubmitChanges();
+            }
+        }
+
+        public void InsertClientsPerTable(string clientId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var lastInsertedDaySession = (from ls in db.GetTable<days_sessions_t>()
+                    orderby ls.session_id descending
+                    select ls).FirstOrDefault(); //get last added session 
+
+                var clientsPersessionTable = db.GetTable<clients_per_session_t>();
+                var clientsPerSessionT = new clients_per_session_t();
+
+                if (lastInsertedDaySession != null)
+                {
+                    if (clientId == "0")
+                    {
+                        clientsPerSessionT.session_id = lastInsertedDaySession.session_id;
+                        clientsPerSessionT.client_id = "0";
+                        clientsPerSessionT.payed_sum = 0;
+                        clientsPersessionTable.InsertOnSubmit(clientsPerSessionT);
+                        db.SubmitChanges();
+                    }
+                    else if (clientId != null && (string.IsNullOrEmpty(clientId) && clientId.Length > 2))
+                    {
+                        IEnumerable<string> discountsArePlaying = DiscountSplitter(clientId);
+
+                        foreach (string d in discountsArePlaying)
+                        {
+                            clientsPerSessionT = new clients_per_session_t
+                            {
+                                session_id = lastInsertedDaySession.session_id,
+                                client_id = d,
+                                payed_sum = 0.0//---------------------------------------------------------------------------------DIVIDE BEFORE !!!!!!!!
+                            };
+                            clientsPersessionTable.InsertOnSubmit(clientsPerSessionT);
+                            db.SubmitChanges();
+                        }
+                    }
+                }
+            }
+        }
+
+        private IEnumerable<string> DiscountSplitter(string textToSplitBySemiColumn)
+        {
+            List<string> result = Regex.Split(textToSplitBySemiColumn, "; ").ToList();
+            return result;
+        }
+
     }
 }

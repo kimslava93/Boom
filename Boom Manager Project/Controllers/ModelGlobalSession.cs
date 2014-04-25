@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
 using Boom_Manager_Project.DataBaseClasses;
-using Boom_Manager_Project.MyClasses;
+//using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project.Controllers
 {
@@ -11,8 +11,7 @@ namespace Boom_Manager_Project.Controllers
     {
         public global_session_t GetOpenedSession()
         {
-            var db = new DataBaseClass();
-            global_session_t openedSession = db.GetOpenedSession();
+            global_session_t openedSession = DataBaseClass.Instancedb().GetOpenedGlobalSession();
             if (openedSession != null)
             {
                 return openedSession;

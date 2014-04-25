@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Data;
+//using System.Drawing;
+//using System.Linq;
+//using System.Text;
 using System.Windows.Forms;
 
 namespace Boom_Manager_Project
@@ -22,10 +22,9 @@ namespace Boom_Manager_Project
 
         private void AddNewSession_Load(object sender, EventArgs e)
         {
-            StartTimers();
+            
             UpdatePlaystationList();
             IsClientWithCardOrNot();
-//            numUpDPaidPrice.Minimum = numUpDPaidPrice.Value;
         }
 
         private void UpdatePlaystationList()
@@ -44,14 +43,14 @@ namespace Boom_Manager_Project
             }
         }
 
-        private void StartTimers()
-        {
-            current_time_timer.Enabled = true;
-            current_time_timer.Start();
-
-            lCurrentDate.Text = _addNewSessionController.StartDate();
-            lCurrentTime.Text = _addNewSessionController.StartTimer();
-        }
+//        private void StartTimers()
+//        {
+//            current_time_timer.Enabled = true;
+//            current_time_timer.Start();
+//
+//            lCurrentDate.Text = _addNewSessionController.StartDate();
+//            lCurrentTime.Text = _addNewSessionController.StartTimer();
+//        }
 
         private void cbPlaystationId_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -64,7 +63,7 @@ namespace Boom_Manager_Project
                 _repeatCallOfMethodCounter += 2;
                 numUpDHoursLeft.Value = 1;
                 numUpDMinutesLeft.Value = 0;
-                decimal t = _addNewSessionController.SetPrice(tbDiscountCards.Text, cbPlaystationId.Text, 1, 0);
+                decimal t = _addNewSessionController.UpdatePrice(tbDiscountCards.Text, cbPlaystationId.Text, 1, 0);
                 numUpDPaidPrice.Minimum = t;
                 numUpDPaidPrice.Value = t;
             }
@@ -73,10 +72,10 @@ namespace Boom_Manager_Project
                 numUpDClientMoneyLeft.Value = numUpDClientMoneyLeft.Maximum;
                 numUpDHoursRemainedOnCard.Value = numUpDHoursRemainedOnCard.Maximum;
                 numUpDMinutesRemainedOnCard.Value = numUpDMinutesRemainedOnCard.Maximum;
-                TimeSpan paidTime = _addNewSessionController.PaidPriceChanged(numUpDClientMoneyLeft.Value,
+                TimeSpan paidTime = _addNewSessionController.UpdateUsualClientTimeLeft(numUpDClientMoneyLeft.Value,
                     cbPlaystationId.Text,
                     tbDiscountCards.Text, numUpDClientMoneyLeft.Minimum, numUpDClientMoneyLeft.Maximum);
-                numUpDHoursRemainedOnCard.Value = (decimal) (paidTime.TotalDays - paidTime.Hours);
+                numUpDHoursRemainedOnCard.Value = (paidTime.Days*24 + paidTime.Hours);
             }
         }
         private void IsClientWithCardOrNot()
@@ -107,7 +106,7 @@ namespace Boom_Manager_Project
             if (_repeatCallOfMethodCounter <= 0)
             {
                 _repeatCallOfMethodCounter++;
-                decimal t = _addNewSessionController.SetPrice(tbDiscountCards.Text, cbPlaystationId.Text,
+                decimal t = _addNewSessionController.UpdatePrice(tbDiscountCards.Text, cbPlaystationId.Text,
                     numUpDHoursLeft.Value,
                     numUpDMinutesLeft.Value);
                 if (t > numUpDPaidPrice.Maximum)
@@ -130,7 +129,7 @@ namespace Boom_Manager_Project
                     numUpDHoursLeft.Value++;
                 }
                 _repeatCallOfMethodCounter++;
-                decimal t = _addNewSessionController.SetPrice(tbDiscountCards.Text, cbPlaystationId.Text,
+                decimal t = _addNewSessionController.UpdatePrice(tbDiscountCards.Text, cbPlaystationId.Text,
                     numUpDHoursLeft.Value, numUpDMinutesLeft.Value);
                 if (t < numUpDPaidPrice.Minimum)
                 {
@@ -150,25 +149,56 @@ namespace Boom_Manager_Project
 
         private void numUpDPaidPrice_ValueChanged(object sender, EventArgs e)
         {
+            UsualClientPriceChanged();
+        }
+
+        private void UsualClientPriceChanged()
+        {
             if (_repeatCallOfMethodCounter <= 0)
             {
                 _repeatCallOfMethodCounter++;
-                TimeSpan t = _addNewSessionController.PaidPriceChanged(numUpDPaidPrice.Value, cbPlaystationId.Text,
+                TimeSpan t = _addNewSessionController.UpdateUsualClientTimeLeft(numUpDPaidPrice.Value, cbPlaystationId.Text,
                     tbDiscountCards.Text, numUpDPaidPrice.Minimum, numUpDPaidPrice.Maximum);
                 if (t.Hours > numUpDHoursLeft.Maximum)
                 {
                     numUpDHoursLeft.Value = numUpDHoursLeft.Maximum;
-//                    numUpDMinutesLeft.Value = numUpDMinutesLeft.Maximum;
+                    numUpDMinutesLeft.Value = 0;
                 }
                 else if (t.Hours < numUpDHoursLeft.Minimum)
                 {
                     numUpDHoursLeft.Value = numUpDHoursLeft.Minimum;
-//                    numUpDMinutesLeft.Value = numUpDMinutesLeft.Minimum;
+                    numUpDMinutesLeft.Value = 0;
                 }
                 else
                 {
-                    numUpDHoursLeft.Value = t.Hours + t.Days*24;
+                    numUpDHoursLeft.Value = t.Hours + t.Days * 24;
                     numUpDMinutesLeft.Value = t.Minutes;
+                }
+            }
+            _repeatCallOfMethodCounter = 0;
+        }
+
+        private void ClientPriceChanged()
+        {
+            if (_repeatCallOfMethodCounter <= 0)
+            {
+                _repeatCallOfMethodCounter++;
+                TimeSpan t = _addNewSessionController.UpdateUsualClientTimeLeft(numUpDClientMoneyLeft.Value, cbPlaystationId.Text,
+                    tbDiscountCards.Text, numUpDClientMoneyLeft.Minimum, numUpDClientMoneyLeft.Maximum);
+                if (t.Hours > numUpDHoursRemainedOnCard.Maximum)
+                {
+                    numUpDHoursRemainedOnCard.Value = numUpDHoursRemainedOnCard.Maximum;
+                    numUpDMinutesLeft.Value = 0;
+                }
+                else if (t.Hours < numUpDHoursRemainedOnCard.Minimum)
+                {
+                    numUpDHoursRemainedOnCard.Value = numUpDHoursRemainedOnCard.Minimum;
+                    numUpDMinutesLeft.Value = 0;
+                }
+                else
+                {
+                    numUpDHoursRemainedOnCard.Value = t.Hours + t.Days * 24;
+                    numUpDMinutesRemainedOnCard.Value = t.Minutes;
                 }
             }
             _repeatCallOfMethodCounter = 0;
@@ -178,38 +208,53 @@ namespace Boom_Manager_Project
         {
             Close();
         }
-        private void AddClients()
+
+        private void bAddDiscountCard_Click(object sender, EventArgs e)
         {
-            AddDiscountCardToSession adcts = new AddDiscountCardToSession(_db, table_numComboBox.Text);
-            adcts.ShowDialog();
-            if (adcts.Result == "0" || String.IsNullOrWhiteSpace(adcts.Result))
+            var adcs = new AddDiscountCardToSession();
+            adcs.ShowDialog();
+            if (adcs.ClientID == "0" || String.IsNullOrWhiteSpace(adcs.ClientID))
             {
-                textBoxBonusCards.Text = "0";
+                tbDiscountCards.Text = "0";
             }
             else
             {
-                if (!IsRepeated(adcts.Result))
+                var result = _addNewSessionController.AddNewClientToField(adcs.ClientID, tbDiscountCards.Text,
+                    tbClientName.Text, numUpDClientMoneyLeft.Value, adcs.ClientName, adcs.MoneyLeft);
+                if (result != null && result.Count != 0)
                 {
-                    if (String.IsNullOrWhiteSpace(textBoxBonusCards.Text) || textBoxBonusCards.Text == "0")
-                    {
-                        textBoxBonusCards.Text = adcts.Result;
-                        client_name_textBox.Text = adcts.Client;
-                        numericUpDownClientMoneyLeft.Minimum = (decimal)adcts.MoneyLeft;
-                        numericUpDownClientMoneyLeft.Maximum = (decimal)adcts.MoneyLeft;
-                        numericUpDownClientMoneyLeft.Value = (decimal)adcts.MoneyLeft;
-                    }
-                    else
-                    {
-                        textBoxBonusCards.Text += "; " + adcts.Result;
-                        client_name_textBox.Text += "; " + adcts.Client;
-                        numericUpDownClientMoneyLeft.Maximum = (decimal)((double)numericUpDownClientMoneyLeft.Value + adcts.MoneyLeft);
-                        numericUpDownClientMoneyLeft.Minimum = numericUpDownClientMoneyLeft.Maximum;
-                        numericUpDownClientMoneyLeft.Value = numericUpDownClientMoneyLeft.Maximum;
-                    }
-                    UpdateRemainedTimeOnPaidPriceChanged((double)numericUpDownClientMoneyLeft.Value);
+                    tbDiscountCards.Text = result[0];
+                    tbClientName.Text = result[1];
+                    numUpDClientMoneyLeft.Minimum = decimal.Parse(result[2].Replace(".", ","));
+                    numUpDClientMoneyLeft.Maximum = decimal.Parse(result[2].Replace(".", ","));
+                    numUpDClientMoneyLeft.Value = decimal.Parse(result[2].Replace(".", ","));
                 }
             }
-            CheckClientWithCardOtNot();
+            IsClientWithCardOrNot();
+        }
+
+        private void numUpDClientMoneyLeft_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void bAddSession_Click(object sender, EventArgs e)
+        {
+            if (tbDiscountCards.Text == "0")
+            {
+                TimeSpan paidTime =
+                    TimeSpan.FromMinutes((double) numUpDHoursLeft.Value*60 + (double) numUpDMinutesLeft.Value);
+
+                _addNewSessionController.AddNewDaySession(cbPlaystationId.Text, tbDiscountCards.Text, paidTime,
+                    (double) numUpDPaidPrice.Value);
+                Close();
+            }
+            else if (!String.IsNullOrEmpty(tbDiscountCards.Text) && tbDiscountCards.Text.Length > 2)
+            {
+                MessageBox.Show("ClientWithCard");
+                Close();
+            }
+            
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.DataBaseClasses;
+using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
 {
@@ -55,7 +57,7 @@ namespace Boom_Manager_Project
             return _addNewSessionModel.CurrentDateTime.ToString("dd MMMM");
         }
 
-        public decimal SetPrice(string discountCard, string playstationId, decimal hoursLeft, decimal minutesLeft)
+        public decimal UpdatePrice(string discountCard, string playstationId, decimal hoursLeft, decimal minutesLeft)
         {
             var currentDateTime = DateTime.Now;
             if (discountCard == "0")
@@ -113,10 +115,8 @@ namespace Boom_Manager_Project
                 }
             return 0;
         }
-        public TimeSpan PaidPriceChanged(decimal priceValue,string playstationId, string discountCard, decimal minimumValue, decimal maximumValue)
+        public TimeSpan UpdateUsualClientTimeLeft(decimal priceValue,string playstationId, string discountCard, decimal minimumValue, decimal maximumValue)
         {
-//            if (_repeatCallOfMethodCounter > 0) return new TimeSpan();
-//            _repeatCallOfMethodCounter++;
             if (discountCard == "0")
             {
                 if (!CheckOnNormalPrice(discountCard, priceValue, minimumValue, maximumValue))
@@ -132,7 +132,6 @@ namespace Boom_Manager_Project
                 }
             }
             TimeSpan result = UpdateRemainedTimeOnPaidPriceChanged((double)priceValue, playstationId);
-//            _repeatCallOfMethodCounter = 0;
             return result;
         }
         private bool CheckOnNormalPrice(string discountCard, decimal priceToCheck, decimal minimum, decimal maximum)
@@ -155,7 +154,6 @@ namespace Boom_Manager_Project
             }
             return true;
         }
-
         private TimeSpan UpdateRemainedTimeOnPaidPriceChanged(double remainedMoney, string playstationId)
         {
             _addNewSessionModel.CurrentDateTime = DateTime.Now;
@@ -181,5 +179,36 @@ namespace Boom_Manager_Project
             }
             return new TimeSpan();
         }
+        public List<string> AddNewClientToField(string clientId, string idsTextBox, string namesTextBox,decimal moneyLeftTextBox, string clientName, decimal moneyLeft)
+        {
+            var result = new List<string>();
+            if (!_addNewSessionModel.IsRepeated(clientId, idsTextBox))
+            {
+                if (String.IsNullOrWhiteSpace(idsTextBox) || idsTextBox == "0")
+                {
+                    result.Add(clientId);
+                    result.Add(clientName);
+                    result.Add(moneyLeft.ToString(CultureInfo.InvariantCulture));
+                }
+                else
+                {
+                    idsTextBox += "; " + clientId;
+                    result.Add(idsTextBox); //adding id
+                    namesTextBox += "; " + clientName;
+                    result.Add(namesTextBox); //adding name of client
+                    moneyLeft = moneyLeftTextBox + moneyLeft;
+                    result.Add(moneyLeft.ToString(CultureInfo.InvariantCulture));//adding new sum
+                }
+                //                UpdateRemainedTimeOnPaidPriceChanged((double) numericUpDownClientMoneyLeft.Value);
+            }
+            return result;
+        }
+        public void AddNewDaySession(string playstationId, string clientId, TimeSpan timeToPlay, double paidSum)
+        {
+            _addNewSessionModel.AddNewDaySession(playstationId, clientId, timeToPlay, paidSum);
+        }
+
+        
     }
+
 }

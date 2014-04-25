@@ -34,12 +34,10 @@ namespace Boom_Manager_Project.Controllers
         }
         public global_session_t GetOpenedSession()
         {
-            var db = DataBaseClass.Instancedb();
-            return db.GetOpenedSession();
+            return DataBaseClass.Instancedb().GetOpenedGlobalSession();
         }
         public void OpeneGlobalSession()
         {
-            var db = DataBaseClass.Instancedb();
             _currentGlobalSession = GetOpenedSession();
             if (_currentGlobalSession == null)
             {
@@ -48,15 +46,20 @@ namespace Boom_Manager_Project.Controllers
             }
             else
             {
-                _clentsList = db.GetListOfClientsPerSessionT();
+                _clentsList = DataBaseClass.Instancedb().GetListOfClientsPerSessionT();
                 _currentDaySessionList = GetDailySession(_currentGlobalSession.daily_id, _clentsList);
             }
         }
-
+        public List<DaySessionClass> GetAllOpenedDaySessions()
+        {
+            int dailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSession();
+            List<clients_per_session_t> clientsPerSessionList = DataBaseClass.Instancedb().GetListOfClientsPerSessionT();
+            return DataBaseClass.Instancedb().GetOpenedDaySessions(dailyId, clientsPerSessionList);
+        }
         public List<DaySessionClass> GetDailySession(int dailyId, List<clients_per_session_t> clientsPerSessionList)
         {
             var db = DataBaseClass.Instancedb();
-            return  db.GetDaySession(dailyId, clientsPerSessionList) /*))*/;
+            return  db.GetOpenedDaySessions(dailyId, clientsPerSessionList) /*))*/;
         }
 
         public void AddNewClient()

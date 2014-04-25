@@ -46,8 +46,6 @@
             this.lMoneyOnCardLeft = new System.Windows.Forms.Label();
             this.lTimeOnCardLeft = new System.Windows.Forms.Label();
             this.current_time_timer = new System.Windows.Forms.Timer(this.components);
-            this.lCurrentTime = new System.Windows.Forms.Label();
-            this.lCurrentDate = new System.Windows.Forms.Label();
             this.cbPlaystationId = new System.Windows.Forms.ComboBox();
             this.lPlaystationId = new System.Windows.Forms.Label();
             this.lClientDiscountId = new System.Windows.Forms.Label();
@@ -66,7 +64,7 @@
             // 
             // numUpDMinutesLeft
             // 
-            this.numUpDMinutesLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDMinutesLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.numUpDMinutesLeft.Location = new System.Drawing.Point(222, 25);
             this.numUpDMinutesLeft.Maximum = new decimal(new int[] {
             60,
@@ -74,13 +72,14 @@
             0,
             0});
             this.numUpDMinutesLeft.Name = "numUpDMinutesLeft";
-            this.numUpDMinutesLeft.Size = new System.Drawing.Size(54, 30);
+            this.numUpDMinutesLeft.Size = new System.Drawing.Size(54, 29);
             this.numUpDMinutesLeft.TabIndex = 6;
             this.numUpDMinutesLeft.ValueChanged += new System.EventHandler(this.numUpDMinutesLeft_ValueChanged);
             // 
             // bCancel
             // 
-            this.bCancel.Location = new System.Drawing.Point(229, 334);
+            this.bCancel.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bCancel.Location = new System.Drawing.Point(206, 334);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(111, 38);
             this.bCancel.TabIndex = 30;
@@ -90,7 +89,7 @@
             // 
             // numUpDHoursLeft
             // 
-            this.numUpDHoursLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDHoursLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.numUpDHoursLeft.Location = new System.Drawing.Point(163, 25);
             this.numUpDHoursLeft.Maximum = new decimal(new int[] {
             120,
@@ -103,7 +102,7 @@
             0,
             0});
             this.numUpDHoursLeft.Name = "numUpDHoursLeft";
-            this.numUpDHoursLeft.Size = new System.Drawing.Size(54, 30);
+            this.numUpDHoursLeft.Size = new System.Drawing.Size(54, 29);
             this.numUpDHoursLeft.TabIndex = 5;
             this.numUpDHoursLeft.ThousandsSeparator = true;
             this.numUpDHoursLeft.Value = new decimal(new int[] {
@@ -116,19 +115,20 @@
             // lOR
             // 
             this.lOR.AutoSize = true;
+            this.lOR.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lOR.Location = new System.Drawing.Point(79, 62);
             this.lOR.Name = "lOR";
-            this.lOR.Size = new System.Drawing.Size(32, 21);
+            this.lOR.Size = new System.Drawing.Size(31, 21);
             this.lOR.TabIndex = 2;
             this.lOR.Text = "OR";
             // 
             // lMoneyToPay
             // 
             this.lMoneyToPay.AutoSize = true;
-            this.lMoneyToPay.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lMoneyToPay.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lMoneyToPay.Location = new System.Drawing.Point(14, 93);
             this.lMoneyToPay.Name = "lMoneyToPay";
-            this.lMoneyToPay.Size = new System.Drawing.Size(124, 22);
+            this.lMoneyToPay.Size = new System.Drawing.Size(102, 21);
             this.lMoneyToPay.TabIndex = 8;
             this.lMoneyToPay.Text = "Money to pay";
             // 
@@ -136,13 +136,13 @@
             // 
             this.tbDiscountCards.BackColor = System.Drawing.Color.White;
             this.tbDiscountCards.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tbDiscountCards.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDiscountCards.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbDiscountCards.HideSelection = false;
-            this.tbDiscountCards.Location = new System.Drawing.Point(140, 49);
+            this.tbDiscountCards.Location = new System.Drawing.Point(146, 49);
             this.tbDiscountCards.Name = "tbDiscountCards";
             this.tbDiscountCards.ReadOnly = true;
             this.tbDiscountCards.ShortcutsEnabled = false;
-            this.tbDiscountCards.Size = new System.Drawing.Size(133, 30);
+            this.tbDiscountCards.Size = new System.Drawing.Size(116, 29);
             this.tbDiscountCards.TabIndex = 28;
             this.tbDiscountCards.Text = "0";
             this.tbDiscountCards.TextChanged += new System.EventHandler(this.tbDiscountCards_TextChanged);
@@ -150,22 +150,23 @@
             // lTimeToPlay
             // 
             this.lTimeToPlay.AutoSize = true;
-            this.lTimeToPlay.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lTimeToPlay.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lTimeToPlay.Location = new System.Drawing.Point(14, 27);
             this.lTimeToPlay.Name = "lTimeToPlay";
-            this.lTimeToPlay.Size = new System.Drawing.Size(108, 22);
+            this.lTimeToPlay.Size = new System.Drawing.Size(91, 21);
             this.lTimeToPlay.TabIndex = 8;
             this.lTimeToPlay.Text = "Time to play";
             // 
             // bAddDiscountCard
             // 
-            this.bAddDiscountCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bAddDiscountCard.Location = new System.Drawing.Point(279, 47);
+            this.bAddDiscountCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAddDiscountCard.Location = new System.Drawing.Point(268, 49);
             this.bAddDiscountCard.Name = "bAddDiscountCard";
-            this.bAddDiscountCard.Size = new System.Drawing.Size(61, 32);
+            this.bAddDiscountCard.Size = new System.Drawing.Size(49, 29);
             this.bAddDiscountCard.TabIndex = 29;
             this.bAddDiscountCard.Text = "Add card";
             this.bAddDiscountCard.UseVisualStyleBackColor = true;
+            this.bAddDiscountCard.Click += new System.EventHandler(this.bAddDiscountCard_Click);
             // 
             // gbClientInfo
             // 
@@ -179,15 +180,15 @@
             this.gbClientInfo.Enabled = false;
             this.gbClientInfo.Location = new System.Drawing.Point(388, 150);
             this.gbClientInfo.Name = "gbClientInfo";
-            this.gbClientInfo.Size = new System.Drawing.Size(304, 190);
+            this.gbClientInfo.Size = new System.Drawing.Size(304, 178);
             this.gbClientInfo.TabIndex = 27;
             this.gbClientInfo.TabStop = false;
-            this.gbClientInfo.Text = "Client info";
+            this.gbClientInfo.Text = "Client name info";
             // 
             // numUpDMinutesRemainedOnCard
             // 
             this.numUpDMinutesRemainedOnCard.Enabled = false;
-            this.numUpDMinutesRemainedOnCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDMinutesRemainedOnCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numUpDMinutesRemainedOnCard.Location = new System.Drawing.Point(228, 73);
             this.numUpDMinutesRemainedOnCard.Maximum = new decimal(new int[] {
             60,
@@ -196,13 +197,13 @@
             0});
             this.numUpDMinutesRemainedOnCard.Name = "numUpDMinutesRemainedOnCard";
             this.numUpDMinutesRemainedOnCard.ReadOnly = true;
-            this.numUpDMinutesRemainedOnCard.Size = new System.Drawing.Size(60, 30);
+            this.numUpDMinutesRemainedOnCard.Size = new System.Drawing.Size(60, 29);
             this.numUpDMinutesRemainedOnCard.TabIndex = 8;
             // 
             // numUpDHoursRemainedOnCard
             // 
             this.numUpDHoursRemainedOnCard.Enabled = false;
-            this.numUpDHoursRemainedOnCard.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDHoursRemainedOnCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numUpDHoursRemainedOnCard.Location = new System.Drawing.Point(162, 73);
             this.numUpDHoursRemainedOnCard.Maximum = new decimal(new int[] {
             500,
@@ -216,7 +217,7 @@
             0});
             this.numUpDHoursRemainedOnCard.Name = "numUpDHoursRemainedOnCard";
             this.numUpDHoursRemainedOnCard.ReadOnly = true;
-            this.numUpDHoursRemainedOnCard.Size = new System.Drawing.Size(60, 30);
+            this.numUpDHoursRemainedOnCard.Size = new System.Drawing.Size(60, 29);
             this.numUpDHoursRemainedOnCard.TabIndex = 7;
             this.numUpDHoursRemainedOnCard.Value = new decimal(new int[] {
             1,
@@ -226,11 +227,11 @@
             // 
             // tbClientName
             // 
-            this.tbClientName.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbClientName.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbClientName.Location = new System.Drawing.Point(116, 24);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.ReadOnly = true;
-            this.tbClientName.Size = new System.Drawing.Size(172, 30);
+            this.tbClientName.Size = new System.Drawing.Size(172, 29);
             this.tbClientName.TabIndex = 3;
             // 
             // numUpDClientMoneyLeft
@@ -238,7 +239,7 @@
             this.numUpDClientMoneyLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDClientMoneyLeft.DecimalPlaces = 2;
             this.numUpDClientMoneyLeft.Enabled = false;
-            this.numUpDClientMoneyLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDClientMoneyLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numUpDClientMoneyLeft.Location = new System.Drawing.Point(162, 114);
             this.numUpDClientMoneyLeft.Maximum = new decimal(new int[] {
             300000,
@@ -247,16 +248,17 @@
             0});
             this.numUpDClientMoneyLeft.Name = "numUpDClientMoneyLeft";
             this.numUpDClientMoneyLeft.ReadOnly = true;
-            this.numUpDClientMoneyLeft.Size = new System.Drawing.Size(126, 30);
+            this.numUpDClientMoneyLeft.Size = new System.Drawing.Size(126, 29);
             this.numUpDClientMoneyLeft.TabIndex = 5;
+            this.numUpDClientMoneyLeft.ValueChanged += new System.EventHandler(this.numUpDClientMoneyLeft_ValueChanged);
             // 
             // lClientName
             // 
             this.lClientName.AutoSize = true;
-            this.lClientName.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lClientName.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lClientName.Location = new System.Drawing.Point(6, 27);
             this.lClientName.Name = "lClientName";
-            this.lClientName.Size = new System.Drawing.Size(102, 22);
+            this.lClientName.Size = new System.Drawing.Size(90, 21);
             this.lClientName.TabIndex = 0;
             this.lClientName.Text = "Client name";
             // 
@@ -264,10 +266,10 @@
             // 
             this.lMoneyOnCardLeft.AutoSize = true;
             this.lMoneyOnCardLeft.Enabled = false;
-            this.lMoneyOnCardLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lMoneyOnCardLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lMoneyOnCardLeft.Location = new System.Drawing.Point(12, 116);
             this.lMoneyOnCardLeft.Name = "lMoneyOnCardLeft";
-            this.lMoneyOnCardLeft.Size = new System.Drawing.Size(96, 22);
+            this.lMoneyOnCardLeft.Size = new System.Drawing.Size(80, 21);
             this.lMoneyOnCardLeft.TabIndex = 8;
             this.lMoneyOnCardLeft.Text = "Money left";
             // 
@@ -275,10 +277,10 @@
             // 
             this.lTimeOnCardLeft.AutoSize = true;
             this.lTimeOnCardLeft.Enabled = false;
-            this.lTimeOnCardLeft.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lTimeOnCardLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lTimeOnCardLeft.Location = new System.Drawing.Point(6, 75);
             this.lTimeOnCardLeft.Name = "lTimeOnCardLeft";
-            this.lTimeOnCardLeft.Size = new System.Drawing.Size(138, 22);
+            this.lTimeOnCardLeft.Size = new System.Drawing.Size(115, 21);
             this.lTimeOnCardLeft.TabIndex = 8;
             this.lTimeOnCardLeft.Text = "Time to play left";
             // 
@@ -287,69 +289,51 @@
             this.current_time_timer.Enabled = true;
             this.current_time_timer.Interval = 1000;
             // 
-            // lCurrentTime
-            // 
-            this.lCurrentTime.AutoSize = true;
-            this.lCurrentTime.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lCurrentTime.Location = new System.Drawing.Point(194, 9);
-            this.lCurrentTime.Name = "lCurrentTime";
-            this.lCurrentTime.Size = new System.Drawing.Size(91, 20);
-            this.lCurrentTime.TabIndex = 24;
-            this.lCurrentTime.Text = "Current time";
-            // 
-            // lCurrentDate
-            // 
-            this.lCurrentDate.AutoSize = true;
-            this.lCurrentDate.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lCurrentDate.Location = new System.Drawing.Point(12, 9);
-            this.lCurrentDate.Name = "lCurrentDate";
-            this.lCurrentDate.Size = new System.Drawing.Size(91, 20);
-            this.lCurrentDate.TabIndex = 23;
-            this.lCurrentDate.Text = "Current date";
-            // 
             // cbPlaystationId
             // 
             this.cbPlaystationId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbPlaystationId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbPlaystationId.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbPlaystationId.Location = new System.Drawing.Point(140, 97);
+            this.cbPlaystationId.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbPlaystationId.Location = new System.Drawing.Point(146, 97);
             this.cbPlaystationId.Name = "cbPlaystationId";
-            this.cbPlaystationId.Size = new System.Drawing.Size(61, 30);
+            this.cbPlaystationId.Size = new System.Drawing.Size(61, 29);
             this.cbPlaystationId.TabIndex = 21;
             this.cbPlaystationId.SelectedIndexChanged += new System.EventHandler(this.cbPlaystationId_SelectedIndexChanged);
             // 
             // lPlaystationId
             // 
             this.lPlaystationId.AutoSize = true;
-            this.lPlaystationId.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lPlaystationId.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lPlaystationId.Location = new System.Drawing.Point(12, 100);
             this.lPlaystationId.Name = "lPlaystationId";
-            this.lPlaystationId.Size = new System.Drawing.Size(118, 22);
+            this.lPlaystationId.Size = new System.Drawing.Size(96, 21);
             this.lPlaystationId.TabIndex = 20;
             this.lPlaystationId.Text = "Playstation #";
             // 
             // lClientDiscountId
             // 
             this.lClientDiscountId.AutoSize = true;
-            this.lClientDiscountId.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lClientDiscountId.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lClientDiscountId.Location = new System.Drawing.Point(12, 52);
             this.lClientDiscountId.Name = "lClientDiscountId";
-            this.lClientDiscountId.Size = new System.Drawing.Size(122, 22);
+            this.lClientDiscountId.Size = new System.Drawing.Size(128, 21);
             this.lClientDiscountId.TabIndex = 26;
-            this.lClientDiscountId.Text = "Client Discount";
+            this.lClientDiscountId.Text = "Client discount ID";
             // 
             // bAddSession
             // 
+            this.bAddSession.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddSession.Location = new System.Drawing.Point(12, 334);
             this.bAddSession.Name = "bAddSession";
             this.bAddSession.Size = new System.Drawing.Size(111, 38);
             this.bAddSession.TabIndex = 25;
             this.bAddSession.Text = "Add new client";
             this.bAddSession.UseVisualStyleBackColor = true;
+            this.bAddSession.Click += new System.EventHandler(this.bAddSession_Click);
             // 
             // numUpDPaidPrice
             // 
-            this.numUpDPaidPrice.Font = new System.Drawing.Font("Bauhaus Lt BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDPaidPrice.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.numUpDPaidPrice.Location = new System.Drawing.Point(163, 91);
             this.numUpDPaidPrice.Maximum = new decimal(new int[] {
             18900,
@@ -357,7 +341,7 @@
             0,
             0});
             this.numUpDPaidPrice.Name = "numUpDPaidPrice";
-            this.numUpDPaidPrice.Size = new System.Drawing.Size(113, 30);
+            this.numUpDPaidPrice.Size = new System.Drawing.Size(113, 29);
             this.numUpDPaidPrice.TabIndex = 4;
             this.numUpDPaidPrice.ValueChanged += new System.EventHandler(this.numUpDPaidPrice_ValueChanged);
             // 
@@ -369,9 +353,10 @@
             this.gbDepositPayment.Controls.Add(this.lOR);
             this.gbDepositPayment.Controls.Add(this.lMoneyToPay);
             this.gbDepositPayment.Controls.Add(this.lTimeToPlay);
+            this.gbDepositPayment.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gbDepositPayment.Location = new System.Drawing.Point(12, 150);
             this.gbDepositPayment.Name = "gbDepositPayment";
-            this.gbDepositPayment.Size = new System.Drawing.Size(328, 178);
+            this.gbDepositPayment.Size = new System.Drawing.Size(305, 178);
             this.gbDepositPayment.TabIndex = 22;
             this.gbDepositPayment.TabStop = false;
             this.gbDepositPayment.Text = "Deposit payment";
@@ -380,21 +365,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(349, 384);
+            this.ClientSize = new System.Drawing.Size(333, 384);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);
             this.Controls.Add(this.bAddDiscountCard);
             this.Controls.Add(this.gbClientInfo);
-            this.Controls.Add(this.lCurrentTime);
-            this.Controls.Add(this.lCurrentDate);
             this.Controls.Add(this.cbPlaystationId);
             this.Controls.Add(this.lPlaystationId);
             this.Controls.Add(this.lClientDiscountId);
             this.Controls.Add(this.bAddSession);
             this.Controls.Add(this.gbDepositPayment);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -402,7 +385,7 @@
             this.Opacity = 0.98D;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddNewSession";
+            this.Text = "AddNewDaySession";
             this.Load += new System.EventHandler(this.AddNewSession_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).EndInit();
@@ -438,8 +421,6 @@
         private System.Windows.Forms.Label lMoneyOnCardLeft;
         private System.Windows.Forms.Label lTimeOnCardLeft;
         private System.Windows.Forms.Timer current_time_timer;
-        private System.Windows.Forms.Label lCurrentTime;
-        private System.Windows.Forms.Label lCurrentDate;
         private System.Windows.Forms.ComboBox cbPlaystationId;
         private System.Windows.Forms.Label lPlaystationId;
         private System.Windows.Forms.Label lClientDiscountId;

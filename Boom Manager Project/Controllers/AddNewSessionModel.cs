@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 
@@ -168,6 +171,81 @@ namespace Boom_Manager_Project.Controllers
             }
             bool res = (beg <= date && date < end) || (beg <= date.AddDays(1) && date.AddDays(1) < end);
             return res;
+        }
+
+        public bool IsRepeated(string cardId, string text)
+        {
+            if (text.Length <= 0)
+            {
+                return true;
+            }
+            List<string> splited = Regex.Split(text, "; ").ToList();
+            var matchedResult = (from m in splited
+                where m == cardId
+                select m).SingleOrDefault();
+            if (matchedResult != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public void AddNewDaySession(string playstationId, string clientId, TimeSpan timeToPlay, double paidSum)
+        {
+            if (!String.IsNullOrWhiteSpace(playstationId))
+            {
+                global_session_t globalSession = DataBaseClass.Instancedb().GetOpenedGlobalSession();
+                var lastClientNumInSession =
+                    DataBaseClass.Instancedb().GetLastClientNumInSession(globalSession.daily_id);
+                var daysSessionT = new days_sessions_t
+                {
+                    daily_id = globalSession.daily_id,
+                    client_num = lastClientNumInSession + 1,
+                    start_game = DateTime.Now,
+                    end_game = DateTime.Now.Add(timeToPlay),
+                    playstation_id = playstationId,
+                    session_state = "opened",
+                    payed_sum = paidSum,
+                    money_left = paidSum,
+                    session_discount = 0
+                    //-----------------------------------------------------------------DISCOUNT ACCOUNTING
+                };
+                try
+                {
+                    DataBaseClass.Instancedb().InsertNewDaySession(daysSessionT);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Cannot insert DaySession!");
+                }
+                try
+                {
+                    DataBaseClass.Instancedb().UpdatePlaystationState(playstationId, "busy");
+                }
+                catch (Exception ex)
+                {
+                    //delete successful insertions 
+                    MessageBox.Show("Cannot update playstation state!");
+                }
+                try
+                {
+                    DataBaseClass.Instancedb().InsertClientsPerTable(clientId);
+                }
+                catch (Exception)
+                {
+                    //delete successful insertions
+                    MessageBox.Show("Cannot insert clients in clients_per_session table!");
+                }
+
+                //                            var allTablesList = (from i in _db.GetTable<tables_t>()
+                //                                                 orderby i.playstation_id.Length ascending, i.playstation_id ascending
+                //                                                 select i.playstation_id).ToList();
+                //
+                //                            int index = allTablesList.IndexOf(table_numComboBox.Text);
+                //                            if (!_endpoints[index].ON())
+                //                            {
+                //                                throw new Exception("NO CONNECTION!!");
+                //                            }//Sending singnal to board
+            }
         }
     }
 }

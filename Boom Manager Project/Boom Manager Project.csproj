@@ -62,7 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddClientToSessionModel.cs" />
+    <Compile Include="AddDiscountToSessionModel.cs" />
     <Compile Include="AddDiscountCardToSession.cs">
       <SubType>Form</SubType>
     </Compile>

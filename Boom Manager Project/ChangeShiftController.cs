@@ -65,7 +65,7 @@ namespace Boom_Manager_Project
 
             var adminInfo = db.GetUserInfoByLogin(login);
 
-            var lastOpenedSession = db.GetOpenedSession();
+            var lastOpenedSession = db.GetOpenedGlobalSession();
             if (lastOpenedSession != null)
             {
                 MessageBox.Show(WarningMessage("CloseOldSession"),

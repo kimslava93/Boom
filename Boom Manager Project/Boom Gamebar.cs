@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
@@ -18,8 +19,8 @@ namespace Boom_Manager_Project
             
             _curDateTime = DateTime.Now;
             _mainFormController = MainFormController.MfController();
+            dgvOpenedSessions.DataSource = _mainFormController.GetAllOpenedDaySessions();
         }
-
         private void BoomMainForm_Load(object sender, EventArgs e)
         {
             lCurrentTime.Text = DateTime.Now.ToString("HH:mm:ss");
@@ -71,8 +72,9 @@ namespace Boom_Manager_Project
 
         private void bAddNewClient_Click(object sender, EventArgs e)
         {
-            FAddNewSession newSessionForm = new FAddNewSession();
+            var newSessionForm = new FAddNewSession();
             newSessionForm.ShowDialog();
+            dgvOpenedSessions.DataSource = _mainFormController.GetAllOpenedDaySessions();
         }
     }
 }
