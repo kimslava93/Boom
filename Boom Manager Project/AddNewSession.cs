@@ -1,10 +1,4 @@
 ﻿using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.Data;
-//using System.Drawing;
-//using System.Linq;
-//using System.Text;
 using System.Windows.Forms;
 
 namespace Boom_Manager_Project
@@ -72,10 +66,18 @@ namespace Boom_Manager_Project
                 numUpDClientMoneyLeft.Value = numUpDClientMoneyLeft.Maximum;
                 numUpDHoursRemainedOnCard.Value = numUpDHoursRemainedOnCard.Maximum;
                 numUpDMinutesRemainedOnCard.Value = numUpDMinutesRemainedOnCard.Maximum;
-                TimeSpan paidTime = _addNewSessionController.UpdateUsualClientTimeLeft(numUpDClientMoneyLeft.Value,
-                    cbPlaystationId.Text,
-                    tbDiscountCards.Text, numUpDClientMoneyLeft.Minimum, numUpDClientMoneyLeft.Maximum);
-                numUpDHoursRemainedOnCard.Value = (paidTime.Days*24 + paidTime.Hours);
+                TimeSpan paidTime = _addNewSessionController.UpdateTimeLeft(numUpDClientMoneyLeft.Value,
+                    cbPlaystationId.Text, numUpDClientMoneyLeft.Minimum, numUpDClientMoneyLeft.Maximum);
+                bAddSession.Enabled = true;
+                if (paidTime > TimeSpan.FromHours(1))
+                {
+                    numUpDHoursRemainedOnCard.Value = (paidTime.Days*24 + paidTime.Hours);
+                }
+                else
+                {
+                    bAddSession.Enabled = false;
+                    MessageBox.Show("Insufficient money on card!\nPlease put more money on card(s) with id#" + tbDiscountCards.Text + "\nor add another card for game!");
+                }
             }
         }
         private void IsClientWithCardOrNot()
@@ -99,6 +101,7 @@ namespace Boom_Manager_Project
         private void tbDiscountCards_TextChanged(object sender, EventArgs e)
         {
             IsClientWithCardOrNot();
+//            SetDefaultPropertiesForFields();
         }
 
         private void numUpDHoursLeft_ValueChanged(object sender, EventArgs e)
@@ -147,31 +150,37 @@ namespace Boom_Manager_Project
             _repeatCallOfMethodCounter = 0;
         }
 
-        private void numUpDPaidPrice_ValueChanged(object sender, EventArgs e)
+        private void numUpDPaidPrice_ValueChanged(object sender, EventArgs e)//without card
         {
             UsualClientPriceChanged();
         }
-
+        private void numUpDClientMoneyLeft_ValueChanged(object sender, EventArgs e)//client with card
+        {
+            ClientPriceChanged();
+        }
         private void UsualClientPriceChanged()
         {
             if (_repeatCallOfMethodCounter <= 0)
             {
                 _repeatCallOfMethodCounter++;
-                TimeSpan t = _addNewSessionController.UpdateUsualClientTimeLeft(numUpDPaidPrice.Value, cbPlaystationId.Text,
-                    tbDiscountCards.Text, numUpDPaidPrice.Minimum, numUpDPaidPrice.Maximum);
+                TimeSpan t = _addNewSessionController.UpdateTimeLeft(numUpDPaidPrice.Value, cbPlaystationId.Text, numUpDPaidPrice.Minimum, numUpDPaidPrice.Maximum);
                 if (t.Hours > numUpDHoursLeft.Maximum)
                 {
+                    bAddSession.Enabled = true;
                     numUpDHoursLeft.Value = numUpDHoursLeft.Maximum;
                     numUpDMinutesLeft.Value = 0;
                 }
                 else if (t.Hours < numUpDHoursLeft.Minimum)
                 {
+                    bAddSession.Enabled = false;
+                    MessageBox.Show("Insufficient money on card!\nPlease put more money on card(s) with id#" + tbDiscountCards.Text + "\nor add another card for game!");
                     numUpDHoursLeft.Value = numUpDHoursLeft.Minimum;
                     numUpDMinutesLeft.Value = 0;
                 }
                 else
                 {
-                    numUpDHoursLeft.Value = t.Hours + t.Days * 24;
+                    bAddSession.Enabled = true;
+                    numUpDHoursLeft.Value = t.Hours + t.Days*24;
                     numUpDMinutesLeft.Value = t.Minutes;
                 }
             }
@@ -183,21 +192,25 @@ namespace Boom_Manager_Project
             if (_repeatCallOfMethodCounter <= 0)
             {
                 _repeatCallOfMethodCounter++;
-                TimeSpan t = _addNewSessionController.UpdateUsualClientTimeLeft(numUpDClientMoneyLeft.Value, cbPlaystationId.Text,
-                    tbDiscountCards.Text, numUpDClientMoneyLeft.Minimum, numUpDClientMoneyLeft.Maximum);
+                TimeSpan t = _addNewSessionController.UpdateTimeLeft(numUpDClientMoneyLeft.Value,
+                    cbPlaystationId.Text, numUpDClientMoneyLeft.Minimum, numUpDClientMoneyLeft.Maximum);
                 if (t.Hours > numUpDHoursRemainedOnCard.Maximum)
                 {
+                    bAddSession.Enabled = true;
                     numUpDHoursRemainedOnCard.Value = numUpDHoursRemainedOnCard.Maximum;
                     numUpDMinutesLeft.Value = 0;
                 }
                 else if (t.Hours < numUpDHoursRemainedOnCard.Minimum)
                 {
+                    bAddSession.Enabled = false;
+                    MessageBox.Show("Insufficient money on card!\nPlease put more money on card(s) with id#" + tbDiscountCards.Text + "\nor add another card for game!");
                     numUpDHoursRemainedOnCard.Value = numUpDHoursRemainedOnCard.Minimum;
                     numUpDMinutesLeft.Value = 0;
                 }
                 else
                 {
-                    numUpDHoursRemainedOnCard.Value = t.Hours + t.Days * 24;
+                    bAddSession.Enabled = true;
+                    numUpDHoursRemainedOnCard.Value = t.Hours + t.Days*24;
                     numUpDMinutesRemainedOnCard.Value = t.Minutes;
                 }
             }
@@ -233,10 +246,7 @@ namespace Boom_Manager_Project
             IsClientWithCardOrNot();
         }
 
-        private void numUpDClientMoneyLeft_ValueChanged(object sender, EventArgs e)
-        {
-            
-        }
+       
 
         private void bAddSession_Click(object sender, EventArgs e)
         {
@@ -246,12 +256,16 @@ namespace Boom_Manager_Project
                     TimeSpan.FromMinutes((double) numUpDHoursLeft.Value*60 + (double) numUpDMinutesLeft.Value);
 
                 _addNewSessionController.AddNewDaySession(cbPlaystationId.Text, tbDiscountCards.Text, paidTime,
-                    (double) numUpDPaidPrice.Value);
+                    (double) numUpDPaidPrice.Value,DateTime.Now);
                 Close();
             }
             else if (!String.IsNullOrEmpty(tbDiscountCards.Text) && tbDiscountCards.Text.Length > 2)
             {
-                MessageBox.Show("ClientWithCard");
+                TimeSpan paidTime =
+                    TimeSpan.FromMinutes((double)numUpDHoursRemainedOnCard.Value * 60 + (double)numUpDMinutesRemainedOnCard.Value);
+
+                _addNewSessionController.AddNewDaySession(cbPlaystationId.Text, tbDiscountCards.Text, paidTime,
+                    (double)numUpDClientMoneyLeft.Value, DateTime.Now);
                 Close();
             }
             

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Drawing;
-using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
-using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
@@ -11,22 +9,22 @@ namespace Boom_Manager_Project
     public partial class BoomMainForm : Form
     {
         private DateTime _curDateTime;
-        private readonly MainFormController _mainFormController;
+        private readonly BoomGamebarController _boomGamebarController;
 
         public BoomMainForm()
         {
             InitializeComponent();
             
             _curDateTime = DateTime.Now;
-            _mainFormController = MainFormController.MfController();
-            dgvOpenedSessions.DataSource = _mainFormController.GetAllOpenedDaySessions();
+            _boomGamebarController = BoomGamebarController.MfController();
+            dgvOpenedSessions.DataSource = _boomGamebarController.GetAllOpenedDaySessions();
         }
         private void BoomMainForm_Load(object sender, EventArgs e)
         {
             lCurrentTime.Text = DateTime.Now.ToString("HH:mm:ss");
             lCurrentDate.Text = DateTime.Now.ToLongDateString();
-            _mainFormController.OpeneGlobalSession();
-            dgvOpenedSessions.DataSource = _mainFormController.DvgAllSessions;
+            _boomGamebarController.OpeneGlobalSession();
+            dgvOpenedSessions.DataSource = _boomGamebarController.DvgAllSessions;
         }
 
         private void BoomMainForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -54,27 +52,25 @@ namespace Boom_Manager_Project
             }
             
 //            CheckSoonToCloseClients();
-//            Thread check = new Thread(TimeOutChecking);
-//            check.IsBackground = true;
-//            check.Priority = ThreadPriority.Normal;
-//            check.Start();
+            var check = new Thread(TimeOutChecking) {IsBackground = true, Priority = ThreadPriority.Normal};
+            check.Start();
         }
-
+     
+        private void TimeOutChecking()
+        {
+            BoomGamebarController.MfController().TimeOutChecking();
+            dgvOpenedSessions.Invalidate();
+        }
         private void bSlideMenu_Click(object sender, EventArgs e)
         {
-            if(splitContainer.Panel2Collapsed)
-                splitContainer.Panel2Collapsed = false;
-            else
-            {
-                splitContainer.Panel2Collapsed = true;
-            }
+            splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
         }
 
         private void bAddNewClient_Click(object sender, EventArgs e)
         {
             var newSessionForm = new FAddNewSession();
             newSessionForm.ShowDialog();
-            dgvOpenedSessions.DataSource = _mainFormController.GetAllOpenedDaySessions();
+            dgvOpenedSessions.DataSource = _boomGamebarController.GetAllOpenedDaySessions();
         }
     }
 }

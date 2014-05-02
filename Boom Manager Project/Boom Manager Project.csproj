@@ -62,7 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddDiscountToSessionModel.cs" />
+    <Compile Include="Models\AddDiscountToSessionModel.cs" />
     <Compile Include="AddDiscountCardToSession.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,7 +75,7 @@
     <Compile Include="AddNewSession.Designer.cs">
       <DependentUpon>AddNewSession.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddNewSessionController.cs" />
+    <Compile Include="Controllers\AddNewSessionController.cs" />
     <Compile Include="AddNewStaffUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,12 +94,12 @@
     <Compile Include="ChangeShift.Designer.cs">
       <DependentUpon>ChangeShift.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChangeShiftController.cs" />
-    <Compile Include="ChangeShiftModel.cs" />
-    <Compile Include="Controllers\AddNewSessionModel.cs" />
-    <Compile Include="Controllers\MainFormController.cs" />
-    <Compile Include="Controllers\ModelGlobalSession.cs" />
-    <Compile Include="Controllers\ModelPersonalInfo.cs" />
+    <Compile Include="Controllers\ChangeShiftController.cs" />
+    <Compile Include="Models\ChangeShiftModel.cs" />
+    <Compile Include="Models\AddNewSessionModel.cs" />
+    <Compile Include="Controllers\BoomGamebarController.cs" />
+    <Compile Include="Models\ModelGlobalSession.cs" />
+    <Compile Include="Models\ModelPersonalInfo.cs" />
     <Compile Include="Controllers\AddNewUserController.cs" />
     <Compile Include="DataBaseClasses\DataBaseClass.cs" />
     <Compile Include="MyClasses\DaySessionClass.cs" />

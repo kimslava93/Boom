@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-//using System.Windows.Forms.VisualStyles;
-using System.Text;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project.DataBaseClasses
@@ -35,11 +35,9 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                var openedSession = (from cs in db.GetTable<global_session_t>()
+                return (from cs in db.GetTable<global_session_t>()
                     where cs.end_session == cs.start_session
                     select cs).SingleOrDefault();
-
-                return openedSession;
             }
         }
 
@@ -87,7 +85,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 
         private static TimeSpan GetTimeLeft(DateTime end)
         {
-            TimeSpan result = end.Subtract( DateTime.Now);
+            TimeSpan result = end.Subtract(DateTime.Now);
             return new TimeSpan(result.Days, result.Hours, result.Minutes, result.Seconds);
         }
 
@@ -261,20 +259,22 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        public void DeleteDaySession(int sessionId)
+        public void DeleteDaySession()
         {
             var db = new dbDataContext();
             lock (db)
             {
+                var lastInsertedDaySession = (from ls in db.GetTable<days_sessions_t>()
+                                              orderby ls.session_id descending
+                                              select ls).FirstOrDefault(); 
+
                 var sessionToDelete = (from d in db.GetTable<days_sessions_t>()
-                    where d.session_id == sessionId
+                    where d.session_id == lastInsertedDaySession.session_id
                     select d).SingleOrDefault();
-                if (sessionToDelete != null)
-                {
-                    Table<days_sessions_t> deleteFromT = db.GetTable<days_sessions_t>();
-                    deleteFromT.DeleteOnSubmit(sessionToDelete);
-                    db.SubmitChanges();
-                }
+                if (sessionToDelete == null) return;
+                Table<days_sessions_t> deleteFromT = db.GetTable<days_sessions_t>();
+                deleteFromT.DeleteOnSubmit(sessionToDelete);
+                db.SubmitChanges();
             }
         }
 
@@ -283,12 +283,14 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                tables_t t = GetTableInfo(playstationId);
-                if (t != null && t.playstation_id != null)
+                var table = (from t in db.GetTable<tables_t>()
+                    where t.playstation_id == playstationId
+                    select t).SingleOrDefault();
+                if (table != null && table.playstation_id != null)
                 {
-                    t.playstation_state = state;
+                    table.playstation_state = state;
+                    db.SubmitChanges();
                 }
-                db.SubmitChanges();
             }
         }
 
@@ -314,7 +316,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                         clientsPersessionTable.InsertOnSubmit(clientsPerSessionT);
                         db.SubmitChanges();
                     }
-                    else if (clientId != null && (string.IsNullOrEmpty(clientId) && clientId.Length > 2))
+                    else if (clientId != null && (!string.IsNullOrEmpty(clientId) && clientId.Length > 2))
                     {
                         IEnumerable<string> discountsArePlaying = DiscountSplitter(clientId);
 
@@ -339,6 +341,39 @@ namespace Boom_Manager_Project.DataBaseClasses
             List<string> result = Regex.Split(textToSplitBySemiColumn, "; ").ToList();
             return result;
         }
+        public void TimeOutClosePlaystation(DaySessionClass dsc)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                int dayId = GetOpenedGlobalSession().daily_id;
+                var getSessionIdtoDelete = (from s in db.GetTable<days_sessions_t>()
+                                            where s.daily_id == dayId
+                                            where s.session_id == dsc.SessionId
+                                            select s).SingleOrDefault();
+                if (getSessionIdtoDelete == null) return;
 
+                getSessionIdtoDelete.session_state = "closed";
+                getSessionIdtoDelete.money_left = dsc.MoneyLeft;
+                if (String.IsNullOrEmpty(getSessionIdtoDelete.comments))
+                {
+                    getSessionIdtoDelete.comments = "";
+                }
+                UpdatePlaystationState(dsc.PlaystationId, "free");
+                while (true)
+                {
+                    try
+                    {
+                        db.SubmitChanges();
+                        break;
+                    }
+                    catch
+                    {
+                        MessageBox.Show(
+                            "Can't update DataBase during closing client comments! Please contact with Developer");
+                    }
+                }
+            }
+        }
     }
 }
