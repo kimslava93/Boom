@@ -83,6 +83,15 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+//        private DateTime CheckTheDate(DateTime toCheck)
+//        {
+//            DateTime curTime = DateTime.Now;
+//            if (toCheck.Year == curTime.Year && toCheck.Month == curTime.Month && toCheck.Day == curTime.Day)
+//            {
+//                return 
+//            }
+//        }
+
         private static TimeSpan GetTimeLeft(DateTime end)
         {
             TimeSpan result = end.Subtract(DateTime.Now);
@@ -341,6 +350,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             List<string> result = Regex.Split(textToSplitBySemiColumn, "; ").ToList();
             return result;
         }
+
         public void TimeOutClosePlaystation(DaySessionClass dsc)
         {
             var db = new dbDataContext();
@@ -355,7 +365,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 
                 getSessionIdtoDelete.session_state = "closed";
                 getSessionIdtoDelete.money_left = dsc.MoneyLeft;
-                if (String.IsNullOrEmpty(getSessionIdtoDelete.comments))
+                if (String.IsNullOrWhiteSpace(getSessionIdtoDelete.comments))
                 {
                     getSessionIdtoDelete.comments = "";
                 }

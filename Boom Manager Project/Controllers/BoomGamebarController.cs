@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -17,7 +18,7 @@ namespace Boom_Manager_Project.Controllers
         private global_session_t _currentGlobalSession;
         private static BoomGamebarController _mfController;
 
-        public static BoomGamebarController MfController()
+        public static BoomGamebarController InstanceBgController()
         {
             return _mfController ?? (_mfController = new BoomGamebarController());
         }
@@ -48,7 +49,7 @@ namespace Boom_Manager_Project.Controllers
             else
             {
                 _clentsList = DataBaseClass.Instancedb().GetListOfClientsPerSessionT();
-                _currentDaySessionList = GetDailySession(_currentGlobalSession.daily_id, _clentsList);
+                _currentDaySessionList = GetExactDailySession(_currentGlobalSession.daily_id, _clentsList);
             }
         }
         public List<DaySessionClass> GetAllOpenedDaySessions()
@@ -57,53 +58,51 @@ namespace Boom_Manager_Project.Controllers
             List<clients_per_session_t> clientsPerSessionList = DataBaseClass.Instancedb().GetListOfClientsPerSessionT();
             return DataBaseClass.Instancedb().GetOpenedDaySessions(dailyId, clientsPerSessionList);
         }
-        public List<DaySessionClass> GetDailySession(int dailyId, List<clients_per_session_t> clientsPerSessionList)
+        public List<DaySessionClass> GetExactDailySession(int dailyId, List<clients_per_session_t> clientsPerSessionList)
         {
             var db = DataBaseClass.Instancedb();
             return db.GetOpenedDaySessions(dailyId, clientsPerSessionList);
         }
 
-        public void TimeOutChecking()
+        public List<DaySessionClass> TimeAndMoneySubstracting(List<DaySessionClass> dSessions)
         {
-            List<DaySessionClass> dSessions = GetAllOpenedDaySessions();
-            if (dSessions.Count <= 0) return;
+            if (dSessions.Count <= 0) return dSessions;
             foreach (DaySessionClass os in dSessions)
             {
                 os.MoneyLeft = Math.Round(GetAlreadyPlayedMoneySum(os.PlaystationId, os.StartGame, os.PayedSum), 2);
                 os.TimeLeft = GetTimeLeft(os.EndGame);
             }
+            return dSessions;
         }
         private TimeSpan GetTimeLeft(DateTime end)
         {
             TimeSpan result = end.Subtract(DateTime.Now);
             return new TimeSpan(result.Days, result.Hours, result.Minutes, result.Seconds);
         }
-        public double GetAlreadyPlayedMoneySum(string plstId, DateTime startDate, double payedSum)
+        public double GetAlreadyPlayedMoneySum(string plstId, DateTime startDate, double paidSum)
         {
             DateTime curTime = DateTime.Now;
             if (startDate > curTime)
             {
                 startDate = startDate.Subtract(TimeSpan.FromDays(1));
             }
-
-            if (startDate < curTime)
-            {
-                TimeSpan payedTime = curTime - startDate;
-                return payedSum -
-                       AddNewSessionModel.InstanceAddNewSessionModel().GetSumToPay(plstId, payedTime, startDate);
-            }
-            return 0.0;
+            if (startDate >= curTime) return 0.0;
+            TimeSpan paidTime = curTime - startDate;
+            double t = paidSum - AddNewSessionModel.InstanceAddNewSessionModel().GetSumToPay(plstId, paidTime, startDate);
+//            MessageBox.Show(paidTime + "\n" + paidSum);
+//            MessageBox.Show("paid time = " + paidTime + "\n" + t.ToString(CultureInfo.InvariantCulture));
+            return t;
         }
-        public void CheckSoonToCloseClients()
+        public List<DaySessionClass> CheckSoonToCloseClients(List<DaySessionClass> dSessions)
         {
-            List<DaySessionClass> dSessions = GetAllOpenedDaySessions();
+//            List<DaySessionClass> dSessions = GetAllOpenedDaySessions();
             foreach (DaySessionClass os in dSessions)
             {
-                if (os.TimeLeft > TimeSpan.FromMinutes(5))
-                {
-                    //continue;
-                }
-                else if (os.TimeLeft > TimeSpan.FromMinutes(3) && os.TimeLeft < TimeSpan.FromMinutes(6))
+//                if (os.TimeLeft > TimeSpan.FromMinutes(5))
+//                {
+//                    //continue;
+//                }
+                if (os.TimeLeft > TimeSpan.FromMinutes(3) && os.TimeLeft < TimeSpan.FromMinutes(6))
                 {
 //                    HighLight(os.SessionId, 0);
                     //warning highlight
@@ -114,12 +113,14 @@ namespace Boom_Manager_Project.Controllers
                 }
                 else if (os.TimeLeft <= TimeSpan.FromMinutes(0))
                 {
-                    _opt.TimeOutClosePlaystation(_dailyId, os);
-                    GetDailySession();
-                    SyncDbContextAndDaySessionList();
+                    DataBaseClass.Instancedb().TimeOutClosePlaystation(os);
+//                    GetExactDailySession();
+                    dSessions = GetAllOpenedDaySessions();
+//                    SyncDbContextAndDaySessionList();
                 }
-                dataGridViewDaysSession.Invalidate();
+//                dataGridViewDaysSession.Invalidate();
             }
+            return dSessions;
         }
     }
 }

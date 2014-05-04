@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.bAddNewClient = new System.Windows.Forms.Button();
             this.bSlideMenu = new System.Windows.Forms.Button();
             this.lCurrentDate = new System.Windows.Forms.Label();
             this.lCurrentTime = new System.Windows.Forms.Label();
             this.dgvOpenedSessions = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.bAddNewClient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -75,6 +75,16 @@
             this.splitContainer.Size = new System.Drawing.Size(1366, 768);
             this.splitContainer.SplitterDistance = 1278;
             this.splitContainer.TabIndex = 3;
+            // 
+            // bAddNewClient
+            // 
+            this.bAddNewClient.Location = new System.Drawing.Point(32, 39);
+            this.bAddNewClient.Name = "bAddNewClient";
+            this.bAddNewClient.Size = new System.Drawing.Size(75, 50);
+            this.bAddNewClient.TabIndex = 7;
+            this.bAddNewClient.Text = "Add new client";
+            this.bAddNewClient.UseVisualStyleBackColor = true;
+            this.bAddNewClient.Click += new System.EventHandler(this.bAddNewClient_Click);
             // 
             // bSlideMenu
             // 
@@ -140,6 +150,7 @@
             this.dgvOpenedSessions.TabIndex = 3;
             this.dgvOpenedSessions.TabStop = false;
             this.dgvOpenedSessions.VirtualMode = true;
+            this.dgvOpenedSessions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOpenedSessions_CellFormatting);
             // 
             // label1
             // 
@@ -149,16 +160,6 @@
             this.label1.Size = new System.Drawing.Size(52, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
-            // 
-            // bAddNewClient
-            // 
-            this.bAddNewClient.Location = new System.Drawing.Point(32, 39);
-            this.bAddNewClient.Name = "bAddNewClient";
-            this.bAddNewClient.Size = new System.Drawing.Size(75, 50);
-            this.bAddNewClient.TabIndex = 7;
-            this.bAddNewClient.Text = "Add new client";
-            this.bAddNewClient.UseVisualStyleBackColor = true;
-            this.bAddNewClient.Click += new System.EventHandler(this.bAddNewClient_Click);
             // 
             // BoomMainForm
             // 

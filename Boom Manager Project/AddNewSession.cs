@@ -250,17 +250,21 @@ namespace Boom_Manager_Project
 
         private void bAddSession_Click(object sender, EventArgs e)
         {
+
             if (tbDiscountCards.Text == "0")
             {
+                UsualClientPriceChanged();
                 TimeSpan paidTime =
                     TimeSpan.FromMinutes((double) numUpDHoursLeft.Value*60 + (double) numUpDMinutesLeft.Value);
 
                 _addNewSessionController.AddNewDaySession(cbPlaystationId.Text, tbDiscountCards.Text, paidTime,
                     (double) numUpDPaidPrice.Value,DateTime.Now);
+//                MessageBox.Show(numUpDPaidPrice.Value.ToString());
                 Close();
             }
             else if (!String.IsNullOrEmpty(tbDiscountCards.Text) && tbDiscountCards.Text.Length > 2)
             {
+                ClientPriceChanged();
                 TimeSpan paidTime =
                     TimeSpan.FromMinutes((double)numUpDHoursRemainedOnCard.Value * 60 + (double)numUpDMinutesRemainedOnCard.Value);
 

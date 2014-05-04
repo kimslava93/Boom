@@ -35,9 +35,10 @@ namespace Boom_Manager_Project.Models
                 {
                     var toAccurateTime2 = new TimeSpan(0,0, 60 - endTime.Minute, 60 - endTime.Second,
                         1000 - endTime.Millisecond);
-                    
-                    sum += toAccurateTime2.TotalSeconds * GetCurrentPriceForPlaystation(playstationId, endTime) / 60 / 60;
-                    endTime = endTime.AddSeconds(toAccurateTime2.TotalSeconds);
+
+                    sum += toAccurateTime2.TotalMilliseconds*GetCurrentPriceForPlaystation(playstationId, endTime)/1000/
+                           60/60;
+                    endTime = endTime.AddMilliseconds(toAccurateTime2.TotalMilliseconds);
                     paidTime = paidTime.Subtract(toAccurateTime2);
                 }
                 for (int i = 0; i < (int)paidTime.TotalHours; i++)
@@ -47,9 +48,9 @@ namespace Boom_Manager_Project.Models
                 }
                 if (paidTime.Minutes != 0)
                 {
-                    sum += GetCurrentPriceForPlaystation(playstationId, endTime)*(paidTime.Minutes*60 +
+                    sum += GetCurrentPriceForPlaystation(playstationId, endTime)*(paidTime.Minutes)/60; /*+
                                                                                   paidTime.Seconds +
-                                                                                  paidTime.Milliseconds/1000)/60/60;
+                                                                                  paidTime.Milliseconds/1000)/60/60;*/
                 }
             }
             else
@@ -57,15 +58,19 @@ namespace Boom_Manager_Project.Models
                 TimeSpan toAccurateTime = TimeSpan.FromMinutes(60 - endTime.Minute);
                 if (toAccurateTime <= paidTime)
                 {
-                    double sumToAdd = toAccurateTime.TotalSeconds * GetCurrentPriceForPlaystation(playstationId, endTime);
-                    sum += sumToAdd / 60 / 60 + sumToAdd % 60 % 60;
+//                    double sumToAdd = toAccurateTime.TotalSeconds * GetCurrentPriceForPlaystation(playstationId, endTime);
+//                    sum += sumToAdd / 60 / 60 + sumToAdd % 60 % 60;
+//                    paidTime = paidTime.Subtract(toAccurateTime);
+//                    endTime = endTime.Add(toAccurateTime);
+                    sum += toAccurateTime.TotalSeconds*GetCurrentPriceForPlaystation(playstationId, endTime)/60/60;
                     paidTime = paidTime.Subtract(toAccurateTime);
                     endTime = endTime.Add(toAccurateTime);
                 }
                 if (paidTime.TotalMinutes > 0)
                 {
-                    double sumToAdd = toAccurateTime.TotalSeconds * GetCurrentPriceForPlaystation(playstationId, endTime);
-                    sum += sumToAdd / 60 / 60 + sumToAdd % 60 % 60;
+//                    double sumToAdd = toAccurateTime.TotalSeconds * GetCurrentPriceForPlaystation(playstationId, endTime);
+//                    sum += sumToAdd / 60 / 60 + sumToAdd % 60 % 60;
+                    sum += paidTime.TotalSeconds*GetCurrentPriceForPlaystation(playstationId, endTime)/60/60;
                 }
             }
             return sum;
