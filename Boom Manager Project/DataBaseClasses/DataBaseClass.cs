@@ -59,7 +59,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return (from days in db.GetTable<days_sessions_t>()
                     where days.daily_id == dailyId
                     where days.session_state == "opened"
-                    orderby days.money_left ascending
+                    orderby days.end_game ascending
                     let startGame = days.start_game
                     where startGame != null
                     let endGame = days.end_game

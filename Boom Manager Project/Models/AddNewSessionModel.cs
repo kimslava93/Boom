@@ -41,16 +41,21 @@ namespace Boom_Manager_Project.Models
                     endTime = endTime.AddMilliseconds(toAccurateTime2.TotalMilliseconds);
                     paidTime = paidTime.Subtract(toAccurateTime2);
                 }
-                for (int i = 0; i < (int)paidTime.TotalHours; i++)
+                int cycles = (int) paidTime.TotalHours;
+                for (int i = 0; i < cycles; i++)
                 {
                     sum += GetCurrentPriceForPlaystation(playstationId, endTime);
                     endTime = endTime.AddHours(1);
+                    paidTime = paidTime.Subtract(TimeSpan.FromHours(1));
                 }
-                if (paidTime.Minutes != 0)
+                if (paidTime.TotalMinutes > 0)
                 {
-                    sum += GetCurrentPriceForPlaystation(playstationId, endTime)*(paidTime.Minutes)/60; /*+
-                                                                                  paidTime.Seconds +
-                                                                                  paidTime.Milliseconds/1000)/60/60;*/
+//                    return sum += GetCurrentPriceForPlaystation(playstationId, endTime)*(paidTime.Minutes)/60 +
+//                                  (paidTime.Seconds/60/60) +
+//                                  (paidTime.Milliseconds/1000/60/60);
+                    double pstPrice = GetCurrentPriceForPlaystation(playstationId, endTime);
+                    sum += paidTime.TotalSeconds*(pstPrice/60/60);
+//                    MessageBox.Show(pstPrice/60 + " " + pstPrice%60);
                 }
             }
             else
