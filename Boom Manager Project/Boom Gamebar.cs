@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
@@ -72,7 +74,7 @@ namespace Boom_Manager_Project
             splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
         }
 
-        private void bAddNewClient_Click(object sender, EventArgs e)
+        private void bAddNewSession_Click(object sender, EventArgs e)
         {
             var newSessionForm = new FAddNewSession();
             newSessionForm.ShowDialog();
@@ -80,7 +82,6 @@ namespace Boom_Manager_Project
             dgvOpenedSessions.DataSource = _currentOpenedSessionsList;
             dgvOpenedSessions.Invalidate();
         }
-
         private void dgvOpenedSessions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             var dataGridViewColumn = dgvOpenedSessions.Columns["StartGame"];
@@ -89,6 +90,42 @@ namespace Boom_Manager_Project
             var gridViewColumn = dgvOpenedSessions.Columns["EndGame"];
             if (gridViewColumn != null)
                 gridViewColumn.DefaultCellStyle.Format = "t";
+        }
+
+        private void bCloseSession_Click(object sender, EventArgs e)
+        {
+            if (dgvOpenedSessions.CurrentRow != null)
+            {
+                var sessionToClose = BoomGamebarController.InstanceBgController()
+                    .GetSelectedSessionData(_currentOpenedSessionsList,
+                        (int) dgvOpenedSessions.CurrentRow.Cells[0].Value);
+                if (sessionToClose != null)
+                {
+                    _currentOpenedSessionsList =
+                        BoomGamebarController.InstanceBgController().CloseSessionBeforeTimer(sessionToClose);
+                    dgvOpenedSessions.Invalidate();
+                }
+            }
+            else
+            {
+                BoomGamebarController.InstanceBgController().ShowErrorMessage(1);//Selec row to delete message 
+//                MessageBox.Show();
+            }
+//            GetDailySession();
+        }
+
+        private void bExtendTime_Click(object sender, EventArgs e)
+        {
+            if (dgvOpenedSessions.CurrentRow != null)
+            {
+                BoomGamebarController.InstanceBgController().ExtendTime((int)dgvOpenedSessions.CurrentRow.Cells[0].Value,_currentOpenedSessionsList);
+                _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().GetAllOpenedDaySessions();
+                dgvOpenedSessions.Invalidate();
+            }
+            else
+            {
+                BoomGamebarController.InstanceBgController().ShowErrorMessage(1);//Selec row to stop message 
+            }
         }
     }
 }

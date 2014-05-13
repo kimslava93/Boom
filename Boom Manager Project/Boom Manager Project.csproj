@@ -62,6 +62,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddNewClientWithDiscountCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewClientWithDiscountCard.Designer.cs">
+      <DependentUpon>AddNewClientWithDiscountCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AddMoneyOnDiscountCardController.cs" />
+    <Compile Include="AddMoneyOnDiscountCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddMoneyOnDiscountCard.Designer.cs">
+      <DependentUpon>AddMoneyOnDiscountCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendSessionTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtendSessionTime.Designer.cs">
+      <DependentUpon>ExtendSessionTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseClasses\CloseSessionController.cs" />
+    <Compile Include="CloseSessionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CloseSessionForm.Designer.cs">
+      <DependentUpon>CloseSessionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseClasses\ErrorsAndWarningsMessages.cs" />
+    <Compile Include="ExtendSessionTimeController.cs" />
     <Compile Include="Models\AddDiscountToSessionModel.cs" />
     <Compile Include="AddDiscountCardToSession.cs">
       <SubType>Form</SubType>
@@ -102,6 +130,7 @@
     <Compile Include="Models\ModelPersonalInfo.cs" />
     <Compile Include="Controllers\AddNewUserController.cs" />
     <Compile Include="DataBaseClasses\DataBaseClass.cs" />
+    <Compile Include="MyClasses\ClientsPerSessionWithSavingsMyClass.cs" />
     <Compile Include="MyClasses\DaySessionClass.cs" />
     <Compile Include="DataBaseClasses\db.designer.cs">
       <AutoGen>True</AutoGen>
@@ -120,6 +149,9 @@
     <EmbeddedResource Include="AddDiscountCardToSession.resx">
       <DependentUpon>AddDiscountCardToSession.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddNewClientWithDiscountCard.resx">
+      <DependentUpon>AddNewClientWithDiscountCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddNewSession.resx">
       <DependentUpon>AddNewSession.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +167,15 @@
     </None>
     <EmbeddedResource Include="ChangeShift.resx">
       <DependentUpon>ChangeShift.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CloseSessionForm.resx">
+      <DependentUpon>CloseSessionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddMoneyOnDiscountCard.resx">
+      <DependentUpon>AddMoneyOnDiscountCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtendSessionTime.resx">
+      <DependentUpon>ExtendSessionTime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EnterPassword.resx">
       <DependentUpon>EnterPassword.cs</DependentUpon>

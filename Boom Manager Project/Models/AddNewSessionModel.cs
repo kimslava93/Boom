@@ -102,7 +102,7 @@ namespace Boom_Manager_Project.Models
             }
             return result;
         }
-        public TimeSpan GetTimeToPlay(double paidSum, string playstationId)
+        public TimeSpan GetTimeToPlay(double paidSum, string playstationId, DateTime fromTime)
         {
             var result = new TimeSpan(0, 0, 0, 0);
             DateTime currentTime = DateTime.Now;
@@ -129,7 +129,7 @@ namespace Boom_Manager_Project.Models
             if (paidSum > 0)
             {
                 result =
-                    result.Add(TimeSpan.FromMinutes(paidSum * 60 / GetCurrentPriceForPlaystation(playstationId, currentTime)));
+                    result.Add(TimeSpan.FromMinutes(paidSum*60/GetCurrentPriceForPlaystation(playstationId, currentTime)));//by cross formula
             }
             return result;
         }

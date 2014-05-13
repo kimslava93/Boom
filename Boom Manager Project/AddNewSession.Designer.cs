@@ -52,6 +52,7 @@
             this.bAddSession = new System.Windows.Forms.Button();
             this.numUpDPaidPrice = new System.Windows.Forms.NumericUpDown();
             this.gbDepositPayment = new System.Windows.Forms.GroupBox();
+            this.bAddMoneyToClient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).BeginInit();
             this.gbClientInfo.SuspendLayout();
@@ -170,6 +171,7 @@
             // 
             // gbClientInfo
             // 
+            this.gbClientInfo.Controls.Add(this.bAddMoneyToClient);
             this.gbClientInfo.Controls.Add(this.numUpDMinutesRemainedOnCard);
             this.gbClientInfo.Controls.Add(this.numUpDHoursRemainedOnCard);
             this.gbClientInfo.Controls.Add(this.tbClientName);
@@ -189,7 +191,7 @@
             // 
             this.numUpDMinutesRemainedOnCard.Enabled = false;
             this.numUpDMinutesRemainedOnCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUpDMinutesRemainedOnCard.Location = new System.Drawing.Point(228, 73);
+            this.numUpDMinutesRemainedOnCard.Location = new System.Drawing.Point(204, 73);
             this.numUpDMinutesRemainedOnCard.Maximum = new decimal(new int[] {
             60,
             0,
@@ -204,7 +206,7 @@
             // 
             this.numUpDHoursRemainedOnCard.Enabled = false;
             this.numUpDHoursRemainedOnCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUpDHoursRemainedOnCard.Location = new System.Drawing.Point(162, 73);
+            this.numUpDHoursRemainedOnCard.Location = new System.Drawing.Point(138, 73);
             this.numUpDHoursRemainedOnCard.Maximum = new decimal(new int[] {
             500,
             0,
@@ -228,10 +230,10 @@
             // tbClientName
             // 
             this.tbClientName.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbClientName.Location = new System.Drawing.Point(116, 24);
+            this.tbClientName.Location = new System.Drawing.Point(102, 25);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.ReadOnly = true;
-            this.tbClientName.Size = new System.Drawing.Size(172, 29);
+            this.tbClientName.Size = new System.Drawing.Size(162, 29);
             this.tbClientName.TabIndex = 3;
             // 
             // numUpDClientMoneyLeft
@@ -240,7 +242,7 @@
             this.numUpDClientMoneyLeft.DecimalPlaces = 2;
             this.numUpDClientMoneyLeft.Enabled = false;
             this.numUpDClientMoneyLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUpDClientMoneyLeft.Location = new System.Drawing.Point(162, 114);
+            this.numUpDClientMoneyLeft.Location = new System.Drawing.Point(138, 114);
             this.numUpDClientMoneyLeft.Maximum = new decimal(new int[] {
             300000,
             0,
@@ -362,11 +364,20 @@
             this.gbDepositPayment.TabStop = false;
             this.gbDepositPayment.Text = "Deposit payment";
             // 
+            // bAddMoneyToClient
+            // 
+            this.bAddMoneyToClient.Location = new System.Drawing.Point(270, 114);
+            this.bAddMoneyToClient.Name = "bAddMoneyToClient";
+            this.bAddMoneyToClient.Size = new System.Drawing.Size(27, 29);
+            this.bAddMoneyToClient.TabIndex = 9;
+            this.bAddMoneyToClient.Text = "+";
+            this.bAddMoneyToClient.UseVisualStyleBackColor = true;
+            // 
             // FAddNewSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(327, 383);
+            this.ClientSize = new System.Drawing.Size(326, 383);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);
@@ -428,5 +439,6 @@
         private System.Windows.Forms.Button bAddSession;
         private System.Windows.Forms.NumericUpDown numUpDPaidPrice;
         private System.Windows.Forms.GroupBox gbDepositPayment;
+        private System.Windows.Forms.Button bAddMoneyToClient;
     }
 }

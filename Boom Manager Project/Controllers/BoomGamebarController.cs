@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.Models;
@@ -16,13 +13,22 @@ namespace Boom_Manager_Project.Controllers
         private List<DaySessionClass> _currentDaySessionList;
         private List<clients_per_session_t> _clentsList;
         private global_session_t _currentGlobalSession;
-        private static BoomGamebarController _mfController;
+        private static BoomGamebarController _boomGamebarController;
+
+        public void ShowErrorMessage(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    MessageBox.Show("Please, select row that you would like to close, before it will be closed by timer");
+                    break;
+            }
+        }
 
         public static BoomGamebarController InstanceBgController()
         {
-            return _mfController ?? (_mfController = new BoomGamebarController());
+            return _boomGamebarController ?? (_boomGamebarController = new BoomGamebarController());
         }
-
         public List<DaySessionClass> DvgAllSessions
         {
             get
@@ -48,17 +54,17 @@ namespace Boom_Manager_Project.Controllers
             }
             else
             {
-                _clentsList = DataBaseClass.Instancedb().GetListOfClientsPerSessionT();
-                _currentDaySessionList = GetExactDailySession(_currentGlobalSession.daily_id, _clentsList);
+                _clentsList = DataBaseClass.Instancedb().GetListOfAllClientsPerSessionT();
+                _currentDaySessionList = GetExactGlobalSession(_currentGlobalSession.daily_id, _clentsList);
             }
         }
         public List<DaySessionClass> GetAllOpenedDaySessions()
         {
-            int dailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSession();
-            List<clients_per_session_t> clientsPerSessionList = DataBaseClass.Instancedb().GetListOfClientsPerSessionT();
+            int dailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSessionDailyId();
+            List<clients_per_session_t> clientsPerSessionList = DataBaseClass.Instancedb().GetListOfAllClientsPerSessionT();
             return DataBaseClass.Instancedb().GetOpenedDaySessions(dailyId, clientsPerSessionList);
         }
-        public List<DaySessionClass> GetExactDailySession(int dailyId, List<clients_per_session_t> clientsPerSessionList)
+        public List<DaySessionClass> GetExactGlobalSession(int dailyId, List<clients_per_session_t> clientsPerSessionList)
         {
             var db = DataBaseClass.Instancedb();
             return db.GetOpenedDaySessions(dailyId, clientsPerSessionList);
@@ -113,8 +119,15 @@ namespace Boom_Manager_Project.Controllers
                 }
                 else if (os.TimeLeft <= TimeSpan.FromMinutes(0))
                 {
-                    DataBaseClass.Instancedb().TimeOutClosePlaystation(os);
-//                    GetExactDailySession();
+                    if (os.ClientId.Equals("0"))
+                    {
+                        DataBaseClass.Instancedb().CloseSessionWithUsualClient(os, "", DateTime.Now);
+                    }
+                    else if(os.ClientId.Length > 1 && !string.IsNullOrWhiteSpace(os.ClientId))
+                    {
+                        DataBaseClass.Instancedb().CloseSessionWithCard(os, "", DateTime.Now);
+                    }
+//                    GetExactGlobalSession();
                     dSessions = GetAllOpenedDaySessions();
 //                    SyncDbContextAndDaySessionList();
                 }
@@ -122,5 +135,54 @@ namespace Boom_Manager_Project.Controllers
             }
             return dSessions;
         }
+
+        public DaySessionClass GetSelectedSessionData(List<DaySessionClass> currentDaySessionClasses, int sessionId)
+        {
+            int tries = 5;
+            var sessionToClose = (from sc in currentDaySessionClasses
+                                  where sc.SessionId == sessionId
+                                  select sc).SingleOrDefault();
+            while (sessionToClose == null && tries >= 0)
+            {
+                tries--;
+                sessionToClose = (from sc in currentDaySessionClasses
+                    where sc.SessionId == sessionId
+                    select sc).SingleOrDefault();
+                if (sessionToClose != null) break;
+            }
+            return sessionToClose;
+            
+//            dgvOpenedSessions.Invalidate();
+        }
+
+        public List<DaySessionClass> CloseSessionBeforeTimer(DaySessionClass sessionToClose)
+        {
+            var csf = new CloseSessionForm(sessionToClose);
+            csf.ShowDialog();
+            return GetAllOpenedDaySessions();
+//            int dailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSessionDailyId();
+//            var selectedSession = DataBaseClass.Instancedb().GetDaySessionBySessionId(sessionToClose.SessionId, dailyId);
+//            if (selectedSession != null)
+//            {
+
+//                selectedSession.money_left = (double)dataGridViewDaysSession.CurrentRow.Cells[6].Value;
+//                _db.SubmitChanges();
+//            }
+//            var withDiscountCard = (from w in _db.clients_per_session_ts
+//                                    where w.session_id == selectedSessionId
+//                                    select w.client_id).ToList();
+        }
+
+        public void ExtendTime(int sessionId, List<DaySessionClass> allSessions)
+        {
+            var sessionToClose = GetSelectedSessionData(allSessions, sessionId);
+            if (sessionToClose != null)
+            {
+                var et = new ExtendSessionTime(sessionToClose);
+                et.ShowDialog();
+            }
+        }
+       
+        
     }
 }

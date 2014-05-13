@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.bAddMoney = new System.Windows.Forms.Button();
-            this.numUpDAddMoneyOnCard = new System.Windows.Forms.NumericUpDown();
             this.tbClientsMoneyLeft = new System.Windows.Forms.TextBox();
             this.tbClientName = new System.Windows.Forms.TextBox();
             this.lAddMoney = new System.Windows.Forms.Label();
@@ -39,33 +38,19 @@
             this.bSubmit = new System.Windows.Forms.Button();
             this.lDsicountId = new System.Windows.Forms.Label();
             this.cbDiscountCard = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDAddMoneyOnCard)).BeginInit();
             this.SuspendLayout();
             // 
             // bAddMoney
             // 
             this.bAddMoney.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bAddMoney.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bAddMoney.Location = new System.Drawing.Point(305, 121);
+            this.bAddMoney.Location = new System.Drawing.Point(153, 121);
             this.bAddMoney.Name = "bAddMoney";
             this.bAddMoney.Size = new System.Drawing.Size(27, 29);
             this.bAddMoney.TabIndex = 22;
-            this.bAddMoney.Text = ">";
+            this.bAddMoney.Text = "+";
             this.bAddMoney.UseVisualStyleBackColor = true;
-            // 
-            // numUpDAddMoneyOnCard
-            // 
-            this.numUpDAddMoneyOnCard.DecimalPlaces = 2;
-            this.numUpDAddMoneyOnCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUpDAddMoneyOnCard.Location = new System.Drawing.Point(153, 121);
-            this.numUpDAddMoneyOnCard.Maximum = new decimal(new int[] {
-            30000,
-            0,
-            0,
-            0});
-            this.numUpDAddMoneyOnCard.Name = "numUpDAddMoneyOnCard";
-            this.numUpDAddMoneyOnCard.Size = new System.Drawing.Size(78, 29);
-            this.numUpDAddMoneyOnCard.TabIndex = 21;
+            this.bAddMoney.Click += new System.EventHandler(this.bAddMoney_Click);
             // 
             // tbClientsMoneyLeft
             // 
@@ -90,7 +75,7 @@
             this.lAddMoney.AutoSize = true;
             this.lAddMoney.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lAddMoney.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lAddMoney.Location = new System.Drawing.Point(12, 119);
+            this.lAddMoney.Location = new System.Drawing.Point(12, 125);
             this.lAddMoney.Name = "lAddMoney";
             this.lAddMoney.Size = new System.Drawing.Size(88, 21);
             this.lAddMoney.TabIndex = 18;
@@ -101,7 +86,7 @@
             this.lMoneyLeft.AutoSize = true;
             this.lMoneyLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lMoneyLeft.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lMoneyLeft.Location = new System.Drawing.Point(12, 86);
+            this.lMoneyLeft.Location = new System.Drawing.Point(12, 89);
             this.lMoneyLeft.Name = "lMoneyLeft";
             this.lMoneyLeft.Size = new System.Drawing.Size(80, 21);
             this.lMoneyLeft.TabIndex = 17;
@@ -112,7 +97,7 @@
             this.lClientName.AutoSize = true;
             this.lClientName.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lClientName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lClientName.Location = new System.Drawing.Point(12, 55);
+            this.lClientName.Location = new System.Drawing.Point(12, 54);
             this.lClientName.Name = "lClientName";
             this.lClientName.Size = new System.Drawing.Size(90, 21);
             this.lClientName.TabIndex = 16;
@@ -122,9 +107,9 @@
             // 
             this.bCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bCancel.Location = new System.Drawing.Point(16, 171);
+            this.bCancel.Location = new System.Drawing.Point(12, 171);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(75, 28);
+            this.bCancel.Size = new System.Drawing.Size(75, 33);
             this.bCancel.TabIndex = 15;
             this.bCancel.Text = "Cancel";
             this.bCancel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -135,9 +120,9 @@
             // 
             this.bSubmit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bSubmit.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bSubmit.Location = new System.Drawing.Point(257, 171);
+            this.bSubmit.Location = new System.Drawing.Point(258, 171);
             this.bSubmit.Name = "bSubmit";
-            this.bSubmit.Size = new System.Drawing.Size(75, 28);
+            this.bSubmit.Size = new System.Drawing.Size(75, 33);
             this.bSubmit.TabIndex = 14;
             this.bSubmit.Text = "Submit";
             this.bSubmit.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -177,7 +162,6 @@
             this.ClientSize = new System.Drawing.Size(345, 216);
             this.ControlBox = false;
             this.Controls.Add(this.bAddMoney);
-            this.Controls.Add(this.numUpDAddMoneyOnCard);
             this.Controls.Add(this.tbClientsMoneyLeft);
             this.Controls.Add(this.tbClientName);
             this.Controls.Add(this.lAddMoney);
@@ -198,7 +182,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddDiscountCardToSession";
             this.Load += new System.EventHandler(this.AddDiscountCardToSession_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDAddMoneyOnCard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,7 +190,6 @@
         #endregion
 
         private System.Windows.Forms.Button bAddMoney;
-        private System.Windows.Forms.NumericUpDown numUpDAddMoneyOnCard;
         private System.Windows.Forms.TextBox tbClientsMoneyLeft;
         private System.Windows.Forms.TextBox tbClientName;
         private System.Windows.Forms.Label lAddMoney;

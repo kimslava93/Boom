@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Boom_Manager_Project.DataBaseClasses;
 
 namespace Boom_Manager_Project
 {
@@ -65,6 +58,13 @@ namespace Boom_Manager_Project
             ClientID = result[0];
             MoneyLeft = decimal.Parse(result[2].Replace(".", ",")); //if (double.TryParse(values[i, j].Replace(".", ","), out tmp))
             ClientName = result[1];
+        }
+
+        private void bAddMoney_Click(object sender, EventArgs e)
+        {
+            var amodc = new AddMoneyOnDiscountCard(ClientID);
+            amodc.ShowDialog();
+            FullFillCbOfClients();
         }
     }
 }

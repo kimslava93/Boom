@@ -12,3 +12,7 @@ D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Pr
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.exe
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.pdb
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csprojResolveAssemblyReference.cache
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CloseSessionForm.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewClientWithDiscountCard.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddMoneyOnDiscountCard.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ExtendSessionTime.resources

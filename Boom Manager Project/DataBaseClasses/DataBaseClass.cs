@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project.DataBaseClasses
@@ -12,7 +12,6 @@ namespace Boom_Manager_Project.DataBaseClasses
     public class DataBaseClass
     {
         private static DataBaseClass _dbClass;
-//        private dbDataContext _db;
         public static DataBaseClass Instancedb()
         {
             return _dbClass ?? (_dbClass = new DataBaseClass());
@@ -41,13 +40,36 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        public List<clients_per_session_t> GetListOfClientsPerSessionT()
+        public List<clients_per_session_t> GetListOfAllClientsPerSessionT()
         {
             var db = new dbDataContext();
             lock (db)
             {
                 return (from c in db.GetTable<clients_per_session_t>()
                     select c).ToList();
+            }
+        }
+
+        public List<clients_per_session_t> GetListOfClientsPerExactSession(int sessionId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from c in db.GetTable<clients_per_session_t>()
+                    where c.session_id == sessionId
+                    select c).ToList();
+            }
+        }
+
+        public days_sessions_t GetDaySessionBySessionId(int sessionId, int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from s in db.GetTable<days_sessions_t>()
+                    where s.session_id == sessionId
+                    where s.daily_id == dailyId
+                    select s).SingleOrDefault();
             }
         }
 
@@ -210,7 +232,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        public int GetLastOpenedGlobalSession()//used to get last dailyID
+        public int GetLastOpenedGlobalSessionDailyId()//used to get last dailyID
         {
             var db = new dbDataContext();
             lock (db)
@@ -222,7 +244,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        public int GetLastClientNumInSession(int dailyId)
+        public int GetLastClientNumInSession(int dailyId)//for getting number for next client
         {
             var db = new dbDataContext();
             lock (db)
@@ -274,8 +296,8 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 var lastInsertedDaySession = (from ls in db.GetTable<days_sessions_t>()
-                                              orderby ls.session_id descending
-                                              select ls).FirstOrDefault(); 
+                    orderby ls.session_id descending
+                    select ls).FirstOrDefault();
 
                 var sessionToDelete = (from d in db.GetTable<days_sessions_t>()
                     where d.session_id == lastInsertedDaySession.session_id
@@ -351,23 +373,28 @@ namespace Boom_Manager_Project.DataBaseClasses
             return result;
         }
 
-        public void TimeOutClosePlaystation(DaySessionClass dsc)
+        public void CloseSessionWithUsualClient(DaySessionClass dsc, string comments, DateTime endTime)
         {
             var db = new dbDataContext();
             lock (db)
             {
                 int dayId = GetOpenedGlobalSession().daily_id;
-                var getSessionIdtoDelete = (from s in db.GetTable<days_sessions_t>()
+                var sessionIdtoDelete = (from s in db.GetTable<days_sessions_t>()
                                             where s.daily_id == dayId
                                             where s.session_id == dsc.SessionId
                                             select s).SingleOrDefault();
-                if (getSessionIdtoDelete == null) return;
+                if (sessionIdtoDelete == null) return;
 
-                getSessionIdtoDelete.session_state = "closed";
-                getSessionIdtoDelete.money_left = dsc.MoneyLeft;
-                if (String.IsNullOrWhiteSpace(getSessionIdtoDelete.comments))
+                sessionIdtoDelete.end_game = endTime;
+                sessionIdtoDelete.session_state = "closed";
+                sessionIdtoDelete.money_left = dsc.MoneyLeft;
+                if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
                 {
-                    getSessionIdtoDelete.comments = "";
+                    sessionIdtoDelete.comments = comments;
+                }
+                else
+                {
+                    sessionIdtoDelete.comments += "\n" + comments;
                 }
                 UpdatePlaystationState(dsc.PlaystationId, "free");
                 while (true)
@@ -385,5 +412,153 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
+        public void CloseSessionWithCard(DaySessionClass dsc, string comments, DateTime endTime)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                int dayId = GetOpenedGlobalSession().daily_id;
+                var sessionIdtoDelete = (from s in db.GetTable<days_sessions_t>()
+                                         where s.daily_id == dayId
+                                         where s.session_id == dsc.SessionId
+                                         select s).SingleOrDefault();
+                if (sessionIdtoDelete == null) return;
+                sessionIdtoDelete.end_game = endTime;
+                sessionIdtoDelete.session_state = "closed";
+                sessionIdtoDelete.money_left = dsc.MoneyLeft;
+                List<clients_per_session_t> clientsOnSession = GetListOfClientsPerExactSession(dsc.SessionId);
+                double eachPlayerShouldPay = dsc.PayedSum - dsc.MoneyLeft/clientsOnSession.Count;
+                double playedMoney = sessionIdtoDelete.payed_sum - sessionIdtoDelete.money_left;
+                double nextShouldpayAdditional = 0;
+                do
+                {
+                    foreach (var client in clientsOnSession)
+                    {
+                        var moneyOnClientCard = GetClientSavingsById(client.client_id);
+                        if (moneyOnClientCard != null)
+                        {
+                            if (moneyOnClientCard.savings >= (eachPlayerShouldPay + nextShouldpayAdditional))
+                            {
+                                playedMoney = playedMoney - (eachPlayerShouldPay + nextShouldpayAdditional);
+//                                moneyOnClientCard.savings = moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional);
+                                ChangeSavingsValueOfClient(moneyOnClientCard.client_id,
+                                    moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional));
+                                nextShouldpayAdditional = 0;
+                            }
+                            else
+                            {
+                                nextShouldpayAdditional = eachPlayerShouldPay - moneyOnClientCard.savings;
+                                playedMoney = playedMoney - moneyOnClientCard.savings;
+//                                moneyOnClientCard.savings = 0;
+                                ChangeSavingsValueOfClient(moneyOnClientCard.client_id, 0);
+                            }
+                        }
+//                        try
+//                        {
+//                            db.SubmitChanges();
+//                        }
+//                        catch (Exception)
+//                        {
+//                            MessageBox.Show("Error during closing clients occured!");
+//                        }
+                    }
+                } while (nextShouldpayAdditional > 0 && playedMoney > 0);
+
+
+                if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
+                {
+                    sessionIdtoDelete.comments = comments;
+                }
+                else
+                {
+                    sessionIdtoDelete.comments += "\n" + comments;
+                }
+                UpdatePlaystationState(dsc.PlaystationId, "free");
+                while (true)
+                {
+                    try
+                    {
+                        db.SubmitChanges();
+                        break;
+                    }
+                    catch
+                    {
+                        MessageBox.Show(
+                            "Can't update DataBase during closing client comments! Please contact with Developer");
+                    }
+                }
+            }
+        }
+
+        public void ChangeSavingsValueOfClient(string clientID, double sumToAdd)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var clientIdToChangeSavings = (from c in db.GetTable<account_savings_t>()
+                    where c.client_id == clientID
+                    select c).SingleOrDefault();
+                if (clientIdToChangeSavings != null)
+                {
+                    clientIdToChangeSavings.savings += sumToAdd;
+                    try
+                    {
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Cannot substract sum from client card with ID " + clientIdToChangeSavings.client_id);
+                    }
+                }
+
+            }
+        }
+
+        public void ExtendGameTimeWithUsualClient(DaySessionClass sessionToExtend, TimeSpan timeToExtend, double moneyToExtend)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var session = (from d in db.GetTable<days_sessions_t>()
+                    where d.session_id == sessionToExtend.SessionId
+                    select d).SingleOrDefault();
+                if (session != null)
+                {
+                    session.end_game += timeToExtend;
+                    session.payed_sum += moneyToExtend;
+                    try
+                    {
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Cannot extend sesion time!");
+                    }
+                }
+            }
+        }
+        public void ExtendGameTimeWithClientWithDiscountCard(DaySessionClass sessionToExtend, TimeSpan timeOfgame, double moneyOnCard)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var session = (from d in db.GetTable<days_sessions_t>()
+                               where d.session_id == sessionToExtend.SessionId
+                               select d).SingleOrDefault();
+                if (session != null)
+                {
+                    session.end_game = session.start_game + timeOfgame;
+                    session.payed_sum = moneyOnCard;
+                    try
+                    {
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Cannot extend sesion time!");
+                    }
+                }
+            }
+        } 
     }
 }

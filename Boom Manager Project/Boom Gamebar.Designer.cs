@@ -31,12 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.bCloseSession = new System.Windows.Forms.Button();
             this.bAddNewClient = new System.Windows.Forms.Button();
             this.bSlideMenu = new System.Windows.Forms.Button();
             this.lCurrentDate = new System.Windows.Forms.Label();
             this.lCurrentTime = new System.Windows.Forms.Label();
             this.dgvOpenedSessions = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.bExtendTime = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -60,6 +62,8 @@
             // 
             // splitContainer.Panel1
             // 
+            this.splitContainer.Panel1.Controls.Add(this.bExtendTime);
+            this.splitContainer.Panel1.Controls.Add(this.bCloseSession);
             this.splitContainer.Panel1.Controls.Add(this.bAddNewClient);
             this.splitContainer.Panel1.Controls.Add(this.bSlideMenu);
             this.splitContainer.Panel1.Controls.Add(this.lCurrentDate);
@@ -76,15 +80,25 @@
             this.splitContainer.SplitterDistance = 1278;
             this.splitContainer.TabIndex = 3;
             // 
+            // bCloseSession
+            // 
+            this.bCloseSession.Location = new System.Drawing.Point(128, 40);
+            this.bCloseSession.Name = "bCloseSession";
+            this.bCloseSession.Size = new System.Drawing.Size(75, 50);
+            this.bCloseSession.TabIndex = 8;
+            this.bCloseSession.Text = "Close Session";
+            this.bCloseSession.UseVisualStyleBackColor = true;
+            this.bCloseSession.Click += new System.EventHandler(this.bCloseSession_Click);
+            // 
             // bAddNewClient
             // 
             this.bAddNewClient.Location = new System.Drawing.Point(32, 39);
             this.bAddNewClient.Name = "bAddNewClient";
             this.bAddNewClient.Size = new System.Drawing.Size(75, 50);
             this.bAddNewClient.TabIndex = 7;
-            this.bAddNewClient.Text = "Add new client";
+            this.bAddNewClient.Text = "Open Session";
             this.bAddNewClient.UseVisualStyleBackColor = true;
-            this.bAddNewClient.Click += new System.EventHandler(this.bAddNewClient_Click);
+            this.bAddNewClient.Click += new System.EventHandler(this.bAddNewSession_Click);
             // 
             // bSlideMenu
             // 
@@ -94,7 +108,8 @@
             this.bSlideMenu.Location = new System.Drawing.Point(1354, 0);
             this.bSlideMenu.Name = "bSlideMenu";
             this.bSlideMenu.Size = new System.Drawing.Size(10, 36);
-            this.bSlideMenu.TabIndex = 6;
+            this.bSlideMenu.TabIndex = 999;
+            this.bSlideMenu.TabStop = false;
             this.bSlideMenu.Text = "<";
             this.bSlideMenu.UseVisualStyleBackColor = true;
             this.bSlideMenu.Click += new System.EventHandler(this.bSlideMenu_Click);
@@ -161,6 +176,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
+            // bExtendTime
+            // 
+            this.bExtendTime.Location = new System.Drawing.Point(228, 40);
+            this.bExtendTime.Name = "bExtendTime";
+            this.bExtendTime.Size = new System.Drawing.Size(75, 50);
+            this.bExtendTime.TabIndex = 1000;
+            this.bExtendTime.Text = "Extend time";
+            this.bExtendTime.UseVisualStyleBackColor = true;
+            this.bExtendTime.Click += new System.EventHandler(this.bExtendTime_Click);
+            // 
             // BoomMainForm
             // 
             this.AllowDrop = true;
@@ -209,6 +234,8 @@
         private System.Windows.Forms.Button bSlideMenu;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bAddNewClient;
+        private System.Windows.Forms.Button bCloseSession;
+        private System.Windows.Forms.Button bExtendTime;
     }
 }
 
