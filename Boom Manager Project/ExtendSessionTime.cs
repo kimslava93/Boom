@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
-using Boom_Manager_Project.Models;
+using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project

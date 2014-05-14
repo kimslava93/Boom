@@ -31,14 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.bExtendTime = new System.Windows.Forms.Button();
             this.bCloseSession = new System.Windows.Forms.Button();
             this.bAddNewClient = new System.Windows.Forms.Button();
             this.bSlideMenu = new System.Windows.Forms.Button();
             this.lCurrentDate = new System.Windows.Forms.Label();
             this.lCurrentTime = new System.Windows.Forms.Label();
             this.dgvOpenedSessions = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.bExtendTime = new System.Windows.Forms.Button();
+            this.bTimezoneManager = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -69,16 +69,25 @@
             this.splitContainer.Panel1.Controls.Add(this.lCurrentDate);
             this.splitContainer.Panel1.Controls.Add(this.lCurrentTime);
             this.splitContainer.Panel1.Controls.Add(this.dgvOpenedSessions);
-            this.splitContainer.Panel1MinSize = 1278;
+            this.splitContainer.Panel1MinSize = 1250;
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.label1);
-            this.splitContainer.Panel2Collapsed = true;
+            this.splitContainer.Panel2.Controls.Add(this.bTimezoneManager);
             this.splitContainer.Panel2MinSize = 0;
             this.splitContainer.Size = new System.Drawing.Size(1366, 768);
-            this.splitContainer.SplitterDistance = 1278;
+            this.splitContainer.SplitterDistance = 1250;
             this.splitContainer.TabIndex = 3;
+            // 
+            // bExtendTime
+            // 
+            this.bExtendTime.Location = new System.Drawing.Point(228, 40);
+            this.bExtendTime.Name = "bExtendTime";
+            this.bExtendTime.Size = new System.Drawing.Size(75, 50);
+            this.bExtendTime.TabIndex = 1000;
+            this.bExtendTime.Text = "Extend time";
+            this.bExtendTime.UseVisualStyleBackColor = true;
+            this.bExtendTime.Click += new System.EventHandler(this.bExtendTime_Click);
             // 
             // bCloseSession
             // 
@@ -105,7 +114,7 @@
             this.bSlideMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bSlideMenu.FlatAppearance.BorderSize = 0;
             this.bSlideMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bSlideMenu.Location = new System.Drawing.Point(1354, 0);
+            this.bSlideMenu.Location = new System.Drawing.Point(1238, 0);
             this.bSlideMenu.Name = "bSlideMenu";
             this.bSlideMenu.Size = new System.Drawing.Size(10, 36);
             this.bSlideMenu.TabIndex = 999;
@@ -119,7 +128,7 @@
             this.lCurrentDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lCurrentDate.AutoSize = true;
             this.lCurrentDate.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lCurrentDate.Location = new System.Drawing.Point(596, 78);
+            this.lCurrentDate.Location = new System.Drawing.Point(480, 78);
             this.lCurrentDate.Name = "lCurrentDate";
             this.lCurrentDate.Size = new System.Drawing.Size(92, 30);
             this.lCurrentDate.TabIndex = 5;
@@ -131,7 +140,7 @@
             this.lCurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lCurrentTime.AutoSize = true;
             this.lCurrentTime.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lCurrentTime.Location = new System.Drawing.Point(531, 3);
+            this.lCurrentTime.Location = new System.Drawing.Point(415, 3);
             this.lCurrentTime.Name = "lCurrentTime";
             this.lCurrentTime.Size = new System.Drawing.Size(291, 86);
             this.lCurrentTime.TabIndex = 4;
@@ -161,30 +170,22 @@
             this.dgvOpenedSessions.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvOpenedSessions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvOpenedSessions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOpenedSessions.Size = new System.Drawing.Size(1364, 651);
+            this.dgvOpenedSessions.Size = new System.Drawing.Size(1248, 651);
             this.dgvOpenedSessions.TabIndex = 3;
             this.dgvOpenedSessions.TabStop = false;
             this.dgvOpenedSessions.VirtualMode = true;
             this.dgvOpenedSessions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvOpenedSessions_CellFormatting);
             // 
-            // label1
+            // bTimezoneManager
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 78);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            // 
-            // bExtendTime
-            // 
-            this.bExtendTime.Location = new System.Drawing.Point(228, 40);
-            this.bExtendTime.Name = "bExtendTime";
-            this.bExtendTime.Size = new System.Drawing.Size(75, 50);
-            this.bExtendTime.TabIndex = 1000;
-            this.bExtendTime.Text = "Extend time";
-            this.bExtendTime.UseVisualStyleBackColor = true;
-            this.bExtendTime.Click += new System.EventHandler(this.bExtendTime_Click);
+            this.bTimezoneManager.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bTimezoneManager.Location = new System.Drawing.Point(0, 0);
+            this.bTimezoneManager.Name = "bTimezoneManager";
+            this.bTimezoneManager.Size = new System.Drawing.Size(110, 56);
+            this.bTimezoneManager.TabIndex = 0;
+            this.bTimezoneManager.Text = "Timezone manager";
+            this.bTimezoneManager.UseVisualStyleBackColor = true;
+            this.bTimezoneManager.Click += new System.EventHandler(this.bTimezoneManager_Click);
             // 
             // BoomMainForm
             // 
@@ -216,7 +217,6 @@
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
-            this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOpenedSessions)).EndInit();
@@ -232,10 +232,10 @@
         private System.Windows.Forms.Label lCurrentTime;
         private System.Windows.Forms.DataGridView dgvOpenedSessions;
         private System.Windows.Forms.Button bSlideMenu;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bAddNewClient;
         private System.Windows.Forms.Button bCloseSession;
         private System.Windows.Forms.Button bExtendTime;
+        private System.Windows.Forms.Button bTimezoneManager;
     }
 }
 

@@ -182,7 +182,13 @@ namespace Boom_Manager_Project.Controllers
                 et.ShowDialog();
             }
         }
-       
-        
+
+        public void CallTimeZoneManager()
+        {
+            var tzm = new TimeZoneManager();
+            tzm.ShowDialog();
+        }
+
+
     }
 }

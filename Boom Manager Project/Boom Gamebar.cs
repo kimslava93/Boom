@@ -127,5 +127,10 @@ namespace Boom_Manager_Project
                 BoomGamebarController.InstanceBgController().ShowErrorMessage(1);//Selec row to stop message 
             }
         }
+
+        private void bTimezoneManager_Click(object sender, EventArgs e)
+        {
+            BoomGamebarController.InstanceBgController().CallTimeZoneManager();
+        }
     }
 }

@@ -137,7 +137,7 @@ namespace Boom_Manager_Project.Models
         {
             try
             {
-                foreach (var tEndTime in DataBaseClass.Instancedb().GetTimeZones())
+                foreach (var tEndTime in DataBaseClass.Instancedb().GetAllTimeZones())
                 {
                     if (IsInTimeZone(tEndTime.timezone_start, tEndTime.timezone_end, timeToFind))
                     {

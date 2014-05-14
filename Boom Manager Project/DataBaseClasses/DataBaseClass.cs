@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Boom_Manager_Project.MyClasses;
+using LINQ_test;
 
 namespace Boom_Manager_Project.DataBaseClasses
 {
@@ -73,6 +74,71 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        public List<tables_t> GetAllTables()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from t in db.GetTable<tables_t>()
+                    select t).ToList();
+            }
+        }
+
+        public List<playstation_timezone> GetAllTimeZonePrices()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from p in db.GetTable<playstation_timezone>()
+                    orderby p.playstation_id.Length ascending, p.playstation_id ascending
+                    select p).ToList();
+//                    select new
+//                    {
+//                        p.playstation_id,
+//                        p.timezone_cost_per_hour
+//                    }).ToList();
+            }
+        }
+
+        public void UpdatePricesForTimeZone(List<string> playstationsToChange, string timeZoneName, int newPrice)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                foreach (string t in playstationsToChange)
+                {
+                    var matchedRecord = (from price in db.GetTable<playstation_timezone>()
+                        where price.playstation_id == t
+                        where price.timezone_name == timeZoneName
+                        select price).SingleOrDefault();
+                    if (matchedRecord == null) continue;
+                    try
+                    {
+                        matchedRecord.timezone_cost_per_hour = newPrice;
+                        db.SubmitChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+            }
+        }
+
+//        public List<string> GetAllTimeZones()
+//        {
+//            var db = new dbDataContext();
+//            lock (db)
+//            {
+//                return (from t in db.GetTable<timezones_t>()
+//                    orderby t.timezone_start
+//                    select new
+//                    {
+//                        t.timezone_name.ToString()
+//                    }).ToList();
+//            }
+//        }
+
         public List<DaySessionClass> GetOpenedDaySessions(int dailyId, List<clients_per_session_t> clientsList)
         {
             var db = new dbDataContext();
@@ -135,6 +201,19 @@ namespace Boom_Manager_Project.DataBaseClasses
             return result;
         }
 
+//        public List<timezones_t> GetAllTimezones()
+//        {
+//            var db = new dbDataContext();
+//            lock (db)
+//            {
+//                var timeZoneTable = (from q in db.GetTable<timezones_t>()
+//                    orderby q.timezone_start
+//                    select q).ToList();
+//                return timeZoneTable;
+//            }
+//            
+//        }
+
         public void AddNewUser(personal_info_t userInfo)
         {
             var db = new dbDataContext();
@@ -190,7 +269,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return price;
             }
         }
-        public List<timezones_t> GetTimeZones()
+        public List<timezones_t> GetAllTimeZones()
         {
             var db = new dbDataContext();
             lock (db)
@@ -306,6 +385,66 @@ namespace Boom_Manager_Project.DataBaseClasses
                 Table<days_sessions_t> deleteFromT = db.GetTable<days_sessions_t>();
                 deleteFromT.DeleteOnSubmit(sessionToDelete);
                 db.SubmitChanges();
+            }
+        }
+
+        public void DeleteTimeZoneWithData(string timeZoneNameToDelete)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                DialogResult deleteDialog =
+                    MessageBox.Show(timeZoneNameToDelete + "will be removed from DataBase!\nAre you sure?",
+                        "Attention!", MessageBoxButtons.OKCancel);
+                if (deleteDialog == DialogResult.OK)
+                {
+                    var playstationCostsToDelete = (from pc in db.GetTable<playstation_timezone>()
+                        where pc.timezone_name == timeZoneNameToDelete
+                        select pc).ToList();
+
+                    for (int i = 0; i < playstationCostsToDelete.Count(); i++)
+                    {
+                        if (playstationCostsToDelete.Count > 0)
+                        {
+                            foreach (var plst in playstationCostsToDelete)
+                            {
+                                try
+                                {
+                                    db.playstation_timezones.DeleteOnSubmit(plst);
+                                    db.SubmitChanges();
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Cannot delete all prices of timezone " + timeZoneNameToDelete);
+                                }
+                            }
+//                            MessageBox.Show(playstationCostsToDelete + " was deleted!");
+                        }
+                    }
+                    var rowToDelete = (from q in db.GetTable<timezones_t>()
+                        where q.timezone_name == timeZoneNameToDelete
+                        select q).SingleOrDefault();
+
+                    try
+                    {
+                        if (rowToDelete != null)
+                            db.timezones_ts.DeleteOnSubmit(rowToDelete);
+                        db.SubmitChanges();
+//                        RefreshTable();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+//                    for (int i = 0; i < ComboBoxTimeZOne.Items.Count; i++)
+//                    {
+//                        if (ComboBoxTimeZOne.Items[i].ToString() == nameToDelete)
+//                        {
+//                            ComboBoxTimeZOne.SelectedIndex = 0;
+//                            ComboBoxTimeZOne.Items.RemoveAt(i);
+//                        }
+//                    }
+                }
             }
         }
 
@@ -559,6 +698,52 @@ namespace Boom_Manager_Project.DataBaseClasses
                     }
                 }
             }
-        } 
+        }
+
+        public void InsertNewTimeZone(string timeZoneName, TimeSpan startTime, TimeSpan endTime)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<timezones_t> timeZonesT = db.GetTable<timezones_t>();
+                var timezones = new timezones_t
+                {
+                    timezone_name = timeZoneName,
+                    timezone_start = startTime,
+                    timezone_end = endTime
+                };
+                try
+                {
+                    timeZonesT.InsertOnSubmit(timezones);
+                    db.SubmitChanges();
+//                    RefreshTable();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Can not insert new timezone to database!");
+                }
+                try
+                {
+                    var playstations = GetAllTables();
+                    foreach (tables_t t in playstations)
+                    {
+                        Table<playstation_timezone> timeZoneTable = db.GetTable<playstation_timezone>();
+                        var playstationTimezone = new playstation_timezone
+                        {
+                            playstation_id = t.playstation_id,
+                            timezone_name = timeZoneName,
+                            timezone_cost_per_hour = 0
+                        };
+                        timeZoneTable.InsertOnSubmit(playstationTimezone);
+                        db.SubmitChanges();
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Cannot insert price data of TimeZone to database");
+                }
+            }
+        }
+
     }
 }
