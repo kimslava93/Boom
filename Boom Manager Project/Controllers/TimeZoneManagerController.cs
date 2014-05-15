@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 
@@ -47,6 +48,19 @@ namespace Boom_Manager_Project.Controllers
            return DataBaseClass.Instancedb().GetAllTimeZonePrices();
         }
 
-        
+        public bool CheckOnNullPrices()
+        {
+            List<playstation_timezone> allPrices = DataBaseClass.Instancedb().GetAllTimeZonePrices();
+            List<string> nullPrices = (from p in allPrices
+                where p.timezone_cost_per_hour == 0
+                select p.playstation_id).ToList();
+            if (nullPrices.Count > 0)
+            {
+                MessageBox.Show("Some playstations has null prices. Please set prices to all timezones!");
+                return false;
+            }
+            return true;
+        }
+
     }
 }

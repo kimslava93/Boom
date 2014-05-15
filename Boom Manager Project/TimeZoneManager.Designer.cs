@@ -45,6 +45,8 @@
             this.lEndTime = new System.Windows.Forms.Label();
             this.lStartTime = new System.Windows.Forms.Label();
             this.lTimezoneName = new System.Windows.Forms.Label();
+            this.bCreateNewTimeZone = new System.Windows.Forms.Button();
+            this.bExitCreatingMode = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sContainer)).BeginInit();
             this.sContainer.Panel1.SuspendLayout();
             this.sContainer.Panel2.SuspendLayout();
@@ -65,23 +67,25 @@
             // 
             // sContainer.Panel1
             // 
+            this.sContainer.Panel1.Controls.Add(this.bExit);
+            this.sContainer.Panel1.Controls.Add(this.bCreateNewTimeZone);
             this.sContainer.Panel1.Controls.Add(this.bDeleteTimezone);
             this.sContainer.Panel1.Controls.Add(this.dgvAllTimezones);
-            this.sContainer.Panel1MinSize = 245;
+            this.sContainer.Panel1MinSize = 244;
             // 
             // sContainer.Panel2
             // 
-            this.sContainer.Panel2.Controls.Add(this.bExit);
+            this.sContainer.Panel2.Controls.Add(this.bExitCreatingMode);
             this.sContainer.Panel2.Controls.Add(this.gbPriceList);
             this.sContainer.Panel2.Controls.Add(this.gbTimezoneCreator);
             this.sContainer.Panel2MinSize = 0;
-            this.sContainer.Size = new System.Drawing.Size(688, 540);
-            this.sContainer.SplitterDistance = 245;
+            this.sContainer.Size = new System.Drawing.Size(688, 246);
+            this.sContainer.SplitterDistance = 244;
             this.sContainer.TabIndex = 0;
             // 
             // bDeleteTimezone
             // 
-            this.bDeleteTimezone.Location = new System.Drawing.Point(11, 197);
+            this.bDeleteTimezone.Location = new System.Drawing.Point(111, 206);
             this.bDeleteTimezone.Name = "bDeleteTimezone";
             this.bDeleteTimezone.Size = new System.Drawing.Size(75, 34);
             this.bDeleteTimezone.TabIndex = 1;
@@ -98,7 +102,6 @@
             this.dgvAllTimezones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAllTimezones.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvAllTimezones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAllTimezones.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvAllTimezones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvAllTimezones.EnableHeadersVisualStyles = false;
             this.dgvAllTimezones.Location = new System.Drawing.Point(0, 0);
@@ -117,7 +120,7 @@
             // 
             // bExit
             // 
-            this.bExit.Location = new System.Drawing.Point(276, 240);
+            this.bExit.Location = new System.Drawing.Point(608, 202);
             this.bExit.Name = "bExit";
             this.bExit.Size = new System.Drawing.Size(75, 38);
             this.bExit.TabIndex = 2;
@@ -271,11 +274,31 @@
             this.lTimezoneName.TabIndex = 0;
             this.lTimezoneName.Text = "Name";
             // 
+            // bCreateNewTimeZone
+            // 
+            this.bCreateNewTimeZone.Location = new System.Drawing.Point(11, 206);
+            this.bCreateNewTimeZone.Name = "bCreateNewTimeZone";
+            this.bCreateNewTimeZone.Size = new System.Drawing.Size(75, 34);
+            this.bCreateNewTimeZone.TabIndex = 2;
+            this.bCreateNewTimeZone.Text = "Create";
+            this.bCreateNewTimeZone.UseVisualStyleBackColor = true;
+            this.bCreateNewTimeZone.Click += new System.EventHandler(this.bCreateNewTimeZone_Click);
+            // 
+            // bExitCreatingMode
+            // 
+            this.bExitCreatingMode.Location = new System.Drawing.Point(310, 231);
+            this.bExitCreatingMode.Name = "bExitCreatingMode";
+            this.bExitCreatingMode.Size = new System.Drawing.Size(75, 38);
+            this.bExitCreatingMode.TabIndex = 3;
+            this.bExitCreatingMode.Text = "Apply";
+            this.bExitCreatingMode.UseVisualStyleBackColor = true;
+            this.bExitCreatingMode.Click += new System.EventHandler(this.bExitCreatingMode_Click);
+            // 
             // TimeZoneManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(688, 540);
+            this.ClientSize = new System.Drawing.Size(688, 246);
             this.ControlBox = false;
             this.Controls.Add(this.sContainer);
             this.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -321,5 +344,7 @@
         private System.Windows.Forms.ComboBox cbAllTimeZones;
         private System.Windows.Forms.Label lTimeZoneNames;
         private System.Windows.Forms.Button bExit;
+        private System.Windows.Forms.Button bCreateNewTimeZone;
+        private System.Windows.Forms.Button bExitCreatingMode;
     }
 }

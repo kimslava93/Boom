@@ -269,6 +269,15 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return price;
             }
         }
+        public List<playstation_timezone> GetAllPricesForPlaystation()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from p in db.GetTable<playstation_timezone>()
+                    select p).ToList();
+            }
+        }
         public List<timezones_t> GetAllTimeZones()
         {
             var db = new dbDataContext();

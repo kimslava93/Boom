@@ -9,6 +9,7 @@ namespace Boom_Manager_Project
 {
     public partial class TimeZoneManager : Form
     {
+        private bool _isNewTimeZoneCreated = false;
         public TimeZoneManager()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace Boom_Manager_Project
 
         private void bAddTimezone_Click(object sender, EventArgs e)
         {
+            bExit.Enabled = false;
             if (TimeZoneManagerController.TimeZoneManagerControllerInstance()
                     .CheckAllInputDataToInsertTimeZone(tbTimezoneName.Text, dtpStartTime.Value.Hour,
                         dtpEndTime.Value.Hour))
@@ -48,12 +50,21 @@ namespace Boom_Manager_Project
                 RefreshPriceList();
                 tbTimezoneName.Text = "";
                 RefreshTable();
+                _isNewTimeZoneCreated = true;
+                MessageBox.Show("Set prices new just created timezone in the right table.");
             }
         }
 
         private void bExit_Click(object sender, EventArgs e)
         {
-            Close();
+            if (bExit.Enabled)
+            {
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Please apple changes");
+            }
         }
 
         private void cbAllTimeZones_SelectedIndexChanged(object sender, EventArgs e)
@@ -105,8 +116,52 @@ namespace Boom_Manager_Project
                 var timeZoneToDelete = (string) dgvAllTimezones.CurrentRow.Cells[0].Value;
                 DataBaseClass.Instancedb().DeleteTimeZoneWithData(timeZoneToDelete);
                 cbAllTimeZones.Items.RemoveAt(cbAllTimeZones.Items.IndexOf(timeZoneToDelete));
+                if (TimeZoneManagerController.TimeZoneManagerControllerInstance().CheckOnNullPrices())
+                {
+                    bExit.Enabled = true;
+//                    sContainer.Panel2Collapsed = true;
+                    if (ActiveForm != null)
+                        ActiveForm.Height = 246;
+                }
                 RefreshPriceList();
                 RefreshTable();
+
+            }
+        }
+
+        private void bCreateNewTimeZone_Click(object sender, EventArgs e)
+        {
+//            sContainer.Panel2Collapsed = false;
+            if (ActiveForm != null)
+                ActiveForm.Height = 526;
+        }
+
+        private void bExitCreatingMode_Click(object sender, EventArgs e)
+        {
+            if (_isNewTimeZoneCreated)
+            {
+                if (TimeZoneManagerController.TimeZoneManagerControllerInstance().CheckOnNullPrices())
+                {
+                    _isNewTimeZoneCreated = false;
+//                    sContainer.Panel2Collapsed = true;
+                    bExit.Enabled = true;
+                    if (ActiveForm != null)
+                        ActiveForm.Height = 246;
+                }
+                else
+                {
+//                    sContainer.Panel2Collapsed = false;
+                    bExit.Enabled = false;
+                    if (ActiveForm != null)
+                        ActiveForm.Height = 526;
+                }
+            }
+            else
+            {
+//                sContainer.Panel2Collapsed = true;
+                bExit.Enabled = true;
+                if (ActiveForm != null)
+                    ActiveForm.Height = 246;
             }
         }
 
