@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
@@ -9,6 +10,7 @@ namespace Boom_Manager_Project
     public partial class ExtendSessionTime : Form
     {
         private int _repeatCallOfMethodCounter;
+        private Point? _old;
         private readonly DaySessionClass _sessionToExtend;
         public ExtendSessionTime(DaySessionClass sessionToExtend)
         {
@@ -193,6 +195,26 @@ namespace Boom_Manager_Project
                 Close();
 
             }
+        }
+
+        private void ExtendSessionTime_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void ExtendSessionTime_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void ExtendSessionTime_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
         }
 
       

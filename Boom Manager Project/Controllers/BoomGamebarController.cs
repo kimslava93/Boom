@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.Models;
 using Boom_Manager_Project.MyClasses;
+using LINQ_test.Driver;
 
 namespace Boom_Manager_Project.Controllers
 {
@@ -24,7 +25,7 @@ namespace Boom_Manager_Project.Controllers
                     break;
             }
         }
-
+       
         public static BoomGamebarController InstanceBgController()
         {
             return _boomGamebarController ?? (_boomGamebarController = new BoomGamebarController());
@@ -44,20 +45,17 @@ namespace Boom_Manager_Project.Controllers
         {
             return DataBaseClass.Instancedb().GetOpenedGlobalSession();
         }
-        public void OpeneGlobalSession()
+
+        public void OpenGlobalSession()
         {
+            var cs = new ChangeShift(true);
+            cs.ShowDialog();
+            
             _currentGlobalSession = GetOpenedSession();
-            if (_currentGlobalSession == null)
-            {
-                var cs = new ChangeShift();
-                cs.ShowDialog();
-            }
-            else
-            {
-                _clentsList = DataBaseClass.Instancedb().GetListOfAllClientsPerSessionT();
-                _currentDaySessionList = GetExactGlobalSession(_currentGlobalSession.daily_id, _clentsList);
-            }
+            _clentsList = DataBaseClass.Instancedb().GetListOfAllClientsPerSessionT();
+            _currentDaySessionList = GetExactGlobalSession(_currentGlobalSession.daily_id, _clentsList);
         }
+
         public List<DaySessionClass> GetAllOpenedDaySessions()
         {
             int dailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSessionDailyId();
@@ -66,8 +64,7 @@ namespace Boom_Manager_Project.Controllers
         }
         public List<DaySessionClass> GetExactGlobalSession(int dailyId, List<clients_per_session_t> clientsPerSessionList)
         {
-            var db = DataBaseClass.Instancedb();
-            return db.GetOpenedDaySessions(dailyId, clientsPerSessionList);
+            return DataBaseClass.Instancedb().GetOpenedDaySessions(dailyId, clientsPerSessionList);
         }
 
         public List<DaySessionClass> TimeAndMoneySubstracting(List<DaySessionClass> dSessions)
@@ -189,6 +186,10 @@ namespace Boom_Manager_Project.Controllers
             tzm.ShowDialog();
         }
 
-
+        public void CallConsoleManager()
+        {
+            var cm = new ConsoleManager();
+            cm.ShowDialog();
+        }
     }
 }

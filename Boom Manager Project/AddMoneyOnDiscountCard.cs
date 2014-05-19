@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
 
@@ -8,7 +9,8 @@ namespace Boom_Manager_Project
     public partial class AddMoneyOnDiscountCard : Form
     {
         private readonly string _clientId;
-        private bool changedSmth = false;
+//        private bool changedSmth = false;
+        private Point? _old;
         private List<object> data;
         public AddMoneyOnDiscountCard(string clientID)
         {
@@ -59,6 +61,51 @@ namespace Boom_Manager_Project
         {
             AddMoneyOnDiscountCardController.AddMoneyOnCardControllerInstance().SubmitChanges(data, _clientId);
             Close();
+        }
+
+        private void AddMoneyOnDiscountCard_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void AddMoneyOnDiscountCard_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void AddMoneyOnDiscountCard_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
+        }
+
+        private void panel_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void panel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void panel_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
+        }
+
+        private void panel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

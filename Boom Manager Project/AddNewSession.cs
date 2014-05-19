@@ -1,21 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Net;
 using System.Windows.Forms;
+using Boom_Manager_Project.Controllers;
+using LINQ_test.Driver;
 
 namespace Boom_Manager_Project
 {
     public partial class FAddNewSession : Form
     {
+        private Point? _old;
         private int _repeatCallOfMethodCounter;
-//        private readonly AddNewSessionController _addNewSessionController;
+        private List<Endpoint> _endpoints;
+        private Device _device1;
         public FAddNewSession()
         {
             _repeatCallOfMethodCounter = 0;
             InitializeComponent();
-//            _addNewSessionController = new AddNewSessionController();
+
         }
 
         private void AddNewSession_Load(object sender, EventArgs e)
         {
+            _device1 = new Device(IPAddress.Parse("192.168.0.201"));
+            _endpoints = AddNewSessionController.AddNewSessionControllerInstance().LoadingOfEndPoints(_device1);
             UpdatePlaystationList();
             IsClientWithCardOrNot();
         }
@@ -272,6 +281,56 @@ namespace Boom_Manager_Project
                 Close();
             }
             
+        }
+
+        private void bAddSession_MouseHover(object sender, EventArgs e)
+        {
+            bAddSession.FlatAppearance.BorderColor = Color.White;
+        }
+
+        private void bAddSession_MouseLeave(object sender, EventArgs e)
+        {
+            bAddSession.FlatAppearance.BorderColor = Color.FromArgb(81, 91, 103);
+        }
+
+        private void bCancel_MouseHover(object sender, EventArgs e)
+        {
+            bCancel.FlatAppearance.BorderColor = Color.White;
+        }
+
+        private void bCancel_MouseLeave(object sender, EventArgs e)
+        {
+            bCancel.FlatAppearance.BorderColor = Color.FromArgb(81, 91, 103);
+        }
+
+        private void bAddDiscountCard_MouseHover(object sender, EventArgs e)
+        {
+            bAddDiscountCard.FlatAppearance.BorderColor = Color.White;
+        }
+
+        private void bAddDiscountCard_MouseLeave(object sender, EventArgs e)
+        {
+            bAddDiscountCard.FlatAppearance.BorderColor = Color.FromArgb(81, 91, 103);
+        }
+
+        private void FAddNewSession_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void FAddNewSession_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void FAddNewSession_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
         }
     }
 }

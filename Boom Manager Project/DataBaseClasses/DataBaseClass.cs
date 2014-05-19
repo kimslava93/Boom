@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Linq;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using Boom_Manager_Project.MyClasses;
-using LINQ_test;
+using LINQ_test.Driver;
 
 namespace Boom_Manager_Project.DataBaseClasses
 {
@@ -29,18 +29,66 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return userInfo;
             }
         }
+        public personal_info_t GetUserInfoByPersonID(string personId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                personal_info_t userInfo = (from a in db.GetTable<personal_info_t>()
+                                            where a.person_id == personId
+                                            select a).SingleOrDefault();
+                return userInfo;
+            }
+        }
 
         public global_session_t GetOpenedGlobalSession()
         {
             var db = new dbDataContext();
             lock (db)
             {
-                return (from cs in db.GetTable<global_session_t>()
-                    where cs.end_session == cs.start_session
-                    select cs).SingleOrDefault();
+                var r =  (from gs in db.GetTable<global_session_t>()
+                    where gs.end_session == gs.start_session
+                    select gs).SingleOrDefault();
+                return r;
+            }
+        }
+        public void CloseLastOpenedGlobalSession()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var globalSession = (from gs in db.GetTable<global_session_t>()
+                         where gs.end_session == gs.start_session
+                         select gs).SingleOrDefault();
+                if (globalSession != null)
+                {
+                    globalSession.end_session = DateTime.Now;
+                    db.SubmitChanges();
+                }
             }
         }
 
+        public List<ShiftsMyClass> GetAllGlobalSessions(int numberOfLastSessons)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                if (numberOfLastSessons > 0)
+                {
+                    return (from a in db.GetTable<global_session_t>()
+                        orderby a.daily_id ascending
+                        select new ShiftsMyClass()
+                        {
+                            DailyId = a.daily_id,
+                            AdministratorID = (string)a.administrator_id,
+                            OperatorId = (string)a.operator_id,
+                            StartTime = a.start_session,
+                            EndTime = a.end_session
+                        }).Take(numberOfLastSessons).ToList();
+                }
+                return new List<ShiftsMyClass>();
+            }
+        }
         public List<clients_per_session_t> GetListOfAllClientsPerSessionT()
         {
             var db = new dbDataContext();
@@ -171,6 +219,26 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        public void TransferOpenedSessionToNextGlobalSession(int sessionId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var sessionToTransfer = (from s in db.GetTable<days_sessions_t>()
+                    where s.session_id == sessionId
+                    select s).SingleOrDefault();
+//                sessionToTransfer.daily_id = sessionToTransfer.daily_id + 1;
+
+                var lastOpenedGlobalSession = GetOpenedGlobalSession();
+
+                if (sessionToTransfer != null)
+                {
+                    sessionToTransfer.daily_id = lastOpenedGlobalSession.daily_id;
+                    db.SubmitChanges();
+                }
+            }
+        }
+
 //        private DateTime CheckTheDate(DateTime toCheck)
 //        {
 //            DateTime curTime = DateTime.Now;
@@ -201,6 +269,38 @@ namespace Boom_Manager_Project.DataBaseClasses
             return result;
         }
 
+        public List<DaySessionClass> GetAllDaySessionsInShift(int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                 var clientsList = (from c in db.GetTable<clients_per_session_t>()
+                                  select c).ToList();
+                var daySessionsReport = (from d in db.GetTable<days_sessions_t>()
+                                     from c in db.GetTable<clients_per_session_t>()
+                                     orderby d.start_game, d.end_game
+                                     where d.daily_id == dailyId
+                                     where c.session_id == d.session_id
+                                     let startGame = d.start_game
+                                     where startGame != null
+                                     let endGame = d.end_game
+                                     where endGame != null
+                                     select new DaySessionClass()
+                                     {
+                                         SessionId = d.client_num,//to see manager num of clients
+                                         PlaystationId = d.playstation_id,
+                                         StartGame = (DateTime)startGame,
+                                         EndGame = (DateTime)endGame,
+                                         TimeLeft = GetTimeLeft((DateTime)endGame),//----------------------------------------------------------
+                                         ClientId = ListToString(d.session_id, clientsList), //to show all clients in one line and column instead of one
+                                         MoneyLeft = d.money_left,
+                                         SessionDiscount = (double)d.session_discount,
+                                         PayedSum = d.payed_sum
+                                     }).ToList<DaySessionClass>();
+                return daySessionsReport;
+            }
+        }
+
 //        public List<timezones_t> GetAllTimezones()
 //        {
 //            var db = new dbDataContext();
@@ -213,6 +313,21 @@ namespace Boom_Manager_Project.DataBaseClasses
 //            }
 //            
 //        }
+        public void AddNewDevice(int deviceId, string ipAddress)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<devices_t> devicesTable = db.GetTable<devices_t>();
+                var device = new devices_t
+                {
+                    device_id = deviceId, 
+                    ip_address = ipAddress
+                };
+                devicesTable.InsertOnSubmit(device);
+                db.SubmitChanges();
+            }
+        }
 
         public void AddNewUser(personal_info_t userInfo)
         {
@@ -236,10 +351,14 @@ namespace Boom_Manager_Project.DataBaseClasses
                 var globSess = new global_session_t
                 {
                     administrator_id = adminID,
-                    operator_id = operatorID,
                     start_session = date,
                     end_session = date
                 };
+
+                if (operatorID != "no operator")
+                {
+                    globSess.operator_id = operatorID;
+                }
 
                 gst.InsertOnSubmit(globSess);
                 db.SubmitChanges();
@@ -320,6 +439,8 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        
+
         public int GetLastOpenedGlobalSessionDailyId()//used to get last dailyID
         {
             var db = new dbDataContext();
@@ -331,7 +452,16 @@ namespace Boom_Manager_Project.DataBaseClasses
                     select gsession.daily_id).FirstOrDefault();
             }
         }
-
+        public global_session_t GetGlobalSessionByDailyId(int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from gsession in db.GetTable<global_session_t>()
+                        where gsession.daily_id == dailyId
+                        select gsession).SingleOrDefault();
+            }
+        }
         public int GetLastClientNumInSession(int dailyId)//for getting number for next client
         {
             var db = new dbDataContext();
@@ -397,13 +527,58 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        public void SwitchOnConsole(string consoleId,List<Endpoint> endpoints)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var allTablesList = (from i in db.GetTable<tables_t>()
+                                     orderby i.playstation_id.Length ascending, i.playstation_id ascending
+                                     select i.playstation_id).ToList();
+
+                int index = allTablesList.IndexOf(consoleId);
+                if (!endpoints[index].On())
+                {
+                    /*throw new Exception*/
+                    MessageBox.Show("NO CONNECTION WITH DEVICE!\nPlease reboot device and try again.");
+
+                }//Sending singnal to board
+            }
+        }
+
+        public List<devices_t> GetAllDevices()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from d in db.GetTable<devices_t>()
+                    select d).ToList();
+            }
+        }
+
+        public List<DevicesEndPointsMyClass> GetAllEndPointsIndexes(int deviceId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from i in db.GetTable<device_endpoints_t>()
+                    where i.device_id == deviceId
+                    orderby i.endpoint_id ascending
+                    select new DevicesEndPointsMyClass
+                    {
+                        EndPointIndex = i.endpoint_id,
+                        PlayStationId = i.playstation_id
+                    }).ToList();
+            }
+        }
+
         public void DeleteTimeZoneWithData(string timeZoneNameToDelete)
         {
             var db = new dbDataContext();
             lock (db)
             {
                 DialogResult deleteDialog =
-                    MessageBox.Show(timeZoneNameToDelete + "will be removed from DataBase!\nAre you sure?",
+                    MessageBox.Show(timeZoneNameToDelete + " will be removed from DataBase!\nAre you sure?",
                         "Attention!", MessageBoxButtons.OKCancel);
                 if (deleteDialog == DialogResult.OK)
                 {
@@ -473,6 +648,59 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        public void DeleteConsole(string consoleId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+//                    string selectedTable = (string)dataGridViewConsolesList.CurrentRow.Cells[0].Value;
+                var consoleToDelete = (from t in db.GetTable<tables_t>()
+                    where t.playstation_id.Equals(consoleId)
+                    select t).SingleOrDefault();
+                var deleteTimezonePrices = (from tp in db.GetTable<playstation_timezone>()
+                    where tp.playstation_id.Equals(consoleId)
+                    select tp);
+                if (consoleToDelete != null && deleteTimezonePrices != null)
+                {
+                    foreach (var deleteTimezonePrice in deleteTimezonePrices)
+                    {
+                        db.playstation_timezones.DeleteOnSubmit(deleteTimezonePrice);
+                    }
+                    db.tables_ts.DeleteOnSubmit(consoleToDelete);
+                    db.SubmitChanges();
+                }
+            }
+        }
+
+        public void InsertNewConsole(string consoleName)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<tables_t> consolesT = db.GetTable<tables_t>();
+                var console = new tables_t
+                {
+                    playstation_id = consoleName,
+                    playstation_state = "free",
+                    order_time = new DateTime(2000, 1, 1, 0, 0, 0)
+                };
+                consolesT.InsertOnSubmit(console);
+                var timeZoneList = GetAllTimeZones();
+                foreach (timezones_t t in timeZoneList)
+                {
+                    Table<playstation_timezone> playstationPricesT = db.GetTable<playstation_timezone>();
+                    var timezonePrice = new playstation_timezone
+                    {
+                        playstation_id = consoleName,
+                        timezone_cost_per_hour = 0,
+                        timezone_name = t.timezone_name
+                    };
+                    playstationPricesT.InsertOnSubmit(timezonePrice);
+                }
+                db.SubmitChanges();
+            }
+        }
+
         public void InsertClientsPerTable(string clientId)
         {
             var db = new dbDataContext();
@@ -535,6 +763,11 @@ namespace Boom_Manager_Project.DataBaseClasses
 
                 sessionIdtoDelete.end_game = endTime;
                 sessionIdtoDelete.session_state = "closed";
+
+//                if (endTime - dsc.StartGame < TimeSpan.FromHours(1))
+//                {
+//                    dsc.MoneyLeft = dsc.PayedSum - dsc.MoneyLeft;
+//                }
                 sessionIdtoDelete.money_left = dsc.MoneyLeft;
                 if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
                 {
@@ -646,12 +879,15 @@ namespace Boom_Manager_Project.DataBaseClasses
                 var clientIdToChangeSavings = (from c in db.GetTable<account_savings_t>()
                     where c.client_id == clientID
                     select c).SingleOrDefault();
+//                var paymentTable = (from p in db.GetTable<payments_t>()
+//                                        where )
                 if (clientIdToChangeSavings != null)
                 {
                     clientIdToChangeSavings.savings += sumToAdd;
                     try
                     {
                         db.SubmitChanges();
+                        InsertNewPaymentToClientHistory(clientID, sumToAdd);
                     }
                     catch (Exception)
                     {
@@ -659,6 +895,24 @@ namespace Boom_Manager_Project.DataBaseClasses
                     }
                 }
 
+            }
+        }
+
+        private void InsertNewPaymentToClientHistory(string clientId, double cash)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var paymentsTable = db.GetTable<payments_t>();
+                var payments = new payments_t
+                {
+                    client_id = clientId,
+                    date_of_transaction = DateTime.Now,
+                    put_cash = cash
+                };
+
+                paymentsTable.InsertOnSubmit(payments);
+                db.SubmitChanges();
             }
         }
 

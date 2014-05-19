@@ -49,9 +49,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v13.2.Core, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v13.2.Core, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v13.2, Version=13.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DocX">
+      <HintPath>..\packages\DocX.1.0.0.13\lib\net40\DocX.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,6 +84,20 @@
     <Compile Include="ChangePlaystationPrice.Designer.cs">
       <DependentUpon>ChangePlaystationPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConsoleManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsoleManager.Designer.cs">
+      <DependentUpon>ConsoleManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AddNewDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controllers\AddNewDevice.Designer.cs">
+      <DependentUpon>AddNewDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AddNewDeviceController.cs" />
+    <Compile Include="Controllers\ConsoleManagerController.cs" />
     <Compile Include="Controllers\ChangePlaystationPriceController.cs" />
     <Compile Include="Controllers\AddMoneyOnDiscountCardController.cs" />
     <Compile Include="AddMoneyOnDiscountCard.cs">
@@ -82,6 +106,21 @@
     <Compile Include="AddMoneyOnDiscountCard.Designer.cs">
       <DependentUpon>AddMoneyOnDiscountCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateNewConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateNewConsole.Designer.cs">
+      <DependentUpon>CreateNewConsole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\CreateNewConsoleController.cs" />
+    <Compile Include="DataBaseClasses\DeviceManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataBaseClasses\DeviceManager.Designer.cs">
+      <DependentUpon>DeviceManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\DeviceManagerContoller.cs" />
+    <Compile Include="MyClasses\DevicesEndPointsMyClass.cs" />
     <Compile Include="ExtendSessionTime.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +136,10 @@
     </Compile>
     <Compile Include="DataBaseClasses\ErrorsAndWarningsMessages.cs" />
     <Compile Include="Controllers\ExtendSessionTimeController.cs" />
+    <Compile Include="HardwareConnectionDriver\Crypto.cs" />
+    <Compile Include="HardwareConnectionDriver\Device.cs" />
+    <Compile Include="HardwareConnectionDriver\Endpoint.cs" />
+    <Compile Include="HardwareConnectionDriver\UDPDriver.cs" />
     <Compile Include="Models\AddDiscountToSessionModel.cs" />
     <Compile Include="AddDiscountCardToSession.cs">
       <SubType>Form</SubType>
@@ -151,8 +194,16 @@
       <DependentUpon>EnterPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="MyClasses\MyString.cs" />
+    <Compile Include="MyClasses\ShiftsMyClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\ShiftsManagerController.cs" />
+    <Compile Include="ShiftsManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShiftsManager.Designer.cs">
+      <DependentUpon>ShiftsManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimeZoneManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +228,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChangePlaystationPrice.resx">
       <DependentUpon>ChangePlaystationPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsoleManager.resx">
+      <DependentUpon>ConsoleManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controllers\AddNewDevice.resx">
+      <DependentUpon>AddNewDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateNewConsole.resx">
+      <DependentUpon>CreateNewConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataBaseClasses\DeviceManager.resx">
+      <DependentUpon>DeviceManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShiftsManager.resx">
+      <DependentUpon>ShiftsManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TimeZoneManager.resx">
       <DependentUpon>TimeZoneManager.cs</DependentUpon>
@@ -208,12 +274,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="DataBaseClasses\db.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>db.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -253,6 +321,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

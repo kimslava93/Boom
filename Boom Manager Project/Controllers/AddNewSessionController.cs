@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.Models;
-using Boom_Manager_Project.MyClasses;
+using LINQ_test.Driver;
 
-namespace Boom_Manager_Project
+namespace Boom_Manager_Project.Controllers
 {
     class AddNewSessionController
     {
@@ -17,7 +16,6 @@ namespace Boom_Manager_Project
 //        private readonly int _dailyId;
 //        private bool _opTable;
 //        private int _repeatCallOfMethodCounter;
-        private readonly AddNewSessionModel _addNewSessionModel;
         private static AddNewSessionController _addNewSessionController;
 
         public static AddNewSessionController AddNewSessionControllerInstance()
@@ -25,11 +23,20 @@ namespace Boom_Manager_Project
             return _addNewSessionController ?? (_addNewSessionController = new AddNewSessionController());
         }
 
-        public AddNewSessionController()
+//        public AddNewSessionController()
+//        {
+//            _addNewSessionModel = new AddNewSessionModel();
+//        }
+        public List<Endpoint> LoadingOfEndPoints(Device dev)
         {
-            _addNewSessionModel = new AddNewSessionModel();
+            var endpoints = new List<Endpoint>();
+            for (int i = 1; i <= 16 /*table_numComboBox.Items.Count*/; i++)
+            {
+                var ep = new Endpoint(dev, (byte)i);
+                endpoints.Add(ep);
+            }
+            return endpoints;
         }
-
         public string WarningMessages(string type)
         {
             if (type == "NoFreePlaces")
@@ -50,19 +57,19 @@ namespace Boom_Manager_Project
 
         public List<tables_t> GetAllFreeTablesId()
         {
-            List<tables_t> allFreeTables = _addNewSessionModel.GetAllFreeTables();
+            List<tables_t> allFreeTables = AddNewSessionModel.InstanceAddNewSessionModel().GetAllFreeTables();
             return allFreeTables;
         }
 
         public string StartTimer()
         {
-            _addNewSessionModel.CurrentDateTime = DateTime.Now;
-            return _addNewSessionModel.CurrentDateTime.ToString("HH:mm:ss");
+            AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime = DateTime.Now;
+            return AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime.ToString("HH:mm:ss");
         }
         public string StartDate()
         {
-            _addNewSessionModel.CurrentDateTime = DateTime.Now;
-            return _addNewSessionModel.CurrentDateTime.ToString("dd MMMM");
+            AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime = DateTime.Now;
+            return AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime.ToString("dd MMMM");
         }
 
         public decimal UpdatePrice(string discountCard, string playstationId, decimal hoursLeft, decimal minutesLeft)
@@ -77,7 +84,7 @@ namespace Boom_Manager_Project
                 if (hoursLeft >= 0 || minutesLeft >= 0)
                 {
                     var toPlay = new TimeSpan((int)hoursLeft / 24, (int)hoursLeft - ((int)hoursLeft / 24) * 24, (int)minutesLeft, 0);
-                    var price = _addNewSessionModel.GetSumToPay(playstationId, toPlay, currentDateTime);
+                    var price = AddNewSessionModel.InstanceAddNewSessionModel().GetSumToPay(playstationId, toPlay, currentDateTime);
                     if (price < 0)
                     {
                         return 0;
@@ -122,12 +129,12 @@ namespace Boom_Manager_Project
 
         private TimeSpan UpdateRemainedTimeOnPaidPriceChanged(double remainedMoney, string playstationId)
         {
-            _addNewSessionModel.CurrentDateTime = DateTime.Now;
+            AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime = DateTime.Now;
             try
             {
-                if (_addNewSessionModel.GetCurrentPriceForPlaystation(playstationId, _addNewSessionModel.CurrentDateTime) > 0)
+                if (AddNewSessionModel.InstanceAddNewSessionModel().GetCurrentPriceForPlaystation(playstationId, AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime) > 0)
                 {
-                    TimeSpan paidTime = _addNewSessionModel.GetTimeToPlay(remainedMoney, playstationId,_addNewSessionModel.CurrentDateTime);
+                    TimeSpan paidTime = AddNewSessionModel.InstanceAddNewSessionModel().GetTimeToPlay(remainedMoney, playstationId, AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime);
 
                     if ((paidTime.Days) * 24 + paidTime.Hours > 0 || paidTime.Minutes > 0)
                     {
@@ -148,7 +155,7 @@ namespace Boom_Manager_Project
         public List<string> AddNewClientToField(string clientId, string idsTextBox, string namesTextBox,decimal moneyLeftTextBox, string clientName, decimal moneyLeft)
         {
             var result = new List<string>();
-            if (!_addNewSessionModel.IsRepeated(clientId, idsTextBox))
+            if (!AddNewSessionModel.InstanceAddNewSessionModel().IsRepeated(clientId, idsTextBox))
             {
                 if (String.IsNullOrWhiteSpace(idsTextBox) || idsTextBox == "0")
                 {
@@ -171,7 +178,7 @@ namespace Boom_Manager_Project
         }
         public void AddNewDaySession(string playstationId, string clientId, TimeSpan timeToPlay, double paidSum, DateTime curTime)
         {
-            _addNewSessionModel.AddNewDaySession(playstationId, clientId, timeToPlay, paidSum, curTime);
+            AddNewSessionModel.InstanceAddNewSessionModel().AddNewDaySession(playstationId, clientId, timeToPlay, paidSum, curTime);
         }
 
         

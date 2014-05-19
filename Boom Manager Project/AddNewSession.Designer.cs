@@ -38,6 +38,7 @@
             this.lTimeToPlay = new System.Windows.Forms.Label();
             this.bAddDiscountCard = new System.Windows.Forms.Button();
             this.gbClientInfo = new System.Windows.Forms.GroupBox();
+            this.bAddMoneyToClient = new System.Windows.Forms.Button();
             this.numUpDMinutesRemainedOnCard = new System.Windows.Forms.NumericUpDown();
             this.numUpDHoursRemainedOnCard = new System.Windows.Forms.NumericUpDown();
             this.tbClientName = new System.Windows.Forms.TextBox();
@@ -52,7 +53,6 @@
             this.bAddSession = new System.Windows.Forms.Button();
             this.numUpDPaidPrice = new System.Windows.Forms.NumericUpDown();
             this.gbDepositPayment = new System.Windows.Forms.GroupBox();
-            this.bAddMoneyToClient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).BeginInit();
             this.gbClientInfo.SuspendLayout();
@@ -65,7 +65,10 @@
             // 
             // numUpDMinutesLeft
             // 
-            this.numUpDMinutesLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numUpDMinutesLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpDMinutesLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpDMinutesLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numUpDMinutesLeft.ForeColor = System.Drawing.Color.White;
             this.numUpDMinutesLeft.Location = new System.Drawing.Point(222, 25);
             this.numUpDMinutesLeft.Maximum = new decimal(new int[] {
             60,
@@ -79,18 +82,29 @@
             // 
             // bCancel
             // 
-            this.bCancel.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bCancel.Location = new System.Drawing.Point(206, 334);
+            this.bCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bCancel.ForeColor = System.Drawing.Color.White;
+            this.bCancel.Location = new System.Drawing.Point(232, 334);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(111, 38);
+            this.bCancel.Size = new System.Drawing.Size(96, 38);
             this.bCancel.TabIndex = 30;
-            this.bCancel.Text = "Cancel";
-            this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.Text = "CANCEL";
+            this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
+            this.bCancel.MouseLeave += new System.EventHandler(this.bCancel_MouseLeave);
+            this.bCancel.MouseHover += new System.EventHandler(this.bCancel_MouseHover);
             // 
             // numUpDHoursLeft
             // 
-            this.numUpDHoursLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numUpDHoursLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpDHoursLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpDHoursLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numUpDHoursLeft.ForeColor = System.Drawing.Color.White;
             this.numUpDHoursLeft.Location = new System.Drawing.Point(163, 25);
             this.numUpDHoursLeft.Maximum = new decimal(new int[] {
             120,
@@ -117,7 +131,8 @@
             // 
             this.lOR.AutoSize = true;
             this.lOR.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lOR.Location = new System.Drawing.Point(79, 62);
+            this.lOR.ForeColor = System.Drawing.Color.White;
+            this.lOR.Location = new System.Drawing.Point(14, 59);
             this.lOR.Name = "lOR";
             this.lOR.Size = new System.Drawing.Size(31, 21);
             this.lOR.TabIndex = 2;
@@ -127,6 +142,7 @@
             // 
             this.lMoneyToPay.AutoSize = true;
             this.lMoneyToPay.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lMoneyToPay.ForeColor = System.Drawing.Color.White;
             this.lMoneyToPay.Location = new System.Drawing.Point(14, 93);
             this.lMoneyToPay.Name = "lMoneyToPay";
             this.lMoneyToPay.Size = new System.Drawing.Size(102, 21);
@@ -135,11 +151,15 @@
             // 
             // tbDiscountCards
             // 
-            this.tbDiscountCards.BackColor = System.Drawing.Color.White;
+            this.tbDiscountCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbDiscountCards.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbDiscountCards.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.tbDiscountCards.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbDiscountCards.HideSelection = false;
+            this.tbDiscountCards.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tbDiscountCards.Enabled = false;
+            this.tbDiscountCards.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDiscountCards.ForeColor = System.Drawing.Color.White;
             this.tbDiscountCards.Location = new System.Drawing.Point(146, 49);
+            this.tbDiscountCards.MaxLength = 50;
             this.tbDiscountCards.Name = "tbDiscountCards";
             this.tbDiscountCards.ReadOnly = true;
             this.tbDiscountCards.ShortcutsEnabled = false;
@@ -152,6 +172,7 @@
             // 
             this.lTimeToPlay.AutoSize = true;
             this.lTimeToPlay.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lTimeToPlay.ForeColor = System.Drawing.Color.White;
             this.lTimeToPlay.Location = new System.Drawing.Point(14, 27);
             this.lTimeToPlay.Name = "lTimeToPlay";
             this.lTimeToPlay.Size = new System.Drawing.Size(91, 21);
@@ -160,14 +181,22 @@
             // 
             // bAddDiscountCard
             // 
-            this.bAddDiscountCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bAddDiscountCard.Location = new System.Drawing.Point(268, 49);
+            this.bAddDiscountCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddDiscountCard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddDiscountCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bAddDiscountCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddDiscountCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bAddDiscountCard.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAddDiscountCard.ForeColor = System.Drawing.Color.White;
+            this.bAddDiscountCard.Location = new System.Drawing.Point(279, 49);
             this.bAddDiscountCard.Name = "bAddDiscountCard";
-            this.bAddDiscountCard.Size = new System.Drawing.Size(49, 29);
+            this.bAddDiscountCard.Size = new System.Drawing.Size(54, 29);
             this.bAddDiscountCard.TabIndex = 29;
             this.bAddDiscountCard.Text = "Add card";
-            this.bAddDiscountCard.UseVisualStyleBackColor = true;
+            this.bAddDiscountCard.UseVisualStyleBackColor = false;
             this.bAddDiscountCard.Click += new System.EventHandler(this.bAddDiscountCard_Click);
+            this.bAddDiscountCard.MouseLeave += new System.EventHandler(this.bAddDiscountCard_MouseLeave);
+            this.bAddDiscountCard.MouseHover += new System.EventHandler(this.bAddDiscountCard_MouseHover);
             // 
             // gbClientInfo
             // 
@@ -186,6 +215,15 @@
             this.gbClientInfo.TabIndex = 27;
             this.gbClientInfo.TabStop = false;
             this.gbClientInfo.Text = "Client name info";
+            // 
+            // bAddMoneyToClient
+            // 
+            this.bAddMoneyToClient.Location = new System.Drawing.Point(270, 114);
+            this.bAddMoneyToClient.Name = "bAddMoneyToClient";
+            this.bAddMoneyToClient.Size = new System.Drawing.Size(27, 29);
+            this.bAddMoneyToClient.TabIndex = 9;
+            this.bAddMoneyToClient.Text = "+";
+            this.bAddMoneyToClient.UseVisualStyleBackColor = true;
             // 
             // numUpDMinutesRemainedOnCard
             // 
@@ -295,7 +333,10 @@
             // 
             this.cbPlaystationId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbPlaystationId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbPlaystationId.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbPlaystationId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.cbPlaystationId.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbPlaystationId.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbPlaystationId.ForeColor = System.Drawing.Color.White;
             this.cbPlaystationId.Location = new System.Drawing.Point(146, 97);
             this.cbPlaystationId.Name = "cbPlaystationId";
             this.cbPlaystationId.Size = new System.Drawing.Size(61, 29);
@@ -306,6 +347,7 @@
             // 
             this.lPlaystationId.AutoSize = true;
             this.lPlaystationId.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lPlaystationId.ForeColor = System.Drawing.Color.White;
             this.lPlaystationId.Location = new System.Drawing.Point(12, 100);
             this.lPlaystationId.Name = "lPlaystationId";
             this.lPlaystationId.Size = new System.Drawing.Size(96, 21);
@@ -316,6 +358,7 @@
             // 
             this.lClientDiscountId.AutoSize = true;
             this.lClientDiscountId.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lClientDiscountId.ForeColor = System.Drawing.Color.White;
             this.lClientDiscountId.Location = new System.Drawing.Point(12, 52);
             this.lClientDiscountId.Name = "lClientDiscountId";
             this.lClientDiscountId.Size = new System.Drawing.Size(128, 21);
@@ -324,19 +367,30 @@
             // 
             // bAddSession
             // 
-            this.bAddSession.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAddSession.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddSession.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddSession.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bAddSession.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddSession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bAddSession.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAddSession.ForeColor = System.Drawing.Color.White;
             this.bAddSession.Location = new System.Drawing.Point(12, 334);
             this.bAddSession.Name = "bAddSession";
-            this.bAddSession.Size = new System.Drawing.Size(111, 38);
+            this.bAddSession.Size = new System.Drawing.Size(96, 38);
             this.bAddSession.TabIndex = 25;
-            this.bAddSession.Text = "Add new client";
-            this.bAddSession.UseVisualStyleBackColor = true;
+            this.bAddSession.Text = "ADD";
+            this.bAddSession.UseVisualStyleBackColor = false;
             this.bAddSession.Click += new System.EventHandler(this.bAddSession_Click);
+            this.bAddSession.MouseLeave += new System.EventHandler(this.bAddSession_MouseLeave);
+            this.bAddSession.MouseHover += new System.EventHandler(this.bAddSession_MouseHover);
             // 
             // numUpDPaidPrice
             // 
+            this.numUpDPaidPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpDPaidPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDPaidPrice.DecimalPlaces = 2;
-            this.numUpDPaidPrice.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numUpDPaidPrice.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numUpDPaidPrice.ForeColor = System.Drawing.Color.White;
             this.numUpDPaidPrice.Location = new System.Drawing.Point(163, 91);
             this.numUpDPaidPrice.Maximum = new decimal(new int[] {
             18900,
@@ -357,27 +411,20 @@
             this.gbDepositPayment.Controls.Add(this.lMoneyToPay);
             this.gbDepositPayment.Controls.Add(this.lTimeToPlay);
             this.gbDepositPayment.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gbDepositPayment.ForeColor = System.Drawing.Color.White;
             this.gbDepositPayment.Location = new System.Drawing.Point(12, 150);
             this.gbDepositPayment.Name = "gbDepositPayment";
-            this.gbDepositPayment.Size = new System.Drawing.Size(305, 178);
+            this.gbDepositPayment.Size = new System.Drawing.Size(316, 178);
             this.gbDepositPayment.TabIndex = 22;
             this.gbDepositPayment.TabStop = false;
             this.gbDepositPayment.Text = "Deposit payment";
-            // 
-            // bAddMoneyToClient
-            // 
-            this.bAddMoneyToClient.Location = new System.Drawing.Point(270, 114);
-            this.bAddMoneyToClient.Name = "bAddMoneyToClient";
-            this.bAddMoneyToClient.Size = new System.Drawing.Size(27, 29);
-            this.bAddMoneyToClient.TabIndex = 9;
-            this.bAddMoneyToClient.Text = "+";
-            this.bAddMoneyToClient.UseVisualStyleBackColor = true;
             // 
             // FAddNewSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(326, 383);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
+            this.ClientSize = new System.Drawing.Size(345, 383);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);
@@ -389,7 +436,7 @@
             this.Controls.Add(this.bAddSession);
             this.Controls.Add(this.gbDepositPayment);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -399,6 +446,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddNewDaySession";
             this.Load += new System.EventHandler(this.AddNewSession_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FAddNewSession_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FAddNewSession_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FAddNewSession_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).EndInit();
             this.gbClientInfo.ResumeLayout(false);
@@ -421,7 +471,6 @@
         private System.Windows.Forms.NumericUpDown numUpDHoursLeft;
         private System.Windows.Forms.Label lOR;
         private System.Windows.Forms.Label lMoneyToPay;
-        private System.Windows.Forms.TextBox tbDiscountCards;
         private System.Windows.Forms.Label lTimeToPlay;
         private System.Windows.Forms.Button bAddDiscountCard;
         private System.Windows.Forms.GroupBox gbClientInfo;
@@ -440,5 +489,6 @@
         private System.Windows.Forms.NumericUpDown numUpDPaidPrice;
         private System.Windows.Forms.GroupBox gbDepositPayment;
         private System.Windows.Forms.Button bAddMoneyToClient;
+        private System.Windows.Forms.TextBox tbDiscountCards;
     }
 }

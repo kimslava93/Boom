@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
@@ -9,6 +10,7 @@ namespace Boom_Manager_Project
 {
     public partial class TimeZoneManager : Form
     {
+        private Point? _old;
         private bool _isNewTimeZoneCreated = false;
         public TimeZoneManager()
         {
@@ -39,12 +41,12 @@ namespace Boom_Manager_Project
         {
             bExit.Enabled = false;
             if (TimeZoneManagerController.TimeZoneManagerControllerInstance()
-                    .CheckAllInputDataToInsertTimeZone(tbTimezoneName.Text, dtpStartTime.Value.Hour,
-                        dtpEndTime.Value.Hour))
+                    .CheckAllInputDataToInsertTimeZone(tbTimezoneName.Text, (int)numUpDStartHours.Value,
+                        (int)numUpDEndHours.Value))
             {
                 TimeZoneManagerController.TimeZoneManagerControllerInstance()
-                    .CreateTimeZoneWithGivenData(tbTimezoneName.Text, dtpStartTime.Value.Hour,
-                        dtpEndTime.Value.Hour);
+                    .CreateTimeZoneWithGivenData(tbTimezoneName.Text, (int) numUpDStartHours.Value,
+                        (int) numUpDEndHours.Value);
                 cbAllTimeZones.Items.Add(tbTimezoneName.Text);
                 cbAllTimeZones.SelectedText = tbTimezoneName.Text;
                 RefreshPriceList();
@@ -104,10 +106,10 @@ namespace Boom_Manager_Project
             }
         }
 
-        private void cbAllTimeZones_MouseClick(object sender, MouseEventArgs e)
-        {
-            RefreshPriceList();
-        }
+//        private void cbAllTimeZones_MouseClick(object sender, MouseEventArgs e)
+//        {
+//            RefreshPriceList();
+//        }
 
         private void bDeleteTimezone_Click(object sender, EventArgs e)
         {
@@ -121,7 +123,7 @@ namespace Boom_Manager_Project
                     bExit.Enabled = true;
 //                    sContainer.Panel2Collapsed = true;
                     if (ActiveForm != null)
-                        ActiveForm.Height = 246;
+                        ActiveForm.Height = 218;
                 }
                 RefreshPriceList();
                 RefreshTable();
@@ -133,7 +135,7 @@ namespace Boom_Manager_Project
         {
 //            sContainer.Panel2Collapsed = false;
             if (ActiveForm != null)
-                ActiveForm.Height = 526;
+                ActiveForm.Height = 527;
         }
 
         private void bExitCreatingMode_Click(object sender, EventArgs e)
@@ -146,14 +148,14 @@ namespace Boom_Manager_Project
 //                    sContainer.Panel2Collapsed = true;
                     bExit.Enabled = true;
                     if (ActiveForm != null)
-                        ActiveForm.Height = 246;
+                        ActiveForm.Height = 218;
                 }
                 else
                 {
 //                    sContainer.Panel2Collapsed = false;
                     bExit.Enabled = false;
                     if (ActiveForm != null)
-                        ActiveForm.Height = 526;
+                        ActiveForm.Height = 527;
                 }
             }
             else
@@ -161,7 +163,48 @@ namespace Boom_Manager_Project
 //                sContainer.Panel2Collapsed = true;
                 bExit.Enabled = true;
                 if (ActiveForm != null)
-                    ActiveForm.Height = 246;
+                    ActiveForm.Height = 218;
+            }
+        }
+
+        private void TimeZoneManager_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void TimeZoneManager_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void TimeZoneManager_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
+        }
+
+        private void cbAllTimeZones_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            RefreshPriceList();
+        }
+
+        private void numUpDStartHours_ValueChanged(object sender, EventArgs e)
+        {
+            if (numUpDStartHours.Value >= 24)
+            {
+                numUpDStartHours.Value = 0;
+            }
+        }
+
+        private void numUpDEndHours_ValueChanged(object sender, EventArgs e)
+        {
+            if (numUpDEndHours.Value >= 24)
+            {
+                numUpDEndHours.Value = 0;
             }
         }
 

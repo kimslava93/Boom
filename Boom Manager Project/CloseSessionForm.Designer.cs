@@ -39,38 +39,60 @@
             // 
             // bClientHasGone
             // 
+            this.bClientHasGone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bClientHasGone.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bClientHasGone.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bClientHasGone.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bClientHasGone.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bClientHasGone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bClientHasGone.ForeColor = System.Drawing.Color.White;
             this.bClientHasGone.Location = new System.Drawing.Point(12, 136);
             this.bClientHasGone.Name = "bClientHasGone";
-            this.bClientHasGone.Size = new System.Drawing.Size(120, 64);
+            this.bClientHasGone.Size = new System.Drawing.Size(87, 59);
             this.bClientHasGone.TabIndex = 0;
             this.bClientHasGone.Text = "Client has gone";
-            this.bClientHasGone.UseVisualStyleBackColor = true;
+            this.bClientHasGone.UseVisualStyleBackColor = false;
             this.bClientHasGone.Click += new System.EventHandler(this.bClientHasGone_Click);
             // 
             // bProblems
             // 
-            this.bProblems.Location = new System.Drawing.Point(131, 211);
+            this.bProblems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bProblems.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bProblems.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bProblems.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bProblems.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bProblems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bProblems.ForeColor = System.Drawing.Color.White;
+            this.bProblems.Location = new System.Drawing.Point(149, 182);
             this.bProblems.Name = "bProblems";
-            this.bProblems.Size = new System.Drawing.Size(120, 27);
+            this.bProblems.Size = new System.Drawing.Size(87, 59);
             this.bProblems.TabIndex = 1;
             this.bProblems.Text = "Problems";
-            this.bProblems.UseVisualStyleBackColor = true;
+            this.bProblems.UseVisualStyleBackColor = false;
             this.bProblems.Click += new System.EventHandler(this.bProblems_Click);
             // 
             // bCancel
             // 
+            this.bCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bCancel.Location = new System.Drawing.Point(252, 136);
+            this.bCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bCancel.ForeColor = System.Drawing.Color.White;
+            this.bCancel.Location = new System.Drawing.Point(287, 136);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(120, 64);
+            this.bCancel.Size = new System.Drawing.Size(87, 59);
             this.bCancel.TabIndex = 2;
             this.bCancel.Text = "Cancel";
-            this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // lQuestion
             // 
             this.lQuestion.AutoSize = true;
+            this.lQuestion.ForeColor = System.Drawing.Color.White;
             this.lQuestion.Location = new System.Drawing.Point(61, 54);
             this.lQuestion.Name = "lQuestion";
             this.lQuestion.Size = new System.Drawing.Size(71, 21);
@@ -113,6 +135,7 @@
             this.AcceptButton = this.bClientHasGone;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.CancelButton = this.bCancel;
             this.ClientSize = new System.Drawing.Size(386, 245);
             this.ControlBox = false;
@@ -135,6 +158,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Close Session";
             this.Load += new System.EventHandler(this.CloseSessionForm_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CloseSessionForm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CloseSessionForm_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CloseSessionForm_MouseUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

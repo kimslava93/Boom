@@ -8,6 +8,7 @@ namespace Boom_Manager_Project
 {
     public partial class EnterPassword : Form
     {
+        private Point? _old;
         private const string MANAGER = "MANAGER";
 //        private const string ADMIN = "admin";
 //        private const string  = "shift";
@@ -26,6 +27,7 @@ namespace Boom_Manager_Project
 
         private void EnterPassword_Load(object sender, EventArgs e)
         {
+            lWarning.Text = "Enter login and password to continue!";
         }
 
         private void CheckValidityOfPassword()
@@ -165,6 +167,26 @@ namespace Boom_Manager_Project
         private void bCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void EnterPassword_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void EnterPassword_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void EnterPassword_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
         }
     }
 }

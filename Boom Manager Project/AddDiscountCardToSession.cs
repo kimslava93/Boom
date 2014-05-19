@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Boom_Manager_Project
@@ -9,6 +10,7 @@ namespace Boom_Manager_Project
         public string ClientID { get; set; }
         public string ClientName { get; set; }
         public decimal MoneyLeft { get; set; }
+        private Point? _old;
         private readonly AddDiscountToSessionModel _adcts;
         public AddDiscountCardToSession()
         {
@@ -65,6 +67,66 @@ namespace Boom_Manager_Project
             var amodc = new AddMoneyOnDiscountCard(ClientID);
             amodc.ShowDialog();
             FullFillCbOfClients();
+        }
+
+        private void lMoneyLeft_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lClientName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lDsicountId_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbClientsMoneyLeft_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lAddMoney_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbClientName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bCancel_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bCancel_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddDiscountCardToSession_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void AddDiscountCardToSession_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void AddDiscountCardToSession_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
         }
     }
 }

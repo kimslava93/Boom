@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.DataBaseClasses;
-using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
 {
     public partial class AddNewStaffUser : Form
     {
-        private AddNewUserController _addNewUserController; 
+        private Point? _old;
         public AddNewStaffUser()
         {
             InitializeComponent();
             _addNewUserController = new AddNewUserController();
         }
-
+        private void AddNewStaffUser_Load(object sender, EventArgs e)
+        {
+            mtbRegistrationDate.Text = DateTime.Now.ToShortDateString();
+        }
         private void bSubmit_Click(object sender, EventArgs e)
         {
             if (AllFieldsAreFullFilled())
@@ -35,10 +32,10 @@ namespace Boom_Manager_Project
                 newUser.position = cbPosition.Text;
                 newUser.phone = tbPhone.Text;
                 newUser.additional_phone = tbAdditionalPhone.Text;
-                newUser.birthday = dtpBirthday.Value;
+                newUser.birthday = DateTime.Parse(mtbBirthday.Text);
                 newUser.home_address = tbHomeAddress.Text;
                 newUser.salary_per_day = (int)numUpDSalary.Value;
-                newUser.registration_date = dtpRegistrationDate.Value;
+                newUser.registration_date = DateTime.Parse(mtbRegistrationDate.Text);
                 try
                 {
 
@@ -72,5 +69,27 @@ namespace Boom_Manager_Project
             return false;
 
         }
+
+        private void AddNewStaffUser_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void AddNewStaffUser_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void AddNewStaffUser_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
+        }
+
+
     }
 }

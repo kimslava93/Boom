@@ -1,38 +1,52 @@
 ﻿using System;
-using System.Data.Linq;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.DataBaseClasses;
-using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
 {
     public partial class ChangeShift : Form
     {
-        private readonly ChangeShiftController _changeShiftController;
-
-        public ChangeShift()
+        private readonly bool _launchOnStart;
+        private bool _formCanBeClosed = false;
+        private Point? _old;
+        public ChangeShift(bool onStart)
         {
             InitializeComponent();
-            _changeShiftController = new ChangeShiftController();
+            _launchOnStart = onStart;
         }
 
         private void ChangeShift_Load(object sender, EventArgs e)
         {
-            lWarning.Text = _changeShiftController.WarningMessage("WarningLabel");
+            if (_launchOnStart)
+            {
+                CheckLastOpenedShift();
+            }
+            lWarning.Text = ChangeShiftController.ChangeShiftControllerInstance().WarningMessage("WarningLabel");
+            FullFillData();
+        }
+
+        private void CheckLastOpenedShift()
+        {
+            bool r = ChangeShiftController.ChangeShiftControllerInstance().DoesTheLastGlobalSesionIsOpened();
+            if(r)
+            {
+                _formCanBeClosed = true;
+                Close();
+            }
         }
 
         private void bCancel_Click(object sender, EventArgs e)
         {
-            if (_changeShiftController.ToCloseForm())
+            if (ChangeShiftController.ChangeShiftControllerInstance().ToCloseForm())
             {
+                _formCanBeClosed = true;
                 Close();
             }
             else
             {
-                MessageBox.Show(_changeShiftController.WarningMessage("FirstShift"));
+                MessageBox.Show(ChangeShiftController.ChangeShiftControllerInstance().WarningMessage("FirstShift"));
             }
         }
 
@@ -41,7 +55,10 @@ namespace Boom_Manager_Project
         {
             if (FieldsAreFulFilled())
             {
-                _changeShiftController.ShouldNewShiftBeCreated(tbInAdminLogin.Text, tbInAdminPassword.Text);
+                ChangeShiftController.ChangeShiftControllerInstance().PasswordChecking(tbInAdminLogin.Text, tbInAdminPassword.Text);
+                MessageBox.Show("Shift accepted successfully!");
+                _formCanBeClosed = true;
+                Close();
             }
         }
         private void bAddNewUser_Click(object sender, EventArgs e)
@@ -54,6 +71,30 @@ namespace Boom_Manager_Project
                 ansu.ShowDialog();
             }
         }
+
+        private void FullFillData()
+        {
+            global_session_t session =
+                ChangeShiftController.ChangeShiftControllerInstance().GetLastOpenedGlobalSession();
+            if (session == null)
+            {
+                tbOutAdminName.Text = "no person";
+                tbOutOperatorName.Text = "no person";
+            }
+            else
+            {
+                tbOutAdminName.Text = DataBaseClass.Instancedb().GetUserInfoByPersonID(session.administrator_id).name;
+                if (session.operator_id == null)
+                {
+                    tbOutOperatorName.Text = "no operator";
+                }
+                else
+                {
+                    tbOutOperatorName.Text = DataBaseClass.Instancedb().GetUserInfoByPersonID(session.operator_id).name;
+                }
+            }
+        }
+
 //        private void CreateNewShift()
 //        {
 //            var db = DataBaseClass.Instancedb();
@@ -128,14 +169,14 @@ namespace Boom_Manager_Project
 
         private void ChangeShift_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_changeShiftController.ToCloseForm())
+            if (_formCanBeClosed)
             {
-                Close();
+                e.Cancel = false;
             }
             else
             {
                 e.Cancel = true;
-                MessageBox.Show(_changeShiftController.WarningMessage("FirstShift"));
+                MessageBox.Show(ChangeShiftController.ChangeShiftControllerInstance().WarningMessage("FirstShift"));
             }
         }
 
@@ -153,6 +194,26 @@ namespace Boom_Manager_Project
             {
                 tbInAdminPassword.Text = "";
             }
+        }
+
+        private void ChangeShift_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void ChangeShift_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void ChangeShift_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
         }
     }
 }

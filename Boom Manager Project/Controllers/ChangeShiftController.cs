@@ -1,19 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
+using Boom_Manager_Project.Models;
+using Boom_Manager_Project.MyClasses;
 
-namespace Boom_Manager_Project
+namespace Boom_Manager_Project.Controllers
 {
     class ChangeShiftController
     {
-        public ChangeShiftController()
+        
+        private static ChangeShiftController _changeShiftController;
+        public static ChangeShiftController ChangeShiftControllerInstance()
         {
-            var changeShiftModel = new ChangeShiftModel();
+            return _changeShiftController ?? (_changeShiftController = new ChangeShiftController());
+        }
+
+        public bool DoesTheLastGlobalSesionIsOpened()
+        {
+            if (GetLastOpenedGlobalSession() != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public string WarningMessage(string type)
@@ -34,7 +43,7 @@ namespace Boom_Manager_Project
             return "";
         }
 
-        public void ShouldNewShiftBeCreated(string login, string password)
+        public void PasswordChecking(string login, string password)
         {
             if (CheckPassword(login, password))
             {
@@ -48,8 +57,7 @@ namespace Boom_Manager_Project
 
         private bool CheckPassword(string login, string password)
         {
-            var db = new DataBaseClass();
-            personal_info_t adminLogin = db.GetUserInfoByLogin(login);
+            personal_info_t adminLogin = DataBaseClass.Instancedb().GetUserInfoByLogin(login);
             if (adminLogin != null)
             {
                 if (adminLogin.staff_password == password)
@@ -59,30 +67,53 @@ namespace Boom_Manager_Project
             }
             return false;
         }
+
         private void CreateNewShift(string login)
         {
-            var db = DataBaseClass.Instancedb();
 
-            var adminInfo = db.GetUserInfoByLogin(login);
+            var adminInfo = DataBaseClass.Instancedb().GetUserInfoByLogin(login);
 
-            var lastOpenedSession = db.GetOpenedGlobalSession();
+            var lastOpenedSession = DataBaseClass.Instancedb().GetOpenedGlobalSession();
+            var operatorInfo = new personal_info_t();
+            List<DaySessionClass> openedSessions = new List<DaySessionClass>();
             if (lastOpenedSession != null)
             {
-                MessageBox.Show(WarningMessage("CloseOldSession"),
-                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                operatorInfo = DataBaseClass.Instancedb().GetUserInfoByPersonID(lastOpenedSession.operator_id);
+                openedSessions = DataBaseClass.Instancedb().GetOpenedDaySessions(lastOpenedSession.daily_id,
+                    DataBaseClass.Instancedb().GetListOfAllClientsPerSessionT());
             }
-            else
+           
+            DataBaseClass.Instancedb().CloseLastOpenedGlobalSession();
+            if (adminInfo != null && operatorInfo != null)
             {
-                if (adminInfo != null)
+                DataBaseClass.Instancedb()
+                    .AddNewGlobalSession(adminInfo.person_id, operatorInfo.person_id, DateTime.Now);
+            }
+            else if (adminInfo != null)
+            {
+                DataBaseClass.Instancedb().AddNewGlobalSession(adminInfo.person_id, "no operator", DateTime.Now);
+            }
+            if (openedSessions != null && openedSessions.Count > 0)
+            {
+                foreach (DaySessionClass t in openedSessions)
                 {
-                    db.AddNewGlobalSession(adminInfo.person_id, "no operator", DateTime.Now);
+                    DataBaseClass.Instancedb().TransferOpenedSessionToNextGlobalSession(t.SessionId);
                 }
             }
+
+//                MessageBox.Show(WarningMessage("CloseOldSession"),
+//                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
+
         public bool ToCloseForm()
         {
-            var cs = new ChangeShiftModel();
-            return cs.ToCloseForm();
+           return ChangeShiftModel.ChangeShiftModelInstance().ToCloseForm();
+        }
+
+        public global_session_t GetLastOpenedGlobalSession()
+        {
+            return DataBaseClass.Instancedb().GetOpenedGlobalSession();
         }
     }
 }

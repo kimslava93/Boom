@@ -227,16 +227,6 @@ namespace Boom_Manager_Project.Models
                     DataBaseClass.Instancedb().UpdatePlaystationState(playstationId, "free");
                     MessageBox.Show("Cannot insert clients in clients_per_session table!");
                 }
-
-                //                            var allTablesList = (from i in _db.GetTable<tables_t>()
-                //                                                 orderby i.playstation_id.Length ascending, i.playstation_id ascending
-                //                                                 select i.playstation_id).ToList();
-                //
-                //                            int index = allTablesList.IndexOf(table_numComboBox.Text);
-                //                            if (!_endpoints[index].ON())
-                //                            {
-                //                                throw new Exception("NO CONNECTION!!");
-                //                            }//Sending singnal to board
             }
         }
     }

@@ -9,6 +9,7 @@ namespace Boom_Manager_Project
 {
     public partial class CloseSessionForm : Form
     {
+        private Point? _old;
         private readonly DaySessionClass _sessionToClose;
         private int _dailyId;
         private List<clients_per_session_t> _clientsPerSession; 
@@ -60,6 +61,26 @@ namespace Boom_Manager_Project
             {
                 MessageBox.Show("Input full and understandable reason,\nwhy you want to switch off console before time expires! ", "Warning!");
             }
+        }
+
+        private void CloseSessionForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            _old = Cursor.Position;
+        }
+
+        private void CloseSessionForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_old.HasValue && _old.Value != Cursor.Position)
+            {
+                Left += Cursor.Position.X - _old.Value.X;
+                Top += Cursor.Position.Y - _old.Value.Y;
+                _old = Cursor.Position;
+            }
+        }
+
+        private void CloseSessionForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            _old = null;
         }
     }
 }

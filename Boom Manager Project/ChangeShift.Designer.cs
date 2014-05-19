@@ -47,22 +47,40 @@
             // 
             // bAcceptShift
             // 
+            this.bAcceptShift.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAcceptShift.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bAcceptShift.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAcceptShift.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAcceptShift.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bAcceptShift.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAcceptShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bAcceptShift.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAcceptShift.ForeColor = System.Drawing.Color.White;
             this.bAcceptShift.Location = new System.Drawing.Point(323, 248);
             this.bAcceptShift.Name = "bAcceptShift";
             this.bAcceptShift.Size = new System.Drawing.Size(78, 32);
             this.bAcceptShift.TabIndex = 0;
             this.bAcceptShift.Text = "Accept shift";
-            this.bAcceptShift.UseVisualStyleBackColor = true;
+            this.bAcceptShift.UseVisualStyleBackColor = false;
             this.bAcceptShift.Click += new System.EventHandler(this.bAcceptShift_Click);
             // 
             // bCancel
             // 
+            this.bCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bCancel.ForeColor = System.Drawing.Color.White;
             this.bCancel.Location = new System.Drawing.Point(53, 248);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(86, 32);
             this.bCancel.TabIndex = 1;
             this.bCancel.Text = "Cancel";
-            this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // lWarning
@@ -83,6 +101,7 @@
             this.gbOutcomingShift.Controls.Add(this.lOutgoingAdministrator);
             this.gbOutcomingShift.Controls.Add(this.tbOutOperatorName);
             this.gbOutcomingShift.Controls.Add(this.tbOutAdminName);
+            this.gbOutcomingShift.ForeColor = System.Drawing.Color.White;
             this.gbOutcomingShift.Location = new System.Drawing.Point(12, 75);
             this.gbOutcomingShift.Name = "gbOutcomingShift";
             this.gbOutcomingShift.Size = new System.Drawing.Size(185, 164);
@@ -94,6 +113,7 @@
             // 
             this.lOutgoingOperator.AutoSize = true;
             this.lOutgoingOperator.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lOutgoingOperator.ForeColor = System.Drawing.Color.White;
             this.lOutgoingOperator.Location = new System.Drawing.Point(12, 95);
             this.lOutgoingOperator.Name = "lOutgoingOperator";
             this.lOutgoingOperator.Size = new System.Drawing.Size(73, 21);
@@ -104,6 +124,7 @@
             // 
             this.lOutgoingAdministrator.AutoSize = true;
             this.lOutgoingAdministrator.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lOutgoingAdministrator.ForeColor = System.Drawing.Color.White;
             this.lOutgoingAdministrator.Location = new System.Drawing.Point(12, 32);
             this.lOutgoingAdministrator.Name = "lOutgoingAdministrator";
             this.lOutgoingAdministrator.Size = new System.Drawing.Size(106, 21);
@@ -112,7 +133,10 @@
             // 
             // tbOutOperatorName
             // 
+            this.tbOutOperatorName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbOutOperatorName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbOutOperatorName.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbOutOperatorName.ForeColor = System.Drawing.Color.White;
             this.tbOutOperatorName.Location = new System.Drawing.Point(16, 119);
             this.tbOutOperatorName.Name = "tbOutOperatorName";
             this.tbOutOperatorName.ReadOnly = true;
@@ -122,7 +146,10 @@
             // 
             // tbOutAdminName
             // 
+            this.tbOutAdminName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbOutAdminName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbOutAdminName.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbOutAdminName.ForeColor = System.Drawing.Color.White;
             this.tbOutAdminName.Location = new System.Drawing.Point(16, 56);
             this.tbOutAdminName.Name = "tbOutAdminName";
             this.tbOutAdminName.ReadOnly = true;
@@ -135,6 +162,7 @@
             this.groupBox1.Controls.Add(this.tbInAdminPassword);
             this.groupBox1.Controls.Add(this.lIncomingAdministrator);
             this.groupBox1.Controls.Add(this.tbInAdminLogin);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(263, 75);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(185, 164);
@@ -144,7 +172,10 @@
             // 
             // tbInAdminPassword
             // 
+            this.tbInAdminPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbInAdminPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbInAdminPassword.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbInAdminPassword.ForeColor = System.Drawing.Color.White;
             this.tbInAdminPassword.Location = new System.Drawing.Point(10, 92);
             this.tbInAdminPassword.MaxLength = 30;
             this.tbInAdminPassword.Name = "tbInAdminPassword";
@@ -160,6 +191,7 @@
             // 
             this.lIncomingAdministrator.AutoSize = true;
             this.lIncomingAdministrator.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lIncomingAdministrator.ForeColor = System.Drawing.Color.White;
             this.lIncomingAdministrator.Location = new System.Drawing.Point(6, 32);
             this.lIncomingAdministrator.Name = "lIncomingAdministrator";
             this.lIncomingAdministrator.Size = new System.Drawing.Size(106, 21);
@@ -168,7 +200,10 @@
             // 
             // tbInAdminLogin
             // 
+            this.tbInAdminLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbInAdminLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbInAdminLogin.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbInAdminLogin.ForeColor = System.Drawing.Color.White;
             this.tbInAdminLogin.Location = new System.Drawing.Point(10, 56);
             this.tbInAdminLogin.Name = "tbInAdminLogin";
             this.tbInAdminLogin.ShortcutsEnabled = false;
@@ -179,18 +214,28 @@
             // 
             // bAddNewUser
             // 
+            this.bAddNewUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddNewUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bAddNewUser.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddNewUser.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddNewUser.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bAddNewUser.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddNewUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bAddNewUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAddNewUser.ForeColor = System.Drawing.Color.White;
             this.bAddNewUser.Location = new System.Drawing.Point(403, 51);
             this.bAddNewUser.Name = "bAddNewUser";
             this.bAddNewUser.Size = new System.Drawing.Size(45, 31);
             this.bAddNewUser.TabIndex = 16;
             this.bAddNewUser.Text = "+";
-            this.bAddNewUser.UseVisualStyleBackColor = true;
+            this.bAddNewUser.UseVisualStyleBackColor = false;
             this.bAddNewUser.Click += new System.EventHandler(this.bAddNewUser_Click);
             // 
             // ChangeShift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(463, 292);
             this.ControlBox = false;
@@ -211,6 +256,9 @@
             this.Text = "Change shift";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChangeShift_FormClosing);
             this.Load += new System.EventHandler(this.ChangeShift_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChangeShift_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ChangeShift_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ChangeShift_MouseUp);
             this.gbOutcomingShift.ResumeLayout(false);
             this.gbOutcomingShift.PerformLayout();
             this.groupBox1.ResumeLayout(false);
