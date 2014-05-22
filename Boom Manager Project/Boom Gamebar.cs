@@ -4,25 +4,21 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
-using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 using LINQ_test.Driver;
-using System.Media;
 
 namespace Boom_Manager_Project
 {
     public partial class BoomMainForm : Form
     {
+        private bool EXIT = false;
         private DateTime _curDateTime;
         private List<DaySessionClass> _currentOpenedSessionsList;//for controlling update dgv
 
         public BoomMainForm()
         {
             InitializeComponent();
-            
             UDPDriver.Instance.Init();
-//            dgvOpenedSessions.BackgroundImage = Properties.Resources.background1;
-            
         }
 
         private void BoomMainForm_Load(object sender, EventArgs e)
@@ -41,12 +37,22 @@ namespace Boom_Manager_Project
 
         private void BoomMainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Restart();
+            if (!EXIT)
+            {
+                Application.Restart();
+            }
         }
 
         private void BoomMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
+            if (!EXIT)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -78,7 +84,21 @@ namespace Boom_Manager_Project
         }
         private void bSlideMenu_Click(object sender, EventArgs e)
         {
-            splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
+            if (splitContainer.Panel2Collapsed)
+            {
+                if (BoomGamebarController.InstanceBgController().AskManagerPassword())
+                {
+                    splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
+                }
+                else
+                {
+                    MessageBox.Show("Access denied!");
+                }
+            }
+            else
+            {
+                splitContainer.Panel2Collapsed = true;
+            }
         }
 
         private void bAddNewSession_Click(object sender, EventArgs e)
@@ -219,6 +239,27 @@ namespace Boom_Manager_Project
         private void bCloseSession_MouseLeave(object sender, EventArgs e)
         {
             bCloseSession.FlatAppearance.BorderColor = Color.FromArgb(81, 91, 103);
+        }
+
+        private void bExitProgram_Click(object sender, EventArgs e)
+        {
+            if(BoomGamebarController.InstanceBgController().AskManagerPassword())
+            {
+                EXIT = true;
+                Close();
+            }
+        }
+
+        private void bWithdrawMoney_Click(object sender, EventArgs e)
+        {
+            var wm = new WithdrawMoney();
+            wm.ShowDialog();
+        }
+
+        private void bClientManager_Click(object sender, EventArgs e)
+        {
+            var cm = new ClientManager("create");
+            cm.ShowDialog();
         }
     }
 }

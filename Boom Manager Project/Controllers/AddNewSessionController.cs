@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.Models;
@@ -178,10 +180,22 @@ namespace Boom_Manager_Project.Controllers
         }
         public void AddNewDaySession(string playstationId, string clientId, TimeSpan timeToPlay, double paidSum, DateTime curTime)
         {
-            AddNewSessionModel.InstanceAddNewSessionModel().AddNewDaySession(playstationId, clientId, timeToPlay, paidSum, curTime);
+            if (EndPointsControl.EndPointsControlInstance().SwitchOn(playstationId))
+            {
+                AddNewSessionModel.InstanceAddNewSessionModel()
+                    .AddNewDaySession(playstationId, clientId, timeToPlay, paidSum, curTime);
+            }
         }
+        private IEnumerable<string> DiscountSplitter(string textToSplitBySemiColumn)
+        {
+            List<string> result = Regex.Split(textToSplitBySemiColumn, "; ").ToList();
+            return result;
+        }
+        public void ChooseClientAndAddMoneyOnCard(string clients)
+        {
+            var allClients = (List<string>) DiscountSplitter(clients);
 
-        
+        }
     }
 
 }

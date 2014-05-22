@@ -21,5 +21,10 @@ namespace Boom_Manager_Project.Controllers
         {
             return DataBaseClass.Instancedb().GetAllEndPointsIndexes(deviceId);
         }
+
+        public void DeleteDevice(int deviceID)
+        {
+            DataBaseClass.Instancedb().DeleteDevice(deviceID);
+        }
     }
 }

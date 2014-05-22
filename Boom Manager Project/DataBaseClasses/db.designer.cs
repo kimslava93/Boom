@@ -69,6 +69,12 @@ namespace Boom_Manager_Project.DataBaseClasses
     partial void Insertglobal_session_t(global_session_t instance);
     partial void Updateglobal_session_t(global_session_t instance);
     partial void Deleteglobal_session_t(global_session_t instance);
+    partial void Insertexpenses_t(expenses_t instance);
+    partial void Updateexpenses_t(expenses_t instance);
+    partial void Deleteexpenses_t(expenses_t instance);
+    partial void Insertwithdrow_money_t(withdrow_money_t instance);
+    partial void Updatewithdrow_money_t(withdrow_money_t instance);
+    partial void Deletewithdrow_money_t(withdrow_money_t instance);
     partial void Insertdevices_t(devices_t instance);
     partial void Updatedevices_t(devices_t instance);
     partial void Deletedevices_t(devices_t instance);
@@ -216,6 +222,22 @@ namespace Boom_Manager_Project.DataBaseClasses
 			get
 			{
 				return this.GetTable<global_session_t>();
+			}
+		}
+		
+		public System.Data.Linq.Table<expenses_t> expenses_ts
+		{
+			get
+			{
+				return this.GetTable<expenses_t>();
+			}
+		}
+		
+		public System.Data.Linq.Table<withdrow_money_t> withdrow_money_ts
+		{
+			get
+			{
+				return this.GetTable<withdrow_money_t>();
 			}
 		}
 		
@@ -2156,6 +2178,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private EntitySet<global_session_t> _global_session_ts;
 		
+		private EntitySet<withdrow_money_t> _withdrow_money_ts;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2187,6 +2211,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 		public personal_info_t()
 		{
 			this._global_session_ts = new EntitySet<global_session_t>(new Action<global_session_t>(this.attach_global_session_ts), new Action<global_session_t>(this.detach_global_session_ts));
+			this._withdrow_money_ts = new EntitySet<withdrow_money_t>(new Action<withdrow_money_t>(this.attach_withdrow_money_ts), new Action<withdrow_money_t>(this.detach_withdrow_money_ts));
 			OnCreated();
 		}
 		
@@ -2423,6 +2448,19 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="personal_info_t_withdrow_money_t", Storage="_withdrow_money_ts", ThisKey="person_id", OtherKey="manager")]
+		public EntitySet<withdrow_money_t> withdrow_money_ts
+		{
+			get
+			{
+				return this._withdrow_money_ts;
+			}
+			set
+			{
+				this._withdrow_money_ts.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2450,6 +2488,18 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 		
 		private void detach_global_session_ts(global_session_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.personal_info_t = null;
+		}
+		
+		private void attach_withdrow_money_ts(withdrow_money_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.personal_info_t = this;
+		}
+		
+		private void detach_withdrow_money_ts(withdrow_money_t entity)
 		{
 			this.SendPropertyChanging();
 			entity.personal_info_t = null;
@@ -3325,6 +3375,10 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private EntitySet<sold_bar_history_table> _sold_bar_history_tables;
 		
+		private EntitySet<expenses_t> _expenses_ts;
+		
+		private EntitySet<withdrow_money_t> _withdrow_money_ts;
+		
 		private EntityRef<personal_info_t> _personal_info_t;
 		
     #region Extensibility Method Definitions
@@ -3347,6 +3401,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		{
 			this._days_sessions_ts = new EntitySet<days_sessions_t>(new Action<days_sessions_t>(this.attach_days_sessions_ts), new Action<days_sessions_t>(this.detach_days_sessions_ts));
 			this._sold_bar_history_tables = new EntitySet<sold_bar_history_table>(new Action<sold_bar_history_table>(this.attach_sold_bar_history_tables), new Action<sold_bar_history_table>(this.detach_sold_bar_history_tables));
+			this._expenses_ts = new EntitySet<expenses_t>(new Action<expenses_t>(this.attach_expenses_ts), new Action<expenses_t>(this.detach_expenses_ts));
+			this._withdrow_money_ts = new EntitySet<withdrow_money_t>(new Action<withdrow_money_t>(this.attach_withdrow_money_ts), new Action<withdrow_money_t>(this.detach_withdrow_money_ts));
 			this._personal_info_t = default(EntityRef<personal_info_t>);
 			OnCreated();
 		}
@@ -3481,6 +3537,32 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_expenses_t", Storage="_expenses_ts", ThisKey="daily_id", OtherKey="daily_id")]
+		public EntitySet<expenses_t> expenses_ts
+		{
+			get
+			{
+				return this._expenses_ts;
+			}
+			set
+			{
+				this._expenses_ts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_withdrow_money_t", Storage="_withdrow_money_ts", ThisKey="daily_id", OtherKey="daily_id")]
+		public EntitySet<withdrow_money_t> withdrow_money_ts
+		{
+			get
+			{
+				return this._withdrow_money_ts;
+			}
+			set
+			{
+				this._withdrow_money_ts.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="personal_info_t_global_session_t", Storage="_personal_info_t", ThisKey="administrator_id", OtherKey="person_id", IsForeignKey=true)]
 		public personal_info_t personal_info_t
 		{
@@ -3557,6 +3639,469 @@ namespace Boom_Manager_Project.DataBaseClasses
 		{
 			this.SendPropertyChanging();
 			entity.global_session_t = null;
+		}
+		
+		private void attach_expenses_ts(expenses_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = this;
+		}
+		
+		private void detach_expenses_ts(expenses_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = null;
+		}
+		
+		private void attach_withdrow_money_ts(withdrow_money_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = this;
+		}
+		
+		private void detach_withdrow_money_ts(withdrow_money_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.expenses_t")]
+	public partial class expenses_t : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _expense_id;
+		
+		private System.Nullable<int> _daily_id;
+		
+		private double _cash_amount;
+		
+		private System.DateTime _expenses_time;
+		
+		private string _comments;
+		
+		private EntityRef<global_session_t> _global_session_t;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onexpense_idChanging(int value);
+    partial void Onexpense_idChanged();
+    partial void Ondaily_idChanging(System.Nullable<int> value);
+    partial void Ondaily_idChanged();
+    partial void Oncash_amountChanging(double value);
+    partial void Oncash_amountChanged();
+    partial void Onexpenses_timeChanging(System.DateTime value);
+    partial void Onexpenses_timeChanged();
+    partial void OncommentsChanging(string value);
+    partial void OncommentsChanged();
+    #endregion
+		
+		public expenses_t()
+		{
+			this._global_session_t = default(EntityRef<global_session_t>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_expense_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int expense_id
+		{
+			get
+			{
+				return this._expense_id;
+			}
+			set
+			{
+				if ((this._expense_id != value))
+				{
+					this.Onexpense_idChanging(value);
+					this.SendPropertyChanging();
+					this._expense_id = value;
+					this.SendPropertyChanged("expense_id");
+					this.Onexpense_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_daily_id", DbType="Int")]
+		public System.Nullable<int> daily_id
+		{
+			get
+			{
+				return this._daily_id;
+			}
+			set
+			{
+				if ((this._daily_id != value))
+				{
+					if (this._global_session_t.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondaily_idChanging(value);
+					this.SendPropertyChanging();
+					this._daily_id = value;
+					this.SendPropertyChanged("daily_id");
+					this.Ondaily_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cash_amount", DbType="Float NOT NULL")]
+		public double cash_amount
+		{
+			get
+			{
+				return this._cash_amount;
+			}
+			set
+			{
+				if ((this._cash_amount != value))
+				{
+					this.Oncash_amountChanging(value);
+					this.SendPropertyChanging();
+					this._cash_amount = value;
+					this.SendPropertyChanged("cash_amount");
+					this.Oncash_amountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_expenses_time", DbType="DateTime NOT NULL")]
+		public System.DateTime expenses_time
+		{
+			get
+			{
+				return this._expenses_time;
+			}
+			set
+			{
+				if ((this._expenses_time != value))
+				{
+					this.Onexpenses_timeChanging(value);
+					this.SendPropertyChanging();
+					this._expenses_time = value;
+					this.SendPropertyChanged("expenses_time");
+					this.Onexpenses_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comments", DbType="VarChar(500)")]
+		public string comments
+		{
+			get
+			{
+				return this._comments;
+			}
+			set
+			{
+				if ((this._comments != value))
+				{
+					this.OncommentsChanging(value);
+					this.SendPropertyChanging();
+					this._comments = value;
+					this.SendPropertyChanged("comments");
+					this.OncommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_expenses_t", Storage="_global_session_t", ThisKey="daily_id", OtherKey="daily_id", IsForeignKey=true)]
+		public global_session_t global_session_t
+		{
+			get
+			{
+				return this._global_session_t.Entity;
+			}
+			set
+			{
+				global_session_t previousValue = this._global_session_t.Entity;
+				if (((previousValue != value) 
+							|| (this._global_session_t.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._global_session_t.Entity = null;
+						previousValue.expenses_ts.Remove(this);
+					}
+					this._global_session_t.Entity = value;
+					if ((value != null))
+					{
+						value.expenses_ts.Add(this);
+						this._daily_id = value.daily_id;
+					}
+					else
+					{
+						this._daily_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("global_session_t");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.withdrow_money_t")]
+	public partial class withdrow_money_t : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Nullable<int> _daily_id;
+		
+		private System.DateTime _transaction_time;
+		
+		private System.Nullable<double> _cash_amount;
+		
+		private string _manager;
+		
+		private int _withdrow_money_id;
+		
+		private EntityRef<global_session_t> _global_session_t;
+		
+		private EntityRef<personal_info_t> _personal_info_t;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Ondaily_idChanging(System.Nullable<int> value);
+    partial void Ondaily_idChanged();
+    partial void Ontransaction_timeChanging(System.DateTime value);
+    partial void Ontransaction_timeChanged();
+    partial void Oncash_amountChanging(System.Nullable<double> value);
+    partial void Oncash_amountChanged();
+    partial void OnmanagerChanging(string value);
+    partial void OnmanagerChanged();
+    partial void Onwithdrow_money_idChanging(int value);
+    partial void Onwithdrow_money_idChanged();
+    #endregion
+		
+		public withdrow_money_t()
+		{
+			this._global_session_t = default(EntityRef<global_session_t>);
+			this._personal_info_t = default(EntityRef<personal_info_t>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_daily_id", DbType="Int")]
+		public System.Nullable<int> daily_id
+		{
+			get
+			{
+				return this._daily_id;
+			}
+			set
+			{
+				if ((this._daily_id != value))
+				{
+					if (this._global_session_t.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondaily_idChanging(value);
+					this.SendPropertyChanging();
+					this._daily_id = value;
+					this.SendPropertyChanged("daily_id");
+					this.Ondaily_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_transaction_time", DbType="DateTime NOT NULL")]
+		public System.DateTime transaction_time
+		{
+			get
+			{
+				return this._transaction_time;
+			}
+			set
+			{
+				if ((this._transaction_time != value))
+				{
+					this.Ontransaction_timeChanging(value);
+					this.SendPropertyChanging();
+					this._transaction_time = value;
+					this.SendPropertyChanged("transaction_time");
+					this.Ontransaction_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cash_amount", DbType="Float")]
+		public System.Nullable<double> cash_amount
+		{
+			get
+			{
+				return this._cash_amount;
+			}
+			set
+			{
+				if ((this._cash_amount != value))
+				{
+					this.Oncash_amountChanging(value);
+					this.SendPropertyChanging();
+					this._cash_amount = value;
+					this.SendPropertyChanged("cash_amount");
+					this.Oncash_amountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_manager", DbType="VarChar(10)")]
+		public string manager
+		{
+			get
+			{
+				return this._manager;
+			}
+			set
+			{
+				if ((this._manager != value))
+				{
+					if (this._personal_info_t.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnmanagerChanging(value);
+					this.SendPropertyChanging();
+					this._manager = value;
+					this.SendPropertyChanged("manager");
+					this.OnmanagerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_withdrow_money_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int withdrow_money_id
+		{
+			get
+			{
+				return this._withdrow_money_id;
+			}
+			set
+			{
+				if ((this._withdrow_money_id != value))
+				{
+					this.Onwithdrow_money_idChanging(value);
+					this.SendPropertyChanging();
+					this._withdrow_money_id = value;
+					this.SendPropertyChanged("withdrow_money_id");
+					this.Onwithdrow_money_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_withdrow_money_t", Storage="_global_session_t", ThisKey="daily_id", OtherKey="daily_id", IsForeignKey=true)]
+		public global_session_t global_session_t
+		{
+			get
+			{
+				return this._global_session_t.Entity;
+			}
+			set
+			{
+				global_session_t previousValue = this._global_session_t.Entity;
+				if (((previousValue != value) 
+							|| (this._global_session_t.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._global_session_t.Entity = null;
+						previousValue.withdrow_money_ts.Remove(this);
+					}
+					this._global_session_t.Entity = value;
+					if ((value != null))
+					{
+						value.withdrow_money_ts.Add(this);
+						this._daily_id = value.daily_id;
+					}
+					else
+					{
+						this._daily_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("global_session_t");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="personal_info_t_withdrow_money_t", Storage="_personal_info_t", ThisKey="manager", OtherKey="person_id", IsForeignKey=true)]
+		public personal_info_t personal_info_t
+		{
+			get
+			{
+				return this._personal_info_t.Entity;
+			}
+			set
+			{
+				personal_info_t previousValue = this._personal_info_t.Entity;
+				if (((previousValue != value) 
+							|| (this._personal_info_t.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._personal_info_t.Entity = null;
+						previousValue.withdrow_money_ts.Remove(this);
+					}
+					this._personal_info_t.Entity = value;
+					if ((value != null))
+					{
+						value.withdrow_money_ts.Add(this);
+						this._manager = value.person_id;
+					}
+					else
+					{
+						this._manager = default(string);
+					}
+					this.SendPropertyChanged("personal_info_t");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -3682,6 +4227,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private int _endpoint_id;
 		
+		private int _endpoint_index;
+		
 		private System.Nullable<int> _device_id;
 		
 		private string _playstation_id;
@@ -3696,6 +4243,8 @@ namespace Boom_Manager_Project.DataBaseClasses
     partial void OnCreated();
     partial void Onendpoint_idChanging(int value);
     partial void Onendpoint_idChanged();
+    partial void Onendpoint_indexChanging(int value);
+    partial void Onendpoint_indexChanged();
     partial void Ondevice_idChanging(System.Nullable<int> value);
     partial void Ondevice_idChanged();
     partial void Onplaystation_idChanging(string value);
@@ -3709,7 +4258,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endpoint_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endpoint_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int endpoint_id
 		{
 			get
@@ -3725,6 +4274,26 @@ namespace Boom_Manager_Project.DataBaseClasses
 					this._endpoint_id = value;
 					this.SendPropertyChanged("endpoint_id");
 					this.Onendpoint_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_endpoint_index", DbType="Int NOT NULL")]
+		public int endpoint_index
+		{
+			get
+			{
+				return this._endpoint_index;
+			}
+			set
+			{
+				if ((this._endpoint_index != value))
+				{
+					this.Onendpoint_indexChanging(value);
+					this.SendPropertyChanging();
+					this._endpoint_index = value;
+					this.SendPropertyChanged("endpoint_index");
+					this.Onendpoint_indexChanged();
 				}
 			}
 		}
@@ -3753,7 +4322,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_playstation_id", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_playstation_id", DbType="VarChar(10)")]
 		public string playstation_id
 		{
 			get

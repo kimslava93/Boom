@@ -87,7 +87,7 @@
             this.bCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
             this.bCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
             this.bCancel.Location = new System.Drawing.Point(232, 334);
             this.bCancel.Name = "bCancel";
@@ -224,6 +224,7 @@
             this.bAddMoneyToClient.TabIndex = 9;
             this.bAddMoneyToClient.Text = "+";
             this.bAddMoneyToClient.UseVisualStyleBackColor = true;
+            this.bAddMoneyToClient.Click += new System.EventHandler(this.bAddMoneyToClient_Click);
             // 
             // numUpDMinutesRemainedOnCard
             // 
@@ -372,7 +373,7 @@
             this.bAddSession.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
             this.bAddSession.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bAddSession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bAddSession.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAddSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddSession.ForeColor = System.Drawing.Color.White;
             this.bAddSession.Location = new System.Drawing.Point(12, 334);
             this.bAddSession.Name = "bAddSession";
@@ -424,7 +425,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(345, 383);
+            this.ClientSize = new System.Drawing.Size(340, 383);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);

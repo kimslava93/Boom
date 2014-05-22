@@ -29,6 +29,17 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return userInfo;
             }
         }
+        public personal_info_t GetUserInfoByName(string name)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                personal_info_t userInfo = (from a in db.GetTable<personal_info_t>()
+                                            where a.name == name
+                                            select a).SingleOrDefault();
+                return userInfo;
+            }
+        }
         public personal_info_t GetUserInfoByPersonID(string personId)
         {
             var db = new dbDataContext();
@@ -148,6 +159,16 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        public List<device_endpoints_t> GetAllEndPoints()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from ep in db.GetTable<device_endpoints_t>()
+                    select ep).ToList();
+            }
+        }
+
         public void UpdatePricesForTimeZone(List<string> playstationsToChange, string timeZoneName, int newPrice)
         {
             var db = new dbDataContext();
@@ -170,6 +191,35 @@ namespace Boom_Manager_Project.DataBaseClasses
                         MessageBox.Show(ex.ToString());
                     }
                 }
+            }
+        }
+        public void UpdateClientInfo(client_info_t cInfo)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var matchedRecord = (from c in db.GetTable<client_info_t>()
+                    where c.client_id == cInfo.client_id
+                    select c).SingleOrDefault();
+                if (matchedRecord != null)
+                {
+                    matchedRecord.name = cInfo.name;
+                    matchedRecord.birthday = cInfo.birthday;
+                    matchedRecord.email = cInfo.email;
+                    matchedRecord.phone = cInfo.phone;
+                }
+                db.SubmitChanges();
+            }
+        }
+        public List<string> GetAllStaffNamesByPositionList(string position)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var allStaff = (from s in db.GetTable<personal_info_t>()
+                    where s.position == position
+                    select s.name).ToList();
+                return allStaff;
             }
         }
 
@@ -324,12 +374,53 @@ namespace Boom_Manager_Project.DataBaseClasses
                     device_id = deviceId, 
                     ip_address = ipAddress
                 };
-                devicesTable.InsertOnSubmit(device);
+                devicesTable.InsertOnSubmit(device); 
+                db.SubmitChanges();
+//                List<string> allConsoles = GetAllTables().Select(t => t.playstation_id).ToList();
+
+                for(int i = 1;i<=16;i++)
+                {
+                    InsertNewEndPoint(deviceId, i);
+                }
+               
+            }
+        }
+
+        public void InsertNewEndPoint(int deviceId, int index)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<device_endpoints_t> deviceEndpointsTs = db.GetTable<device_endpoints_t>();
+                var endpoint = new device_endpoints_t()
+                {
+                    device_id = deviceId,
+                    endpoint_index = index
+//                    playstation_id = playstationId
+                };
+                deviceEndpointsTs.InsertOnSubmit(endpoint);
                 db.SubmitChanges();
             }
         }
 
-        public void AddNewUser(personal_info_t userInfo)
+        public void ChangeEndPointConsoleId(int endpointId, string changePlaystation, int deviceId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var matched = (from ep in db.GetTable<device_endpoints_t>()
+                    where ep.endpoint_index == endpointId
+                    where ep.device_id == deviceId
+                    select ep).SingleOrDefault();
+                if (matched != null)
+                {
+                    matched.playstation_id = changePlaystation ?? null;
+                    
+                    db.SubmitChanges();
+                }
+            }
+        }
+        public void AddNewStaffUser(personal_info_t userInfo)
         {
             var db = new dbDataContext();
             lock (db)
@@ -338,6 +429,37 @@ namespace Boom_Manager_Project.DataBaseClasses
                 personal_info_t user = userInfo;
 
                 personalInfoTable.InsertOnSubmit(user);
+                db.SubmitChanges();
+            }
+        }
+
+        public void AddNewClient(client_info_t clientInfo)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<client_info_t> personalInfoTable = db.GetTable<client_info_t>();
+                client_info_t user = clientInfo;
+
+                personalInfoTable.InsertOnSubmit(user);
+                db.SubmitChanges();
+                AddNewSaVingsForClient(user.client_id);
+            }
+        }
+
+        private void AddNewSaVingsForClient(string clientId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<account_savings_t> personalInfoTable = db.GetTable<account_savings_t>();
+                var savings = new account_savings_t()
+                {
+                    client_id = clientId,
+                    savings = 0
+                };
+
+                personalInfoTable.InsertOnSubmit(savings);
                 db.SubmitChanges();
             }
         }
@@ -556,6 +678,39 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        public void DeleteDevice(int deviceId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var matchedResult = (from d in db.GetTable<devices_t>()
+                    where d.device_id == deviceId
+                    select d).SingleOrDefault();
+                if (matchedResult != null)
+                {
+                    Table<devices_t> devicesTable = db.GetTable<devices_t>();
+                    devicesTable.DeleteOnSubmit(matchedResult);
+                    DeleteAllEndPointsOfDevice(deviceId);
+                    db.SubmitChanges();
+                    
+                }
+            }
+        }
+        public void DeleteAllEndPointsOfDevice(int deviceId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var matchedResult = (from d in db.GetTable<device_endpoints_t>()
+                    where d.device_id == deviceId
+                    select d);
+                {
+                    Table<device_endpoints_t> devicesTable = db.GetTable<device_endpoints_t>();
+                    devicesTable.DeleteAllOnSubmit(matchedResult);
+                    db.SubmitChanges();
+                }
+            }
+        }
         public List<DevicesEndPointsMyClass> GetAllEndPointsIndexes(int deviceId)
         {
             var db = new dbDataContext();
@@ -566,7 +721,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     orderby i.endpoint_id ascending
                     select new DevicesEndPointsMyClass
                     {
-                        EndPointIndex = i.endpoint_id,
+                        EndPointIndex = i.endpoint_index,
                         PlayStationId = i.playstation_id
                     }).ToList();
             }
@@ -660,13 +815,41 @@ namespace Boom_Manager_Project.DataBaseClasses
                 var deleteTimezonePrices = (from tp in db.GetTable<playstation_timezone>()
                     where tp.playstation_id.Equals(consoleId)
                     select tp);
-                if (consoleToDelete != null && deleteTimezonePrices != null)
+                var deleteEndPoints = (from ep in db.GetTable<device_endpoints_t>()
+                    where ep.playstation_id == consoleId
+                    select ep);
+                var sessionsToDelete = (from s in db.GetTable<days_sessions_t>()
+                    where s.playstation_id == consoleId
+                    select s);
+                if (sessionsToDelete != null)
                 {
+                    Table<clients_per_session_t> cps = db.GetTable<clients_per_session_t>();
+                    foreach (var daysSessionsT in sessionsToDelete)
+                    {
+                        days_sessions_t t = daysSessionsT;
+                        var clientsPerSessionToDelete = (from cp in db.GetTable<clients_per_session_t>()
+                            where cp.session_id == t.session_id
+                            select cp).SingleOrDefault();
+                        if (clientsPerSessionToDelete != null) cps.DeleteOnSubmit(clientsPerSessionToDelete);
+                        db.SubmitChanges();
+                    }
+                }
+                if (consoleToDelete != null)
+                {
+                    Table<days_sessions_t> daysSessionsTs = db.GetTable<days_sessions_t>();
+                    Table<device_endpoints_t> deviceEndpointsTs = db.GetTable<device_endpoints_t>();
+                    Table<tables_t> tablesTs = db.GetTable<tables_t>();
+
                     foreach (var deleteTimezonePrice in deleteTimezonePrices)
                     {
                         db.playstation_timezones.DeleteOnSubmit(deleteTimezonePrice);
                     }
-                    db.tables_ts.DeleteOnSubmit(consoleToDelete);
+                    daysSessionsTs.DeleteAllOnSubmit(sessionsToDelete);
+                    db.SubmitChanges();
+                    deviceEndpointsTs.DeleteAllOnSubmit(deleteEndPoints);
+                    db.SubmitChanges();
+                   
+                    tablesTs.DeleteOnSubmit(consoleToDelete);
                     db.SubmitChanges();
                 }
             }
@@ -808,8 +991,8 @@ namespace Boom_Manager_Project.DataBaseClasses
                 sessionIdtoDelete.session_state = "closed";
                 sessionIdtoDelete.money_left = dsc.MoneyLeft;
                 List<clients_per_session_t> clientsOnSession = GetListOfClientsPerExactSession(dsc.SessionId);
-                double eachPlayerShouldPay = dsc.PayedSum - dsc.MoneyLeft/clientsOnSession.Count;
-                double playedMoney = sessionIdtoDelete.payed_sum - sessionIdtoDelete.money_left;
+                double playedMoney = dsc.PayedSum - dsc.MoneyLeft;//sessionIdtoDelete.payed_sum - sessionIdtoDelete.money_left;
+                double eachPlayerShouldPay = playedMoney/clientsOnSession.Count;
                 double nextShouldpayAdditional = 0;
                 do
                 {
@@ -823,7 +1006,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                                 playedMoney = playedMoney - (eachPlayerShouldPay + nextShouldpayAdditional);
 //                                moneyOnClientCard.savings = moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional);
                                 ChangeSavingsValueOfClient(moneyOnClientCard.client_id,
-                                    moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional));
+                                    (moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional))*-1);
                                 nextShouldpayAdditional = 0;
                             }
                             else
@@ -894,7 +1077,36 @@ namespace Boom_Manager_Project.DataBaseClasses
                         MessageBox.Show("Cannot substract sum from client card with ID " + clientIdToChangeSavings.client_id);
                     }
                 }
+            }
+        }
 
+        public void InsertWithdrawRecord(double money, string managerName, DateTime withdrawTime)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<withdrow_money_t> withdrawMoneyTable = db.GetTable<withdrow_money_t>();
+                var withdrawMoney = new withdrow_money_t
+                {
+                    daily_id = GetLastOpenedGlobalSessionDailyId(),
+                    manager = GetUserInfoByName(managerName).person_id,
+                    cash_amount = money,
+                    transaction_time = withdrawTime
+                };
+                withdrawMoneyTable.InsertOnSubmit(withdrawMoney);
+                db.SubmitChanges();
+            }
+        }
+
+        public List<double?> GetAllWithdrawnMoneyOnDailyId(int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var allMoney = (from m in db.GetTable<withdrow_money_t>()
+                    where m.daily_id == dailyId
+                    select m.cash_amount).ToList();
+                return allMoney;
             }
         }
 

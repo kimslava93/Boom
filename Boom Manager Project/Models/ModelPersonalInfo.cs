@@ -18,7 +18,7 @@ namespace Boom_Manager_Project.Models
         public void CreateNewUser(personal_info_t newUserInfo)
         {
             var db = new DataBaseClass();
-            db.AddNewUser(newUserInfo);
+            db.AddNewStaffUser(newUserInfo);
         }
     }
 }

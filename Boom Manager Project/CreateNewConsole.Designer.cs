@@ -154,7 +154,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(390, 433);
+            this.ClientSize = new System.Drawing.Size(390, 73);
             this.ControlBox = false;
             this.Controls.Add(this.bCreateTimeZonePriceList);
             this.Controls.Add(this.gbPriceList);

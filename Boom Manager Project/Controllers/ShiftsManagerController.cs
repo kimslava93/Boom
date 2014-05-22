@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
@@ -80,9 +81,12 @@ namespace Boom_Manager_Project.Controllers
                 playedSum += allSessions[row - 1].PayedSum;
                 moneyLeftSum += allSessions[row - 1].MoneyLeft;
             }
-            
+            List<double?> withdrMoney = DataBaseClass.Instancedb().GetAllWithdrawnMoneyOnDailyId(dailyId);
+            double withdrawnMoney = withdrMoney.Where(t1 => t1 != null).Sum(t1 => t1 != null ? t1.Value : 0);
+
             doc.InsertParagraph("Money left(Tips and odd money) = " + moneyLeftSum + " soms");
             doc.InsertParagraph("Played money = " + playedSum + " soms");
+            doc.InsertParagraph("Withdrawn money = " + withdrawnMoney + " soms");
 
             doc.Save();
 

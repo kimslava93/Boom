@@ -191,5 +191,16 @@ namespace Boom_Manager_Project.Controllers
             var cm = new ConsoleManager();
             cm.ShowDialog();
         }
+
+        public bool AskManagerPassword()
+        {
+            var ep = new EnterPassword("MANAGER");
+            ep.ShowDialog();
+            if (ep.Passed)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

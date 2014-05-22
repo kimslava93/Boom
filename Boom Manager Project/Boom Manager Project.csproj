@@ -90,13 +90,20 @@
     <Compile Include="ConsoleManager.Designer.cs">
       <DependentUpon>ConsoleManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AddNewDevice.cs">
+    <Compile Include="AddNewDevice.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controllers\AddNewDevice.Designer.cs">
+    <Compile Include="AddNewDevice.Designer.cs">
       <DependentUpon>AddNewDevice.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AddNewDeviceController.cs" />
+    <Compile Include="ClientManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientManager.Designer.cs">
+      <DependentUpon>ClientManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ClientManagerController.cs" />
     <Compile Include="Controllers\ConsoleManagerController.cs" />
     <Compile Include="Controllers\ChangePlaystationPriceController.cs" />
     <Compile Include="Controllers\AddMoneyOnDiscountCardController.cs" />
@@ -113,13 +120,21 @@
       <DependentUpon>CreateNewConsole.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CreateNewConsoleController.cs" />
-    <Compile Include="DataBaseClasses\DeviceManager.cs">
+    <Compile Include="DeviceManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataBaseClasses\DeviceManager.Designer.cs">
+    <Compile Include="DeviceManager.Designer.cs">
       <DependentUpon>DeviceManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\DeviceManagerContoller.cs" />
+    <Compile Include="ChangeEndpointConsoleID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeEndpointConsoleID.Designer.cs">
+      <DependentUpon>ChangeEndpointConsoleID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ChangeEndpointConsoleIDContolller.cs" />
+    <Compile Include="EndPointsControl.cs" />
     <Compile Include="MyClasses\DevicesEndPointsMyClass.cs" />
     <Compile Include="ExtendSessionTime.cs">
       <SubType>Form</SubType>
@@ -127,7 +142,7 @@
     <Compile Include="ExtendSessionTime.Designer.cs">
       <DependentUpon>ExtendSessionTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataBaseClasses\CloseSessionController.cs" />
+    <Compile Include="Controllers\CloseSessionController.cs" />
     <Compile Include="CloseSessionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +226,13 @@
       <DependentUpon>TimeZoneManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\TimeZoneManagerController.cs" />
+    <Compile Include="WithdrawMoney.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WithdrawMoney.Designer.cs">
+      <DependentUpon>WithdrawMoney.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WithdrawMoneyController.cs" />
     <EmbeddedResource Include="AddDiscountCardToSession.resx">
       <DependentUpon>AddDiscountCardToSession.cs</DependentUpon>
     </EmbeddedResource>
@@ -232,20 +254,29 @@
     <EmbeddedResource Include="ConsoleManager.resx">
       <DependentUpon>ConsoleManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controllers\AddNewDevice.resx">
+    <EmbeddedResource Include="AddNewDevice.resx">
       <DependentUpon>AddNewDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientManager.resx">
+      <DependentUpon>ClientManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateNewConsole.resx">
       <DependentUpon>CreateNewConsole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataBaseClasses\DeviceManager.resx">
+    <EmbeddedResource Include="DeviceManager.resx">
       <DependentUpon>DeviceManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeEndpointConsoleID.resx">
+      <DependentUpon>ChangeEndpointConsoleID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShiftsManager.resx">
       <DependentUpon>ShiftsManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TimeZoneManager.resx">
       <DependentUpon>TimeZoneManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WithdrawMoney.resx">
+      <DependentUpon>WithdrawMoney.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="DataBaseClasses\db.dbml.layout">

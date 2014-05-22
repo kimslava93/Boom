@@ -88,7 +88,7 @@ namespace Boom_Manager_Project
 
         private void bDelete_Click(object sender, EventArgs e)
         {
-            DialogResult toDelete = MessageBox.Show("Are you sure that you want to delete this console?", "Warning",
+            DialogResult toDelete = MessageBox.Show("Are you sure that you want to delete this console?\nAll sessions, devices, history will be erased!\nProbably it is better to edit this console", "Warning",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (toDelete == DialogResult.Yes)
             {

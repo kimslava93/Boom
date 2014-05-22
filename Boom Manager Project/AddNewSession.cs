@@ -332,5 +332,10 @@ namespace Boom_Manager_Project
         {
             _old = null;
         }
+
+        private void bAddMoneyToClient_Click(object sender, EventArgs e)
+        {
+//            var amd = new AddMoneyOnDiscountCard();
+        }
     }
 }
