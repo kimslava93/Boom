@@ -20,63 +20,65 @@ namespace Boom_Manager_Project
 
         public bool SwitchOn(string consoleId)
         {
-            if (!String.IsNullOrWhiteSpace(consoleId))
-            {
-                List<device_endpoints_t> allEndPoints = DataBaseClass.Instancedb().GetAllEndPoints();
-                var console = (from c in allEndPoints
-                    where c.playstation_id == consoleId
-                    select c).SingleOrDefault();
-                List<devices_t> allDevices = DataBaseClass.Instancedb().GetAllDevices();
-                string iPaddress = (from i in allDevices
-                    where console != null && i.device_id == console.device_id
-                    select i.ip_address).SingleOrDefault();
-                if (iPaddress != null)
-                {
-                    var device = new Device(IPAddress.Parse(iPaddress));
-                    if (console != null)
-                    {
-                        var ep = new Endpoint(device, (byte) console.endpoint_index);
-                        if (!ep.On())
-                        {
-                            MessageBox.Show(
-                                "No connection with device! Please try to reboot device or check the lan connection.");
-                            return false;
-                        }
-                        return true;
-                    }
-                }
-            }
-            return false;
+//            if (!String.IsNullOrWhiteSpace(consoleId))
+//            {
+//                List<device_endpoints_t> allEndPoints = DataBaseClass.Instancedb().GetAllEndPoints();
+//                var console = (from c in allEndPoints
+//                    where c.playstation_id == consoleId
+//                    select c).SingleOrDefault();
+//                List<devices_t> allDevices = DataBaseClass.Instancedb().GetAllDevices();
+//                string iPaddress = (from i in allDevices
+//                    where console != null && i.device_id == console.device_id
+//                    select i.ip_address).SingleOrDefault();
+//                if (iPaddress != null)
+//                {
+//                    var device = new Device(IPAddress.Parse(iPaddress));
+//                    if (console != null)
+//                    {
+//                        var ep = new Endpoint(device, (byte) console.endpoint_index);
+//                        if (!ep.On())
+//                        {
+//                            MessageBox.Show(
+//                                "No connection with device! Please try to reboot device or check the lan connection.");
+//                            return false;
+//                        }
+//                        return true;
+//                    }
+//                }
+//            }
+//            return false;
+            return true;
         }
         public bool SwitchOff(string consoleId)
         {
-            if (!String.IsNullOrWhiteSpace(consoleId))
-            {
-                List<device_endpoints_t> allEndPoints = DataBaseClass.Instancedb().GetAllEndPoints();
-                var console = (from c in allEndPoints
-                               where c.playstation_id == consoleId
-                               select c).SingleOrDefault();
-                List<devices_t> allDevices = DataBaseClass.Instancedb().GetAllDevices();
-                string iPaddress = (from i in allDevices
-                                    where console != null && i.device_id == console.device_id
-                                    select i.ip_address).SingleOrDefault();
-                if (iPaddress != null)
-                {
-                    var device = new Device(IPAddress.Parse(iPaddress));
-                    if (console != null)
-                    {
-                        var ep = new Endpoint(device, (byte)console.endpoint_index);
-                        if (!ep.Off())
-                        {
-                            MessageBox.Show(
-                                "No connection with device! Please try to reboot device or check the lan connection.");
-                            return false;
-                        }
-                        return true;
-                    }
-                }
-            }
-            return false;
+//            if (!String.IsNullOrWhiteSpace(consoleId))
+//            {
+//                List<device_endpoints_t> allEndPoints = DataBaseClass.Instancedb().GetAllEndPoints();
+//                var console = (from c in allEndPoints
+//                               where c.playstation_id == consoleId
+//                               select c).SingleOrDefault();
+//                List<devices_t> allDevices = DataBaseClass.Instancedb().GetAllDevices();
+//                string iPaddress = (from i in allDevices
+//                                    where console != null && i.device_id == console.device_id
+//                                    select i.ip_address).SingleOrDefault();
+//                if (iPaddress != null)
+//                {
+//                    var device = new Device(IPAddress.Parse(iPaddress));
+//                    if (console != null)
+//                    {
+//                        var ep = new Endpoint(device, (byte)console.endpoint_index);
+//                        if (!ep.Off())
+//                        {
+//                            MessageBox.Show(
+//                                "No connection with device! Please try to reboot device or check the lan connection.");
+//                            return false;
+//                        }
+//                        return true;
+//                    }
+//                }
+//            }
+//            return false;
+            return true;
         }
     }
 }

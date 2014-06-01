@@ -68,7 +68,7 @@ namespace Boom_Manager_Project
 
 //                    adc.ClientID = id;
 //                    adc.ClientName = clientToFind.name;
-//                    adc.MoneyLeft = (decimal)savingsToFind.savings;
+//                    adc.Остаток_денег = (decimal)savingsToFind.savings;
                 }
                 else
                 {

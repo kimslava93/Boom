@@ -186,15 +186,15 @@ namespace Boom_Manager_Project.Controllers
                     .AddNewDaySession(playstationId, clientId, timeToPlay, paidSum, curTime);
             }
         }
-        private IEnumerable<string> DiscountSplitter(string textToSplitBySemiColumn)
-        {
-            List<string> result = Regex.Split(textToSplitBySemiColumn, "; ").ToList();
-            return result;
-        }
+//        private IEnumerable<string> DiscountSplitter(string textToSplitBySemiColumn)
+//        {
+//            List<string> result = Regex.Split(textToSplitBySemiColumn, "; ").ToList();
+//            return result;
+//        }
         public void ChooseClientAndAddMoneyOnCard(string clients)
         {
-            var allClients = (List<string>) DiscountSplitter(clients);
-
+//            var allClients = (List<string>) DiscountSplitter(clients);
+            //NOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHED
         }
     }
 

@@ -55,11 +55,11 @@
             this.bClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bClose.ForeColor = System.Drawing.Color.White;
-            this.bClose.Location = new System.Drawing.Point(403, 370);
+            this.bClose.Location = new System.Drawing.Point(381, 370);
             this.bClose.Name = "bClose";
-            this.bClose.Size = new System.Drawing.Size(75, 34);
+            this.bClose.Size = new System.Drawing.Size(97, 34);
             this.bClose.TabIndex = 2;
-            this.bClose.Text = "Close";
+            this.bClose.Text = "Закрыть";
             this.bClose.UseVisualStyleBackColor = false;
             this.bClose.Click += new System.EventHandler(this.bClose_Click);
             // 
@@ -75,9 +75,9 @@
             this.bAdd.ForeColor = System.Drawing.Color.White;
             this.bAdd.Location = new System.Drawing.Point(381, 12);
             this.bAdd.Name = "bAdd";
-            this.bAdd.Size = new System.Drawing.Size(97, 33);
+            this.bAdd.Size = new System.Drawing.Size(97, 62);
             this.bAdd.TabIndex = 3;
-            this.bAdd.Text = "Add device";
+            this.bAdd.Text = "Добавить девайс";
             this.bAdd.UseVisualStyleBackColor = false;
             this.bAdd.Click += new System.EventHandler(this.bAdd_Click);
             // 
@@ -90,7 +90,7 @@
             this.groupBox1.Size = new System.Drawing.Size(328, 170);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Devices";
+            this.groupBox1.Text = "Девайсы";
             // 
             // dgvAllDevices
             // 
@@ -146,7 +146,7 @@
             this.groupBox2.Size = new System.Drawing.Size(466, 170);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "EndPoints on device";
+            this.groupBox2.Text = "Розетки на текущем девайсе";
             // 
             // dgvAllEndPointsIndexes
             // 
@@ -202,11 +202,11 @@
             this.bDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bDelete.ForeColor = System.Drawing.Color.White;
-            this.bDelete.Location = new System.Drawing.Point(381, 149);
+            this.bDelete.Location = new System.Drawing.Point(381, 98);
             this.bDelete.Name = "bDelete";
             this.bDelete.Size = new System.Drawing.Size(97, 33);
             this.bDelete.TabIndex = 6;
-            this.bDelete.Text = "Delete";
+            this.bDelete.Text = "Удалить";
             this.bDelete.UseVisualStyleBackColor = false;
             this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
             // 

@@ -26,3 +26,4 @@ D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Pr
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.WithdrawMoney.resources
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ChangeEndpointConsoleID.resources
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.Controllers.ClientManager.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csprojResolveAssemblyReference.cache

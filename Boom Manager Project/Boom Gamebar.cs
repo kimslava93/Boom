@@ -111,10 +111,10 @@ namespace Boom_Manager_Project
         }
         private void dgvOpenedSessions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            var dataGridViewColumn = dgvOpenedSessions.Columns["StartGame"];
+            var dataGridViewColumn = dgvOpenedSessions.Columns["Начало"];
             if (dataGridViewColumn != null)
                 dataGridViewColumn.DefaultCellStyle.Format = "t";
-            var gridViewColumn = dgvOpenedSessions.Columns["EndGame"];
+            var gridViewColumn = dgvOpenedSessions.Columns["Конец"];
             if (gridViewColumn != null)
                 gridViewColumn.DefaultCellStyle.Format = "t";
         }

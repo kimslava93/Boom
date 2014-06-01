@@ -41,9 +41,9 @@
             this.lWarning.ForeColor = System.Drawing.Color.White;
             this.lWarning.Location = new System.Drawing.Point(52, 9);
             this.lWarning.Name = "lWarning";
-            this.lWarning.Size = new System.Drawing.Size(179, 21);
+            this.lWarning.Size = new System.Drawing.Size(237, 21);
             this.lWarning.TabIndex = 0;
-            this.lWarning.Text = "Set price for playstations: ";
+            this.lWarning.Text = "Установить цену для приставок: ";
             this.lWarning.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // numUpDPrice
@@ -73,11 +73,11 @@
             this.bApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bApply.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bApply.ForeColor = System.Drawing.Color.White;
-            this.bApply.Location = new System.Drawing.Point(56, 137);
+            this.bApply.Location = new System.Drawing.Point(12, 137);
             this.bApply.Name = "bApply";
-            this.bApply.Size = new System.Drawing.Size(75, 39);
+            this.bApply.Size = new System.Drawing.Size(109, 39);
             this.bApply.TabIndex = 2;
-            this.bApply.Text = "Apply";
+            this.bApply.Text = "Применить";
             this.bApply.UseVisualStyleBackColor = false;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
             // 
@@ -92,11 +92,11 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(156, 137);
+            this.bCancel.Location = new System.Drawing.Point(186, 137);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(75, 39);
+            this.bCancel.Size = new System.Drawing.Size(90, 39);
             this.bCancel.TabIndex = 2;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 

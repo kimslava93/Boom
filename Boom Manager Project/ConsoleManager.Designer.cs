@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbConsoleInfo = new System.Windows.Forms.GroupBox();
             this.mtbOrderTime = new System.Windows.Forms.MaskedTextBox();
             this.cbCurrentState = new System.Windows.Forms.ComboBox();
@@ -63,17 +63,17 @@
             this.gbConsoleInfo.ForeColor = System.Drawing.Color.White;
             this.gbConsoleInfo.Location = new System.Drawing.Point(178, 56);
             this.gbConsoleInfo.Name = "gbConsoleInfo";
-            this.gbConsoleInfo.Size = new System.Drawing.Size(289, 312);
+            this.gbConsoleInfo.Size = new System.Drawing.Size(333, 312);
             this.gbConsoleInfo.TabIndex = 1;
             this.gbConsoleInfo.TabStop = false;
-            this.gbConsoleInfo.Text = "Console Info";
+            this.gbConsoleInfo.Text = "Информация о приставке";
             // 
             // mtbOrderTime
             // 
             this.mtbOrderTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.mtbOrderTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtbOrderTime.ForeColor = System.Drawing.Color.White;
-            this.mtbOrderTime.Location = new System.Drawing.Point(122, 92);
+            this.mtbOrderTime.Location = new System.Drawing.Point(163, 93);
             this.mtbOrderTime.Mask = "00.00.0000 00:00";
             this.mtbOrderTime.Name = "mtbOrderTime";
             this.mtbOrderTime.Size = new System.Drawing.Size(161, 29);
@@ -90,7 +90,7 @@
             "busy",
             "order",
             "unknown"});
-            this.cbCurrentState.Location = new System.Drawing.Point(122, 57);
+            this.cbCurrentState.Location = new System.Drawing.Point(163, 58);
             this.cbCurrentState.Name = "cbCurrentState";
             this.cbCurrentState.Size = new System.Drawing.Size(161, 29);
             this.cbCurrentState.TabIndex = 6;
@@ -100,7 +100,7 @@
             this.tbConsoleName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.tbConsoleName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbConsoleName.ForeColor = System.Drawing.Color.White;
-            this.tbConsoleName.Location = new System.Drawing.Point(122, 22);
+            this.tbConsoleName.Location = new System.Drawing.Point(163, 23);
             this.tbConsoleName.Name = "tbConsoleName";
             this.tbConsoleName.Size = new System.Drawing.Size(161, 29);
             this.tbConsoleName.TabIndex = 5;
@@ -111,9 +111,9 @@
             this.lOrderTime.ForeColor = System.Drawing.Color.White;
             this.lOrderTime.Location = new System.Drawing.Point(6, 95);
             this.lOrderTime.Name = "lOrderTime";
-            this.lOrderTime.Size = new System.Drawing.Size(82, 21);
+            this.lOrderTime.Size = new System.Drawing.Size(103, 21);
             this.lOrderTime.TabIndex = 4;
-            this.lOrderTime.Text = "Order time";
+            this.lOrderTime.Text = "Время заказа";
             // 
             // lCurrentState
             // 
@@ -121,9 +121,9 @@
             this.lCurrentState.ForeColor = System.Drawing.Color.White;
             this.lCurrentState.Location = new System.Drawing.Point(6, 60);
             this.lCurrentState.Name = "lCurrentState";
-            this.lCurrentState.Size = new System.Drawing.Size(97, 21);
+            this.lCurrentState.Size = new System.Drawing.Size(144, 21);
             this.lCurrentState.TabIndex = 3;
-            this.lCurrentState.Text = "Current state";
+            this.lCurrentState.Text = "Текущее состояние";
             this.lCurrentState.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lConsoleName
@@ -132,9 +132,9 @@
             this.lConsoleName.ForeColor = System.Drawing.Color.White;
             this.lConsoleName.Location = new System.Drawing.Point(6, 25);
             this.lConsoleName.Name = "lConsoleName";
-            this.lConsoleName.Size = new System.Drawing.Size(50, 21);
+            this.lConsoleName.Size = new System.Drawing.Size(78, 21);
             this.lConsoleName.TabIndex = 2;
-            this.lConsoleName.Text = "Name";
+            this.lConsoleName.Text = "Название";
             // 
             // dgvPriceListOfConsole
             // 
@@ -145,14 +145,14 @@
             this.dgvPriceListOfConsole.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPriceListOfConsole.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dgvPriceListOfConsole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPriceListOfConsole.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPriceListOfConsole.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvPriceListOfConsole.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvPriceListOfConsole.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvPriceListOfConsole.EnableHeadersVisualStyles = false;
@@ -168,7 +168,7 @@
             this.dgvPriceListOfConsole.ShowCellToolTips = false;
             this.dgvPriceListOfConsole.ShowEditingIcon = false;
             this.dgvPriceListOfConsole.ShowRowErrors = false;
-            this.dgvPriceListOfConsole.Size = new System.Drawing.Size(283, 142);
+            this.dgvPriceListOfConsole.Size = new System.Drawing.Size(327, 142);
             this.dgvPriceListOfConsole.TabIndex = 1;
             this.dgvPriceListOfConsole.VirtualMode = true;
             // 
@@ -185,9 +185,9 @@
             this.bApplyChanges.ForeColor = System.Drawing.Color.White;
             this.bApplyChanges.Location = new System.Drawing.Point(3, 278);
             this.bApplyChanges.Name = "bApplyChanges";
-            this.bApplyChanges.Size = new System.Drawing.Size(283, 31);
+            this.bApplyChanges.Size = new System.Drawing.Size(327, 31);
             this.bApplyChanges.TabIndex = 0;
-            this.bApplyChanges.Text = "Apply changes";
+            this.bApplyChanges.Text = "Внести изменения";
             this.bApplyChanges.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.bApplyChanges.UseVisualStyleBackColor = false;
             // 
@@ -200,7 +200,7 @@
             this.gbAllConsoles.Size = new System.Drawing.Size(160, 312);
             this.gbAllConsoles.TabIndex = 2;
             this.gbAllConsoles.TabStop = false;
-            this.gbAllConsoles.Text = "AllConsoles";
+            this.gbAllConsoles.Text = "Все приставки";
             // 
             // dgvAllConsoles
             // 
@@ -211,14 +211,14 @@
             this.dgvAllConsoles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAllConsoles.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dgvAllConsoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAllConsoles.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAllConsoles.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAllConsoles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAllConsoles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvAllConsoles.EnableHeadersVisualStyles = false;
@@ -252,9 +252,9 @@
             this.bAddNewConsole.ForeColor = System.Drawing.Color.White;
             this.bAddNewConsole.Location = new System.Drawing.Point(15, 15);
             this.bAddNewConsole.Name = "bAddNewConsole";
-            this.bAddNewConsole.Size = new System.Drawing.Size(85, 31);
+            this.bAddNewConsole.Size = new System.Drawing.Size(98, 31);
             this.bAddNewConsole.TabIndex = 2;
-            this.bAddNewConsole.Text = "Add";
+            this.bAddNewConsole.Text = "Добавить";
             this.bAddNewConsole.UseVisualStyleBackColor = false;
             this.bAddNewConsole.Click += new System.EventHandler(this.bAddNewConsole_Click);
             // 
@@ -268,11 +268,11 @@
             this.bDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bDelete.ForeColor = System.Drawing.Color.White;
-            this.bDelete.Location = new System.Drawing.Point(106, 15);
+            this.bDelete.Location = new System.Drawing.Point(119, 15);
             this.bDelete.Name = "bDelete";
             this.bDelete.Size = new System.Drawing.Size(85, 31);
             this.bDelete.TabIndex = 3;
-            this.bDelete.Text = "Delete";
+            this.bDelete.Text = "Удалить";
             this.bDelete.UseVisualStyleBackColor = false;
             this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
             // 
@@ -286,11 +286,11 @@
             this.bClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bClose.ForeColor = System.Drawing.Color.White;
-            this.bClose.Location = new System.Drawing.Point(392, 13);
+            this.bClose.Location = new System.Drawing.Point(371, 13);
             this.bClose.Name = "bClose";
-            this.bClose.Size = new System.Drawing.Size(75, 34);
+            this.bClose.Size = new System.Drawing.Size(96, 34);
             this.bClose.TabIndex = 3;
-            this.bClose.Text = "Close";
+            this.bClose.Text = "Закрыть";
             this.bClose.UseVisualStyleBackColor = false;
             this.bClose.Click += new System.EventHandler(this.bClose_Click);
             // 
@@ -299,7 +299,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(479, 382);
+            this.ClientSize = new System.Drawing.Size(524, 382);
             this.ControlBox = false;
             this.Controls.Add(this.bDelete);
             this.Controls.Add(this.bClose);

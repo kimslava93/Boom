@@ -27,14 +27,14 @@ namespace Boom_Manager_Project
 
         private void SetPositionOfGb()
         {
-            if (_sessionToExtend.ClientId == "0")
+            if (_sessionToExtend.Клиент == "0")
             {
                 gbExtendUsualClient.Location =
                     ExtendSessionTimeController.ExtendSessionTimeControllerInstance().VisibleLocation;
                 gbExtendWithCard.Location =
                     ExtendSessionTimeController.ExtendSessionTimeControllerInstance().HiddenLocation;
             }
-            else if(!string.IsNullOrWhiteSpace(_sessionToExtend.ClientId))
+            else if(!string.IsNullOrWhiteSpace(_sessionToExtend.Клиент))
             {
                 gbExtendUsualClient.Location =
                     ExtendSessionTimeController.ExtendSessionTimeControllerInstance().HiddenLocation;
@@ -45,19 +45,19 @@ namespace Boom_Manager_Project
 
         private void FulFillTbs()
         {
-            tbSessionID.Text = _sessionToExtend.SessionId.ToString(CultureInfo.InvariantCulture);
-            if (_sessionToExtend.ClientId == "0")
+            tbSessionID.Text = _sessionToExtend.Сессия.ToString(CultureInfo.InvariantCulture);
+            if (_sessionToExtend.Клиент == "0")
             {
                 numUpDMinutesExtend.Value = 30; //minimum is 30 minutes
                 numUpDMoneyExtend.Minimum = AddNewSessionController.AddNewSessionControllerInstance()
-                    .UpdatePrice("0", _sessionToExtend.PlaystationId, 0, 30); //minimum price is 30 minutes
-                tbEndTimeWas.Text = _sessionToExtend.EndGame.ToString("dd-MMMM HH:mm");
+                    .UpdatePrice("0", _sessionToExtend.Приставка, 0, 30); //minimum price is 30 minutes
+                tbEndTimeWas.Text = _sessionToExtend.Конец.ToString("dd-MMMM HH:mm");
             }
             else
             {
                 dgvClientsPerTable.DataSource =
                     ExtendSessionTimeController.ExtendSessionTimeControllerInstance()
-                        .GetClientsTable(_sessionToExtend.SessionId);
+                        .GetClientsTable(_sessionToExtend.Сессия);
                 dgvClientsPerTable.Invalidate();
             }
 
@@ -85,7 +85,7 @@ namespace Boom_Manager_Project
             if (_repeatCallOfMethodCounter <= 0)
             {
                 _repeatCallOfMethodCounter++;
-                decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice("0", _sessionToExtend.PlaystationId,
+                decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice("0", _sessionToExtend.Приставка,
                     numUpDHoursExtend.Value,
                     numUpDMinutesExtend.Value);
                 if (t > numUpDMoneyExtend.Maximum)
@@ -110,7 +110,7 @@ namespace Boom_Manager_Project
                     numUpDHoursExtend.Value++;
                 }
                 _repeatCallOfMethodCounter++;
-                decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice("0", _sessionToExtend.PlaystationId,
+                decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice("0", _sessionToExtend.Приставка,
                     numUpDHoursExtend.Value, numUpDMinutesExtend.Value);
                 if (t < numUpDMoneyExtend.Minimum)
                 {
@@ -148,7 +148,7 @@ namespace Boom_Manager_Project
                 _repeatCallOfMethodCounter++;
                 TimeSpan t =
                     AddNewSessionController.AddNewSessionControllerInstance()
-                        .UpdateTimeLeft(numUpDMoneyExtend.Value, _sessionToExtend.PlaystationId,
+                        .UpdateTimeLeft(numUpDMoneyExtend.Value, _sessionToExtend.Приставка,
                             numUpDMoneyExtend.Minimum, numUpDMoneyExtend.Maximum);
                 if (t.Hours > numUpDHoursExtend.Maximum)
                 {
@@ -179,7 +179,7 @@ namespace Boom_Manager_Project
 
         private void UpdateEndTime()
         {
-            tbEndTimeWill.Text = (_sessionToExtend.EndGame.Add(
+            tbEndTimeWill.Text = (_sessionToExtend.Конец.Add(
                 TimeSpan.FromHours((int) numUpDHoursExtend.Value).Add(+
                     TimeSpan.FromMinutes((int) numUpDMinutesExtend.Value)))).ToString(
                         "dd-MMMM HH:mm");

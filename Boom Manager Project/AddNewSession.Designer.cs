@@ -89,11 +89,11 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(232, 334);
+            this.bCancel.Location = new System.Drawing.Point(266, 334);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(96, 38);
             this.bCancel.TabIndex = 30;
-            this.bCancel.Text = "CANCEL";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             this.bCancel.MouseLeave += new System.EventHandler(this.bCancel_MouseLeave);
@@ -145,9 +145,9 @@
             this.lMoneyToPay.ForeColor = System.Drawing.Color.White;
             this.lMoneyToPay.Location = new System.Drawing.Point(14, 93);
             this.lMoneyToPay.Name = "lMoneyToPay";
-            this.lMoneyToPay.Size = new System.Drawing.Size(102, 21);
+            this.lMoneyToPay.Size = new System.Drawing.Size(123, 21);
             this.lMoneyToPay.TabIndex = 8;
-            this.lMoneyToPay.Text = "Money to pay";
+            this.lMoneyToPay.Text = "Денег оплачено";
             // 
             // tbDiscountCards
             // 
@@ -175,9 +175,9 @@
             this.lTimeToPlay.ForeColor = System.Drawing.Color.White;
             this.lTimeToPlay.Location = new System.Drawing.Point(14, 27);
             this.lTimeToPlay.Name = "lTimeToPlay";
-            this.lTimeToPlay.Size = new System.Drawing.Size(91, 21);
+            this.lTimeToPlay.Size = new System.Drawing.Size(145, 21);
             this.lTimeToPlay.TabIndex = 8;
-            this.lTimeToPlay.Text = "Time to play";
+            this.lTimeToPlay.Text = "Оплаченное время";
             // 
             // bAddDiscountCard
             // 
@@ -188,11 +188,12 @@
             this.bAddDiscountCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddDiscountCard.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddDiscountCard.ForeColor = System.Drawing.Color.White;
-            this.bAddDiscountCard.Location = new System.Drawing.Point(279, 49);
+            this.bAddDiscountCard.Location = new System.Drawing.Point(268, 49);
             this.bAddDiscountCard.Name = "bAddDiscountCard";
-            this.bAddDiscountCard.Size = new System.Drawing.Size(54, 29);
+            this.bAddDiscountCard.Size = new System.Drawing.Size(94, 29);
             this.bAddDiscountCard.TabIndex = 29;
-            this.bAddDiscountCard.Text = "Add card";
+            this.bAddDiscountCard.Text = "Добавить";
+            this.bAddDiscountCard.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.bAddDiscountCard.UseVisualStyleBackColor = false;
             this.bAddDiscountCard.Click += new System.EventHandler(this.bAddDiscountCard_Click);
             this.bAddDiscountCard.MouseLeave += new System.EventHandler(this.bAddDiscountCard_MouseLeave);
@@ -209,28 +210,38 @@
             this.gbClientInfo.Controls.Add(this.lMoneyOnCardLeft);
             this.gbClientInfo.Controls.Add(this.lTimeOnCardLeft);
             this.gbClientInfo.Enabled = false;
+            this.gbClientInfo.ForeColor = System.Drawing.Color.White;
             this.gbClientInfo.Location = new System.Drawing.Point(388, 150);
             this.gbClientInfo.Name = "gbClientInfo";
-            this.gbClientInfo.Size = new System.Drawing.Size(304, 178);
+            this.gbClientInfo.Size = new System.Drawing.Size(324, 178);
             this.gbClientInfo.TabIndex = 27;
             this.gbClientInfo.TabStop = false;
-            this.gbClientInfo.Text = "Client name info";
+            this.gbClientInfo.Text = "Информация о сессии с клиентом";
             // 
             // bAddMoneyToClient
             // 
-            this.bAddMoneyToClient.Location = new System.Drawing.Point(270, 114);
+            this.bAddMoneyToClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddMoneyToClient.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddMoneyToClient.FlatAppearance.BorderSize = 0;
+            this.bAddMoneyToClient.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddMoneyToClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddMoneyToClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bAddMoneyToClient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAddMoneyToClient.Location = new System.Drawing.Point(291, 114);
             this.bAddMoneyToClient.Name = "bAddMoneyToClient";
             this.bAddMoneyToClient.Size = new System.Drawing.Size(27, 29);
             this.bAddMoneyToClient.TabIndex = 9;
             this.bAddMoneyToClient.Text = "+";
-            this.bAddMoneyToClient.UseVisualStyleBackColor = true;
+            this.bAddMoneyToClient.UseVisualStyleBackColor = false;
             this.bAddMoneyToClient.Click += new System.EventHandler(this.bAddMoneyToClient_Click);
             // 
             // numUpDMinutesRemainedOnCard
             // 
+            this.numUpDMinutesRemainedOnCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDMinutesRemainedOnCard.Enabled = false;
             this.numUpDMinutesRemainedOnCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUpDMinutesRemainedOnCard.Location = new System.Drawing.Point(204, 73);
+            this.numUpDMinutesRemainedOnCard.ForeColor = System.Drawing.Color.White;
+            this.numUpDMinutesRemainedOnCard.Location = new System.Drawing.Point(222, 73);
             this.numUpDMinutesRemainedOnCard.Maximum = new decimal(new int[] {
             60,
             0,
@@ -243,9 +254,11 @@
             // 
             // numUpDHoursRemainedOnCard
             // 
+            this.numUpDHoursRemainedOnCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDHoursRemainedOnCard.Enabled = false;
             this.numUpDHoursRemainedOnCard.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUpDHoursRemainedOnCard.Location = new System.Drawing.Point(138, 73);
+            this.numUpDHoursRemainedOnCard.ForeColor = System.Drawing.Color.White;
+            this.numUpDHoursRemainedOnCard.Location = new System.Drawing.Point(156, 73);
             this.numUpDHoursRemainedOnCard.Maximum = new decimal(new int[] {
             500,
             0,
@@ -268,8 +281,11 @@
             // 
             // tbClientName
             // 
+            this.tbClientName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbClientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbClientName.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbClientName.Location = new System.Drawing.Point(102, 25);
+            this.tbClientName.ForeColor = System.Drawing.Color.White;
+            this.tbClientName.Location = new System.Drawing.Point(156, 24);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.ReadOnly = true;
             this.tbClientName.Size = new System.Drawing.Size(162, 29);
@@ -277,11 +293,13 @@
             // 
             // numUpDClientMoneyLeft
             // 
+            this.numUpDClientMoneyLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDClientMoneyLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDClientMoneyLeft.DecimalPlaces = 2;
             this.numUpDClientMoneyLeft.Enabled = false;
             this.numUpDClientMoneyLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUpDClientMoneyLeft.Location = new System.Drawing.Point(138, 114);
+            this.numUpDClientMoneyLeft.ForeColor = System.Drawing.Color.White;
+            this.numUpDClientMoneyLeft.Location = new System.Drawing.Point(156, 114);
             this.numUpDClientMoneyLeft.Maximum = new decimal(new int[] {
             300000,
             0,
@@ -299,20 +317,20 @@
             this.lClientName.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lClientName.Location = new System.Drawing.Point(6, 27);
             this.lClientName.Name = "lClientName";
-            this.lClientName.Size = new System.Drawing.Size(90, 21);
+            this.lClientName.Size = new System.Drawing.Size(131, 21);
             this.lClientName.TabIndex = 0;
-            this.lClientName.Text = "Client name";
+            this.lClientName.Text = "Имя клиента(-ов)";
             // 
             // lMoneyOnCardLeft
             // 
             this.lMoneyOnCardLeft.AutoSize = true;
             this.lMoneyOnCardLeft.Enabled = false;
             this.lMoneyOnCardLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lMoneyOnCardLeft.Location = new System.Drawing.Point(12, 116);
+            this.lMoneyOnCardLeft.Location = new System.Drawing.Point(6, 118);
             this.lMoneyOnCardLeft.Name = "lMoneyOnCardLeft";
-            this.lMoneyOnCardLeft.Size = new System.Drawing.Size(80, 21);
+            this.lMoneyOnCardLeft.Size = new System.Drawing.Size(107, 21);
             this.lMoneyOnCardLeft.TabIndex = 8;
-            this.lMoneyOnCardLeft.Text = "Money left";
+            this.lMoneyOnCardLeft.Text = "Остаток денег";
             // 
             // lTimeOnCardLeft
             // 
@@ -321,9 +339,9 @@
             this.lTimeOnCardLeft.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lTimeOnCardLeft.Location = new System.Drawing.Point(6, 75);
             this.lTimeOnCardLeft.Name = "lTimeOnCardLeft";
-            this.lTimeOnCardLeft.Size = new System.Drawing.Size(115, 21);
+            this.lTimeOnCardLeft.Size = new System.Drawing.Size(141, 21);
             this.lTimeOnCardLeft.TabIndex = 8;
-            this.lTimeOnCardLeft.Text = "Time to play left";
+            this.lTimeOnCardLeft.Text = "Оставшееся время";
             // 
             // current_time_timer
             // 
@@ -351,9 +369,9 @@
             this.lPlaystationId.ForeColor = System.Drawing.Color.White;
             this.lPlaystationId.Location = new System.Drawing.Point(12, 100);
             this.lPlaystationId.Name = "lPlaystationId";
-            this.lPlaystationId.Size = new System.Drawing.Size(96, 21);
+            this.lPlaystationId.Size = new System.Drawing.Size(104, 21);
             this.lPlaystationId.TabIndex = 20;
-            this.lPlaystationId.Text = "Playstation #";
+            this.lPlaystationId.Text = "№ приставки";
             // 
             // lClientDiscountId
             // 
@@ -362,9 +380,9 @@
             this.lClientDiscountId.ForeColor = System.Drawing.Color.White;
             this.lClientDiscountId.Location = new System.Drawing.Point(12, 52);
             this.lClientDiscountId.Name = "lClientDiscountId";
-            this.lClientDiscountId.Size = new System.Drawing.Size(128, 21);
+            this.lClientDiscountId.Size = new System.Drawing.Size(125, 21);
             this.lClientDiscountId.TabIndex = 26;
-            this.lClientDiscountId.Text = "Client discount ID";
+            this.lClientDiscountId.Text = "Карточки сессии";
             // 
             // bAddSession
             // 
@@ -379,7 +397,7 @@
             this.bAddSession.Name = "bAddSession";
             this.bAddSession.Size = new System.Drawing.Size(96, 38);
             this.bAddSession.TabIndex = 25;
-            this.bAddSession.Text = "ADD";
+            this.bAddSession.Text = "Добавить";
             this.bAddSession.UseVisualStyleBackColor = false;
             this.bAddSession.Click += new System.EventHandler(this.bAddSession_Click);
             this.bAddSession.MouseLeave += new System.EventHandler(this.bAddSession_MouseLeave);
@@ -389,7 +407,6 @@
             // 
             this.numUpDPaidPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDPaidPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numUpDPaidPrice.DecimalPlaces = 2;
             this.numUpDPaidPrice.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.numUpDPaidPrice.ForeColor = System.Drawing.Color.White;
             this.numUpDPaidPrice.Location = new System.Drawing.Point(163, 91);
@@ -415,17 +432,17 @@
             this.gbDepositPayment.ForeColor = System.Drawing.Color.White;
             this.gbDepositPayment.Location = new System.Drawing.Point(12, 150);
             this.gbDepositPayment.Name = "gbDepositPayment";
-            this.gbDepositPayment.Size = new System.Drawing.Size(316, 178);
+            this.gbDepositPayment.Size = new System.Drawing.Size(350, 178);
             this.gbDepositPayment.TabIndex = 22;
             this.gbDepositPayment.TabStop = false;
-            this.gbDepositPayment.Text = "Deposit payment";
+            this.gbDepositPayment.Text = "Оплата по депозиту";
             // 
             // FAddNewSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(340, 383);
+            this.ClientSize = new System.Drawing.Size(376, 383);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);

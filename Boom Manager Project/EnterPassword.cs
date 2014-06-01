@@ -27,7 +27,7 @@ namespace Boom_Manager_Project
 
         private void EnterPassword_Load(object sender, EventArgs e)
         {
-            lWarning.Text = "Enter login and password to continue!";
+            lWarning.Text = ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(5);
         }
 
         private void CheckValidityOfPassword()
@@ -56,7 +56,7 @@ namespace Boom_Manager_Project
                     {
                         if (_accessPosition == MANAGER)
                         {
-                            MessageBox.Show("Only manager have an access to this field!");
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(12));
                         }
                         else if (_accessPosition != MANAGER && matchedStaff.staff_password == tbPassword.Text)
                         {
@@ -87,7 +87,8 @@ namespace Boom_Manager_Project
             tbPassword.ForeColor = Color.White;
             tbLogin.BackColor = Color.Red;
             tbLogin.ForeColor = Color.White;
-            MessageBox.Show(" Invalid Login or password!", "Error!", MessageBoxButtons.OK,
+            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(10),
+                ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(6), MessageBoxButtons.OK,
                 MessageBoxIcon.Exclamation);
         }
 
@@ -148,7 +149,7 @@ namespace Boom_Manager_Project
         {
             tbLogin.BackColor = Color.White;
             tbLogin.ForeColor = Color.Black;
-            if (tbLogin.Text == "Login")
+            if (tbLogin.Text == @"Login")
             {
                 tbLogin.Text = "";
             }
@@ -158,7 +159,7 @@ namespace Boom_Manager_Project
         {
             tbPassword.BackColor = Color.White;
             tbPassword.ForeColor = Color.Black;
-            if (tbPassword.Text == "Password")
+            if (tbPassword.Text == @"Password")
             {
                 tbPassword.Text = "";
             }

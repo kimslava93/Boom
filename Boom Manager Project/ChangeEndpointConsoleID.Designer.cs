@@ -31,11 +31,11 @@
             this.bApply = new System.Windows.Forms.Button();
             this.bClose = new System.Windows.Forms.Button();
             this.gbConsoleID = new System.Windows.Forms.GroupBox();
+            this.bSetToZero = new System.Windows.Forms.Button();
             this.cbConsolesList = new System.Windows.Forms.ComboBox();
             this.tbEndPointID = new System.Windows.Forms.TextBox();
             this.lConsoleID = new System.Windows.Forms.Label();
             this.lEndpoint = new System.Windows.Forms.Label();
-            this.bSetToZero = new System.Windows.Forms.Button();
             this.gbConsoleID.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,9 +51,9 @@
             this.bApply.ForeColor = System.Drawing.Color.White;
             this.bApply.Location = new System.Drawing.Point(12, 190);
             this.bApply.Name = "bApply";
-            this.bApply.Size = new System.Drawing.Size(75, 34);
+            this.bApply.Size = new System.Drawing.Size(111, 34);
             this.bApply.TabIndex = 4;
-            this.bApply.Text = "Apply";
+            this.bApply.Text = "Применить";
             this.bApply.UseVisualStyleBackColor = false;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
             // 
@@ -67,11 +67,11 @@
             this.bClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bClose.ForeColor = System.Drawing.Color.White;
-            this.bClose.Location = new System.Drawing.Point(222, 190);
+            this.bClose.Location = new System.Drawing.Point(208, 190);
             this.bClose.Name = "bClose";
-            this.bClose.Size = new System.Drawing.Size(75, 34);
+            this.bClose.Size = new System.Drawing.Size(89, 34);
             this.bClose.TabIndex = 5;
-            this.bClose.Text = "Cancel";
+            this.bClose.Text = "Отмена";
             this.bClose.UseVisualStyleBackColor = false;
             this.bClose.Click += new System.EventHandler(this.bClose_Click_1);
             // 
@@ -88,7 +88,26 @@
             this.gbConsoleID.Size = new System.Drawing.Size(285, 172);
             this.gbConsoleID.TabIndex = 6;
             this.gbConsoleID.TabStop = false;
-            this.gbConsoleID.Text = "Choose console ID";
+            this.gbConsoleID.Text = "Выбрать ID приставки";
+            // 
+            // bSetToZero
+            // 
+            this.bSetToZero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSetToZero.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSetToZero.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSetToZero.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bSetToZero.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSetToZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bSetToZero.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bSetToZero.ForeColor = System.Drawing.Color.White;
+            this.bSetToZero.Location = new System.Drawing.Point(196, 115);
+            this.bSetToZero.Name = "bSetToZero";
+            this.bSetToZero.Size = new System.Drawing.Size(83, 26);
+            this.bSetToZero.TabIndex = 9;
+            this.bSetToZero.Text = "Обнулить";
+            this.bSetToZero.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.bSetToZero.UseVisualStyleBackColor = false;
+            this.bSetToZero.Click += new System.EventHandler(this.bSetToZero_Click);
             // 
             // cbConsolesList
             // 
@@ -117,37 +136,18 @@
             this.lConsoleID.AutoSize = true;
             this.lConsoleID.Location = new System.Drawing.Point(17, 83);
             this.lConsoleID.Name = "lConsoleID";
-            this.lConsoleID.Size = new System.Drawing.Size(83, 21);
+            this.lConsoleID.Size = new System.Drawing.Size(101, 21);
             this.lConsoleID.TabIndex = 0;
-            this.lConsoleID.Text = "Console ID";
+            this.lConsoleID.Text = "ID приставки";
             // 
             // lEndpoint
             // 
             this.lEndpoint.AutoSize = true;
             this.lEndpoint.Location = new System.Drawing.Point(17, 47);
             this.lEndpoint.Name = "lEndpoint";
-            this.lEndpoint.Size = new System.Drawing.Size(94, 21);
+            this.lEndpoint.Size = new System.Drawing.Size(84, 21);
             this.lEndpoint.TabIndex = 0;
-            this.lEndpoint.Text = "End point ID";
-            // 
-            // bSetToZero
-            // 
-            this.bSetToZero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bSetToZero.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bSetToZero.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bSetToZero.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
-            this.bSetToZero.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bSetToZero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bSetToZero.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bSetToZero.ForeColor = System.Drawing.Color.White;
-            this.bSetToZero.Location = new System.Drawing.Point(196, 115);
-            this.bSetToZero.Name = "bSetToZero";
-            this.bSetToZero.Size = new System.Drawing.Size(83, 26);
-            this.bSetToZero.TabIndex = 9;
-            this.bSetToZero.Text = "set to zero";
-            this.bSetToZero.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.bSetToZero.UseVisualStyleBackColor = false;
-            this.bSetToZero.Click += new System.EventHandler(this.bSetToZero_Click);
+            this.lEndpoint.Text = "ID розетки";
             // 
             // ChangeEndpointConsoleID
             // 

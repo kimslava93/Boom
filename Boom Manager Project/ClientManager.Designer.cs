@@ -32,6 +32,7 @@
             this.bCancel = new System.Windows.Forms.Button();
             this.gbClientInfo = new System.Windows.Forms.GroupBox();
             this.numUpDClientIdCreate = new System.Windows.Forms.NumericUpDown();
+            this.numUpDSavings = new System.Windows.Forms.NumericUpDown();
             this.numUpDDiscount = new System.Windows.Forms.NumericUpDown();
             this.tbPlayedSum = new System.Windows.Forms.TextBox();
             this.tbActivationDate = new System.Windows.Forms.TextBox();
@@ -49,11 +50,10 @@
             this.lEmail = new System.Windows.Forms.Label();
             this.lBirthday = new System.Windows.Forms.Label();
             this.lName = new System.Windows.Forms.Label();
-            this.numUpDSavings = new System.Windows.Forms.NumericUpDown();
             this.gbClientInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDClientIdCreate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDDiscount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDSavings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDDiscount)).BeginInit();
             this.SuspendLayout();
             // 
             // bApply
@@ -69,9 +69,9 @@
             this.bApply.ForeColor = System.Drawing.Color.White;
             this.bApply.Location = new System.Drawing.Point(12, 376);
             this.bApply.Name = "bApply";
-            this.bApply.Size = new System.Drawing.Size(75, 37);
+            this.bApply.Size = new System.Drawing.Size(110, 37);
             this.bApply.TabIndex = 10;
-            this.bApply.Text = "Apply";
+            this.bApply.Text = "Применить";
             this.bApply.UseVisualStyleBackColor = false;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
             // 
@@ -86,11 +86,11 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(349, 376);
+            this.bCancel.Location = new System.Drawing.Point(336, 376);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(75, 37);
+            this.bCancel.Size = new System.Drawing.Size(88, 37);
             this.bCancel.TabIndex = 11;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
@@ -119,10 +119,10 @@
             this.gbClientInfo.ForeColor = System.Drawing.Color.White;
             this.gbClientInfo.Location = new System.Drawing.Point(0, 0);
             this.gbClientInfo.Name = "gbClientInfo";
-            this.gbClientInfo.Size = new System.Drawing.Size(436, 362);
+            this.gbClientInfo.Size = new System.Drawing.Size(437, 362);
             this.gbClientInfo.TabIndex = 28;
             this.gbClientInfo.TabStop = false;
-            this.gbClientInfo.Text = "Client info";
+            this.gbClientInfo.Text = "Информация о клиенте";
             // 
             // numUpDClientIdCreate
             // 
@@ -139,6 +139,22 @@
             this.numUpDClientIdCreate.ReadOnly = true;
             this.numUpDClientIdCreate.Size = new System.Drawing.Size(129, 29);
             this.numUpDClientIdCreate.TabIndex = 39;
+            // 
+            // numUpDSavings
+            // 
+            this.numUpDSavings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpDSavings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpDSavings.ForeColor = System.Drawing.Color.White;
+            this.numUpDSavings.Location = new System.Drawing.Point(169, 318);
+            this.numUpDSavings.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.numUpDSavings.Name = "numUpDSavings";
+            this.numUpDSavings.ReadOnly = true;
+            this.numUpDSavings.Size = new System.Drawing.Size(160, 29);
+            this.numUpDSavings.TabIndex = 9;
             // 
             // numUpDDiscount
             // 
@@ -237,54 +253,54 @@
             this.lClientId.AutoSize = true;
             this.lClientId.Location = new System.Drawing.Point(8, 41);
             this.lClientId.Name = "lClientId";
-            this.lClientId.Size = new System.Drawing.Size(67, 21);
+            this.lClientId.Size = new System.Drawing.Size(84, 21);
             this.lClientId.TabIndex = 27;
-            this.lClientId.Text = "Client ID";
+            this.lClientId.Text = "ID клиента";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 320);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 21);
+            this.label1.Size = new System.Drawing.Size(114, 21);
             this.label1.TabIndex = 26;
-            this.label1.Text = "Savings";
+            this.label1.Text = "Денег на карте";
             // 
             // lPlayedSum
             // 
             this.lPlayedSum.AutoSize = true;
             this.lPlayedSum.Location = new System.Drawing.Point(8, 285);
             this.lPlayedSum.Name = "lPlayedSum";
-            this.lPlayedSum.Size = new System.Drawing.Size(86, 21);
+            this.lPlayedSum.Size = new System.Drawing.Size(143, 21);
             this.lPlayedSum.TabIndex = 26;
-            this.lPlayedSum.Text = "Played sum";
+            this.lPlayedSum.Text = "Наигранныя сумма";
             // 
             // lPersonalDiscount
             // 
             this.lPersonalDiscount.AutoSize = true;
             this.lPersonalDiscount.Location = new System.Drawing.Point(8, 250);
             this.lPersonalDiscount.Name = "lPersonalDiscount";
-            this.lPersonalDiscount.Size = new System.Drawing.Size(126, 21);
+            this.lPersonalDiscount.Size = new System.Drawing.Size(161, 21);
             this.lPersonalDiscount.TabIndex = 25;
-            this.lPersonalDiscount.Text = "PersonalDiscount";
+            this.lPersonalDiscount.Text = "Персональная скидка";
             // 
             // lActivationDate
             // 
             this.lActivationDate.AutoSize = true;
             this.lActivationDate.Location = new System.Drawing.Point(8, 215);
             this.lActivationDate.Name = "lActivationDate";
-            this.lActivationDate.Size = new System.Drawing.Size(110, 21);
+            this.lActivationDate.Size = new System.Drawing.Size(120, 21);
             this.lActivationDate.TabIndex = 28;
-            this.lActivationDate.Text = "Activation date";
+            this.lActivationDate.Text = "Дата активации";
             // 
             // lPhone
             // 
             this.lPhone.AutoSize = true;
             this.lPhone.Location = new System.Drawing.Point(8, 180);
             this.lPhone.Name = "lPhone";
-            this.lPhone.Size = new System.Drawing.Size(54, 21);
+            this.lPhone.Size = new System.Drawing.Size(70, 21);
             this.lPhone.TabIndex = 30;
-            this.lPhone.Text = "Phone";
+            this.lPhone.Text = "Телефон";
             // 
             // lEmail
             // 
@@ -300,41 +316,25 @@
             this.lBirthday.AutoSize = true;
             this.lBirthday.Location = new System.Drawing.Point(8, 145);
             this.lBirthday.Name = "lBirthday";
-            this.lBirthday.Size = new System.Drawing.Size(65, 21);
+            this.lBirthday.Size = new System.Drawing.Size(120, 21);
             this.lBirthday.TabIndex = 30;
-            this.lBirthday.Text = "Birthday";
+            this.lBirthday.Text = "День рождения";
             // 
             // lName
             // 
             this.lName.AutoSize = true;
             this.lName.Location = new System.Drawing.Point(8, 75);
             this.lName.Name = "lName";
-            this.lName.Size = new System.Drawing.Size(50, 21);
+            this.lName.Size = new System.Drawing.Size(39, 21);
             this.lName.TabIndex = 29;
-            this.lName.Text = "Name";
-            // 
-            // numUpDSavings
-            // 
-            this.numUpDSavings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.numUpDSavings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numUpDSavings.ForeColor = System.Drawing.Color.White;
-            this.numUpDSavings.Location = new System.Drawing.Point(169, 318);
-            this.numUpDSavings.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.numUpDSavings.Name = "numUpDSavings";
-            this.numUpDSavings.ReadOnly = true;
-            this.numUpDSavings.Size = new System.Drawing.Size(160, 29);
-            this.numUpDSavings.TabIndex = 9;
+            this.lName.Text = "Имя";
             // 
             // ClientManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(436, 425);
+            this.ClientSize = new System.Drawing.Size(437, 425);
             this.ControlBox = false;
             this.Controls.Add(this.gbClientInfo);
             this.Controls.Add(this.bCancel);
@@ -352,8 +352,8 @@
             this.gbClientInfo.ResumeLayout(false);
             this.gbClientInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDClientIdCreate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDDiscount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDSavings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDDiscount)).EndInit();
             this.ResumeLayout(false);
 
         }

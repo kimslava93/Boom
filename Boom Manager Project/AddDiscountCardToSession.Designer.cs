@@ -39,7 +39,7 @@
             this.lDsicountId = new System.Windows.Forms.Label();
             this.cbDiscountCard = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lName = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,9 +57,9 @@
             this.bAddMoney.ForeColor = System.Drawing.Color.White;
             this.bAddMoney.Location = new System.Drawing.Point(147, 135);
             this.bAddMoney.Name = "bAddMoney";
-            this.bAddMoney.Size = new System.Drawing.Size(59, 33);
+            this.bAddMoney.Size = new System.Drawing.Size(105, 33);
             this.bAddMoney.TabIndex = 22;
-            this.bAddMoney.Text = "ADD";
+            this.bAddMoney.Text = "Добавить";
             this.bAddMoney.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.bAddMoney.UseVisualStyleBackColor = false;
             this.bAddMoney.Click += new System.EventHandler(this.bAddMoney_Click);
@@ -97,9 +97,9 @@
             this.lAddMoney.ForeColor = System.Drawing.Color.White;
             this.lAddMoney.Location = new System.Drawing.Point(6, 140);
             this.lAddMoney.Name = "lAddMoney";
-            this.lAddMoney.Size = new System.Drawing.Size(88, 21);
+            this.lAddMoney.Size = new System.Drawing.Size(127, 21);
             this.lAddMoney.TabIndex = 18;
-            this.lAddMoney.Text = "Add money";
+            this.lAddMoney.Text = "Добавить деньги";
             this.lAddMoney.Click += new System.EventHandler(this.lAddMoney_Click);
             // 
             // lMoneyLeft
@@ -109,9 +109,9 @@
             this.lMoneyLeft.ForeColor = System.Drawing.Color.White;
             this.lMoneyLeft.Location = new System.Drawing.Point(6, 104);
             this.lMoneyLeft.Name = "lMoneyLeft";
-            this.lMoneyLeft.Size = new System.Drawing.Size(80, 21);
+            this.lMoneyLeft.Size = new System.Drawing.Size(112, 21);
             this.lMoneyLeft.TabIndex = 17;
-            this.lMoneyLeft.Text = "Money left";
+            this.lMoneyLeft.Text = "Денег на счету";
             this.lMoneyLeft.Click += new System.EventHandler(this.lMoneyLeft_Click);
             // 
             // lClientName
@@ -121,9 +121,9 @@
             this.lClientName.ForeColor = System.Drawing.Color.White;
             this.lClientName.Location = new System.Drawing.Point(6, 69);
             this.lClientName.Name = "lClientName";
-            this.lClientName.Size = new System.Drawing.Size(90, 21);
+            this.lClientName.Size = new System.Drawing.Size(115, 21);
             this.lClientName.TabIndex = 16;
-            this.lClientName.Text = "Client name";
+            this.lClientName.Text = "Имя владельца";
             this.lClientName.Click += new System.EventHandler(this.lClientName_Click);
             // 
             // bCancel
@@ -140,9 +140,9 @@
             this.bCancel.ForeColor = System.Drawing.Color.White;
             this.bCancel.Location = new System.Drawing.Point(10, 186);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(75, 33);
+            this.bCancel.Size = new System.Drawing.Size(83, 33);
             this.bCancel.TabIndex = 15;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -161,11 +161,11 @@
             this.bSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bSubmit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bSubmit.ForeColor = System.Drawing.Color.White;
-            this.bSubmit.Location = new System.Drawing.Point(252, 186);
+            this.bSubmit.Location = new System.Drawing.Point(234, 186);
             this.bSubmit.Name = "bSubmit";
-            this.bSubmit.Size = new System.Drawing.Size(75, 33);
+            this.bSubmit.Size = new System.Drawing.Size(125, 33);
             this.bSubmit.TabIndex = 14;
-            this.bSubmit.Text = "Submit";
+            this.bSubmit.Text = "Подтвердить";
             this.bSubmit.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.bSubmit.UseVisualStyleBackColor = false;
             this.bSubmit.Click += new System.EventHandler(this.bSubmit_Click);
@@ -177,9 +177,9 @@
             this.lDsicountId.ForeColor = System.Drawing.Color.White;
             this.lDsicountId.Location = new System.Drawing.Point(6, 34);
             this.lDsicountId.Name = "lDsicountId";
-            this.lDsicountId.Size = new System.Drawing.Size(102, 21);
+            this.lDsicountId.Size = new System.Drawing.Size(73, 21);
             this.lDsicountId.TabIndex = 12;
-            this.lDsicountId.Text = "Discount card";
+            this.lDsicountId.Text = "Карточка";
             this.lDsicountId.Click += new System.EventHandler(this.lDsicountId_Click);
             // 
             // cbDiscountCard
@@ -211,18 +211,18 @@
             this.groupBox1.Controls.Add(this.lMoneyLeft);
             this.groupBox1.Location = new System.Drawing.Point(6, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(367, 242);
+            this.groupBox1.Size = new System.Drawing.Size(367, 226);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             // 
-            // label1
+            // lName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(85, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(218, 21);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "ADD DISCOUNT  TO SESSION";
+            this.lName.AutoSize = true;
+            this.lName.Location = new System.Drawing.Point(61, 9);
+            this.lName.Name = "lName";
+            this.lName.Size = new System.Drawing.Size(272, 21);
+            this.lName.TabIndex = 24;
+            this.lName.Text = "ДОБАВИТЬ КАРТОЧКУ ДЛЯ СЕССИИ";
             // 
             // AddDiscountCardToSession
             // 
@@ -231,9 +231,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(377, 274);
+            this.ClientSize = new System.Drawing.Size(377, 261);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lName);
             this.Controls.Add(this.groupBox1);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -269,6 +269,6 @@
         private System.Windows.Forms.Label lDsicountId;
         private System.Windows.Forms.ComboBox cbDiscountCard;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lName;
     }
 }

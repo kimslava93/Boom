@@ -20,7 +20,7 @@ namespace Boom_Manager_Project.DataBaseClasses
         {
             if (clientOnSession.Count > 0)
             {
-                if (EndPointsControl.EndPointsControlInstance().SwitchOff(sessionToClose.PlaystationId))
+                if (EndPointsControl.EndPointsControlInstance().SwitchOff(sessionToClose.Приставка))
                 {
 
                     if (clientOnSession.Count == 1 && clientOnSession[0].client_id.Equals("0"))
@@ -37,7 +37,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             else
             {
                 MessageBox.Show("Error! Session cannot be closed because of client absence in the session#" +
-                                sessionToClose.SessionId);
+                                sessionToClose.Сессия);
             }
         }
 
@@ -53,8 +53,8 @@ namespace Boom_Manager_Project.DataBaseClasses
                 {
                     case DialogResult.Yes:
                         comments += ". " + moneyLeftWithoutHourMoney + " soms were returned";
-                        sessionToClose.PayedSum = sessionToClose.PayedSum - moneyLeftWithoutHourMoney;
-                        sessionToClose.MoneyLeft -= moneyLeftWithoutHourMoney;
+                        sessionToClose.Оплаченная_сумма = sessionToClose.Оплаченная_сумма - moneyLeftWithoutHourMoney;
+                        sessionToClose.Остаток_денег -= moneyLeftWithoutHourMoney;
                         DataBaseClass.Instancedb().CloseSessionWithUsualClient(sessionToClose, comments, endTime);
                         break;
                     case DialogResult.No:
@@ -73,18 +73,18 @@ namespace Boom_Manager_Project.DataBaseClasses
         private double GetMoneyLeftSum(DaySessionClass sessionToCalculate)
             //substract one hour from game if client was playing lower than one hour 
         {
-            double moneyPlayed = sessionToCalculate.PayedSum - sessionToCalculate.MoneyLeft;
+            double moneyPlayed = sessionToCalculate.Оплаченная_сумма - sessionToCalculate.Остаток_денег;
             double oneHourpPrice = AddNewSessionModel.InstanceAddNewSessionModel()
-                .GetSumToPay(sessionToCalculate.PlaystationId, TimeSpan.FromHours(1), sessionToCalculate.StartGame);
-            if (sessionToCalculate.PayedSum < oneHourpPrice && (int)moneyPlayed == (int)sessionToCalculate.PayedSum)//never should happen
+                .GetSumToPay(sessionToCalculate.Приставка, TimeSpan.FromHours(1), sessionToCalculate.Начало);
+            if (sessionToCalculate.Оплаченная_сумма < oneHourpPrice && (int)moneyPlayed == (int)sessionToCalculate.Оплаченная_сумма)//never should happen
             {
                 return (double) 0;
             }
             if (moneyPlayed < oneHourpPrice)
             {
-                return sessionToCalculate.PayedSum - oneHourpPrice;
+                return sessionToCalculate.Оплаченная_сумма - oneHourpPrice;
             }
-            return sessionToCalculate.MoneyLeft;
+            return sessionToCalculate.Остаток_денег;
         }
 
         public int ExpandForProblemReportOrMinimize(int height)

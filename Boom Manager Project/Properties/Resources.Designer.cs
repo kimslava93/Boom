@@ -59,5 +59,14 @@ namespace Boom_Manager_Project.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string EnterPassword_tbLogin_MouseClick_Login {
+            get {
+                return ResourceManager.GetString("EnterPassword_tbLogin_MouseClick_Login", resourceCulture);
+            }
+        }
     }
 }

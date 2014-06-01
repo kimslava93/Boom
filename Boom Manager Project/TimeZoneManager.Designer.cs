@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bExit = new System.Windows.Forms.Button();
             this.bExitCreatingMode = new System.Windows.Forms.Button();
             this.bCreateNewTimeZone = new System.Windows.Forms.Button();
@@ -71,11 +71,11 @@
             this.bExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bExit.ForeColor = System.Drawing.Color.White;
-            this.bExit.Location = new System.Drawing.Point(601, 177);
+            this.bExit.Location = new System.Drawing.Point(616, 177);
             this.bExit.Name = "bExit";
             this.bExit.Size = new System.Drawing.Size(75, 34);
             this.bExit.TabIndex = 8;
-            this.bExit.Text = "Exit";
+            this.bExit.Text = "Выход";
             this.bExit.UseVisualStyleBackColor = false;
             this.bExit.Click += new System.EventHandler(this.bExit_Click);
             // 
@@ -91,9 +91,9 @@
             this.bExitCreatingMode.ForeColor = System.Drawing.Color.White;
             this.bExitCreatingMode.Location = new System.Drawing.Point(299, 458);
             this.bExitCreatingMode.Name = "bExitCreatingMode";
-            this.bExitCreatingMode.Size = new System.Drawing.Size(79, 42);
+            this.bExitCreatingMode.Size = new System.Drawing.Size(116, 42);
             this.bExitCreatingMode.TabIndex = 10;
-            this.bExitCreatingMode.Text = "Apply";
+            this.bExitCreatingMode.Text = "Применить";
             this.bExitCreatingMode.UseVisualStyleBackColor = false;
             this.bExitCreatingMode.Click += new System.EventHandler(this.bExitCreatingMode_Click);
             // 
@@ -109,9 +109,9 @@
             this.bCreateNewTimeZone.ForeColor = System.Drawing.Color.White;
             this.bCreateNewTimeZone.Location = new System.Drawing.Point(12, 177);
             this.bCreateNewTimeZone.Name = "bCreateNewTimeZone";
-            this.bCreateNewTimeZone.Size = new System.Drawing.Size(75, 34);
+            this.bCreateNewTimeZone.Size = new System.Drawing.Size(86, 34);
             this.bCreateNewTimeZone.TabIndex = 9;
-            this.bCreateNewTimeZone.Text = "Create";
+            this.bCreateNewTimeZone.Text = "Создать";
             this.bCreateNewTimeZone.UseVisualStyleBackColor = false;
             this.bCreateNewTimeZone.Click += new System.EventHandler(this.bCreateNewTimeZone_Click);
             // 
@@ -127,9 +127,9 @@
             this.bDeleteTimezone.ForeColor = System.Drawing.Color.White;
             this.bDeleteTimezone.Location = new System.Drawing.Point(126, 177);
             this.bDeleteTimezone.Name = "bDeleteTimezone";
-            this.bDeleteTimezone.Size = new System.Drawing.Size(75, 34);
+            this.bDeleteTimezone.Size = new System.Drawing.Size(86, 34);
             this.bDeleteTimezone.TabIndex = 7;
-            this.bDeleteTimezone.Text = "Delete";
+            this.bDeleteTimezone.Text = "Удалить";
             this.bDeleteTimezone.UseVisualStyleBackColor = false;
             this.bDeleteTimezone.Click += new System.EventHandler(this.bDeleteTimezone_Click);
             // 
@@ -142,10 +142,10 @@
             this.gbPriceList.ForeColor = System.Drawing.Color.White;
             this.gbPriceList.Location = new System.Drawing.Point(311, 230);
             this.gbPriceList.Name = "gbPriceList";
-            this.gbPriceList.Size = new System.Drawing.Size(365, 222);
+            this.gbPriceList.Size = new System.Drawing.Size(380, 222);
             this.gbPriceList.TabIndex = 6;
             this.gbPriceList.TabStop = false;
-            this.gbPriceList.Text = "Playstation price list";
+            this.gbPriceList.Text = "Прайс лист приставки";
             // 
             // dgvTimeZonePrices
             // 
@@ -157,29 +157,29 @@
             this.dgvTimeZonePrices.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dgvTimeZonePrices.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvTimeZonePrices.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle37.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle37.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle37.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle37.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTimeZonePrices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTimeZonePrices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTimeZonePrices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTimeZonePrices.ColumnHeadersVisible = false;
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle38.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTimeZonePrices.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTimeZonePrices.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvTimeZonePrices.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvTimeZonePrices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvTimeZonePrices.EnableHeadersVisualStyles = false;
             this.dgvTimeZonePrices.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.dgvTimeZonePrices.Location = new System.Drawing.Point(3, 73);
+            this.dgvTimeZonePrices.Location = new System.Drawing.Point(3, 78);
             this.dgvTimeZonePrices.Name = "dgvTimeZonePrices";
             this.dgvTimeZonePrices.ReadOnly = true;
             this.dgvTimeZonePrices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -187,7 +187,7 @@
             this.dgvTimeZonePrices.ShowCellToolTips = false;
             this.dgvTimeZonePrices.ShowEditingIcon = false;
             this.dgvTimeZonePrices.ShowRowErrors = false;
-            this.dgvTimeZonePrices.Size = new System.Drawing.Size(359, 146);
+            this.dgvTimeZonePrices.Size = new System.Drawing.Size(374, 141);
             this.dgvTimeZonePrices.TabIndex = 3;
             this.dgvTimeZonePrices.VirtualMode = true;
             // 
@@ -201,11 +201,11 @@
             this.bChangePrices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bChangePrices.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bChangePrices.ForeColor = System.Drawing.Color.White;
-            this.bChangePrices.Location = new System.Drawing.Point(278, 15);
+            this.bChangePrices.Location = new System.Drawing.Point(260, 17);
             this.bChangePrices.Name = "bChangePrices";
-            this.bChangePrices.Size = new System.Drawing.Size(81, 55);
+            this.bChangePrices.Size = new System.Drawing.Size(114, 55);
             this.bChangePrices.TabIndex = 2;
-            this.bChangePrices.Text = "Change prices";
+            this.bChangePrices.Text = "Установить цену";
             this.bChangePrices.UseVisualStyleBackColor = false;
             this.bChangePrices.Click += new System.EventHandler(this.bChangePrices_Click);
             // 
@@ -215,7 +215,7 @@
             this.cbAllTimeZones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbAllTimeZones.ForeColor = System.Drawing.Color.White;
             this.cbAllTimeZones.FormattingEnabled = true;
-            this.cbAllTimeZones.Location = new System.Drawing.Point(133, 33);
+            this.cbAllTimeZones.Location = new System.Drawing.Point(126, 33);
             this.cbAllTimeZones.Name = "cbAllTimeZones";
             this.cbAllTimeZones.Size = new System.Drawing.Size(121, 29);
             this.cbAllTimeZones.TabIndex = 1;
@@ -228,9 +228,9 @@
             this.lTimeZoneNames.ForeColor = System.Drawing.Color.White;
             this.lTimeZoneNames.Location = new System.Drawing.Point(6, 36);
             this.lTimeZoneNames.Name = "lTimeZoneNames";
-            this.lTimeZoneNames.Size = new System.Drawing.Size(121, 21);
+            this.lTimeZoneNames.Size = new System.Drawing.Size(114, 21);
             this.lTimeZoneNames.TabIndex = 0;
-            this.lTimeZoneNames.Text = "Time zone name";
+            this.lTimeZoneNames.Text = "Название вр.з.";
             // 
             // dgvAllTimezones
             // 
@@ -240,23 +240,23 @@
             this.dgvAllTimezones.AllowUserToResizeRows = false;
             this.dgvAllTimezones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAllTimezones.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle39.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle39.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAllTimezones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAllTimezones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvAllTimezones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle40.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle40.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAllTimezones.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAllTimezones.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvAllTimezones.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvAllTimezones.EnableHeadersVisualStyles = false;
             this.dgvAllTimezones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -272,7 +272,7 @@
             this.dgvAllTimezones.ShowCellToolTips = false;
             this.dgvAllTimezones.ShowEditingIcon = false;
             this.dgvAllTimezones.ShowRowErrors = false;
-            this.dgvAllTimezones.Size = new System.Drawing.Size(664, 133);
+            this.dgvAllTimezones.Size = new System.Drawing.Size(679, 133);
             this.dgvAllTimezones.TabIndex = 4;
             this.dgvAllTimezones.VirtualMode = true;
             // 
@@ -293,7 +293,7 @@
             this.gbTimezoneCreator.Size = new System.Drawing.Size(293, 222);
             this.gbTimezoneCreator.TabIndex = 5;
             this.gbTimezoneCreator.TabStop = false;
-            this.gbTimezoneCreator.Text = "Time zone creator";
+            this.gbTimezoneCreator.Text = "Создать временную зону";
             // 
             // textBox2
             // 
@@ -361,11 +361,11 @@
             this.bAddTimezone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddTimezone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddTimezone.ForeColor = System.Drawing.Color.White;
-            this.bAddTimezone.Location = new System.Drawing.Point(107, 183);
+            this.bAddTimezone.Location = new System.Drawing.Point(97, 182);
             this.bAddTimezone.Name = "bAddTimezone";
-            this.bAddTimezone.Size = new System.Drawing.Size(79, 34);
+            this.bAddTimezone.Size = new System.Drawing.Size(103, 34);
             this.bAddTimezone.TabIndex = 4;
-            this.bAddTimezone.Text = "Add";
+            this.bAddTimezone.Text = "Добавить";
             this.bAddTimezone.UseVisualStyleBackColor = false;
             this.bAddTimezone.Click += new System.EventHandler(this.bAddTimezone_Click);
             // 
@@ -385,9 +385,9 @@
             this.lEndTime.ForeColor = System.Drawing.Color.White;
             this.lEndTime.Location = new System.Drawing.Point(12, 108);
             this.lEndTime.Name = "lEndTime";
-            this.lEndTime.Size = new System.Drawing.Size(69, 21);
+            this.lEndTime.Size = new System.Drawing.Size(93, 21);
             this.lEndTime.TabIndex = 1;
-            this.lEndTime.Text = "End time";
+            this.lEndTime.Text = "Конец вр. з.";
             // 
             // lStartTime
             // 
@@ -395,9 +395,9 @@
             this.lStartTime.ForeColor = System.Drawing.Color.White;
             this.lStartTime.Location = new System.Drawing.Point(12, 73);
             this.lStartTime.Name = "lStartTime";
-            this.lStartTime.Size = new System.Drawing.Size(74, 21);
+            this.lStartTime.Size = new System.Drawing.Size(102, 21);
             this.lStartTime.TabIndex = 1;
-            this.lStartTime.Text = "Start time";
+            this.lStartTime.Text = "Начало вр. з.";
             // 
             // lTimezoneName
             // 
@@ -405,27 +405,27 @@
             this.lTimezoneName.ForeColor = System.Drawing.Color.White;
             this.lTimezoneName.Location = new System.Drawing.Point(12, 35);
             this.lTimezoneName.Name = "lTimezoneName";
-            this.lTimezoneName.Size = new System.Drawing.Size(50, 21);
+            this.lTimezoneName.Size = new System.Drawing.Size(39, 21);
             this.lTimezoneName.TabIndex = 0;
-            this.lTimezoneName.Text = "Name";
+            this.lTimezoneName.Text = "Имя";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(262, 9);
+            this.label1.Location = new System.Drawing.Point(217, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(176, 21);
+            this.label1.Size = new System.Drawing.Size(277, 21);
             this.label1.TabIndex = 11;
-            this.label1.Text = "TIMEZONE MANAGER";
+            this.label1.Text = "Управление временными зонами";
             // 
             // TimeZoneManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(688, 218);
+            this.ClientSize = new System.Drawing.Size(699, 514);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bExit);

@@ -68,11 +68,11 @@ namespace Boom_Manager_Project
             this.bSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bSubmit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bSubmit.ForeColor = System.Drawing.Color.White;
-            this.bSubmit.Location = new System.Drawing.Point(32, 474);
+            this.bSubmit.Location = new System.Drawing.Point(12, 447);
             this.bSubmit.Name = "bSubmit";
-            this.bSubmit.Size = new System.Drawing.Size(75, 37);
+            this.bSubmit.Size = new System.Drawing.Size(91, 37);
             this.bSubmit.TabIndex = 44;
-            this.bSubmit.Text = "Create";
+            this.bSubmit.Text = "Создать";
             this.bSubmit.UseVisualStyleBackColor = false;
             this.bSubmit.Click += new System.EventHandler(this.bSubmit_Click);
             // 
@@ -81,110 +81,110 @@ namespace Boom_Manager_Project
             this.lSalaryPerDay.AutoSize = true;
             this.lSalaryPerDay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lSalaryPerDay.ForeColor = System.Drawing.Color.White;
-            this.lSalaryPerDay.Location = new System.Drawing.Point(27, 383);
+            this.lSalaryPerDay.Location = new System.Drawing.Point(11, 374);
             this.lSalaryPerDay.Name = "lSalaryPerDay";
-            this.lSalaryPerDay.Size = new System.Drawing.Size(109, 21);
+            this.lSalaryPerDay.Size = new System.Drawing.Size(150, 21);
             this.lSalaryPerDay.TabIndex = 38;
-            this.lSalaryPerDay.Text = "Salary per day";
+            this.lSalaryPerDay.Text = "Ежедневная оплата";
             // 
             // lHomeAddress
             // 
             this.lHomeAddress.AutoSize = true;
             this.lHomeAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lHomeAddress.ForeColor = System.Drawing.Color.White;
-            this.lHomeAddress.Location = new System.Drawing.Point(27, 348);
+            this.lHomeAddress.Location = new System.Drawing.Point(11, 339);
             this.lHomeAddress.Name = "lHomeAddress";
-            this.lHomeAddress.Size = new System.Drawing.Size(110, 21);
+            this.lHomeAddress.Size = new System.Drawing.Size(134, 21);
             this.lHomeAddress.TabIndex = 39;
-            this.lHomeAddress.Text = "Home address";
+            this.lHomeAddress.Text = "Домашний адрес";
             // 
             // lBirthday
             // 
             this.lBirthday.AutoSize = true;
             this.lBirthday.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lBirthday.ForeColor = System.Drawing.Color.White;
-            this.lBirthday.Location = new System.Drawing.Point(27, 316);
+            this.lBirthday.Location = new System.Drawing.Point(11, 307);
             this.lBirthday.Name = "lBirthday";
-            this.lBirthday.Size = new System.Drawing.Size(68, 21);
+            this.lBirthday.Size = new System.Drawing.Size(123, 21);
             this.lBirthday.TabIndex = 36;
-            this.lBirthday.Text = "Birthday";
+            this.lBirthday.Text = "День рождения";
             // 
             // lAdditionalPhone
             // 
             this.lAdditionalPhone.AutoSize = true;
             this.lAdditionalPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lAdditionalPhone.ForeColor = System.Drawing.Color.White;
-            this.lAdditionalPhone.Location = new System.Drawing.Point(27, 278);
+            this.lAdditionalPhone.Location = new System.Drawing.Point(11, 269);
             this.lAdditionalPhone.Name = "lAdditionalPhone";
-            this.lAdditionalPhone.Size = new System.Drawing.Size(129, 21);
+            this.lAdditionalPhone.Size = new System.Drawing.Size(106, 21);
             this.lAdditionalPhone.TabIndex = 37;
-            this.lAdditionalPhone.Text = "Additional phone";
+            this.lAdditionalPhone.Text = "Доп. телефон";
             // 
             // lPhone
             // 
             this.lPhone.AutoSize = true;
             this.lPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lPhone.ForeColor = System.Drawing.Color.White;
-            this.lPhone.Location = new System.Drawing.Point(28, 243);
+            this.lPhone.Location = new System.Drawing.Point(12, 234);
             this.lPhone.Name = "lPhone";
-            this.lPhone.Size = new System.Drawing.Size(54, 21);
+            this.lPhone.Size = new System.Drawing.Size(71, 21);
             this.lPhone.TabIndex = 42;
-            this.lPhone.Text = "Phone";
+            this.lPhone.Text = "Телефон";
             // 
             // lPosition
             // 
             this.lPosition.AutoSize = true;
             this.lPosition.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lPosition.ForeColor = System.Drawing.Color.White;
-            this.lPosition.Location = new System.Drawing.Point(29, 208);
+            this.lPosition.Location = new System.Drawing.Point(13, 199);
             this.lPosition.Name = "lPosition";
-            this.lPosition.Size = new System.Drawing.Size(66, 21);
+            this.lPosition.Size = new System.Drawing.Size(90, 21);
             this.lPosition.TabIndex = 43;
-            this.lPosition.Text = "Position";
+            this.lPosition.Text = "Должность";
             // 
             // lPassword
             // 
             this.lPassword.AutoSize = true;
             this.lPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lPassword.ForeColor = System.Drawing.Color.White;
-            this.lPassword.Location = new System.Drawing.Point(27, 175);
+            this.lPassword.Location = new System.Drawing.Point(11, 166);
             this.lPassword.Name = "lPassword";
-            this.lPassword.Size = new System.Drawing.Size(77, 21);
+            this.lPassword.Size = new System.Drawing.Size(63, 21);
             this.lPassword.TabIndex = 40;
-            this.lPassword.Text = "Password";
+            this.lPassword.Text = "Пароль";
             // 
             // lLogin
             // 
             this.lLogin.AutoSize = true;
             this.lLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lLogin.ForeColor = System.Drawing.Color.White;
-            this.lLogin.Location = new System.Drawing.Point(27, 138);
+            this.lLogin.Location = new System.Drawing.Point(11, 129);
             this.lLogin.Name = "lLogin";
-            this.lLogin.Size = new System.Drawing.Size(49, 21);
+            this.lLogin.Size = new System.Drawing.Size(54, 21);
             this.lLogin.TabIndex = 41;
-            this.lLogin.Text = "Login";
+            this.lLogin.Text = "Логин";
             // 
             // lName
             // 
             this.lName.AutoSize = true;
             this.lName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lName.ForeColor = System.Drawing.Color.White;
-            this.lName.Location = new System.Drawing.Point(27, 103);
+            this.lName.Location = new System.Drawing.Point(11, 94);
             this.lName.Name = "lName";
-            this.lName.Size = new System.Drawing.Size(52, 21);
+            this.lName.Size = new System.Drawing.Size(41, 21);
             this.lName.TabIndex = 35;
-            this.lName.Text = "Name";
+            this.lName.Text = "Имя";
             // 
             // lPersonId
             // 
             this.lPersonId.AutoSize = true;
             this.lPersonId.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lPersonId.ForeColor = System.Drawing.Color.White;
-            this.lPersonId.Location = new System.Drawing.Point(28, 68);
+            this.lPersonId.Location = new System.Drawing.Point(12, 59);
             this.lPersonId.Name = "lPersonId";
-            this.lPersonId.Size = new System.Drawing.Size(77, 21);
+            this.lPersonId.Size = new System.Drawing.Size(126, 21);
             this.lPersonId.TabIndex = 34;
-            this.lPersonId.Text = "Person ID";
+            this.lPersonId.Text = "ID пользователя";
             // 
             // tbHomeAddress
             // 
@@ -192,7 +192,7 @@ namespace Boom_Manager_Project
             this.tbHomeAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbHomeAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbHomeAddress.ForeColor = System.Drawing.Color.White;
-            this.tbHomeAddress.Location = new System.Drawing.Point(163, 345);
+            this.tbHomeAddress.Location = new System.Drawing.Point(167, 336);
             this.tbHomeAddress.MaxLength = 30;
             this.tbHomeAddress.Name = "tbHomeAddress";
             this.tbHomeAddress.Size = new System.Drawing.Size(187, 29);
@@ -204,7 +204,7 @@ namespace Boom_Manager_Project
             this.tbAdditionalPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAdditionalPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbAdditionalPhone.ForeColor = System.Drawing.Color.White;
-            this.tbAdditionalPhone.Location = new System.Drawing.Point(163, 275);
+            this.tbAdditionalPhone.Location = new System.Drawing.Point(167, 266);
             this.tbAdditionalPhone.MaxLength = 25;
             this.tbAdditionalPhone.Name = "tbAdditionalPhone";
             this.tbAdditionalPhone.Size = new System.Drawing.Size(187, 29);
@@ -216,7 +216,7 @@ namespace Boom_Manager_Project
             this.tbPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbPhone.ForeColor = System.Drawing.Color.White;
-            this.tbPhone.Location = new System.Drawing.Point(163, 240);
+            this.tbPhone.Location = new System.Drawing.Point(167, 231);
             this.tbPhone.MaxLength = 25;
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(187, 29);
@@ -230,7 +230,7 @@ namespace Boom_Manager_Project
             this.tbPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbPassword.ForeColor = System.Drawing.Color.White;
             this.tbPassword.HideSelection = false;
-            this.tbPassword.Location = new System.Drawing.Point(163, 170);
+            this.tbPassword.Location = new System.Drawing.Point(167, 161);
             this.tbPassword.MaxLength = 25;
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.ShortcutsEnabled = false;
@@ -244,7 +244,7 @@ namespace Boom_Manager_Project
             this.tbLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbLogin.ForeColor = System.Drawing.Color.White;
-            this.tbLogin.Location = new System.Drawing.Point(163, 135);
+            this.tbLogin.Location = new System.Drawing.Point(167, 126);
             this.tbLogin.MaxLength = 15;
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(187, 29);
@@ -256,7 +256,7 @@ namespace Boom_Manager_Project
             this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbName.ForeColor = System.Drawing.Color.White;
-            this.tbName.Location = new System.Drawing.Point(163, 100);
+            this.tbName.Location = new System.Drawing.Point(167, 91);
             this.tbName.MaxLength = 50;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(187, 29);
@@ -268,7 +268,7 @@ namespace Boom_Manager_Project
             this.tbPersonId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbPersonId.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbPersonId.ForeColor = System.Drawing.Color.White;
-            this.tbPersonId.Location = new System.Drawing.Point(163, 65);
+            this.tbPersonId.Location = new System.Drawing.Point(167, 56);
             this.tbPersonId.MaxLength = 10;
             this.tbPersonId.Name = "tbPersonId";
             this.tbPersonId.Size = new System.Drawing.Size(187, 29);
@@ -284,7 +284,7 @@ namespace Boom_Manager_Project
             "ADMINISTRATOR",
             "OPERATOR",
             "MANAGER"});
-            this.cbPosition.Location = new System.Drawing.Point(163, 205);
+            this.cbPosition.Location = new System.Drawing.Point(167, 196);
             this.cbPosition.Name = "cbPosition";
             this.cbPosition.Size = new System.Drawing.Size(187, 29);
             this.cbPosition.TabIndex = 46;
@@ -294,7 +294,7 @@ namespace Boom_Manager_Project
             this.numUpDSalary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDSalary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDSalary.ForeColor = System.Drawing.Color.White;
-            this.numUpDSalary.Location = new System.Drawing.Point(163, 381);
+            this.numUpDSalary.Location = new System.Drawing.Point(167, 372);
             this.numUpDSalary.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -320,11 +320,11 @@ namespace Boom_Manager_Project
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(265, 474);
+            this.bCancel.Location = new System.Drawing.Point(268, 447);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(75, 37);
+            this.bCancel.Size = new System.Drawing.Size(86, 37);
             this.bCancel.TabIndex = 48;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
@@ -344,18 +344,18 @@ namespace Boom_Manager_Project
             this.lRegistrationDate.AutoSize = true;
             this.lRegistrationDate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lRegistrationDate.ForeColor = System.Drawing.Color.White;
-            this.lRegistrationDate.Location = new System.Drawing.Point(27, 422);
+            this.lRegistrationDate.Location = new System.Drawing.Point(11, 413);
             this.lRegistrationDate.Name = "lRegistrationDate";
-            this.lRegistrationDate.Size = new System.Drawing.Size(130, 21);
+            this.lRegistrationDate.Size = new System.Drawing.Size(139, 21);
             this.lRegistrationDate.TabIndex = 36;
-            this.lRegistrationDate.Text = "Registration Date";
+            this.lRegistrationDate.Text = "Дата регистрации";
             // 
             // mtbBirthday
             // 
             this.mtbBirthday.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.mtbBirthday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtbBirthday.ForeColor = System.Drawing.Color.White;
-            this.mtbBirthday.Location = new System.Drawing.Point(163, 310);
+            this.mtbBirthday.Location = new System.Drawing.Point(167, 301);
             this.mtbBirthday.Mask = "00/00/0000";
             this.mtbBirthday.Name = "mtbBirthday";
             this.mtbBirthday.ShortcutsEnabled = false;
@@ -367,7 +367,7 @@ namespace Boom_Manager_Project
             this.mtbRegistrationDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.mtbRegistrationDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mtbRegistrationDate.ForeColor = System.Drawing.Color.White;
-            this.mtbRegistrationDate.Location = new System.Drawing.Point(163, 416);
+            this.mtbRegistrationDate.Location = new System.Drawing.Point(167, 407);
             this.mtbRegistrationDate.Name = "mtbRegistrationDate";
             this.mtbRegistrationDate.ReadOnly = true;
             this.mtbRegistrationDate.ShortcutsEnabled = false;
@@ -379,7 +379,7 @@ namespace Boom_Manager_Project
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(386, 523);
+            this.ClientSize = new System.Drawing.Size(366, 496);
             this.ControlBox = false;
             this.Controls.Add(this.mtbRegistrationDate);
             this.Controls.Add(this.mtbBirthday);

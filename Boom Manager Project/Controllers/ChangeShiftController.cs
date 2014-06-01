@@ -29,18 +29,20 @@ namespace Boom_Manager_Project.Controllers
         {
             if (type == "WarningLabel")
             {
-                return "Please input login and password to accept shift.\n" +
-                       "By loging in you accept shift as it is, \nand take all responsibility for equipment itself";
+                return "Введите логин и пароль для принятия смены\n" +
+                       //"Please input login and password to accept shift.\n" +
+                       "Сразу после того как вы введете логин и пароль, \nвы примите всю ответственность оборудованния и кассы на себя!";
+                    //"By loging in you accept shift as it is, \nand take all responsibility for equipment itself";
             }
             if (type == "FirstShift")
             {
-                return "Your shift is the first and there is no opened one.\nYou should login to continue!";
+                return "До вас не было открыто ни одной сессии! Вы должны ввести логин и пароль чтобы продолжить!"; //"Your shift is the first and there is no opened one.\nYou should login to continue!";
             }
             if (type == "CloseOldSession")
             {
-                return "You should close all old sessions!";
+                return "Вы должны закрыть все предыдущие сессии!";//"You should close all old sessions!";
             }
-            return "";
+            return "Неизвестное предупреждение! Обратитесь к разработчику!";
         }
 
         public void PasswordChecking(string login, string password)
@@ -51,7 +53,7 @@ namespace Boom_Manager_Project.Controllers
             }
             else
             {
-                MessageBox.Show("Login or Password is wrong!");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(10));
             }
         }
 
@@ -75,7 +77,7 @@ namespace Boom_Manager_Project.Controllers
 
             var lastOpenedSession = DataBaseClass.Instancedb().GetOpenedGlobalSession();
             var operatorInfo = new personal_info_t();
-            List<DaySessionClass> openedSessions = new List<DaySessionClass>();
+            var openedSessions = new List<DaySessionClass>();
             if (lastOpenedSession != null)
             {
                 operatorInfo = DataBaseClass.Instancedb().GetUserInfoByPersonID(lastOpenedSession.operator_id);
@@ -97,7 +99,7 @@ namespace Boom_Manager_Project.Controllers
             {
                 foreach (DaySessionClass t in openedSessions)
                 {
-                    DataBaseClass.Instancedb().TransferOpenedSessionToNextGlobalSession(t.SessionId);
+                    DataBaseClass.Instancedb().TransferOpenedSessionToNextGlobalSession(t.Сессия);
                 }
             }
 

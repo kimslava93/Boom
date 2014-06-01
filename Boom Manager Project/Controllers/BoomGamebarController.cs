@@ -72,8 +72,8 @@ namespace Boom_Manager_Project.Controllers
             if (dSessions.Count <= 0) return dSessions;
             foreach (DaySessionClass os in dSessions)
             {
-                os.MoneyLeft = Math.Round(GetAlreadyPlayedMoneySum(os.PlaystationId, os.StartGame, os.PayedSum), 2);
-                os.TimeLeft = GetTimeLeft(os.EndGame);
+                os.Остаток_денег = Math.Round(GetAlreadyPlayedMoneySum(os.Приставка, os.Начало, os.Оплаченная_сумма), 0);
+                os.Оставшееся_время = GetTimeLeft(os.Конец);
             }
             return dSessions;
         }
@@ -101,26 +101,26 @@ namespace Boom_Manager_Project.Controllers
 //            List<DaySessionClass> dSessions = GetAllOpenedDaySessions();
             foreach (DaySessionClass os in dSessions)
             {
-//                if (os.TimeLeft > TimeSpan.FromMinutes(5))
+//                if (os.Оставшееся_время > TimeSpan.FromMinutes(5))
 //                {
 //                    //continue;
 //                }
-                if (os.TimeLeft > TimeSpan.FromMinutes(3) && os.TimeLeft < TimeSpan.FromMinutes(6))
+                if (os.Оставшееся_время > TimeSpan.FromMinutes(3) && os.Оставшееся_время < TimeSpan.FromMinutes(6))
                 {
-//                    HighLight(os.SessionId, 0);
+//                    HighLight(os.Сессия, 0);
                     //warning highlight
                 }
-                else if (os.TimeLeft > TimeSpan.FromMinutes(0) && os.TimeLeft <= TimeSpan.FromMinutes(3))
+                else if (os.Оставшееся_время > TimeSpan.FromMinutes(0) && os.Оставшееся_время <= TimeSpan.FromMinutes(3))
                 {
-//                    HighLight(os.SessionId, 1);
+//                    HighLight(os.Сессия, 1);
                 }
-                else if (os.TimeLeft <= TimeSpan.FromMinutes(0))
+                else if (os.Оставшееся_время <= TimeSpan.FromMinutes(0))
                 {
-                    if (os.ClientId.Equals("0"))
+                    if (os.Клиент.Equals("0"))
                     {
                         DataBaseClass.Instancedb().CloseSessionWithUsualClient(os, "", DateTime.Now);
                     }
-                    else if(os.ClientId.Length > 1 && !string.IsNullOrWhiteSpace(os.ClientId))
+                    else if(os.Клиент.Length > 1 && !string.IsNullOrWhiteSpace(os.Клиент))
                     {
                         DataBaseClass.Instancedb().CloseSessionWithCard(os, "", DateTime.Now);
                     }
@@ -137,13 +137,13 @@ namespace Boom_Manager_Project.Controllers
         {
             int tries = 5;
             var sessionToClose = (from sc in currentDaySessionClasses
-                                  where sc.SessionId == sessionId
+                                  where sc.Сессия == sessionId
                                   select sc).SingleOrDefault();
             while (sessionToClose == null && tries >= 0)
             {
                 tries--;
                 sessionToClose = (from sc in currentDaySessionClasses
-                    where sc.SessionId == sessionId
+                    where sc.Сессия == sessionId
                     select sc).SingleOrDefault();
                 if (sessionToClose != null) break;
             }
@@ -158,7 +158,7 @@ namespace Boom_Manager_Project.Controllers
             csf.ShowDialog();
             return GetAllOpenedDaySessions();
 //            int dailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSessionDailyId();
-//            var selectedSession = DataBaseClass.Instancedb().GetDaySessionBySessionId(sessionToClose.SessionId, dailyId);
+//            var selectedSession = DataBaseClass.Instancedb().GetDaySessionBySessionId(sessionToClose.Сессия, dailyId);
 //            if (selectedSession != null)
 //            {
 

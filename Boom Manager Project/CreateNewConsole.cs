@@ -43,7 +43,7 @@ namespace Boom_Manager_Project
 //        {
 //            foreach (TimezonePricesMyClass t in _timezonePrices)
 //            {
-//                if (textBoxNameOfNewConsole.Text.Equals(t.PlaystationId))
+//                if (textBoxNameOfNewConsole.Text.Equals(t.Приставка))
 //                {
 //                    if (t.TimezoneCostPerHour <= 0)
 //                    {

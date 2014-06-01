@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lSessionID = new System.Windows.Forms.Label();
             this.tbSessionID = new System.Windows.Forms.TextBox();
             this.gbExtendUsualClient = new System.Windows.Forms.GroupBox();
@@ -61,9 +61,9 @@
             this.lSessionID.ForeColor = System.Drawing.Color.White;
             this.lSessionID.Location = new System.Drawing.Point(31, 24);
             this.lSessionID.Name = "lSessionID";
-            this.lSessionID.Size = new System.Drawing.Size(78, 21);
+            this.lSessionID.Size = new System.Drawing.Size(76, 21);
             this.lSessionID.TabIndex = 0;
-            this.lSessionID.Text = "Session ID";
+            this.lSessionID.Text = "ID сессии";
             // 
             // tbSessionID
             // 
@@ -93,7 +93,7 @@
             this.gbExtendUsualClient.Size = new System.Drawing.Size(339, 216);
             this.gbExtendUsualClient.TabIndex = 2;
             this.gbExtendUsualClient.TabStop = false;
-            this.gbExtendUsualClient.Text = "Extend usual client time";
+            this.gbExtendUsualClient.Text = "Продлить время обычного клиента";
             // 
             // tbEndTimeWill
             // 
@@ -122,7 +122,7 @@
             this.numUpDMinutesExtend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDMinutesExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDMinutesExtend.ForeColor = System.Drawing.Color.White;
-            this.numUpDMinutesExtend.Location = new System.Drawing.Point(241, 47);
+            this.numUpDMinutesExtend.Location = new System.Drawing.Point(267, 47);
             this.numUpDMinutesExtend.Maximum = new decimal(new int[] {
             59,
             0,
@@ -138,7 +138,7 @@
             this.numUpDHoursExtend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDHoursExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDHoursExtend.ForeColor = System.Drawing.Color.White;
-            this.numUpDHoursExtend.Location = new System.Drawing.Point(177, 47);
+            this.numUpDHoursExtend.Location = new System.Drawing.Point(203, 47);
             this.numUpDHoursExtend.Maximum = new decimal(new int[] {
             15,
             0,
@@ -154,7 +154,7 @@
             this.numUpDMoneyExtend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDMoneyExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDMoneyExtend.ForeColor = System.Drawing.Color.White;
-            this.numUpDMoneyExtend.Location = new System.Drawing.Point(177, 82);
+            this.numUpDMoneyExtend.Location = new System.Drawing.Point(203, 82);
             this.numUpDMoneyExtend.Maximum = new decimal(new int[] {
             19400,
             0,
@@ -171,9 +171,9 @@
             this.EndTimeWill.ForeColor = System.Drawing.Color.White;
             this.EndTimeWill.Location = new System.Drawing.Point(19, 169);
             this.EndTimeWill.Name = "EndTimeWill";
-            this.EndTimeWill.Size = new System.Drawing.Size(93, 21);
+            this.EndTimeWill.Size = new System.Drawing.Size(110, 21);
             this.EndTimeWill.TabIndex = 0;
-            this.EndTimeWill.Text = "End time will";
+            this.EndTimeWill.Text = "Продление до";
             // 
             // lEndTimeWas
             // 
@@ -181,9 +181,9 @@
             this.lEndTimeWas.ForeColor = System.Drawing.Color.White;
             this.lEndTimeWas.Location = new System.Drawing.Point(19, 134);
             this.lEndTimeWas.Name = "lEndTimeWas";
-            this.lEndTimeWas.Size = new System.Drawing.Size(98, 21);
+            this.lEndTimeWas.Size = new System.Drawing.Size(85, 21);
             this.lEndTimeWas.TabIndex = 0;
-            this.lEndTimeWas.Text = "End time was";
+            this.lEndTimeWas.Text = "Конец был";
             // 
             // lExtend
             // 
@@ -191,9 +191,9 @@
             this.lExtend.ForeColor = System.Drawing.Color.White;
             this.lExtend.Location = new System.Drawing.Point(19, 49);
             this.lExtend.Name = "lExtend";
-            this.lExtend.Size = new System.Drawing.Size(110, 21);
+            this.lExtend.Size = new System.Drawing.Size(163, 21);
             this.lExtend.TabIndex = 0;
-            this.lExtend.Text = "Time to extend";
+            this.lExtend.Text = "Время для продления";
             // 
             // lMoneyToExtend
             // 
@@ -201,39 +201,47 @@
             this.lMoneyToExtend.ForeColor = System.Drawing.Color.White;
             this.lMoneyToExtend.Location = new System.Drawing.Point(19, 84);
             this.lMoneyToExtend.Name = "lMoneyToExtend";
-            this.lMoneyToExtend.Size = new System.Drawing.Size(124, 21);
+            this.lMoneyToExtend.Size = new System.Drawing.Size(153, 21);
             this.lMoneyToExtend.TabIndex = 0;
-            this.lMoneyToExtend.Text = "Money to extend";
+            this.lMoneyToExtend.Text = "Денег на продление";
             // 
             // gbExtendWithCard
             // 
             this.gbExtendWithCard.Controls.Add(this.label1);
             this.gbExtendWithCard.Controls.Add(this.bAddMoney);
             this.gbExtendWithCard.Controls.Add(this.dgvClientsPerTable);
+            this.gbExtendWithCard.ForeColor = System.Drawing.Color.White;
             this.gbExtendWithCard.Location = new System.Drawing.Point(405, 61);
             this.gbExtendWithCard.Name = "gbExtendWithCard";
-            this.gbExtendWithCard.Size = new System.Drawing.Size(247, 216);
+            this.gbExtendWithCard.Size = new System.Drawing.Size(298, 216);
             this.gbExtendWithCard.TabIndex = 3;
             this.gbExtendWithCard.TabStop = false;
-            this.gbExtendWithCard.Text = "Extend client with discount time";
+            this.gbExtendWithCard.Text = "Продлить время клиента с карточкой";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(6, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(210, 21);
+            this.label1.Size = new System.Drawing.Size(277, 21);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Choose client and add money";
+            this.label1.Text = "Выберите клиента и начислите деньги";
             // 
             // bAddMoney
             // 
-            this.bAddMoney.Location = new System.Drawing.Point(119, 166);
+            this.bAddMoney.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddMoney.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddMoney.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddMoney.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddMoney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bAddMoney.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bAddMoney.Location = new System.Drawing.Point(150, 113);
             this.bAddMoney.Name = "bAddMoney";
             this.bAddMoney.Size = new System.Drawing.Size(48, 42);
             this.bAddMoney.TabIndex = 1;
             this.bAddMoney.Text = "+";
-            this.bAddMoney.UseVisualStyleBackColor = true;
+            this.bAddMoney.UseVisualStyleBackColor = false;
             this.bAddMoney.Click += new System.EventHandler(this.bAddMoney_Click);
             // 
             // dgvClientsPerTable
@@ -248,14 +256,14 @@
             this.dgvClientsPerTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientsPerTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvClientsPerTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientsPerTable.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientsPerTable.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvClientsPerTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvClientsPerTable.Location = new System.Drawing.Point(6, 66);
             this.dgvClientsPerTable.MultiSelect = false;
@@ -282,11 +290,11 @@
             this.bApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bApply.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bApply.ForeColor = System.Drawing.Color.White;
-            this.bApply.Location = new System.Drawing.Point(276, 278);
+            this.bApply.Location = new System.Drawing.Point(253, 278);
             this.bApply.Name = "bApply";
-            this.bApply.Size = new System.Drawing.Size(75, 37);
+            this.bApply.Size = new System.Drawing.Size(98, 37);
             this.bApply.TabIndex = 4;
-            this.bApply.Text = "Extend";
+            this.bApply.Text = "Продлить";
             this.bApply.UseVisualStyleBackColor = false;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
             // 
@@ -303,9 +311,9 @@
             this.bCancel.ForeColor = System.Drawing.Color.White;
             this.bCancel.Location = new System.Drawing.Point(12, 278);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(75, 37);
+            this.bCancel.Size = new System.Drawing.Size(95, 37);
             this.bCancel.TabIndex = 5;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмену";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
@@ -316,7 +324,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(366, 323);
+            this.ClientSize = new System.Drawing.Size(365, 323);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bApply);

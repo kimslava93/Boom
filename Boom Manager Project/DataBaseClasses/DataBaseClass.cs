@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Linq;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -88,11 +87,11 @@ namespace Boom_Manager_Project.DataBaseClasses
                 {
                     return (from a in db.GetTable<global_session_t>()
                         orderby a.daily_id ascending
-                        select new ShiftsMyClass()
+                        select new ShiftsMyClass
                         {
                             DailyId = a.daily_id,
-                            AdministratorID = (string)a.administrator_id,
-                            OperatorId = (string)a.operator_id,
+                            AdministratorID = a.administrator_id,
+                            OperatorId = a.operator_id,
                             StartTime = a.start_session,
                             EndTime = a.end_session
                         }).Take(numberOfLastSessons).ToList();
@@ -254,17 +253,17 @@ namespace Boom_Manager_Project.DataBaseClasses
                     where sessionDiscount != null
                     select new DaySessionClass
                     {
-                        SessionId = days.session_id,
-                        PlaystationId = days.playstation_id,
-                        StartGame = (DateTime) startGame,
-                        EndGame = (DateTime) endGame,
-                        TimeLeft = GetTimeLeft((DateTime) endGame),
+                        Сессия = days.session_id,
+                        Приставка = days.playstation_id,
+                        Начало = (DateTime) startGame,
+                        Конец = (DateTime) endGame,
+                        Оставшееся_время = GetTimeLeft((DateTime) endGame),
                         //----------------------------------------------------------
-                        ClientId = ListToString(days.session_id, clientsList),
+                        Клиент = ListToString(days.session_id, clientsList),
                         //to show all clients in one line and column instead of one as string
-                        MoneyLeft = days.money_left,
-                        SessionDiscount = (double) sessionDiscount,
-                        PayedSum = days.payed_sum
+                        Остаток_денег = days.money_left,
+                        Скидка_сессии = (double) sessionDiscount,
+                        Оплаченная_сумма = days.payed_sum
                     }).ToList<DaySessionClass>();
             }
         }
@@ -335,17 +334,17 @@ namespace Boom_Manager_Project.DataBaseClasses
                                      where startGame != null
                                      let endGame = d.end_game
                                      where endGame != null
-                                     select new DaySessionClass()
+                                     select new DaySessionClass
                                      {
-                                         SessionId = d.client_num,//to see manager num of clients
-                                         PlaystationId = d.playstation_id,
-                                         StartGame = (DateTime)startGame,
-                                         EndGame = (DateTime)endGame,
-                                         TimeLeft = GetTimeLeft((DateTime)endGame),//----------------------------------------------------------
-                                         ClientId = ListToString(d.session_id, clientsList), //to show all clients in one line and column instead of one
-                                         MoneyLeft = d.money_left,
-                                         SessionDiscount = (double)d.session_discount,
-                                         PayedSum = d.payed_sum
+                                         Сессия = d.client_num,//to see manager num of clients
+                                         Приставка = d.playstation_id,
+                                         Начало = (DateTime)startGame,
+                                         Конец = (DateTime)endGame,
+                                         Оставшееся_время = GetTimeLeft((DateTime)endGame),//----------------------------------------------------------
+                                         Клиент = ListToString(d.session_id, clientsList), //to show all clients in one line and column instead of one
+                                         Остаток_денег = d.money_left,
+                                         Скидка_сессии = (double)d.session_discount,
+                                         Оплаченная_сумма = d.payed_sum
                                      }).ToList<DaySessionClass>();
                 return daySessionsReport;
             }
@@ -392,7 +391,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 Table<device_endpoints_t> deviceEndpointsTs = db.GetTable<device_endpoints_t>();
-                var endpoint = new device_endpoints_t()
+                var endpoint = new device_endpoints_t
                 {
                     device_id = deviceId,
                     endpoint_index = index
@@ -414,7 +413,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     select ep).SingleOrDefault();
                 if (matched != null)
                 {
-                    matched.playstation_id = changePlaystation ?? null;
+                    matched.playstation_id = changePlaystation;
                     
                     db.SubmitChanges();
                 }
@@ -453,7 +452,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 Table<account_savings_t> personalInfoTable = db.GetTable<account_savings_t>();
-                var savings = new account_savings_t()
+                var savings = new account_savings_t
                 {
                     client_id = clientId,
                     savings = 0
@@ -662,7 +661,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 if (!endpoints[index].On())
                 {
                     /*throw new Exception*/
-                    MessageBox.Show("NO CONNECTION WITH DEVICE!\nPlease reboot device and try again.");
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(1));//no connection with device
 
                 }//Sending singnal to board
             }
@@ -733,8 +732,8 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 DialogResult deleteDialog =
-                    MessageBox.Show(timeZoneNameToDelete + " will be removed from DataBase!\nAre you sure?",
-                        "Attention!", MessageBoxButtons.OKCancel);
+                    MessageBox.Show(timeZoneNameToDelete + ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(1),
+                        ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetCaption(1), MessageBoxButtons.OKCancel);
                 if (deleteDialog == DialogResult.OK)
                 {
                     var playstationCostsToDelete = (from pc in db.GetTable<playstation_timezone>()
@@ -754,7 +753,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                                 }
                                 catch (Exception)
                                 {
-                                    MessageBox.Show("Cannot delete all prices of timezone " + timeZoneNameToDelete);
+                                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(2) + timeZoneNameToDelete);//cannot delete playstation cost
                                 }
                             }
 //                            MessageBox.Show(playstationCostsToDelete + " was deleted!");
@@ -821,18 +820,16 @@ namespace Boom_Manager_Project.DataBaseClasses
                 var sessionsToDelete = (from s in db.GetTable<days_sessions_t>()
                     where s.playstation_id == consoleId
                     select s);
-                if (sessionsToDelete != null)
+                
+                Table<clients_per_session_t> cps = db.GetTable<clients_per_session_t>();
+                foreach (var daysSessionsT in sessionsToDelete)
                 {
-                    Table<clients_per_session_t> cps = db.GetTable<clients_per_session_t>();
-                    foreach (var daysSessionsT in sessionsToDelete)
-                    {
-                        days_sessions_t t = daysSessionsT;
-                        var clientsPerSessionToDelete = (from cp in db.GetTable<clients_per_session_t>()
-                            where cp.session_id == t.session_id
-                            select cp).SingleOrDefault();
-                        if (clientsPerSessionToDelete != null) cps.DeleteOnSubmit(clientsPerSessionToDelete);
-                        db.SubmitChanges();
-                    }
+                    days_sessions_t t = daysSessionsT;
+                    var clientsPerSessionToDelete = (from cp in db.GetTable<clients_per_session_t>()
+                        where cp.session_id == t.session_id
+                        select cp).SingleOrDefault();
+                    if (clientsPerSessionToDelete != null) cps.DeleteOnSubmit(clientsPerSessionToDelete);
+                    db.SubmitChanges();
                 }
                 if (consoleToDelete != null)
                 {
@@ -940,18 +937,18 @@ namespace Boom_Manager_Project.DataBaseClasses
                 int dayId = GetOpenedGlobalSession().daily_id;
                 var sessionIdtoDelete = (from s in db.GetTable<days_sessions_t>()
                                             where s.daily_id == dayId
-                                            where s.session_id == dsc.SessionId
+                                            where s.session_id == dsc.Сессия
                                             select s).SingleOrDefault();
                 if (sessionIdtoDelete == null) return;
 
                 sessionIdtoDelete.end_game = endTime;
                 sessionIdtoDelete.session_state = "closed";
 
-//                if (endTime - dsc.StartGame < TimeSpan.FromHours(1))
+//                if (endTime - dsc.Начало < TimeSpan.FromHours(1))
 //                {
-//                    dsc.MoneyLeft = dsc.PayedSum - dsc.MoneyLeft;
+//                    dsc.Остаток_денег = dsc.Оплаченная_сумма - dsc.Остаток_денег;
 //                }
-                sessionIdtoDelete.money_left = dsc.MoneyLeft;
+                sessionIdtoDelete.money_left = dsc.Остаток_денег;
                 if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
                 {
                     sessionIdtoDelete.comments = comments;
@@ -960,7 +957,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 {
                     sessionIdtoDelete.comments += "\n" + comments;
                 }
-                UpdatePlaystationState(dsc.PlaystationId, "free");
+                UpdatePlaystationState(dsc.Приставка, "free");
                 while (true)
                 {
                     try
@@ -971,7 +968,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     catch
                     {
                         MessageBox.Show(
-                            "Can't update DataBase during closing client comments! Please contact with Developer");
+                            ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(3));
                     }
                 }
             }
@@ -984,14 +981,14 @@ namespace Boom_Manager_Project.DataBaseClasses
                 int dayId = GetOpenedGlobalSession().daily_id;
                 var sessionIdtoDelete = (from s in db.GetTable<days_sessions_t>()
                                          where s.daily_id == dayId
-                                         where s.session_id == dsc.SessionId
+                                         where s.session_id == dsc.Сессия
                                          select s).SingleOrDefault();
                 if (sessionIdtoDelete == null) return;
                 sessionIdtoDelete.end_game = endTime;
                 sessionIdtoDelete.session_state = "closed";
-                sessionIdtoDelete.money_left = dsc.MoneyLeft;
-                List<clients_per_session_t> clientsOnSession = GetListOfClientsPerExactSession(dsc.SessionId);
-                double playedMoney = dsc.PayedSum - dsc.MoneyLeft;//sessionIdtoDelete.payed_sum - sessionIdtoDelete.money_left;
+                sessionIdtoDelete.money_left = dsc.Остаток_денег;
+                List<clients_per_session_t> clientsOnSession = GetListOfClientsPerExactSession(dsc.Сессия);
+                double playedMoney = dsc.Оплаченная_сумма - dsc.Остаток_денег;//sessionIdtoDelete.payed_sum - sessionIdtoDelete.money_left;
                 double eachPlayerShouldPay = playedMoney/clientsOnSession.Count;
                 double nextShouldpayAdditional = 0;
                 do
@@ -1037,7 +1034,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 {
                     sessionIdtoDelete.comments += "\n" + comments;
                 }
-                UpdatePlaystationState(dsc.PlaystationId, "free");
+                UpdatePlaystationState(dsc.Приставка, "free");
                 while (true)
                 {
                     try
@@ -1048,7 +1045,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     catch
                     {
                         MessageBox.Show(
-                            "Can't update DataBase during closing client comments! Please contact with Developer");
+                            ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(3));
                     }
                 }
             }
@@ -1074,7 +1071,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Cannot substract sum from client card with ID " + clientIdToChangeSavings.client_id);
+                        MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(4) + clientIdToChangeSavings.client_id);
                     }
                 }
             }
@@ -1134,7 +1131,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 var session = (from d in db.GetTable<days_sessions_t>()
-                    where d.session_id == sessionToExtend.SessionId
+                    where d.session_id == sessionToExtend.Сессия
                     select d).SingleOrDefault();
                 if (session != null)
                 {
@@ -1146,7 +1143,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Cannot extend sesion time!");
+                        MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(5));
                     }
                 }
             }
@@ -1157,7 +1154,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 var session = (from d in db.GetTable<days_sessions_t>()
-                               where d.session_id == sessionToExtend.SessionId
+                               where d.session_id == sessionToExtend.Сессия
                                select d).SingleOrDefault();
                 if (session != null)
                 {
@@ -1169,7 +1166,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Cannot extend sesion time!");
+                        MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(5));
                     }
                 }
             }
@@ -1195,7 +1192,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Can not insert new timezone to database!");
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(5));
                 }
                 try
                 {
@@ -1215,10 +1212,9 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Cannot insert price data of TimeZone to database");
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(7));
                 }
             }
         }
-
     }
 }

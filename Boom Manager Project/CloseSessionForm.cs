@@ -11,7 +11,6 @@ namespace Boom_Manager_Project
     {
         private Point? _old;
         private readonly DaySessionClass _sessionToClose;
-        private int _dailyId;
         private List<clients_per_session_t> _clientsPerSession; 
         public CloseSessionForm(DaySessionClass sessionToClose)
         {
@@ -19,12 +18,14 @@ namespace Boom_Manager_Project
             InitializeComponent();
         }
 
+        public int DailyId { get; set; }
+
         private void CloseSessionForm_Load(object sender, EventArgs e)
         {
             lQuestion.TextAlign = ContentAlignment.MiddleCenter;
-            lQuestion.Text = "Why do you want to close session\nbefore time expires?";
-            _dailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSessionDailyId();
-            _clientsPerSession = DataBaseClass.Instancedb().GetListOfClientsPerExactSession(_sessionToClose.SessionId);
+            lQuestion.Text = ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(3);
+            DailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSessionDailyId();
+            _clientsPerSession = DataBaseClass.Instancedb().GetListOfClientsPerExactSession(_sessionToClose.Сессия);
         }
 
         private void bCancel_Click(object sender, EventArgs e)
@@ -59,7 +60,8 @@ namespace Boom_Manager_Project
             }
             else
             {
-                MessageBox.Show("Input full and understandable reason,\nwhy you want to switch off console before time expires! ", "Warning!");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(11),
+                    ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(1));
             }
         }
 

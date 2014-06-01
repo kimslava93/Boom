@@ -47,11 +47,11 @@
             this.bClientHasGone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bClientHasGone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bClientHasGone.ForeColor = System.Drawing.Color.White;
-            this.bClientHasGone.Location = new System.Drawing.Point(12, 141);
+            this.bClientHasGone.Location = new System.Drawing.Point(12, 134);
             this.bClientHasGone.Name = "bClientHasGone";
-            this.bClientHasGone.Size = new System.Drawing.Size(138, 40);
+            this.bClientHasGone.Size = new System.Drawing.Size(147, 54);
             this.bClientHasGone.TabIndex = 0;
-            this.bClientHasGone.Text = "Client has gone";
+            this.bClientHasGone.Text = "Клиент ушел раньше";
             this.bClientHasGone.UseVisualStyleBackColor = false;
             this.bClientHasGone.Click += new System.EventHandler(this.bClientHasGone_Click);
             // 
@@ -69,7 +69,7 @@
             this.bProblems.Name = "bProblems";
             this.bProblems.Size = new System.Drawing.Size(102, 32);
             this.bProblems.TabIndex = 1;
-            this.bProblems.Text = "Problems";
+            this.bProblems.Text = "Проблема";
             this.bProblems.UseVisualStyleBackColor = false;
             this.bProblems.Click += new System.EventHandler(this.bProblems_Click);
             // 
@@ -88,7 +88,7 @@
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(138, 41);
             this.bCancel.TabIndex = 2;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 

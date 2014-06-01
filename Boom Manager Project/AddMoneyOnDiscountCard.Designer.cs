@@ -61,9 +61,9 @@
             this.lName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lName.Location = new System.Drawing.Point(26, 68);
             this.lName.Name = "lName";
-            this.lName.Size = new System.Drawing.Size(50, 21);
+            this.lName.Size = new System.Drawing.Size(39, 21);
             this.lName.TabIndex = 1;
-            this.lName.Text = "Name";
+            this.lName.Text = "Имя";
             // 
             // lMoneyOnCard
             // 
@@ -71,9 +71,9 @@
             this.lMoneyOnCard.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lMoneyOnCard.Location = new System.Drawing.Point(26, 103);
             this.lMoneyOnCard.Name = "lMoneyOnCard";
-            this.lMoneyOnCard.Size = new System.Drawing.Size(111, 21);
+            this.lMoneyOnCard.Size = new System.Drawing.Size(114, 21);
             this.lMoneyOnCard.TabIndex = 1;
-            this.lMoneyOnCard.Text = "Money on card";
+            this.lMoneyOnCard.Text = "Денег на карте";
             // 
             // label4
             // 
@@ -81,9 +81,9 @@
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label4.Location = new System.Drawing.Point(26, 193);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 21);
+            this.label4.Size = new System.Drawing.Size(119, 21);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Money to add";
+            this.label4.Text = "Добавить денег";
             // 
             // tbID
             // 
@@ -149,11 +149,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(76, 148);
+            this.label1.Location = new System.Drawing.Point(48, 152);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(255, 21);
+            this.label1.Size = new System.Drawing.Size(314, 21);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Set amount of money for transaction";
+            this.label1.Text = "Укажите сумму для начисления на карточку";
             // 
             // bAccept
             // 
@@ -165,11 +165,11 @@
             this.bAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAccept.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAccept.ForeColor = System.Drawing.Color.White;
-            this.bAccept.Location = new System.Drawing.Point(305, 248);
+            this.bAccept.Location = new System.Drawing.Point(253, 248);
             this.bAccept.Name = "bAccept";
-            this.bAccept.Size = new System.Drawing.Size(75, 40);
+            this.bAccept.Size = new System.Drawing.Size(127, 40);
             this.bAccept.TabIndex = 7;
-            this.bAccept.Text = "Submit";
+            this.bAccept.Text = "Подтвердить";
             this.bAccept.UseVisualStyleBackColor = false;
             this.bAccept.Click += new System.EventHandler(this.bAccept_Click);
             // 
@@ -185,9 +185,9 @@
             this.bCancel.ForeColor = System.Drawing.Color.White;
             this.bCancel.Location = new System.Drawing.Point(26, 248);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(75, 40);
+            this.bCancel.Size = new System.Drawing.Size(85, 40);
             this.bCancel.TabIndex = 8;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 

@@ -8,14 +8,14 @@ namespace Boom_Manager_Project.MyClasses
 {
     public class DaySessionClass
     {
-        public int SessionId { get; set; }
-        public string PlaystationId { get; set; }
-        public DateTime StartGame { get; set; }
-        public DateTime EndGame { get; set; }
-        public TimeSpan TimeLeft { get; set;}
-        public string ClientId { get; set; }
-        public double MoneyLeft { get; set; }
-        public double SessionDiscount { get; set; }
-        public double PayedSum { get; set; }
+        public int Сессия { get; set; }
+        public string Приставка { get; set; }
+        public DateTime Начало { get; set; }
+        public DateTime Конец { get; set; }
+        public TimeSpan Оставшееся_время { get; set;}
+        public string Клиент { get; set; }
+        public double Остаток_денег { get; set; }
+        public double Скидка_сессии { get; set; }
+        public double Оплаченная_сумма { get; set; }
     }
 }

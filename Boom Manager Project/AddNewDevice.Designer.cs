@@ -43,9 +43,9 @@
             this.lDeviceId.ForeColor = System.Drawing.Color.White;
             this.lDeviceId.Location = new System.Drawing.Point(12, 42);
             this.lDeviceId.Name = "lDeviceId";
-            this.lDeviceId.Size = new System.Drawing.Size(73, 21);
+            this.lDeviceId.Size = new System.Drawing.Size(85, 21);
             this.lDeviceId.TabIndex = 0;
-            this.lDeviceId.Text = "Device ID";
+            this.lDeviceId.Text = "ID девайса";
             // 
             // lIPaddress
             // 
@@ -53,9 +53,9 @@
             this.lIPaddress.ForeColor = System.Drawing.Color.White;
             this.lIPaddress.Location = new System.Drawing.Point(12, 91);
             this.lIPaddress.Name = "lIPaddress";
-            this.lIPaddress.Size = new System.Drawing.Size(78, 21);
+            this.lIPaddress.Size = new System.Drawing.Size(67, 21);
             this.lIPaddress.TabIndex = 1;
-            this.lIPaddress.Text = "IP address";
+            this.lIPaddress.Text = "IP адрес";
             // 
             // mtbIpAddress
             // 
@@ -97,11 +97,11 @@
             this.bCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCreate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCreate.ForeColor = System.Drawing.Color.White;
-            this.bCreate.Location = new System.Drawing.Point(165, 163);
+            this.bCreate.Location = new System.Drawing.Point(159, 163);
             this.bCreate.Name = "bCreate";
-            this.bCreate.Size = new System.Drawing.Size(77, 31);
+            this.bCreate.Size = new System.Drawing.Size(83, 31);
             this.bCreate.TabIndex = 4;
-            this.bCreate.Text = "Create";
+            this.bCreate.Text = "Создать";
             this.bCreate.UseVisualStyleBackColor = false;
             this.bCreate.Click += new System.EventHandler(this.bCreate_Click);
             // 
@@ -117,9 +117,9 @@
             this.bCancel.ForeColor = System.Drawing.Color.White;
             this.bCancel.Location = new System.Drawing.Point(16, 163);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(77, 31);
+            this.bCancel.Size = new System.Drawing.Size(81, 31);
             this.bCancel.TabIndex = 5;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 

@@ -56,11 +56,11 @@
             this.bAcceptShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAcceptShift.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAcceptShift.ForeColor = System.Drawing.Color.White;
-            this.bAcceptShift.Location = new System.Drawing.Point(323, 248);
+            this.bAcceptShift.Location = new System.Drawing.Point(352, 248);
             this.bAcceptShift.Name = "bAcceptShift";
-            this.bAcceptShift.Size = new System.Drawing.Size(78, 32);
+            this.bAcceptShift.Size = new System.Drawing.Size(96, 32);
             this.bAcceptShift.TabIndex = 0;
-            this.bAcceptShift.Text = "Accept shift";
+            this.bAcceptShift.Text = "Принять";
             this.bAcceptShift.UseVisualStyleBackColor = false;
             this.bAcceptShift.Click += new System.EventHandler(this.bAcceptShift_Click);
             // 
@@ -75,11 +75,11 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(53, 248);
+            this.bCancel.Location = new System.Drawing.Point(12, 248);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(86, 32);
             this.bCancel.TabIndex = 1;
-            this.bCancel.Text = "Cancel";
+            this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
@@ -104,10 +104,10 @@
             this.gbOutcomingShift.ForeColor = System.Drawing.Color.White;
             this.gbOutcomingShift.Location = new System.Drawing.Point(12, 75);
             this.gbOutcomingShift.Name = "gbOutcomingShift";
-            this.gbOutcomingShift.Size = new System.Drawing.Size(185, 164);
+            this.gbOutcomingShift.Size = new System.Drawing.Size(199, 164);
             this.gbOutcomingShift.TabIndex = 14;
             this.gbOutcomingShift.TabStop = false;
-            this.gbOutcomingShift.Text = "Finishing shift";
+            this.gbOutcomingShift.Text = "Завершающая смена";
             // 
             // lOutgoingOperator
             // 
@@ -116,9 +116,9 @@
             this.lOutgoingOperator.ForeColor = System.Drawing.Color.White;
             this.lOutgoingOperator.Location = new System.Drawing.Point(12, 95);
             this.lOutgoingOperator.Name = "lOutgoingOperator";
-            this.lOutgoingOperator.Size = new System.Drawing.Size(73, 21);
+            this.lOutgoingOperator.Size = new System.Drawing.Size(81, 21);
             this.lOutgoingOperator.TabIndex = 9;
-            this.lOutgoingOperator.Text = "Operator";
+            this.lOutgoingOperator.Text = "Оператор";
             // 
             // lOutgoingAdministrator
             // 
@@ -127,9 +127,9 @@
             this.lOutgoingAdministrator.ForeColor = System.Drawing.Color.White;
             this.lOutgoingAdministrator.Location = new System.Drawing.Point(12, 32);
             this.lOutgoingAdministrator.Name = "lOutgoingAdministrator";
-            this.lOutgoingAdministrator.Size = new System.Drawing.Size(106, 21);
+            this.lOutgoingAdministrator.Size = new System.Drawing.Size(123, 21);
             this.lOutgoingAdministrator.TabIndex = 8;
-            this.lOutgoingAdministrator.Text = "Administrator";
+            this.lOutgoingAdministrator.Text = "Администратор";
             // 
             // tbOutOperatorName
             // 
@@ -142,7 +142,7 @@
             this.tbOutOperatorName.ReadOnly = true;
             this.tbOutOperatorName.Size = new System.Drawing.Size(157, 29);
             this.tbOutOperatorName.TabIndex = 7;
-            this.tbOutOperatorName.Text = "Name";
+            this.tbOutOperatorName.Text = "Имя";
             // 
             // tbOutAdminName
             // 
@@ -155,7 +155,7 @@
             this.tbOutAdminName.ReadOnly = true;
             this.tbOutAdminName.Size = new System.Drawing.Size(157, 29);
             this.tbOutAdminName.TabIndex = 6;
-            this.tbOutAdminName.Text = "Name";
+            this.tbOutAdminName.Text = "Имя";
             // 
             // groupBox1
             // 
@@ -163,12 +163,12 @@
             this.groupBox1.Controls.Add(this.lIncomingAdministrator);
             this.groupBox1.Controls.Add(this.tbInAdminLogin);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(263, 75);
+            this.groupBox1.Location = new System.Drawing.Point(252, 75);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(185, 164);
+            this.groupBox1.Size = new System.Drawing.Size(196, 164);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Starting shift";
+            this.groupBox1.Text = "Принимающая смена";
             // 
             // tbInAdminPassword
             // 
@@ -183,7 +183,7 @@
             this.tbInAdminPassword.ShortcutsEnabled = false;
             this.tbInAdminPassword.Size = new System.Drawing.Size(157, 29);
             this.tbInAdminPassword.TabIndex = 19;
-            this.tbInAdminPassword.Text = "Password";
+            this.tbInAdminPassword.Text = "Пароль";
             this.tbInAdminPassword.UseSystemPasswordChar = true;
             this.tbInAdminPassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbInAdminPassword_MouseClick);
             // 
@@ -194,9 +194,9 @@
             this.lIncomingAdministrator.ForeColor = System.Drawing.Color.White;
             this.lIncomingAdministrator.Location = new System.Drawing.Point(6, 32);
             this.lIncomingAdministrator.Name = "lIncomingAdministrator";
-            this.lIncomingAdministrator.Size = new System.Drawing.Size(106, 21);
+            this.lIncomingAdministrator.Size = new System.Drawing.Size(123, 21);
             this.lIncomingAdministrator.TabIndex = 16;
-            this.lIncomingAdministrator.Text = "Administrator";
+            this.lIncomingAdministrator.Text = "Администратор";
             // 
             // tbInAdminLogin
             // 
@@ -209,7 +209,7 @@
             this.tbInAdminLogin.ShortcutsEnabled = false;
             this.tbInAdminLogin.Size = new System.Drawing.Size(157, 29);
             this.tbInAdminLogin.TabIndex = 14;
-            this.tbInAdminLogin.Text = "Login";
+            this.tbInAdminLogin.Text = "Логин";
             this.tbInAdminLogin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbInAdminLogin_MouseClick);
             // 
             // bAddNewUser

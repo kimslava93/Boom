@@ -50,13 +50,13 @@ namespace Boom_Manager_Project.Controllers
         {
 //            TimeSpan timeToPlay = new TimeSpan();
             List<clients_per_session_t> clientsPerSession =
-                DataBaseClass.Instancedb().GetListOfClientsPerExactSession(sessionToUpdate.SessionId);
+                DataBaseClass.Instancedb().GetListOfClientsPerExactSession(sessionToUpdate.Сессия);
             double sumToPlay =
                 clientsPerSession.Select(t1 => DataBaseClass.Instancedb().GetClientSavingsById(t1.client_id))
                     .Select(moneyOnCard => moneyOnCard.savings)
                     .Sum();
             TimeSpan t = AddNewSessionModel.InstanceAddNewSessionModel()
-                .GetTimeToPlay(sumToPlay, sessionToUpdate.PlaystationId, sessionToUpdate.StartGame);
+                .GetTimeToPlay(sumToPlay, sessionToUpdate.Приставка, sessionToUpdate.Начало);
 //            MessageBox.Show("new sum to play = " + sumToPlay + "\nnew time to play = " + t);
             DataBaseClass.Instancedb().ExtendGameTimeWithClientWithDiscountCard(sessionToUpdate, t, sumToPlay);
         }

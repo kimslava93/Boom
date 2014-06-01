@@ -56,7 +56,7 @@ namespace Boom_Manager_Project
         {
             List<string> result = _adcts.GetClientInfo(cbDiscountCard.Text);
             tbClientName.Text = result[1];
-            tbClientsMoneyLeft.Text = result[2]; //MoneyLeft.ToString(CultureInfo.InvariantCulture);
+            tbClientsMoneyLeft.Text = result[2]; //Остаток_денег.ToString(CultureInfo.InvariantCulture);
             ClientID = result[0];
             MoneyLeft = decimal.Parse(result[2].Replace(".", ",")); //if (double.TryParse(values[i, j].Replace(".", ","), out tmp))
             ClientName = result[1];

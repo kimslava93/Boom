@@ -22,34 +22,33 @@ namespace Boom_Manager_Project
         {
             if (AllFieldsAreFullFilled())
             {
-                personal_info_t newUser = new personal_info_t();
-               
-                
-                newUser.person_id = tbPersonId.Text;
-                newUser.name = tbName.Text;
-                newUser.staff_login = tbLogin.Text;
-                newUser.staff_password = tbPassword.Text;
-                newUser.position = cbPosition.Text;
-                newUser.phone = tbPhone.Text;
-                newUser.additional_phone = tbAdditionalPhone.Text;
-                newUser.birthday = DateTime.Parse(mtbBirthday.Text);
-                newUser.home_address = tbHomeAddress.Text;
-                newUser.salary_per_day = (int)numUpDSalary.Value;
-                newUser.registration_date = DateTime.Parse(mtbRegistrationDate.Text);
+                var newUser = new personal_info_t
+                {
+                    person_id = tbPersonId.Text,
+                    name = tbName.Text,
+                    staff_login = tbLogin.Text,
+                    staff_password = tbPassword.Text,
+                    position = cbPosition.Text,
+                    phone = tbPhone.Text,
+                    additional_phone = tbAdditionalPhone.Text,
+                    birthday = DateTime.Parse(mtbBirthday.Text),
+                    home_address = tbHomeAddress.Text,
+                    salary_per_day = (int) numUpDSalary.Value,
+                    registration_date = DateTime.Parse(mtbRegistrationDate.Text)
+                };
                 try
                 {
-
-                _addNewUserController.AddNewUser(newUser);
+                    _addNewUserController.AddNewUser(newUser);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Something wrong! Check the entered data!");
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(8));//Wrong data
                 }
                 Close();
             }
             else
             {
-                MessageBox.Show("Some fields have wrog values! Check entered data and try again.");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(9));
             }
         }
 

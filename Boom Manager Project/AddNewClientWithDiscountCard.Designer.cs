@@ -54,9 +54,9 @@
             this.lName.ForeColor = System.Drawing.Color.White;
             this.lName.Location = new System.Drawing.Point(13, 47);
             this.lName.Name = "lName";
-            this.lName.Size = new System.Drawing.Size(52, 21);
+            this.lName.Size = new System.Drawing.Size(41, 21);
             this.lName.TabIndex = 0;
-            this.lName.Text = "Name";
+            this.lName.Text = "Имя";
             // 
             // lBirthday
             // 
@@ -65,9 +65,9 @@
             this.lBirthday.ForeColor = System.Drawing.Color.White;
             this.lBirthday.Location = new System.Drawing.Point(13, 82);
             this.lBirthday.Name = "lBirthday";
-            this.lBirthday.Size = new System.Drawing.Size(68, 21);
+            this.lBirthday.Size = new System.Drawing.Size(123, 21);
             this.lBirthday.TabIndex = 1;
-            this.lBirthday.Text = "Birthday";
+            this.lBirthday.Text = "День рождения";
             // 
             // lEmail
             // 
@@ -87,9 +87,9 @@
             this.lPhone.ForeColor = System.Drawing.Color.White;
             this.lPhone.Location = new System.Drawing.Point(13, 152);
             this.lPhone.Name = "lPhone";
-            this.lPhone.Size = new System.Drawing.Size(54, 21);
+            this.lPhone.Size = new System.Drawing.Size(71, 21);
             this.lPhone.TabIndex = 3;
-            this.lPhone.Text = "Phone";
+            this.lPhone.Text = "Телефон";
             // 
             // lActivationDate
             // 
@@ -98,9 +98,9 @@
             this.lActivationDate.ForeColor = System.Drawing.Color.White;
             this.lActivationDate.Location = new System.Drawing.Point(13, 184);
             this.lActivationDate.Name = "lActivationDate";
-            this.lActivationDate.Size = new System.Drawing.Size(113, 21);
+            this.lActivationDate.Size = new System.Drawing.Size(124, 21);
             this.lActivationDate.TabIndex = 4;
-            this.lActivationDate.Text = "Activation date";
+            this.lActivationDate.Text = "Дата активации";
             // 
             // lPersDiscount
             // 
@@ -109,9 +109,9 @@
             this.lPersDiscount.ForeColor = System.Drawing.Color.White;
             this.lPersDiscount.Location = new System.Drawing.Point(13, 221);
             this.lPersDiscount.Name = "lPersDiscount";
-            this.lPersDiscount.Size = new System.Drawing.Size(133, 21);
+            this.lPersDiscount.Size = new System.Drawing.Size(165, 21);
             this.lPersDiscount.TabIndex = 5;
-            this.lPersDiscount.Text = "Personal discount";
+            this.lPersDiscount.Text = "Персональная скидка";
             // 
             // lPlayedSum
             // 
@@ -120,33 +120,33 @@
             this.lPlayedSum.ForeColor = System.Drawing.Color.White;
             this.lPlayedSum.Location = new System.Drawing.Point(13, 257);
             this.lPlayedSum.Name = "lPlayedSum";
-            this.lPlayedSum.Size = new System.Drawing.Size(90, 21);
+            this.lPlayedSum.Size = new System.Drawing.Size(144, 21);
             this.lPlayedSum.TabIndex = 6;
-            this.lPlayedSum.Text = "Played sum";
+            this.lPlayedSum.Text = "Наигранная сумма";
             // 
             // tbName
             // 
             this.tbName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbName.ForeColor = System.Drawing.Color.White;
-            this.tbName.Location = new System.Drawing.Point(155, 44);
+            this.tbName.Location = new System.Drawing.Point(180, 44);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(233, 29);
+            this.tbName.Size = new System.Drawing.Size(208, 29);
             this.tbName.TabIndex = 7;
             // 
             // tbBirtdhay
             // 
             this.tbBirtdhay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBirtdhay.ForeColor = System.Drawing.Color.White;
-            this.tbBirtdhay.Location = new System.Drawing.Point(155, 79);
+            this.tbBirtdhay.Location = new System.Drawing.Point(180, 79);
             this.tbBirtdhay.Name = "tbBirtdhay";
-            this.tbBirtdhay.Size = new System.Drawing.Size(233, 29);
+            this.tbBirtdhay.Size = new System.Drawing.Size(208, 29);
             this.tbBirtdhay.TabIndex = 8;
             // 
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.ForeColor = System.Drawing.Color.White;
-            this.textBox3.Location = new System.Drawing.Point(155, 184);
+            this.textBox3.Location = new System.Drawing.Point(180, 184);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(113, 29);
             this.textBox3.TabIndex = 11;
@@ -155,7 +155,7 @@
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDown1.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown1.Location = new System.Drawing.Point(155, 219);
+            this.numericUpDown1.Location = new System.Drawing.Point(180, 219);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(113, 29);
             this.numericUpDown1.TabIndex = 12;
@@ -164,7 +164,7 @@
             // 
             this.textBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox4.ForeColor = System.Drawing.Color.White;
-            this.textBox4.Location = new System.Drawing.Point(155, 254);
+            this.textBox4.Location = new System.Drawing.Point(180, 254);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(113, 29);
             this.textBox4.TabIndex = 13;
@@ -174,35 +174,35 @@
             this.lID.AutoSize = true;
             this.lID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lID.ForeColor = System.Drawing.Color.White;
-            this.lID.Location = new System.Drawing.Point(12, 9);
+            this.lID.Location = new System.Drawing.Point(13, 12);
             this.lID.Name = "lID";
-            this.lID.Size = new System.Drawing.Size(32, 21);
+            this.lID.Size = new System.Drawing.Size(25, 21);
             this.lID.TabIndex = 14;
-            this.lID.Text = "ID: ";
+            this.lID.Text = "ID";
             // 
             // tbEmail
             // 
             this.tbEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEmail.ForeColor = System.Drawing.Color.White;
-            this.tbEmail.Location = new System.Drawing.Point(155, 114);
+            this.tbEmail.Location = new System.Drawing.Point(180, 114);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(233, 29);
+            this.tbEmail.Size = new System.Drawing.Size(208, 29);
             this.tbEmail.TabIndex = 15;
             // 
             // tbPhone
             // 
             this.tbPhone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPhone.ForeColor = System.Drawing.Color.White;
-            this.tbPhone.Location = new System.Drawing.Point(155, 149);
+            this.tbPhone.Location = new System.Drawing.Point(180, 149);
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(233, 29);
+            this.tbPhone.Size = new System.Drawing.Size(208, 29);
             this.tbPhone.TabIndex = 16;
             // 
             // tbID
             // 
             this.tbID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbID.ForeColor = System.Drawing.Color.White;
-            this.tbID.Location = new System.Drawing.Point(155, 9);
+            this.tbID.Location = new System.Drawing.Point(180, 9);
             this.tbID.Name = "tbID";
             this.tbID.Size = new System.Drawing.Size(113, 29);
             this.tbID.TabIndex = 17;
