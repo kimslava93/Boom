@@ -84,6 +84,7 @@
     <Compile Include="ChangePlaystationPrice.Designer.cs">
       <DependentUpon>ChangePlaystationPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateNewDiscountStepController.cs" />
     <Compile Include="ConsoleManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +121,12 @@
       <DependentUpon>CreateNewConsole.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\CreateNewConsoleController.cs" />
+    <Compile Include="CreateNewDiscountStep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateNewDiscountStep.Designer.cs">
+      <DependentUpon>CreateNewDiscountStep.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeviceManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +141,14 @@
       <DependentUpon>ChangeEndpointConsoleID.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ChangeEndpointConsoleIDContolller.cs" />
+    <Compile Include="DevicesWithEndPoints.cs" />
+    <Compile Include="DiscountStepsManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiscountStepsManager.Designer.cs">
+      <DependentUpon>DiscountStepsManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DiscountStepsManagerController.cs" />
     <Compile Include="EndPointsControl.cs" />
     <Compile Include="MyClasses\DevicesEndPointsMyClass.cs" />
     <Compile Include="ExtendSessionTime.cs">
@@ -263,11 +278,17 @@
     <EmbeddedResource Include="CreateNewConsole.resx">
       <DependentUpon>CreateNewConsole.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CreateNewDiscountStep.resx">
+      <DependentUpon>CreateNewDiscountStep.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeviceManager.resx">
       <DependentUpon>DeviceManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeEndpointConsoleID.resx">
       <DependentUpon>ChangeEndpointConsoleID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiscountStepsManager.resx">
+      <DependentUpon>DiscountStepsManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShiftsManager.resx">
       <DependentUpon>ShiftsManager.cs</DependentUpon>

@@ -35,14 +35,16 @@ namespace Boom_Manager_Project.Controllers
                 bApply.Text = "Create";
                 gbClientInfo.Text = "Create client";
                 cbClients.Location = ClientManagerController.ClientManagerControllerInstance().CREATEMode;
-                numUpDClientIdCreate.Location = ClientManagerController.ClientManagerControllerInstance().EDITMode;
+                tbClientId.Location = ClientManagerController.ClientManagerControllerInstance().EDITMode;
                 cbClients.Enabled = false;
-                numUpDClientIdCreate.Enabled = true;
-                tbBirthday.Enabled = true;
+                tbClientId.Enabled = true;
+                numUpdBDay.Enabled = true;
+                numUpdBMonth.Enabled = true;
+                numUpdBYear.Enabled = true;
                 numUpDDiscount.Enabled = true;
-                tbBirthday.Enabled = true;
                 numUpDSavings.Enabled = true;
                 tbPlayedSum.Enabled = false;
+                tbActivationDate.Text = DateTime.Now.ToShortDateString();
             }
             else if (!String.IsNullOrWhiteSpace(_command) && _command == EDIT)
             {
@@ -56,9 +58,9 @@ namespace Boom_Manager_Project.Controllers
                 bApply.Text = "Apply";
                 gbClientInfo.Text = "Edit client info";
                 cbClients.Location = ClientManagerController.ClientManagerControllerInstance().EDITMode;
-                numUpDClientIdCreate.Location = ClientManagerController.ClientManagerControllerInstance().CREATEMode;
+                tbClientId.Location = ClientManagerController.ClientManagerControllerInstance().CREATEMode;
                 cbClients.Enabled = true;
-                numUpDClientIdCreate.Enabled = false;
+                tbClientId.Enabled = false;
                
             }
             else
@@ -80,7 +82,13 @@ namespace Boom_Manager_Project.Controllers
             
             tbName.Text = c.name;
             tbActivationDate.Text = c.activation_date.ToString(CultureInfo.InvariantCulture);
-            tbBirthday.Text = c.birthday.ToString();
+            if (c.birthday != null)
+            {
+                numUpdBDay.Text = c.birthday.Value.Day.ToString(CultureInfo.InvariantCulture);
+                numUpdBMonth.Text = c.birthday.Value.Month.ToString(CultureInfo.InvariantCulture);
+                numUpdBYear.Text = c.birthday.Value.Year.ToString(CultureInfo.InvariantCulture);
+            }
+
             tbEmail.Text = c.email;
             
             if (c.pers_discount != null)
@@ -92,7 +100,9 @@ namespace Boom_Manager_Project.Controllers
             {
                 tbName.Enabled = false;
                 tbActivationDate.Enabled = false;
-                tbBirthday.Enabled = false;
+                numUpdBDay.Enabled = false;
+                numUpdBMonth.Enabled = false;
+                numUpdBYear.Enabled = false;
                 tbEmail.Enabled = false;
                 tbPlayedSum.Enabled = false;
                 numUpDDiscount.Enabled = false;
@@ -106,7 +116,9 @@ namespace Boom_Manager_Project.Controllers
                 ClientManagerController.ClientManagerControllerInstance().GetClientSavings(cbClients.Text);
                 numUpDSavings.Value = (decimal)s.savings;
                 numUpDDiscount.Enabled = false;
-                tbBirthday.Enabled = true;
+                numUpdBDay.Enabled = true;
+                numUpdBMonth.Enabled = true;
+                numUpdBYear.Enabled = true;
                 tbName.Enabled = true;
                 tbPhone.Enabled = true;
                 tbActivationDate.Enabled = false;
@@ -128,9 +140,11 @@ namespace Boom_Manager_Project.Controllers
 
         private void bApply_Click(object sender, EventArgs e)
         {
+            var bday = new DateTime((int)numUpdBYear.Value, (int)numUpdBMonth.Value, (int)numUpdBDay.Value);
             ClientManagerController.ClientManagerControllerInstance()
-                .CreateNewClient((int) numUpDClientIdCreate.Value, tbName.Text, tbEmail.Text, tbBirthday.Text,
+                .CreateNewClient(tbClientId.Text, tbName.Text, tbEmail.Text, bday,
                     tbPhone.Text, tbActivationDate.Text, (double) numUpDSavings.Value, 0);
+            Close();
         }
 
 

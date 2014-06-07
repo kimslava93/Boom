@@ -9,7 +9,7 @@ namespace Boom_Manager_Project
     public partial class ChangeShift : Form
     {
         private readonly bool _launchOnStart;
-        private bool _formCanBeClosed = false;
+        private bool _formCanBeClosed;
         private Point? _old;
         public ChangeShift(bool onStart)
         {
@@ -56,7 +56,7 @@ namespace Boom_Manager_Project
             if (FieldsAreFulFilled())
             {
                 ChangeShiftController.ChangeShiftControllerInstance().PasswordChecking(tbInAdminLogin.Text, tbInAdminPassword.Text);
-                MessageBox.Show("Shift accepted successfully!");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetMessage(0));
                 _formCanBeClosed = true;
                 Close();
             }
@@ -78,20 +78,13 @@ namespace Boom_Manager_Project
                 ChangeShiftController.ChangeShiftControllerInstance().GetLastOpenedGlobalSession();
             if (session == null)
             {
-                tbOutAdminName.Text = "no person";
-                tbOutOperatorName.Text = "no person";
+                tbOutAdminName.Text = @"no person";
+                tbOutOperatorName.Text = @"no person";
             }
             else
             {
                 tbOutAdminName.Text = DataBaseClass.Instancedb().GetUserInfoByPersonID(session.administrator_id).name;
-                if (session.operator_id == null)
-                {
-                    tbOutOperatorName.Text = "no operator";
-                }
-                else
-                {
-                    tbOutOperatorName.Text = DataBaseClass.Instancedb().GetUserInfoByPersonID(session.operator_id).name;
-                }
+                tbOutOperatorName.Text = session.operator_id == null ? @"no operator" : DataBaseClass.Instancedb().GetUserInfoByPersonID(session.operator_id).name;
             }
         }
 
@@ -122,11 +115,11 @@ namespace Boom_Manager_Project
             bool result = true;
             if (String.IsNullOrEmpty(tbOutAdminName.Text))
             {
-                tbOutAdminName.Text = "Empty";
+                tbOutAdminName.Text = @"Empty";
             }
             if (String.IsNullOrEmpty(tbOutOperatorName.Text))
             {
-                tbOutOperatorName.Text = "Empty";
+                tbOutOperatorName.Text = @"Empty";
             }
             if (String.IsNullOrEmpty(tbInAdminLogin.Text))
             {
@@ -182,7 +175,7 @@ namespace Boom_Manager_Project
 
         private void tbInAdminLogin_MouseClick(object sender, MouseEventArgs e)
         {
-            if (tbInAdminLogin.Text == "Login")
+            if (tbInAdminLogin.Text == @"Login")
             {
                 tbInAdminLogin.Text = "";
             }
@@ -190,7 +183,7 @@ namespace Boom_Manager_Project
 
         private void tbInAdminPassword_MouseClick(object sender, MouseEventArgs e)
         {
-            if (tbInAdminPassword.Text == "Password")
+            if (tbInAdminPassword.Text == @"Password")
             {
                 tbInAdminPassword.Text = "";
             }

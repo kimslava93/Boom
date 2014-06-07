@@ -56,7 +56,7 @@
             this.bAcceptShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAcceptShift.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAcceptShift.ForeColor = System.Drawing.Color.White;
-            this.bAcceptShift.Location = new System.Drawing.Point(352, 248);
+            this.bAcceptShift.Location = new System.Drawing.Point(352, 286);
             this.bAcceptShift.Name = "bAcceptShift";
             this.bAcceptShift.Size = new System.Drawing.Size(96, 32);
             this.bAcceptShift.TabIndex = 0;
@@ -75,7 +75,7 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(12, 248);
+            this.bCancel.Location = new System.Drawing.Point(12, 286);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(86, 32);
             this.bCancel.TabIndex = 1;
@@ -87,7 +87,7 @@
             // 
             this.lWarning.AutoSize = true;
             this.lWarning.ForeColor = System.Drawing.Color.Red;
-            this.lWarning.Location = new System.Drawing.Point(60, 9);
+            this.lWarning.Location = new System.Drawing.Point(46, 9);
             this.lWarning.Name = "lWarning";
             this.lWarning.Size = new System.Drawing.Size(70, 21);
             this.lWarning.TabIndex = 12;
@@ -102,7 +102,7 @@
             this.gbOutcomingShift.Controls.Add(this.tbOutOperatorName);
             this.gbOutcomingShift.Controls.Add(this.tbOutAdminName);
             this.gbOutcomingShift.ForeColor = System.Drawing.Color.White;
-            this.gbOutcomingShift.Location = new System.Drawing.Point(12, 75);
+            this.gbOutcomingShift.Location = new System.Drawing.Point(12, 113);
             this.gbOutcomingShift.Name = "gbOutcomingShift";
             this.gbOutcomingShift.Size = new System.Drawing.Size(199, 164);
             this.gbOutcomingShift.TabIndex = 14;
@@ -163,7 +163,7 @@
             this.groupBox1.Controls.Add(this.lIncomingAdministrator);
             this.groupBox1.Controls.Add(this.tbInAdminLogin);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(252, 75);
+            this.groupBox1.Location = new System.Drawing.Point(252, 113);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(196, 164);
             this.groupBox1.TabIndex = 15;
@@ -223,7 +223,7 @@
             this.bAddNewUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddNewUser.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddNewUser.ForeColor = System.Drawing.Color.White;
-            this.bAddNewUser.Location = new System.Drawing.Point(403, 51);
+            this.bAddNewUser.Location = new System.Drawing.Point(406, 76);
             this.bAddNewUser.Name = "bAddNewUser";
             this.bAddNewUser.Size = new System.Drawing.Size(45, 31);
             this.bAddNewUser.TabIndex = 16;
@@ -237,7 +237,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(463, 292);
+            this.ClientSize = new System.Drawing.Size(463, 330);
             this.ControlBox = false;
             this.Controls.Add(this.bAddNewUser);
             this.Controls.Add(this.groupBox1);

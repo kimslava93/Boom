@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Linq;
-using System.Data.Linq.Mapping;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 
-namespace Boom_Manager_Project
+namespace Boom_Manager_Project.Models
 {
     class AddDiscountToSessionModel
     {
+        private static  AddDiscountToSessionModel _addDiscountToSessionModel;
+
+        public static AddDiscountToSessionModel AddDiscountToSessionModelInstance()
+        {
+            return _addDiscountToSessionModel ?? (_addDiscountToSessionModel = new AddDiscountToSessionModel());
+        }
+
 //        public List<object> GetDataAboutClient(string id)
 //        {
 //            var result = new List<object>();
@@ -44,6 +46,15 @@ namespace Boom_Manager_Project
         public List<client_info_t> GetClientList()
         {
             return DataBaseClass.Instancedb().GetAllClients();
+        }
+
+        public bool IsThereAnyClients()
+        {
+            if (GetClientList().Count > 1)
+            {
+                return true;
+            }
+            return false;
         }
 
         public List<string> GetClientInfo(string id)

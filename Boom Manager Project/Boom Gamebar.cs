@@ -261,5 +261,11 @@ namespace Boom_Manager_Project
             var cm = new ClientManager("create");
             cm.ShowDialog();
         }
+
+        private void bDiscountSteps_Click(object sender, EventArgs e)
+        {
+            var ds = new DiscountStepsManager();
+            ds.ShowDialog();
+        }
     }
 }

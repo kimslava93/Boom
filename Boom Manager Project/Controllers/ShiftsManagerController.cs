@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -34,7 +35,14 @@ namespace Boom_Manager_Project.Controllers
 
             doc.InsertParagraph("ID дня: " + dailyId);
             doc.InsertParagraph("Начало: " + gs.start_session);
-            doc.InsertParagraph("Конец: " + gs.end_session);
+            if (gs.start_session == gs.end_session)
+            {
+                doc.InsertParagraph("Сессия еще не закончена!");
+            }
+            else
+            {
+                doc.InsertParagraph("Конец: " + gs.end_session);
+            }
             doc.InsertParagraph("Администратор: " +
                                 DataBaseClass.Instancedb().GetUserInfoByPersonID(gs.administrator_id).name);
 
@@ -64,13 +72,13 @@ namespace Boom_Manager_Project.Controllers
             
             double playedSum = 0;
             double moneyLeftSum = 0;
-            for (int row = 1; row < allSessions.Count; row++)
+            for (int row = 1; row <= allSessions.Count; row++)
             {
                 t.Rows[row].Cells[0].Paragraphs[0].InsertText(
                     allSessions[row - 1].Сессия.ToString(CultureInfo.InvariantCulture));
                 t.Rows[row].Cells[1].Paragraphs[0].InsertText(allSessions[row - 1].Приставка);
-                t.Rows[row].Cells[2].Paragraphs[0].InsertText(allSessions[row - 1].Начало.ToString("dd/MMM HH:mm:ss"));
-                t.Rows[row].Cells[3].Paragraphs[0].InsertText(allSessions[row - 1].Конец.ToString("dd/MMM HH:mm:ss"));
+                t.Rows[row].Cells[2].Paragraphs[0].InsertText(allSessions[row - 1].Начало.ToString("HH:mm"));
+                t.Rows[row].Cells[3].Paragraphs[0].InsertText(allSessions[row - 1].Конец.ToString("HH:mm"));
                 t.Rows[row].Cells[4].Paragraphs[0].InsertText(allSessions[row - 1].Клиент);
                 t.Rows[row].Cells[5].Paragraphs[0].InsertText(
                     allSessions[row - 1].Остаток_денег.ToString(CultureInfo.InvariantCulture));
@@ -84,20 +92,29 @@ namespace Boom_Manager_Project.Controllers
             List<double?> withdrMoney = DataBaseClass.Instancedb().GetAllWithdrawnMoneyOnDailyId(dailyId);
             double withdrawnMoney = withdrMoney.Where(t1 => t1 != null).Sum(t1 => t1 != null ? t1.Value : 0);
 
-            doc.InsertParagraph("Остаток денег(ненаигранные деньги) = " + moneyLeftSum + " сом");
+            doc.InsertParagraph("Касса (не наигранные деньги) = " + moneyLeftSum + " сом");
             doc.InsertParagraph("Наигранные деньги = " + playedSum + " сом");
             doc.InsertParagraph("Снято = " + withdrawnMoney + " сом");
+            doc.InsertParagraph("Остаток с прошлой смены ХХХХХХХХ сом");
 
             doc.Save();
-
-            DialogResult dresult =
-                MessageBox.Show("Report was successfully generated.\nWould younlike to open generated report?",
-                    "Question", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-            if (dresult == DialogResult.Yes)
+            try
             {
-                Process.Start("WINWORD.EXE", fileName);
+                DialogResult dresult =
+                    MessageBox.Show("Report was successfully generated.\nWould younlike to open generated report?",
+                        "Question", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                if (dresult == DialogResult.Yes)
+                {
+                    Process.Start("WINWORD.EXE", fileName);
+                }
             }
+            catch (Exception)
+            {
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(13));
+            }
+
         }
     }
 }

@@ -53,6 +53,11 @@
             this.bAddSession = new System.Windows.Forms.Button();
             this.numUpDPaidPrice = new System.Windows.Forms.NumericUpDown();
             this.gbDepositPayment = new System.Windows.Forms.GroupBox();
+            this.tbDiscountSize = new System.Windows.Forms.TextBox();
+            this.lDiscount = new System.Windows.Forms.Label();
+            this.lPlusTime = new System.Windows.Forms.Label();
+            this.lPlusMoney = new System.Windows.Forms.Label();
+            this.lPercentage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).BeginInit();
             this.gbClientInfo.SuspendLayout();
@@ -89,7 +94,7 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(266, 334);
+            this.bCancel.Location = new System.Drawing.Point(285, 334);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(96, 38);
             this.bCancel.TabIndex = 30;
@@ -153,20 +158,19 @@
             // 
             this.tbDiscountCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.tbDiscountCards.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbDiscountCards.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tbDiscountCards.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tbDiscountCards.Enabled = false;
             this.tbDiscountCards.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbDiscountCards.ForeColor = System.Drawing.Color.White;
             this.tbDiscountCards.Location = new System.Drawing.Point(146, 49);
             this.tbDiscountCards.MaxLength = 50;
             this.tbDiscountCards.Name = "tbDiscountCards";
-            this.tbDiscountCards.ReadOnly = true;
             this.tbDiscountCards.ShortcutsEnabled = false;
             this.tbDiscountCards.Size = new System.Drawing.Size(116, 29);
             this.tbDiscountCards.TabIndex = 28;
             this.tbDiscountCards.Text = "0";
+            this.tbDiscountCards.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbDiscountCards_MouseClick);
             this.tbDiscountCards.TextChanged += new System.EventHandler(this.tbDiscountCards_TextChanged);
+            this.tbDiscountCards.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDiscountCards_KeyPress);
             // 
             // lTimeToPlay
             // 
@@ -182,6 +186,7 @@
             // bAddDiscountCard
             // 
             this.bAddDiscountCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bAddDiscountCard.Enabled = false;
             this.bAddDiscountCard.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bAddDiscountCard.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
             this.bAddDiscountCard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
@@ -211,7 +216,7 @@
             this.gbClientInfo.Controls.Add(this.lTimeOnCardLeft);
             this.gbClientInfo.Enabled = false;
             this.gbClientInfo.ForeColor = System.Drawing.Color.White;
-            this.gbClientInfo.Location = new System.Drawing.Point(388, 150);
+            this.gbClientInfo.Location = new System.Drawing.Point(456, 150);
             this.gbClientInfo.Name = "gbClientInfo";
             this.gbClientInfo.Size = new System.Drawing.Size(324, 178);
             this.gbClientInfo.TabIndex = 27;
@@ -361,6 +366,7 @@
             this.cbPlaystationId.Size = new System.Drawing.Size(61, 29);
             this.cbPlaystationId.TabIndex = 21;
             this.cbPlaystationId.SelectedIndexChanged += new System.EventHandler(this.cbPlaystationId_SelectedIndexChanged);
+            this.cbPlaystationId.TextChanged += new System.EventHandler(this.cbPlaystationId_TextChanged);
             // 
             // lPlaystationId
             // 
@@ -422,27 +428,88 @@
             // 
             // gbDepositPayment
             // 
+            this.gbDepositPayment.Controls.Add(this.lPercentage);
+            this.gbDepositPayment.Controls.Add(this.lPlusMoney);
+            this.gbDepositPayment.Controls.Add(this.lPlusTime);
+            this.gbDepositPayment.Controls.Add(this.tbDiscountSize);
             this.gbDepositPayment.Controls.Add(this.numUpDMinutesLeft);
             this.gbDepositPayment.Controls.Add(this.numUpDHoursLeft);
             this.gbDepositPayment.Controls.Add(this.numUpDPaidPrice);
             this.gbDepositPayment.Controls.Add(this.lOR);
+            this.gbDepositPayment.Controls.Add(this.lDiscount);
             this.gbDepositPayment.Controls.Add(this.lMoneyToPay);
             this.gbDepositPayment.Controls.Add(this.lTimeToPlay);
             this.gbDepositPayment.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gbDepositPayment.ForeColor = System.Drawing.Color.White;
             this.gbDepositPayment.Location = new System.Drawing.Point(12, 150);
             this.gbDepositPayment.Name = "gbDepositPayment";
-            this.gbDepositPayment.Size = new System.Drawing.Size(350, 178);
+            this.gbDepositPayment.Size = new System.Drawing.Size(370, 178);
             this.gbDepositPayment.TabIndex = 22;
             this.gbDepositPayment.TabStop = false;
             this.gbDepositPayment.Text = "Оплата по депозиту";
+            // 
+            // tbDiscountSize
+            // 
+            this.tbDiscountSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbDiscountSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbDiscountSize.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbDiscountSize.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tbDiscountSize.Enabled = false;
+            this.tbDiscountSize.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDiscountSize.ForeColor = System.Drawing.Color.White;
+            this.tbDiscountSize.Location = new System.Drawing.Point(160, 136);
+            this.tbDiscountSize.MaxLength = 50;
+            this.tbDiscountSize.Name = "tbDiscountSize";
+            this.tbDiscountSize.ReadOnly = true;
+            this.tbDiscountSize.ShortcutsEnabled = false;
+            this.tbDiscountSize.Size = new System.Drawing.Size(57, 29);
+            this.tbDiscountSize.TabIndex = 29;
+            this.tbDiscountSize.Text = "0";
+            // 
+            // lDiscount
+            // 
+            this.lDiscount.AutoSize = true;
+            this.lDiscount.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lDiscount.ForeColor = System.Drawing.Color.White;
+            this.lDiscount.Location = new System.Drawing.Point(14, 138);
+            this.lDiscount.Name = "lDiscount";
+            this.lDiscount.Size = new System.Drawing.Size(59, 21);
+            this.lDiscount.TabIndex = 8;
+            this.lDiscount.Text = "Скидка";
+            // 
+            // lPlusTime
+            // 
+            this.lPlusTime.AutoSize = true;
+            this.lPlusTime.ForeColor = System.Drawing.Color.LightGreen;
+            this.lPlusTime.Location = new System.Drawing.Point(282, 27);
+            this.lPlusTime.Name = "lPlusTime";
+            this.lPlusTime.Size = new System.Drawing.Size(0, 21);
+            this.lPlusTime.TabIndex = 30;
+            // 
+            // lPlusMoney
+            // 
+            this.lPlusMoney.AutoSize = true;
+            this.lPlusMoney.ForeColor = System.Drawing.Color.LightGreen;
+            this.lPlusMoney.Location = new System.Drawing.Point(282, 93);
+            this.lPlusMoney.Name = "lPlusMoney";
+            this.lPlusMoney.Size = new System.Drawing.Size(0, 21);
+            this.lPlusMoney.TabIndex = 30;
+            // 
+            // lPercentage
+            // 
+            this.lPercentage.AutoSize = true;
+            this.lPercentage.Location = new System.Drawing.Point(217, 140);
+            this.lPercentage.Name = "lPercentage";
+            this.lPercentage.Size = new System.Drawing.Size(23, 21);
+            this.lPercentage.TabIndex = 31;
+            this.lPercentage.Text = "%";
             // 
             // FAddNewSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(376, 383);
+            this.ClientSize = new System.Drawing.Size(393, 383);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);
@@ -508,5 +575,10 @@
         private System.Windows.Forms.GroupBox gbDepositPayment;
         private System.Windows.Forms.Button bAddMoneyToClient;
         private System.Windows.Forms.TextBox tbDiscountCards;
+        private System.Windows.Forms.TextBox tbDiscountSize;
+        private System.Windows.Forms.Label lDiscount;
+        private System.Windows.Forms.Label lPlusMoney;
+        private System.Windows.Forms.Label lPlusTime;
+        private System.Windows.Forms.Label lPercentage;
     }
 }

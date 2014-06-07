@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BoomDB2" Class="dbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=Kim_PC\SQLEXPRESS;Initial Catalog=BoomDB2;Integrated Security=True" SettingsObjectName="Boom_Manager_Project.Properties.Settings" SettingsPropertyName="BoomDB2ConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.account_savings_t" Member="account_savings_ts">
-    <Type Name="account_savings_t">
-      <Column Name="account_savings_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="client_id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="savings" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="client_info_t_account_savings_t" Member="client_info_t" ThisKey="client_id" OtherKey="client_id" Type="client_info_t" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.timezones_t" Member="timezones_ts">
     <Type Name="timezones_t">
       <Column Name="timezone_name" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -37,9 +29,9 @@
       <Column Name="activation_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="pers_discount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="played_sum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="client_info_t_account_savings_t" Member="account_savings_ts" ThisKey="client_id" OtherKey="client_id" Type="account_savings_t" />
       <Association Name="client_info_t_clients_per_session_t" Member="clients_per_session_ts" ThisKey="client_id" OtherKey="client_id" Type="clients_per_session_t" />
       <Association Name="client_info_t_payments_t" Member="payments_ts" ThisKey="client_id" OtherKey="client_id" Type="payments_t" />
+      <Association Name="client_info_t_account_savings_t" Member="account_savings_ts" ThisKey="client_id" OtherKey="client_id" Type="account_savings_t" />
     </Type>
   </Table>
   <Table Name="dbo.clients_per_session_t" Member="clients_per_session_ts">
@@ -169,6 +161,7 @@
       <Association Name="global_session_t_sold_bar_history_table" Member="sold_bar_history_tables" ThisKey="daily_id" OtherKey="daily_id" Type="sold_bar_history_table" />
       <Association Name="global_session_t_expenses_t" Member="expenses_ts" ThisKey="daily_id" OtherKey="daily_id" Type="expenses_t" />
       <Association Name="global_session_t_withdrow_money_t" Member="withdrow_money_ts" ThisKey="daily_id" OtherKey="daily_id" Type="withdrow_money_t" />
+      <Association Name="global_session_t_cash_t" Member="cash_ts" ThisKey="daily_id" OtherKey="daily_id" Type="cash_t" />
       <Association Name="personal_info_t_global_session_t" Member="personal_info_t" ThisKey="administrator_id" OtherKey="person_id" Type="personal_info_t" IsForeignKey="true" />
     </Type>
   </Table>
@@ -208,6 +201,29 @@
       <Column Name="playstation_id" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Association Name="devices_t_device_endpoints_t" Member="devices_t" ThisKey="device_id" OtherKey="device_id" Type="devices_t" IsForeignKey="true" />
       <Association Name="tables_t_device_endpoints_t" Member="tables_t" ThisKey="playstation_id" OtherKey="playstation_id" Type="tables_t" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cash_t" Member="cash_ts">
+    <Type Name="cash_t">
+      <Column Name="cash_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="daily_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cash_amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="global_session_t_cash_t" Member="global_session_t" ThisKey="daily_id" OtherKey="daily_id" Type="global_session_t" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.account_savings_t" Member="account_savings_ts">
+    <Type Name="account_savings_t">
+      <Column Name="savings_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="client_id" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="savings" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="client_info_t_account_savings_t" Member="client_info_t" ThisKey="client_id" OtherKey="client_id" Type="client_info_t" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.steps_of_discount_upgrading" Member="steps_of_discount_upgradings">
+    <Type Name="steps_of_discount_upgrading">
+      <Column Name="name" Type="System.String" DbType="VarChar(25) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="required_played_sum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="discount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

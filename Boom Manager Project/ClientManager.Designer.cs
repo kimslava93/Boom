@@ -31,14 +31,16 @@
             this.bApply = new System.Windows.Forms.Button();
             this.bCancel = new System.Windows.Forms.Button();
             this.gbClientInfo = new System.Windows.Forms.GroupBox();
-            this.numUpDClientIdCreate = new System.Windows.Forms.NumericUpDown();
+            this.numUpdBYear = new System.Windows.Forms.NumericUpDown();
+            this.numUpdBMonth = new System.Windows.Forms.NumericUpDown();
+            this.numUpdBDay = new System.Windows.Forms.NumericUpDown();
+            this.tbClientId = new System.Windows.Forms.TextBox();
             this.numUpDSavings = new System.Windows.Forms.NumericUpDown();
             this.numUpDDiscount = new System.Windows.Forms.NumericUpDown();
             this.tbPlayedSum = new System.Windows.Forms.TextBox();
             this.tbActivationDate = new System.Windows.Forms.TextBox();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.tbPhone = new System.Windows.Forms.TextBox();
-            this.tbBirthday = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.cbClients = new System.Windows.Forms.ComboBox();
             this.lClientId = new System.Windows.Forms.Label();
@@ -51,7 +53,9 @@
             this.lBirthday = new System.Windows.Forms.Label();
             this.lName = new System.Windows.Forms.Label();
             this.gbClientInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDClientIdCreate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpdBYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpdBMonth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpdBDay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDSavings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDDiscount)).BeginInit();
             this.SuspendLayout();
@@ -70,7 +74,7 @@
             this.bApply.Location = new System.Drawing.Point(12, 376);
             this.bApply.Name = "bApply";
             this.bApply.Size = new System.Drawing.Size(110, 37);
-            this.bApply.TabIndex = 10;
+            this.bApply.TabIndex = 7;
             this.bApply.Text = "Применить";
             this.bApply.UseVisualStyleBackColor = false;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
@@ -89,21 +93,23 @@
             this.bCancel.Location = new System.Drawing.Point(336, 376);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(88, 37);
-            this.bCancel.TabIndex = 11;
+            this.bCancel.TabIndex = 8;
             this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // gbClientInfo
             // 
-            this.gbClientInfo.Controls.Add(this.numUpDClientIdCreate);
+            this.gbClientInfo.Controls.Add(this.numUpdBYear);
+            this.gbClientInfo.Controls.Add(this.numUpdBMonth);
+            this.gbClientInfo.Controls.Add(this.numUpdBDay);
+            this.gbClientInfo.Controls.Add(this.tbClientId);
             this.gbClientInfo.Controls.Add(this.numUpDSavings);
             this.gbClientInfo.Controls.Add(this.numUpDDiscount);
             this.gbClientInfo.Controls.Add(this.tbPlayedSum);
             this.gbClientInfo.Controls.Add(this.tbActivationDate);
             this.gbClientInfo.Controls.Add(this.tbEmail);
             this.gbClientInfo.Controls.Add(this.tbPhone);
-            this.gbClientInfo.Controls.Add(this.tbBirthday);
             this.gbClientInfo.Controls.Add(this.tbName);
             this.gbClientInfo.Controls.Add(this.cbClients);
             this.gbClientInfo.Controls.Add(this.lClientId);
@@ -119,31 +125,102 @@
             this.gbClientInfo.ForeColor = System.Drawing.Color.White;
             this.gbClientInfo.Location = new System.Drawing.Point(0, 0);
             this.gbClientInfo.Name = "gbClientInfo";
-            this.gbClientInfo.Size = new System.Drawing.Size(437, 362);
+            this.gbClientInfo.Size = new System.Drawing.Size(435, 362);
             this.gbClientInfo.TabIndex = 28;
             this.gbClientInfo.TabStop = false;
             this.gbClientInfo.Text = "Информация о клиенте";
             // 
-            // numUpDClientIdCreate
+            // numUpdBYear
             // 
-            this.numUpDClientIdCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.numUpDClientIdCreate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numUpDClientIdCreate.ForeColor = System.Drawing.Color.White;
-            this.numUpDClientIdCreate.Location = new System.Drawing.Point(537, 39);
-            this.numUpDClientIdCreate.Maximum = new decimal(new int[] {
-            500,
+            this.numUpdBYear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpdBYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpdBYear.ForeColor = System.Drawing.Color.White;
+            this.numUpdBYear.Location = new System.Drawing.Point(301, 143);
+            this.numUpdBYear.Maximum = new decimal(new int[] {
+            2050,
             0,
             0,
             0});
-            this.numUpDClientIdCreate.Name = "numUpDClientIdCreate";
-            this.numUpDClientIdCreate.ReadOnly = true;
-            this.numUpDClientIdCreate.Size = new System.Drawing.Size(129, 29);
-            this.numUpDClientIdCreate.TabIndex = 39;
+            this.numUpdBYear.Minimum = new decimal(new int[] {
+            1850,
+            0,
+            0,
+            0});
+            this.numUpdBYear.Name = "numUpdBYear";
+            this.numUpdBYear.Size = new System.Drawing.Size(82, 29);
+            this.numUpdBYear.TabIndex = 5;
+            this.numUpdBYear.Value = new decimal(new int[] {
+            1850,
+            0,
+            0,
+            0});
+            // 
+            // numUpdBMonth
+            // 
+            this.numUpdBMonth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpdBMonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpdBMonth.ForeColor = System.Drawing.Color.White;
+            this.numUpdBMonth.Location = new System.Drawing.Point(235, 143);
+            this.numUpdBMonth.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.numUpdBMonth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numUpdBMonth.Name = "numUpdBMonth";
+            this.numUpdBMonth.Size = new System.Drawing.Size(60, 29);
+            this.numUpdBMonth.TabIndex = 4;
+            this.numUpdBMonth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numUpdBDay
+            // 
+            this.numUpdBDay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpdBDay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpdBDay.ForeColor = System.Drawing.Color.White;
+            this.numUpdBDay.Location = new System.Drawing.Point(169, 143);
+            this.numUpdBDay.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.numUpdBDay.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numUpdBDay.Name = "numUpdBDay";
+            this.numUpdBDay.Size = new System.Drawing.Size(60, 29);
+            this.numUpdBDay.TabIndex = 3;
+            this.numUpdBDay.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // tbClientId
+            // 
+            this.tbClientId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbClientId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbClientId.ForeColor = System.Drawing.Color.White;
+            this.tbClientId.Location = new System.Drawing.Point(510, 39);
+            this.tbClientId.MaxLength = 15;
+            this.tbClientId.Name = "tbClientId";
+            this.tbClientId.Size = new System.Drawing.Size(160, 29);
+            this.tbClientId.TabIndex = 0;
             // 
             // numUpDSavings
             // 
             this.numUpDSavings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDSavings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpDSavings.Enabled = false;
             this.numUpDSavings.ForeColor = System.Drawing.Color.White;
             this.numUpDSavings.Location = new System.Drawing.Point(169, 318);
             this.numUpDSavings.Maximum = new decimal(new int[] {
@@ -154,7 +231,7 @@
             this.numUpDSavings.Name = "numUpDSavings";
             this.numUpDSavings.ReadOnly = true;
             this.numUpDSavings.Size = new System.Drawing.Size(160, 29);
-            this.numUpDSavings.TabIndex = 9;
+            this.numUpDSavings.TabIndex = 999;
             // 
             // numUpDDiscount
             // 
@@ -162,10 +239,19 @@
             this.numUpDDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDDiscount.ForeColor = System.Drawing.Color.White;
             this.numUpDDiscount.Location = new System.Drawing.Point(169, 248);
+            this.numUpDDiscount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numUpDDiscount.Name = "numUpDDiscount";
-            this.numUpDDiscount.ReadOnly = true;
             this.numUpDDiscount.Size = new System.Drawing.Size(160, 29);
-            this.numUpDDiscount.TabIndex = 7;
+            this.numUpDDiscount.TabIndex = 999;
+            this.numUpDDiscount.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
             // tbPlayedSum
             // 
@@ -176,7 +262,7 @@
             this.tbPlayedSum.Name = "tbPlayedSum";
             this.tbPlayedSum.ReadOnly = true;
             this.tbPlayedSum.Size = new System.Drawing.Size(160, 29);
-            this.tbPlayedSum.TabIndex = 8;
+            this.tbPlayedSum.TabIndex = 999;
             // 
             // tbActivationDate
             // 
@@ -188,7 +274,7 @@
             this.tbActivationDate.Name = "tbActivationDate";
             this.tbActivationDate.ReadOnly = true;
             this.tbActivationDate.Size = new System.Drawing.Size(160, 29);
-            this.tbActivationDate.TabIndex = 6;
+            this.tbActivationDate.TabIndex = 999;
             // 
             // tbEmail
             // 
@@ -199,7 +285,7 @@
             this.tbEmail.MaxLength = 25;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(241, 29);
-            this.tbEmail.TabIndex = 3;
+            this.tbEmail.TabIndex = 2;
             // 
             // tbPhone
             // 
@@ -210,18 +296,7 @@
             this.tbPhone.MaxLength = 25;
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(160, 29);
-            this.tbPhone.TabIndex = 5;
-            // 
-            // tbBirthday
-            // 
-            this.tbBirthday.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.tbBirthday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbBirthday.ForeColor = System.Drawing.Color.White;
-            this.tbBirthday.Location = new System.Drawing.Point(169, 143);
-            this.tbBirthday.MaxLength = 25;
-            this.tbBirthday.Name = "tbBirthday";
-            this.tbBirthday.Size = new System.Drawing.Size(160, 29);
-            this.tbBirthday.TabIndex = 4;
+            this.tbPhone.TabIndex = 6;
             // 
             // tbName
             // 
@@ -232,7 +307,7 @@
             this.tbName.MaxLength = 50;
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(241, 29);
-            this.tbName.TabIndex = 2;
+            this.tbName.TabIndex = 1;
             // 
             // cbClients
             // 
@@ -245,7 +320,7 @@
             this.cbClients.Location = new System.Drawing.Point(169, 38);
             this.cbClients.Name = "cbClients";
             this.cbClients.Size = new System.Drawing.Size(160, 29);
-            this.cbClients.TabIndex = 1;
+            this.cbClients.TabIndex = 0;
             this.cbClients.SelectedIndexChanged += new System.EventHandler(this.cbClients_SelectedIndexChanged);
             // 
             // lClientId
@@ -260,6 +335,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Enabled = false;
             this.label1.Location = new System.Drawing.Point(8, 320);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 21);
@@ -334,7 +410,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(437, 425);
+            this.ClientSize = new System.Drawing.Size(435, 425);
             this.ControlBox = false;
             this.Controls.Add(this.gbClientInfo);
             this.Controls.Add(this.bCancel);
@@ -351,7 +427,9 @@
             this.Load += new System.EventHandler(this.ClientManager_Load);
             this.gbClientInfo.ResumeLayout(false);
             this.gbClientInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDClientIdCreate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpdBYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpdBMonth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpdBDay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDSavings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDDiscount)).EndInit();
             this.ResumeLayout(false);
@@ -367,7 +445,6 @@
         private System.Windows.Forms.TextBox tbPlayedSum;
         private System.Windows.Forms.TextBox tbActivationDate;
         private System.Windows.Forms.TextBox tbEmail;
-        private System.Windows.Forms.TextBox tbBirthday;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.ComboBox cbClients;
         private System.Windows.Forms.Label lClientId;
@@ -377,11 +454,14 @@
         private System.Windows.Forms.Label lEmail;
         private System.Windows.Forms.Label lBirthday;
         private System.Windows.Forms.Label lName;
-        private System.Windows.Forms.NumericUpDown numUpDClientIdCreate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.Label lPhone;
         private System.Windows.Forms.NumericUpDown numUpDSavings;
+        private System.Windows.Forms.TextBox tbClientId;
+        private System.Windows.Forms.NumericUpDown numUpdBYear;
+        private System.Windows.Forms.NumericUpDown numUpdBMonth;
+        private System.Windows.Forms.NumericUpDown numUpdBDay;
 
     }
 }

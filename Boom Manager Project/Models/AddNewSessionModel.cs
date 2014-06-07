@@ -41,7 +41,7 @@ namespace Boom_Manager_Project.Models
                     endTime = endTime.AddMilliseconds(toAccurateTime2.TotalMilliseconds);
                     paidTime = paidTime.Subtract(toAccurateTime2);
                 }
-                int cycles = (int) paidTime.TotalHours;
+                var cycles = (int) paidTime.TotalHours;
                 for (int i = 0; i < cycles; i++)
                 {
                     sum += GetCurrentPriceForPlaystation(playstationId, endTime);
@@ -98,7 +98,7 @@ namespace Boom_Manager_Project.Models
             }
             catch (Exception)
             {
-                MessageBox.Show("Can't get playstation cost.");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(22));
             }
             return result;
         }
@@ -110,7 +110,8 @@ namespace Boom_Manager_Project.Models
             {
                 if (currentTime.Minute != 0)
                 {
-                    TimeSpan toAccurateTime = TimeSpan.FromMinutes(60 - currentTime.Minute);
+                    TimeSpan toAccurateTime = TimeSpan.FromMinutes(60 - currentTime.Minute) +
+                                              TimeSpan.FromSeconds(60 - currentTime.Second);
                     result = result.Add(toAccurateTime);
                     paidSum -= toAccurateTime.Minutes * GetCurrentPriceForPlaystation(playstationId, currentTime) / 60;
                     currentTime = currentTime.Add(toAccurateTime);
@@ -204,7 +205,15 @@ namespace Boom_Manager_Project.Models
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Cannot insert DaySession!");
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(18));
+                }
+                try
+                {
+                    DataBaseClass.Instancedb().AddMoneyToCash(daysSessionT.payed_sum);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(19));
                 }
                 try
                 {
@@ -214,7 +223,7 @@ namespace Boom_Manager_Project.Models
                 {
                     //delete successful insertions
                     DataBaseClass.Instancedb().DeleteDaySession();
-                    MessageBox.Show("Cannot update playstation state!");
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(20));
                 }
                 try
                 {
@@ -225,7 +234,8 @@ namespace Boom_Manager_Project.Models
                     //delete successful insertions
                     DataBaseClass.Instancedb().DeleteDaySession();
                     DataBaseClass.Instancedb().UpdatePlaystationState(playstationId, "free");
-                    MessageBox.Show("Cannot insert clients in clients_per_session table!");
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(19));
+                        //"Cannot insert clients in clients_per_session table!");
                 }
             }
         }

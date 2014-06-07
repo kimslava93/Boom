@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.Models;
 using Boom_Manager_Project.MyClasses;
 
-namespace Boom_Manager_Project.DataBaseClasses
+namespace Boom_Manager_Project.Controllers
 {
     class CloseSessionController
     {
@@ -36,25 +35,30 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
             else
             {
-                MessageBox.Show("Error! Session cannot be closed because of client absence in the session#" +
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(14) +
                                 sessionToClose.Сессия);
             }
         }
 
         private void CloseUsualClient(DaySessionClass sessionToClose, string comments, DateTime endTime)
         {
-            double moneyLeftWithoutHourMoney = GetMoneyLeftSum(sessionToClose);
-            if (moneyLeftWithoutHourMoney > 1)
+            double changeMoney = GetOddMoney(sessionToClose);
+            if (changeMoney > 1)
             {
                 DialogResult dresult =
-                    MessageBox.Show(" " + moneyLeftWithoutHourMoney + " soms left.\nWere money returned to client?",
-                        "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        @" " + changeMoney +
+                        ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(7),
+                        ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetCaption(2), MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
                 switch (dresult)
                 {
                     case DialogResult.Yes:
-                        comments += ". " + moneyLeftWithoutHourMoney + " soms were returned";
-                        sessionToClose.Оплаченная_сумма = sessionToClose.Оплаченная_сумма - moneyLeftWithoutHourMoney;
-                        sessionToClose.Остаток_денег -= moneyLeftWithoutHourMoney;
+                        comments += ". " + changeMoney +
+                                    ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(8);
+                        sessionToClose.Оплаченная_сумма = sessionToClose.Оплаченная_сумма - changeMoney;
+                        sessionToClose.Остаток_денег -= changeMoney;
+                        DataBaseClass.Instancedb().AddMoneyToCash(changeMoney*(-1));
                         DataBaseClass.Instancedb().CloseSessionWithUsualClient(sessionToClose, comments, endTime);
                         break;
                     case DialogResult.No:
@@ -70,21 +74,26 @@ namespace Boom_Manager_Project.DataBaseClasses
             DataBaseClass.Instancedb().CloseSessionWithCard(sessionToClose, comments, endTime);
         }
 
-        private double GetMoneyLeftSum(DaySessionClass sessionToCalculate)
+        private double GetOddMoney(DaySessionClass sessionToCalculate)
             //substract one hour from game if client was playing lower than one hour 
         {
             double moneyPlayed = sessionToCalculate.Оплаченная_сумма - sessionToCalculate.Остаток_денег;
-            double oneHourpPrice = AddNewSessionModel.InstanceAddNewSessionModel()
+            double oneHourPrice = AddNewSessionModel.InstanceAddNewSessionModel()
                 .GetSumToPay(sessionToCalculate.Приставка, TimeSpan.FromHours(1), sessionToCalculate.Начало);
-            if (sessionToCalculate.Оплаченная_сумма < oneHourpPrice && (int)moneyPlayed == (int)sessionToCalculate.Оплаченная_сумма)//never should happen
+            if (moneyPlayed <= oneHourPrice && (sessionToCalculate.Оплаченная_сумма - oneHourPrice) <= 0)
             {
-                return (double) 0;
+                return 0;
             }
-            if (moneyPlayed < oneHourpPrice)
+            if (moneyPlayed <= oneHourPrice && (sessionToCalculate.Оплаченная_сумма - oneHourPrice) > 1)
             {
-                return sessionToCalculate.Оплаченная_сумма - oneHourpPrice;
+                return sessionToCalculate.Оплаченная_сумма - oneHourPrice;
             }
-            return sessionToCalculate.Остаток_денег;
+            if (moneyPlayed > oneHourPrice)
+            {
+                return sessionToCalculate.Остаток_денег;
+                    //sessionToCalculate.Оплаченная_сумма - sessionToCalculate.Остаток_денег;
+            }
+            return 0;
         }
 
         public int ExpandForProblemReportOrMinimize(int height)

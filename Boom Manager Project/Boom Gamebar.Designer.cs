@@ -50,6 +50,7 @@
             this.bAllGlobalSessions = new System.Windows.Forms.Button();
             this.bConsoleManager = new System.Windows.Forms.Button();
             this.bTimezoneManager = new System.Windows.Forms.Button();
+            this.bDiscountSteps = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -90,7 +91,6 @@
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.splitContainer.Panel2.Controls.Add(this.gbManageGroup);
-            this.splitContainer.Panel2Collapsed = true;
             this.splitContainer.Panel2MinSize = 0;
             this.splitContainer.Size = new System.Drawing.Size(1366, 768);
             this.splitContainer.SplitterDistance = 1250;
@@ -108,7 +108,7 @@
             this.bChangeShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bChangeShift.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bChangeShift.ForeColor = System.Drawing.Color.White;
-            this.bChangeShift.Location = new System.Drawing.Point(830, 25);
+            this.bChangeShift.Location = new System.Drawing.Point(714, 25);
             this.bChangeShift.Margin = new System.Windows.Forms.Padding(5);
             this.bChangeShift.Name = "bChangeShift";
             this.bChangeShift.Size = new System.Drawing.Size(124, 38);
@@ -188,7 +188,7 @@
             this.bSlideMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bSlideMenu.FlatAppearance.BorderSize = 0;
             this.bSlideMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bSlideMenu.Location = new System.Drawing.Point(1354, 0);
+            this.bSlideMenu.Location = new System.Drawing.Point(1238, 0);
             this.bSlideMenu.Name = "bSlideMenu";
             this.bSlideMenu.Size = new System.Drawing.Size(10, 36);
             this.bSlideMenu.TabIndex = 999;
@@ -203,7 +203,7 @@
             this.lCurrentDate.AutoSize = true;
             this.lCurrentDate.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lCurrentDate.ForeColor = System.Drawing.Color.White;
-            this.lCurrentDate.Location = new System.Drawing.Point(596, 78);
+            this.lCurrentDate.Location = new System.Drawing.Point(480, 78);
             this.lCurrentDate.Name = "lCurrentDate";
             this.lCurrentDate.Size = new System.Drawing.Size(92, 30);
             this.lCurrentDate.TabIndex = 5;
@@ -216,7 +216,7 @@
             this.lCurrentTime.AutoSize = true;
             this.lCurrentTime.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lCurrentTime.ForeColor = System.Drawing.Color.White;
-            this.lCurrentTime.Location = new System.Drawing.Point(531, 3);
+            this.lCurrentTime.Location = new System.Drawing.Point(415, 3);
             this.lCurrentTime.Name = "lCurrentTime";
             this.lCurrentTime.Size = new System.Drawing.Size(291, 86);
             this.lCurrentTime.TabIndex = 4;
@@ -264,7 +264,7 @@
             this.dgvOpenedSessions.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvOpenedSessions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvOpenedSessions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOpenedSessions.Size = new System.Drawing.Size(1364, 655);
+            this.dgvOpenedSessions.Size = new System.Drawing.Size(1248, 655);
             this.dgvOpenedSessions.TabIndex = 3;
             this.dgvOpenedSessions.TabStop = false;
             this.dgvOpenedSessions.VirtualMode = true;
@@ -272,6 +272,7 @@
             // 
             // gbManageGroup
             // 
+            this.gbManageGroup.Controls.Add(this.bDiscountSteps);
             this.gbManageGroup.Controls.Add(this.bClientManager);
             this.gbManageGroup.Controls.Add(this.bWithdrawMoney);
             this.gbManageGroup.Controls.Add(this.bExitProgram);
@@ -283,7 +284,7 @@
             this.gbManageGroup.ForeColor = System.Drawing.Color.White;
             this.gbManageGroup.Location = new System.Drawing.Point(0, 0);
             this.gbManageGroup.Name = "gbManageGroup";
-            this.gbManageGroup.Size = new System.Drawing.Size(94, 98);
+            this.gbManageGroup.Size = new System.Drawing.Size(113, 766);
             this.gbManageGroup.TabIndex = 4;
             this.gbManageGroup.TabStop = false;
             this.gbManageGroup.Text = "MANAGE";
@@ -302,9 +303,9 @@
             this.bClientManager.ForeColor = System.Drawing.Color.White;
             this.bClientManager.Location = new System.Drawing.Point(3, 199);
             this.bClientManager.Name = "bClientManager";
-            this.bClientManager.Size = new System.Drawing.Size(88, 33);
+            this.bClientManager.Size = new System.Drawing.Size(107, 33);
             this.bClientManager.TabIndex = 10;
-            this.bClientManager.Text = "Clients";
+            this.bClientManager.Text = "Клиенты";
             this.bClientManager.UseVisualStyleBackColor = false;
             this.bClientManager.Click += new System.EventHandler(this.bClientManager_Click);
             // 
@@ -322,9 +323,9 @@
             this.bWithdrawMoney.ForeColor = System.Drawing.Color.White;
             this.bWithdrawMoney.Location = new System.Drawing.Point(3, 166);
             this.bWithdrawMoney.Name = "bWithdrawMoney";
-            this.bWithdrawMoney.Size = new System.Drawing.Size(88, 33);
+            this.bWithdrawMoney.Size = new System.Drawing.Size(107, 33);
             this.bWithdrawMoney.TabIndex = 9;
-            this.bWithdrawMoney.Text = "Withdraw";
+            this.bWithdrawMoney.Text = "Снять";
             this.bWithdrawMoney.UseVisualStyleBackColor = false;
             this.bWithdrawMoney.Click += new System.EventHandler(this.bWithdrawMoney_Click);
             // 
@@ -340,9 +341,9 @@
             this.bExitProgram.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bExitProgram.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bExitProgram.ForeColor = System.Drawing.Color.White;
-            this.bExitProgram.Location = new System.Drawing.Point(3, 62);
+            this.bExitProgram.Location = new System.Drawing.Point(3, 730);
             this.bExitProgram.Name = "bExitProgram";
-            this.bExitProgram.Size = new System.Drawing.Size(88, 33);
+            this.bExitProgram.Size = new System.Drawing.Size(107, 33);
             this.bExitProgram.TabIndex = 8;
             this.bExitProgram.Text = "EXIT";
             this.bExitProgram.UseVisualStyleBackColor = false;
@@ -362,9 +363,9 @@
             this.bDevicesManager.ForeColor = System.Drawing.Color.White;
             this.bDevicesManager.Location = new System.Drawing.Point(3, 133);
             this.bDevicesManager.Name = "bDevicesManager";
-            this.bDevicesManager.Size = new System.Drawing.Size(88, 33);
+            this.bDevicesManager.Size = new System.Drawing.Size(107, 33);
             this.bDevicesManager.TabIndex = 7;
-            this.bDevicesManager.Text = "Devices";
+            this.bDevicesManager.Text = "Устройства";
             this.bDevicesManager.UseVisualStyleBackColor = false;
             this.bDevicesManager.Click += new System.EventHandler(this.bDevicesManager_Click_1);
             // 
@@ -382,9 +383,9 @@
             this.bAllGlobalSessions.ForeColor = System.Drawing.Color.White;
             this.bAllGlobalSessions.Location = new System.Drawing.Point(3, 97);
             this.bAllGlobalSessions.Name = "bAllGlobalSessions";
-            this.bAllGlobalSessions.Size = new System.Drawing.Size(88, 36);
+            this.bAllGlobalSessions.Size = new System.Drawing.Size(107, 36);
             this.bAllGlobalSessions.TabIndex = 6;
-            this.bAllGlobalSessions.Text = "Shifts";
+            this.bAllGlobalSessions.Text = "Смены";
             this.bAllGlobalSessions.UseVisualStyleBackColor = false;
             this.bAllGlobalSessions.Click += new System.EventHandler(this.bAllGlobalSessions_Click_1);
             // 
@@ -402,9 +403,9 @@
             this.bConsoleManager.ForeColor = System.Drawing.Color.White;
             this.bConsoleManager.Location = new System.Drawing.Point(3, 61);
             this.bConsoleManager.Name = "bConsoleManager";
-            this.bConsoleManager.Size = new System.Drawing.Size(88, 36);
+            this.bConsoleManager.Size = new System.Drawing.Size(107, 36);
             this.bConsoleManager.TabIndex = 5;
-            this.bConsoleManager.Text = "Console";
+            this.bConsoleManager.Text = "Приставки";
             this.bConsoleManager.UseVisualStyleBackColor = false;
             this.bConsoleManager.Click += new System.EventHandler(this.bConsoleManager_Click_1);
             // 
@@ -422,11 +423,31 @@
             this.bTimezoneManager.ForeColor = System.Drawing.Color.White;
             this.bTimezoneManager.Location = new System.Drawing.Point(3, 25);
             this.bTimezoneManager.Name = "bTimezoneManager";
-            this.bTimezoneManager.Size = new System.Drawing.Size(88, 36);
+            this.bTimezoneManager.Size = new System.Drawing.Size(107, 36);
             this.bTimezoneManager.TabIndex = 4;
-            this.bTimezoneManager.Text = "Timezone";
+            this.bTimezoneManager.Text = "Вр зоны";
             this.bTimezoneManager.UseVisualStyleBackColor = false;
             this.bTimezoneManager.Click += new System.EventHandler(this.bTimezoneManager_Click_1);
+            // 
+            // bDiscountSteps
+            // 
+            this.bDiscountSteps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bDiscountSteps.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bDiscountSteps.BackgroundImage")));
+            this.bDiscountSteps.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bDiscountSteps.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.bDiscountSteps.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bDiscountSteps.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bDiscountSteps.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bDiscountSteps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bDiscountSteps.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bDiscountSteps.ForeColor = System.Drawing.Color.White;
+            this.bDiscountSteps.Location = new System.Drawing.Point(3, 232);
+            this.bDiscountSteps.Name = "bDiscountSteps";
+            this.bDiscountSteps.Size = new System.Drawing.Size(107, 33);
+            this.bDiscountSteps.TabIndex = 11;
+            this.bDiscountSteps.Text = "Уровни скидок";
+            this.bDiscountSteps.UseVisualStyleBackColor = false;
+            this.bDiscountSteps.Click += new System.EventHandler(this.bDiscountSteps_Click);
             // 
             // BoomMainForm
             // 
@@ -486,6 +507,7 @@
         private System.Windows.Forms.Button bExitProgram;
         private System.Windows.Forms.Button bWithdrawMoney;
         private System.Windows.Forms.Button bClientManager;
+        private System.Windows.Forms.Button bDiscountSteps;
     }
 }
 

@@ -127,6 +127,21 @@
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="bDiscountSteps.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAIsAAAAoCAYAAADOkQm/AAAABGdBTUEAALGeYUxB9wAAACBjSFJNAACH
+        EAAAjBIAAP1NAACBPgAAWesAARIPAAA85gAAGc66ySIyAAABK2lDQ1BQaG90b3Nob3AgSUNDIHByb2Zp
+        bGUAACjPY2BgMnB0cXJlEmBgyM0rKQpyd1KIiIxSYD/PwMbAzAAGicnFBY4BAT4gdl5+XioDBvh2jYER
+        RF/WBZnFQBrgSi4oKgHSf4DYKCW1OJmBgdEAyM4uLykAijPOAbJFkrLB7A0gdlFIkDOQfQTI5kuHsK+A
+        2EkQ9hMQuwjoCSD7C0h9OpjNxAE2B8KWAbFLUitA9jI45xdUFmWmZ5QoGFpaWio4puQnpSoEVxaXpOYW
+        K3jmJecXFeQXJZakpgDVQtwHBoIQhaAQ0wBqtNBkoDIAxQOE9TkQHL6MYmcQYgiQXFpUBmUyMhkT5iPM
+        mCPBwOC/lIGB5Q9CzKSXgWGBDgMD/1SEmJohA4OAPgPDvjkAwMZP/eeaqagAAAAJcEhZcwAALiIAAC4i
+        Aari3ZIAAAC3SURBVHhe7dyxDcJQEAVBXCIxBTh2C7RJDYgSwN8CCRkLbQETTPIu3fhO58s8ra6r++oJ
+        O6OL0cc0YpnfI/yzjFhuuxGO3EYsRwf4IRYysZCJhUwsZGIhEwuZWMjEQiYWMrGQiYVMLGRiIRMLmVjI
+        xEImFjKxkImFTCxkYiETC5lYyMRCJhYysZCJhUwsZGIhEwuZWMjEQiYWshGLN2EU25uwZTfCke0B4ee1
+        6eM9wrfRxdrHPL0As43wgyMb2D8AAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="bClientManager.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIsAAAAoCAYAAADOkQm/AAAABGdBTUEAALGeYUxB9wAAACBjSFJNAACH
@@ -232,7 +247,4 @@
         6eM9wrfRxdrHPL0As43wgyMb2D8AAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>75</value>
-  </metadata>
 </root>

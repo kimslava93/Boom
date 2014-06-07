@@ -30,9 +30,6 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertaccount_savings_t(account_savings_t instance);
-    partial void Updateaccount_savings_t(account_savings_t instance);
-    partial void Deleteaccount_savings_t(account_savings_t instance);
     partial void Inserttimezones_t(timezones_t instance);
     partial void Updatetimezones_t(timezones_t instance);
     partial void Deletetimezones_t(timezones_t instance);
@@ -81,6 +78,15 @@ namespace Boom_Manager_Project.DataBaseClasses
     partial void Insertdevice_endpoints_t(device_endpoints_t instance);
     partial void Updatedevice_endpoints_t(device_endpoints_t instance);
     partial void Deletedevice_endpoints_t(device_endpoints_t instance);
+    partial void Insertcash_t(cash_t instance);
+    partial void Updatecash_t(cash_t instance);
+    partial void Deletecash_t(cash_t instance);
+    partial void Insertaccount_savings_t(account_savings_t instance);
+    partial void Updateaccount_savings_t(account_savings_t instance);
+    partial void Deleteaccount_savings_t(account_savings_t instance);
+    partial void Insertsteps_of_discount_upgrading(steps_of_discount_upgrading instance);
+    partial void Updatesteps_of_discount_upgrading(steps_of_discount_upgrading instance);
+    partial void Deletesteps_of_discount_upgrading(steps_of_discount_upgrading instance);
     #endregion
 		
 		public dbDataContext() : 
@@ -111,14 +117,6 @@ namespace Boom_Manager_Project.DataBaseClasses
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<account_savings_t> account_savings_ts
-		{
-			get
-			{
-				return this.GetTable<account_savings_t>();
-			}
 		}
 		
 		public System.Data.Linq.Table<timezones_t> timezones_ts
@@ -256,155 +254,28 @@ namespace Boom_Manager_Project.DataBaseClasses
 				return this.GetTable<device_endpoints_t>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.account_savings_t")]
-	public partial class account_savings_t : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _account_savings_ID;
-		
-		private string _client_id;
-		
-		private double _savings;
-		
-		private EntityRef<client_info_t> _client_info_t;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onaccount_savings_IDChanging(int value);
-    partial void Onaccount_savings_IDChanged();
-    partial void Onclient_idChanging(string value);
-    partial void Onclient_idChanged();
-    partial void OnsavingsChanging(double value);
-    partial void OnsavingsChanged();
-    #endregion
-		
-		public account_savings_t()
-		{
-			this._client_info_t = default(EntityRef<client_info_t>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_account_savings_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int account_savings_ID
+		public System.Data.Linq.Table<cash_t> cash_ts
 		{
 			get
 			{
-				return this._account_savings_ID;
-			}
-			set
-			{
-				if ((this._account_savings_ID != value))
-				{
-					this.Onaccount_savings_IDChanging(value);
-					this.SendPropertyChanging();
-					this._account_savings_ID = value;
-					this.SendPropertyChanged("account_savings_ID");
-					this.Onaccount_savings_IDChanged();
-				}
+				return this.GetTable<cash_t>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_client_id", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string client_id
+		public System.Data.Linq.Table<account_savings_t> account_savings_ts
 		{
 			get
 			{
-				return this._client_id;
-			}
-			set
-			{
-				if ((this._client_id != value))
-				{
-					if (this._client_info_t.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onclient_idChanging(value);
-					this.SendPropertyChanging();
-					this._client_id = value;
-					this.SendPropertyChanged("client_id");
-					this.Onclient_idChanged();
-				}
+				return this.GetTable<account_savings_t>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_savings", DbType="Float NOT NULL")]
-		public double savings
+		public System.Data.Linq.Table<steps_of_discount_upgrading> steps_of_discount_upgradings
 		{
 			get
 			{
-				return this._savings;
-			}
-			set
-			{
-				if ((this._savings != value))
-				{
-					this.OnsavingsChanging(value);
-					this.SendPropertyChanging();
-					this._savings = value;
-					this.SendPropertyChanged("savings");
-					this.OnsavingsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="client_info_t_account_savings_t", Storage="_client_info_t", ThisKey="client_id", OtherKey="client_id", IsForeignKey=true)]
-		public client_info_t client_info_t
-		{
-			get
-			{
-				return this._client_info_t.Entity;
-			}
-			set
-			{
-				client_info_t previousValue = this._client_info_t.Entity;
-				if (((previousValue != value) 
-							|| (this._client_info_t.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._client_info_t.Entity = null;
-						previousValue.account_savings_ts.Remove(this);
-					}
-					this._client_info_t.Entity = value;
-					if ((value != null))
-					{
-						value.account_savings_ts.Add(this);
-						this._client_id = value.client_id;
-					}
-					else
-					{
-						this._client_id = default(string);
-					}
-					this.SendPropertyChanged("client_info_t");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<steps_of_discount_upgrading>();
 			}
 		}
 	}
@@ -668,11 +539,11 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private double _played_sum;
 		
-		private EntitySet<account_savings_t> _account_savings_ts;
-		
 		private EntitySet<clients_per_session_t> _clients_per_session_ts;
 		
 		private EntitySet<payments_t> _payments_ts;
+		
+		private EntitySet<account_savings_t> _account_savings_ts;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -698,9 +569,9 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		public client_info_t()
 		{
-			this._account_savings_ts = new EntitySet<account_savings_t>(new Action<account_savings_t>(this.attach_account_savings_ts), new Action<account_savings_t>(this.detach_account_savings_ts));
 			this._clients_per_session_ts = new EntitySet<clients_per_session_t>(new Action<clients_per_session_t>(this.attach_clients_per_session_ts), new Action<clients_per_session_t>(this.detach_clients_per_session_ts));
 			this._payments_ts = new EntitySet<payments_t>(new Action<payments_t>(this.attach_payments_ts), new Action<payments_t>(this.detach_payments_ts));
+			this._account_savings_ts = new EntitySet<account_savings_t>(new Action<account_savings_t>(this.attach_account_savings_ts), new Action<account_savings_t>(this.detach_account_savings_ts));
 			OnCreated();
 		}
 		
@@ -864,19 +735,6 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="client_info_t_account_savings_t", Storage="_account_savings_ts", ThisKey="client_id", OtherKey="client_id")]
-		public EntitySet<account_savings_t> account_savings_ts
-		{
-			get
-			{
-				return this._account_savings_ts;
-			}
-			set
-			{
-				this._account_savings_ts.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="client_info_t_clients_per_session_t", Storage="_clients_per_session_ts", ThisKey="client_id", OtherKey="client_id")]
 		public EntitySet<clients_per_session_t> clients_per_session_ts
 		{
@@ -903,6 +761,19 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="client_info_t_account_savings_t", Storage="_account_savings_ts", ThisKey="client_id", OtherKey="client_id")]
+		public EntitySet<account_savings_t> account_savings_ts
+		{
+			get
+			{
+				return this._account_savings_ts;
+			}
+			set
+			{
+				this._account_savings_ts.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -921,18 +792,6 @@ namespace Boom_Manager_Project.DataBaseClasses
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_account_savings_ts(account_savings_t entity)
-		{
-			this.SendPropertyChanging();
-			entity.client_info_t = this;
-		}
-		
-		private void detach_account_savings_ts(account_savings_t entity)
-		{
-			this.SendPropertyChanging();
-			entity.client_info_t = null;
 		}
 		
 		private void attach_clients_per_session_ts(clients_per_session_t entity)
@@ -954,6 +813,18 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 		
 		private void detach_payments_ts(payments_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.client_info_t = null;
+		}
+		
+		private void attach_account_savings_ts(account_savings_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.client_info_t = this;
+		}
+		
+		private void detach_account_savings_ts(account_savings_t entity)
 		{
 			this.SendPropertyChanging();
 			entity.client_info_t = null;
@@ -3379,6 +3250,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private EntitySet<withdrow_money_t> _withdrow_money_ts;
 		
+		private EntitySet<cash_t> _cash_ts;
+		
 		private EntityRef<personal_info_t> _personal_info_t;
 		
     #region Extensibility Method Definitions
@@ -3403,6 +3276,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 			this._sold_bar_history_tables = new EntitySet<sold_bar_history_table>(new Action<sold_bar_history_table>(this.attach_sold_bar_history_tables), new Action<sold_bar_history_table>(this.detach_sold_bar_history_tables));
 			this._expenses_ts = new EntitySet<expenses_t>(new Action<expenses_t>(this.attach_expenses_ts), new Action<expenses_t>(this.detach_expenses_ts));
 			this._withdrow_money_ts = new EntitySet<withdrow_money_t>(new Action<withdrow_money_t>(this.attach_withdrow_money_ts), new Action<withdrow_money_t>(this.detach_withdrow_money_ts));
+			this._cash_ts = new EntitySet<cash_t>(new Action<cash_t>(this.attach_cash_ts), new Action<cash_t>(this.detach_cash_ts));
 			this._personal_info_t = default(EntityRef<personal_info_t>);
 			OnCreated();
 		}
@@ -3563,6 +3437,19 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_cash_t", Storage="_cash_ts", ThisKey="daily_id", OtherKey="daily_id")]
+		public EntitySet<cash_t> cash_ts
+		{
+			get
+			{
+				return this._cash_ts;
+			}
+			set
+			{
+				this._cash_ts.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="personal_info_t_global_session_t", Storage="_personal_info_t", ThisKey="administrator_id", OtherKey="person_id", IsForeignKey=true)]
 		public personal_info_t personal_info_t
 		{
@@ -3660,6 +3547,18 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 		
 		private void detach_withdrow_money_ts(withdrow_money_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = null;
+		}
+		
+		private void attach_cash_ts(cash_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = this;
+		}
+		
+		private void detach_cash_ts(cash_t entity)
 		{
 			this.SendPropertyChanging();
 			entity.global_session_t = null;
@@ -4410,6 +4309,418 @@ namespace Boom_Manager_Project.DataBaseClasses
 						this._playstation_id = default(string);
 					}
 					this.SendPropertyChanged("tables_t");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.cash_t")]
+	public partial class cash_t : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _cash_id;
+		
+		private System.Nullable<int> _daily_id;
+		
+		private System.Nullable<double> _cash_amount;
+		
+		private EntityRef<global_session_t> _global_session_t;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oncash_idChanging(int value);
+    partial void Oncash_idChanged();
+    partial void Ondaily_idChanging(System.Nullable<int> value);
+    partial void Ondaily_idChanged();
+    partial void Oncash_amountChanging(System.Nullable<double> value);
+    partial void Oncash_amountChanged();
+    #endregion
+		
+		public cash_t()
+		{
+			this._global_session_t = default(EntityRef<global_session_t>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cash_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int cash_id
+		{
+			get
+			{
+				return this._cash_id;
+			}
+			set
+			{
+				if ((this._cash_id != value))
+				{
+					this.Oncash_idChanging(value);
+					this.SendPropertyChanging();
+					this._cash_id = value;
+					this.SendPropertyChanged("cash_id");
+					this.Oncash_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_daily_id", DbType="Int")]
+		public System.Nullable<int> daily_id
+		{
+			get
+			{
+				return this._daily_id;
+			}
+			set
+			{
+				if ((this._daily_id != value))
+				{
+					if (this._global_session_t.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondaily_idChanging(value);
+					this.SendPropertyChanging();
+					this._daily_id = value;
+					this.SendPropertyChanged("daily_id");
+					this.Ondaily_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cash_amount", DbType="Float")]
+		public System.Nullable<double> cash_amount
+		{
+			get
+			{
+				return this._cash_amount;
+			}
+			set
+			{
+				if ((this._cash_amount != value))
+				{
+					this.Oncash_amountChanging(value);
+					this.SendPropertyChanging();
+					this._cash_amount = value;
+					this.SendPropertyChanged("cash_amount");
+					this.Oncash_amountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_cash_t", Storage="_global_session_t", ThisKey="daily_id", OtherKey="daily_id", IsForeignKey=true)]
+		public global_session_t global_session_t
+		{
+			get
+			{
+				return this._global_session_t.Entity;
+			}
+			set
+			{
+				global_session_t previousValue = this._global_session_t.Entity;
+				if (((previousValue != value) 
+							|| (this._global_session_t.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._global_session_t.Entity = null;
+						previousValue.cash_ts.Remove(this);
+					}
+					this._global_session_t.Entity = value;
+					if ((value != null))
+					{
+						value.cash_ts.Add(this);
+						this._daily_id = value.daily_id;
+					}
+					else
+					{
+						this._daily_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("global_session_t");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.account_savings_t")]
+	public partial class account_savings_t : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _savings_id;
+		
+		private string _client_id;
+		
+		private double _savings;
+		
+		private EntityRef<client_info_t> _client_info_t;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onsavings_idChanging(int value);
+    partial void Onsavings_idChanged();
+    partial void Onclient_idChanging(string value);
+    partial void Onclient_idChanged();
+    partial void OnsavingsChanging(double value);
+    partial void OnsavingsChanged();
+    #endregion
+		
+		public account_savings_t()
+		{
+			this._client_info_t = default(EntityRef<client_info_t>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_savings_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int savings_id
+		{
+			get
+			{
+				return this._savings_id;
+			}
+			set
+			{
+				if ((this._savings_id != value))
+				{
+					this.Onsavings_idChanging(value);
+					this.SendPropertyChanging();
+					this._savings_id = value;
+					this.SendPropertyChanged("savings_id");
+					this.Onsavings_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_client_id", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string client_id
+		{
+			get
+			{
+				return this._client_id;
+			}
+			set
+			{
+				if ((this._client_id != value))
+				{
+					if (this._client_info_t.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onclient_idChanging(value);
+					this.SendPropertyChanging();
+					this._client_id = value;
+					this.SendPropertyChanged("client_id");
+					this.Onclient_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_savings", DbType="Float NOT NULL")]
+		public double savings
+		{
+			get
+			{
+				return this._savings;
+			}
+			set
+			{
+				if ((this._savings != value))
+				{
+					this.OnsavingsChanging(value);
+					this.SendPropertyChanging();
+					this._savings = value;
+					this.SendPropertyChanged("savings");
+					this.OnsavingsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="client_info_t_account_savings_t", Storage="_client_info_t", ThisKey="client_id", OtherKey="client_id", IsForeignKey=true)]
+		public client_info_t client_info_t
+		{
+			get
+			{
+				return this._client_info_t.Entity;
+			}
+			set
+			{
+				client_info_t previousValue = this._client_info_t.Entity;
+				if (((previousValue != value) 
+							|| (this._client_info_t.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._client_info_t.Entity = null;
+						previousValue.account_savings_ts.Remove(this);
+					}
+					this._client_info_t.Entity = value;
+					if ((value != null))
+					{
+						value.account_savings_ts.Add(this);
+						this._client_id = value.client_id;
+					}
+					else
+					{
+						this._client_id = default(string);
+					}
+					this.SendPropertyChanged("client_info_t");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.steps_of_discount_upgrading")]
+	public partial class steps_of_discount_upgrading : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _name;
+		
+		private double _required_played_sum;
+		
+		private double _discount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void Onrequired_played_sumChanging(double value);
+    partial void Onrequired_played_sumChanged();
+    partial void OndiscountChanging(double value);
+    partial void OndiscountChanged();
+    #endregion
+		
+		public steps_of_discount_upgrading()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(25) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_required_played_sum", DbType="Float NOT NULL")]
+		public double required_played_sum
+		{
+			get
+			{
+				return this._required_played_sum;
+			}
+			set
+			{
+				if ((this._required_played_sum != value))
+				{
+					this.Onrequired_played_sumChanging(value);
+					this.SendPropertyChanging();
+					this._required_played_sum = value;
+					this.SendPropertyChanged("required_played_sum");
+					this.Onrequired_played_sumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_discount", DbType="Float NOT NULL")]
+		public double discount
+		{
+			get
+			{
+				return this._discount;
+			}
+			set
+			{
+				if ((this._discount != value))
+				{
+					this.OndiscountChanging(value);
+					this.SendPropertyChanging();
+					this._discount = value;
+					this.SendPropertyChanged("discount");
+					this.OndiscountChanged();
 				}
 			}
 		}

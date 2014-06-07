@@ -2,35 +2,55 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Boom_Manager_Project.DataBaseClasses;
+using Boom_Manager_Project.Models;
 
 namespace Boom_Manager_Project
 {
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------WHEN WILL BE INTEGRATED CLIENT SAVINGS ACCOUNT-------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------
     public partial class AddDiscountCardToSession : Form
     {
         public string ClientID { get; set; }
         public string ClientName { get; set; }
         public decimal MoneyLeft { get; set; }
         private Point? _old;
-        private readonly AddDiscountToSessionModel _adcts;
+//        private readonly AddDiscountToSessionModel _adcts;
         public AddDiscountCardToSession()
         {
             InitializeComponent();
-            _adcts = new AddDiscountToSessionModel();
+           
+//            _adcts = new AddDiscountToSessionModel();
         }
 
         private void AddDiscountCardToSession_Load(object sender, EventArgs e)
         {
+            if (!AddDiscountToSessionModel.AddDiscountToSessionModelInstance().IsThereAnyClients())
+            {
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(23));
+                Close();
+            }
             FullFillCbOfClients();
         }
 
         private void FullFillCbOfClients()
         {
             cbDiscountCard.ValueMember = "client_id";
-            cbDiscountCard.DataSource = _adcts.GetClientList();
+            cbDiscountCard.DataSource = AddDiscountToSessionModel.AddDiscountToSessionModelInstance().GetClientList();
             if (cbDiscountCard.Items.Count > 0)
                 cbDiscountCard.SelectedIndex = 0;
             else
-                MessageBox.Show(_adcts.GetWarning("noClients"));
+                MessageBox.Show(AddDiscountToSessionModel.AddDiscountToSessionModelInstance().GetWarning("noClients"));
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -54,7 +74,7 @@ namespace Boom_Manager_Project
 
         private void CheckAllData()
         {
-            List<string> result = _adcts.GetClientInfo(cbDiscountCard.Text);
+            List<string> result = AddDiscountToSessionModel.AddDiscountToSessionModelInstance().GetClientInfo(cbDiscountCard.Text);
             tbClientName.Text = result[1];
             tbClientsMoneyLeft.Text = result[2]; //Остаток_денег.ToString(CultureInfo.InvariantCulture);
             ClientID = result[0];

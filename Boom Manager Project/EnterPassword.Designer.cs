@@ -48,7 +48,7 @@
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.ShortcutsEnabled = false;
             this.tbLogin.Size = new System.Drawing.Size(222, 29);
-            this.tbLogin.TabIndex = 2;
+            this.tbLogin.TabIndex = 0;
             this.tbLogin.Tag = "";
             this.tbLogin.Text = "Login";
             this.tbLogin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbLogin_MouseClick);
@@ -68,7 +68,7 @@
             this.bAccept.Location = new System.Drawing.Point(40, 199);
             this.bAccept.Name = "bAccept";
             this.bAccept.Size = new System.Drawing.Size(75, 34);
-            this.bAccept.TabIndex = 0;
+            this.bAccept.TabIndex = 2;
             this.bAccept.Text = "Accept";
             this.bAccept.UseVisualStyleBackColor = false;
             this.bAccept.Click += new System.EventHandler(this.bAccept_Click);
@@ -87,7 +87,7 @@
             this.bCancel.Location = new System.Drawing.Point(187, 199);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 34);
-            this.bCancel.TabIndex = 1;
+            this.bCancel.TabIndex = 3;
             this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
@@ -102,7 +102,7 @@
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(222, 29);
-            this.tbPassword.TabIndex = 3;
+            this.tbPassword.TabIndex = 1;
             this.tbPassword.Text = "Password";
             this.tbPassword.UseSystemPasswordChar = true;
             this.tbPassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbPassword_MouseClick);

@@ -31,7 +31,7 @@ namespace Boom_Manager_Project.Controllers
             {
                 return "Введите логин и пароль для принятия смены\n" +
                        //"Please input login and password to accept shift.\n" +
-                       "Сразу после того как вы введете логин и пароль, \nвы примите всю ответственность оборудованния и кассы на себя!";
+                       "Сразу после того как вы введете логин и пароль, \nвы примите всю ответственность состояния\n оборудованния и кассы на себя!";
                     //"By loging in you accept shift as it is, \nand take all responsibility for equipment itself";
             }
             if (type == "FirstShift")

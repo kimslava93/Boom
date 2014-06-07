@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Boom_Manager_Project.MyClasses;
@@ -165,6 +166,18 @@ namespace Boom_Manager_Project.DataBaseClasses
             {
                 return (from ep in db.GetTable<device_endpoints_t>()
                     select ep).ToList();
+            }
+        }
+
+        public List<Device> GetDevicesList()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var devicesT = (from d in db.GetTable<devices_t>()
+                    select d).ToList();
+                List<Device> result = devicesT.Select(d => new Device(IPAddress.Parse(d.ip_address))).ToList();
+                return result;
             }
         }
 
@@ -385,6 +398,34 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        public void AddNewDiscountStep(string name, double requrements, double discount)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var match = (from m in db.GetTable<steps_of_discount_upgrading>()
+                    where m.name == name
+                    select m).SingleOrDefault();
+                if (match == null)
+                {
+                    Table<steps_of_discount_upgrading> stepsOfDiscountUpgradingsTable =
+                        db.GetTable<steps_of_discount_upgrading>();
+                    var steps = new steps_of_discount_upgrading
+                    {
+                        name = name,
+                        discount = discount,
+                        required_played_sum = requrements
+                    };
+                    stepsOfDiscountUpgradingsTable.InsertOnSubmit(steps);
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(27));
+                }
+            }
+        }
+
         public void InsertNewEndPoint(int deviceId, int index)
         {
             var db = new dbDataContext();
@@ -485,6 +526,31 @@ namespace Boom_Manager_Project.DataBaseClasses
                 db.SubmitChanges();
             }
         }
+
+        public void AddMoneyToCash(double cash)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                int dId = GetOpenedGlobalSession().daily_id;
+                var getCashFromCurrentSession = (from c in db.GetTable<cash_t>()
+                    where c.daily_id == dId
+                    select c).SingleOrDefault();
+                if (getCashFromCurrentSession != null)
+                {
+                    getCashFromCurrentSession.cash_amount = getCashFromCurrentSession.cash_amount + cash;
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    var cashTable = db.GetTable<cash_t>();
+                    var cashT = new cash_t {cash_amount = cash, daily_id = dId};
+                    cashTable.InsertOnSubmit(cashT);
+                    db.SubmitChanges();
+                }
+            }
+        }
+
         public List<tables_t> GetAllFreeTables()
         {
             var db = new dbDataContext();
@@ -494,6 +560,17 @@ namespace Boom_Manager_Project.DataBaseClasses
                     orderby tb.playstation_id.Length ascending, tb.playstation_id ascending
                     where tb.playstation_state == "free"
                     select tb).ToList();
+            }
+        }
+
+        public List<steps_of_discount_upgrading> GetAllDiscountSteps()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from sd in db.GetTable<steps_of_discount_upgrading>()
+                        orderby sd.required_played_sum
+                    select sd).ToList();
             }
         }
 
@@ -645,6 +722,28 @@ namespace Boom_Manager_Project.DataBaseClasses
                 Table<days_sessions_t> deleteFromT = db.GetTable<days_sessions_t>();
                 deleteFromT.DeleteOnSubmit(sessionToDelete);
                 db.SubmitChanges();
+            }
+        }
+
+        public void DeleteDiscountStep(string  name)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var match = (from m in db.GetTable<steps_of_discount_upgrading>()
+                    where m.name == name
+                    select m).SingleOrDefault();
+                if (match != null)
+                {
+                    Table<steps_of_discount_upgrading> stepsOfDiscountUpgradingsTable =
+                        db.GetTable<steps_of_discount_upgrading>();
+                    stepsOfDiscountUpgradingsTable.DeleteOnSubmit(match);
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(28));
+                }
             }
         }
 

@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
-using Microsoft.SqlServer.Server;
 
 namespace Boom_Manager_Project.Controllers
 {
@@ -24,7 +21,7 @@ namespace Boom_Manager_Project.Controllers
 
         public List<string> GetAllClients()
         {
-            var allClients = DataBaseClasses.DataBaseClass.Instancedb().GetAllClients();
+            var allClients = DataBaseClass.Instancedb().GetAllClients();
             return allClients.Select(c => c.client_id.ToString(CultureInfo.InvariantCulture)).ToList();
         }
 
@@ -50,7 +47,7 @@ namespace Boom_Manager_Project.Controllers
             return false;
         }
 
-        public string GetClientIdFromInt(int clientInt)
+        public string GetClientIdFromInt(string clientInt)
         {
             string result = clientInt.ToString(CultureInfo.InvariantCulture);
             if (result.Length == 1)
@@ -64,29 +61,29 @@ namespace Boom_Manager_Project.Controllers
             return result;
         }
 
-        public void CreateNewClient(int clientId, string name, string email, string birthday, string phone,
+        public void CreateNewClient(string clientId, string name, string email, DateTime birthday, string phone,
             string activationdate, double personalDiscount, double playedSum)
         {
-            string clientID = GetClientIdFromInt(clientId);
-            if (CheckClientIdOnRepeat(clientID))
+//            string clientID = GetClientIdFromInt(clientId);
+            if (CheckClientIdOnRepeat(clientId))
             {
-                client_info_t c = new client_info_t()
+                var c = new client_info_t
                 {
-                    client_id = clientID,
+                    client_id = clientId,
                     activation_date = DateTime.Parse(activationdate), 
                     email = email,
-                    birthday = DateTime.Parse(birthday),
+                    birthday = birthday,
                     name = name,
                     pers_discount = personalDiscount,
                     phone = phone,
                     played_sum = playedSum
                 };
                 DataBaseClass.Instancedb().AddNewClient(c);
-                MessageBox.Show("Succesfully created!");
+                MessageBox.Show(@"Succesfully created!");
             }
             else
             {
-                MessageBox.Show("This id is already created, choose another one!");
+                MessageBox.Show(@"This id is already created, choose another one!");
             }
         }
     }
