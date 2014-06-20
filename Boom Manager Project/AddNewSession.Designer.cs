@@ -53,11 +53,11 @@
             this.bAddSession = new System.Windows.Forms.Button();
             this.numUpDPaidPrice = new System.Windows.Forms.NumericUpDown();
             this.gbDepositPayment = new System.Windows.Forms.GroupBox();
+            this.lPercentage = new System.Windows.Forms.Label();
+            this.lPlusMoney = new System.Windows.Forms.Label();
+            this.lPlusTime = new System.Windows.Forms.Label();
             this.tbDiscountSize = new System.Windows.Forms.TextBox();
             this.lDiscount = new System.Windows.Forms.Label();
-            this.lPlusTime = new System.Windows.Forms.Label();
-            this.lPlusMoney = new System.Windows.Forms.Label();
-            this.lPercentage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).BeginInit();
             this.gbClientInfo.SuspendLayout();
@@ -193,7 +193,7 @@
             this.bAddDiscountCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddDiscountCard.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddDiscountCard.ForeColor = System.Drawing.Color.White;
-            this.bAddDiscountCard.Location = new System.Drawing.Point(268, 49);
+            this.bAddDiscountCard.Location = new System.Drawing.Point(288, 49);
             this.bAddDiscountCard.Name = "bAddDiscountCard";
             this.bAddDiscountCard.Size = new System.Drawing.Size(94, 29);
             this.bAddDiscountCard.TabIndex = 29;
@@ -355,7 +355,6 @@
             // 
             // cbPlaystationId
             // 
-            this.cbPlaystationId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbPlaystationId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbPlaystationId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.cbPlaystationId.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -448,6 +447,33 @@
             this.gbDepositPayment.TabStop = false;
             this.gbDepositPayment.Text = "Оплата по депозиту";
             // 
+            // lPercentage
+            // 
+            this.lPercentage.AutoSize = true;
+            this.lPercentage.Location = new System.Drawing.Point(217, 140);
+            this.lPercentage.Name = "lPercentage";
+            this.lPercentage.Size = new System.Drawing.Size(23, 21);
+            this.lPercentage.TabIndex = 31;
+            this.lPercentage.Text = "%";
+            // 
+            // lPlusMoney
+            // 
+            this.lPlusMoney.AutoSize = true;
+            this.lPlusMoney.ForeColor = System.Drawing.Color.LightGreen;
+            this.lPlusMoney.Location = new System.Drawing.Point(282, 93);
+            this.lPlusMoney.Name = "lPlusMoney";
+            this.lPlusMoney.Size = new System.Drawing.Size(0, 21);
+            this.lPlusMoney.TabIndex = 30;
+            // 
+            // lPlusTime
+            // 
+            this.lPlusTime.AutoSize = true;
+            this.lPlusTime.ForeColor = System.Drawing.Color.LightGreen;
+            this.lPlusTime.Location = new System.Drawing.Point(282, 27);
+            this.lPlusTime.Name = "lPlusTime";
+            this.lPlusTime.Size = new System.Drawing.Size(0, 21);
+            this.lPlusTime.TabIndex = 30;
+            // 
             // tbDiscountSize
             // 
             this.tbDiscountSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -465,6 +491,7 @@
             this.tbDiscountSize.Size = new System.Drawing.Size(57, 29);
             this.tbDiscountSize.TabIndex = 29;
             this.tbDiscountSize.Text = "0";
+            this.tbDiscountSize.TextChanged += new System.EventHandler(this.tbDiscountSize_TextChanged);
             // 
             // lDiscount
             // 
@@ -476,33 +503,6 @@
             this.lDiscount.Size = new System.Drawing.Size(59, 21);
             this.lDiscount.TabIndex = 8;
             this.lDiscount.Text = "Скидка";
-            // 
-            // lPlusTime
-            // 
-            this.lPlusTime.AutoSize = true;
-            this.lPlusTime.ForeColor = System.Drawing.Color.LightGreen;
-            this.lPlusTime.Location = new System.Drawing.Point(282, 27);
-            this.lPlusTime.Name = "lPlusTime";
-            this.lPlusTime.Size = new System.Drawing.Size(0, 21);
-            this.lPlusTime.TabIndex = 30;
-            // 
-            // lPlusMoney
-            // 
-            this.lPlusMoney.AutoSize = true;
-            this.lPlusMoney.ForeColor = System.Drawing.Color.LightGreen;
-            this.lPlusMoney.Location = new System.Drawing.Point(282, 93);
-            this.lPlusMoney.Name = "lPlusMoney";
-            this.lPlusMoney.Size = new System.Drawing.Size(0, 21);
-            this.lPlusMoney.TabIndex = 30;
-            // 
-            // lPercentage
-            // 
-            this.lPercentage.AutoSize = true;
-            this.lPercentage.Location = new System.Drawing.Point(217, 140);
-            this.lPercentage.Name = "lPercentage";
-            this.lPercentage.Size = new System.Drawing.Size(23, 21);
-            this.lPercentage.TabIndex = 31;
-            this.lPercentage.Text = "%";
             // 
             // FAddNewSession
             // 

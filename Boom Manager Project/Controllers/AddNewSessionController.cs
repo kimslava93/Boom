@@ -45,7 +45,7 @@ namespace Boom_Manager_Project.Controllers
 
         public int GetDiscountSize(string discount)
         {
-            int res = 0;
+            int res;
             if(int.TryParse(discount, out res))
             {
                 return res;
@@ -118,16 +118,13 @@ namespace Boom_Manager_Project.Controllers
             {
                 return 0;
             }
-//            if (discountCard == "0")
+//            if (discountSize == "0")
 //            {
                 if (hoursLeft >= 0 || minutesLeft >= 0)
                 {
                     var toPlay = new TimeSpan((int)hoursLeft / 24, (int)hoursLeft - ((int)hoursLeft / 24) * 24, (int)minutesLeft, 0);
                     var price = AddNewSessionModel.InstanceAddNewSessionModel().GetSumToPay(playstationId, toPlay, currentDateTime);
-                    if (GetDiscountSize(discountCard) > 0)
-                    {
-
-                    }
+                   
                     if (price < 0)
                     {
                         return 0;
@@ -255,7 +252,7 @@ namespace Boom_Manager_Project.Controllers
         public bool CheckFieldsOnNull(string playstationId, string clientId, TimeSpan timeToPlay, double paidSum)
         {
             if (string.IsNullOrEmpty(playstationId) || string.IsNullOrEmpty(clientId) ||
-                timeToPlay == TimeSpan.FromMinutes(0) || paidSum <= 0 || paidSum == null)
+                timeToPlay == TimeSpan.FromMinutes(0) || paidSum <= 0)
             {
                 return false;
             }

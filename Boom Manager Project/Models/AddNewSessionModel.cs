@@ -12,6 +12,7 @@ namespace Boom_Manager_Project.Models
        
         public DateTime CurrentDateTime;
         private static AddNewSessionModel _addNewSessionModel;
+        public string ClientId;
         public static AddNewSessionModel InstanceAddNewSessionModel()
         {
             return _addNewSessionModel ?? (_addNewSessionModel = new AddNewSessionModel());
@@ -227,7 +228,14 @@ namespace Boom_Manager_Project.Models
                 }
                 try
                 {
-                    DataBaseClass.Instancedb().InsertClientsPerTable(clientId);
+                    if (clientId == @"0")
+                    {
+                        DataBaseClass.Instancedb().InsertClientsPerTable(clientId);
+                    }
+                    else
+                    {
+                        DataBaseClass.Instancedb().InsertClientsPerTable(ClientId);
+                    }
                 }
                 catch (Exception)
                 {

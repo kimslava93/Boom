@@ -320,9 +320,13 @@ namespace Boom_Manager_Project.DataBaseClasses
         private static string ListToString(int sessionId, IEnumerable<clients_per_session_t> clientsList)
         {
             string result = "";
+            var clientsInfo = Instancedb().GetAllClients();
             var clientsInSession = (from c in clientsList
+                                    from allclients in clientsInfo
                 where c.session_id == sessionId
-                select c.client_id).ToList();
+                where allclients.client_id == c.client_id
+                select allclients.name).ToList();
+
             if (clientsInSession.Count > 0)
             {
                 result = clientsInSession.Aggregate(result, (current, s) => current + (s + "; "));
@@ -615,7 +619,16 @@ namespace Boom_Manager_Project.DataBaseClasses
                     select c).SingleOrDefault();
             }
         }
-
+        public client_info_t GetClientInfoByName(string name)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from c in db.GetTable<client_info_t>()
+                        where c.name == name
+                        select c).SingleOrDefault();
+            }
+        }
         public account_savings_t GetClientSavingsById(string id)
         {
             var db = new dbDataContext();
