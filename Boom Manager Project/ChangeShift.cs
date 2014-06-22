@@ -55,10 +55,14 @@ namespace Boom_Manager_Project
         {
             if (FieldsAreFulFilled())
             {
-                ChangeShiftController.ChangeShiftControllerInstance().PasswordChecking(tbInAdminLogin.Text, tbInAdminPassword.Text);
-                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetMessage(0));
-                _formCanBeClosed = true;
-                Close();
+                if (ChangeShiftController.ChangeShiftControllerInstance()
+                    .PasswordChecking(tbInAdminLogin.Text, tbInAdminPassword.Text))
+                {
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetMessage(0));
+                    _formCanBeClosed = true;
+
+                    Close();
+                }
             }
         }
         private void bAddNewUser_Click(object sender, EventArgs e)
@@ -175,18 +179,16 @@ namespace Boom_Manager_Project
 
         private void tbInAdminLogin_MouseClick(object sender, MouseEventArgs e)
         {
-            if (tbInAdminLogin.Text == @"Login")
-            {
-                tbInAdminLogin.Text = "";
-            }
+            tbInAdminLogin.SelectAll();
+//            if (tbInAdminLogin.Text == @"Login")
+//            {
+//                tbInAdminLogin.Text = "";
+//            }
         }
 
         private void tbInAdminPassword_MouseClick(object sender, MouseEventArgs e)
         {
-            if (tbInAdminPassword.Text == @"Password")
-            {
-                tbInAdminPassword.Text = "";
-            }
+            tbInAdminLogin.SelectAll();
         }
 
         private void ChangeShift_MouseDown(object sender, MouseEventArgs e)

@@ -68,7 +68,7 @@
             this.mtbIpAddress.ShortcutsEnabled = false;
             this.mtbIpAddress.Size = new System.Drawing.Size(123, 29);
             this.mtbIpAddress.SkipLiterals = false;
-            this.mtbIpAddress.TabIndex = 2;
+            this.mtbIpAddress.TabIndex = 1;
             this.mtbIpAddress.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePrompt;
             this.mtbIpAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtbIpAddress_KeyPress);
             // 
@@ -85,7 +85,7 @@
             0});
             this.numUpdDeviceId.Name = "numUpdDeviceId";
             this.numUpdDeviceId.Size = new System.Drawing.Size(123, 29);
-            this.numUpdDeviceId.TabIndex = 3;
+            this.numUpdDeviceId.TabIndex = 0;
             // 
             // bCreate
             // 
@@ -100,7 +100,7 @@
             this.bCreate.Location = new System.Drawing.Point(159, 163);
             this.bCreate.Name = "bCreate";
             this.bCreate.Size = new System.Drawing.Size(83, 31);
-            this.bCreate.TabIndex = 4;
+            this.bCreate.TabIndex = 2;
             this.bCreate.Text = "Создать";
             this.bCreate.UseVisualStyleBackColor = false;
             this.bCreate.Click += new System.EventHandler(this.bCreate_Click);
@@ -118,7 +118,7 @@
             this.bCancel.Location = new System.Drawing.Point(16, 163);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(81, 31);
-            this.bCancel.TabIndex = 5;
+            this.bCancel.TabIndex = 3;
             this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using DevExpress.XtraPrinting.Native;
+using Boom_Manager_Project.DataBaseClasses;
 
 namespace Boom_Manager_Project
 {
@@ -25,7 +19,7 @@ namespace Boom_Manager_Project
         private void WithdrawMoney_Load(object sender, EventArgs e)
         {
             LoadManagersList();
-            tbTime.Text = DateTime.Now.ToString("dd-MMM-yyyy HH:mm");
+            tbTime.Text = DateTime.Now.ToString("dd-MMM-yy HH:mm");
         }
 
         private void LoadManagersList()
@@ -40,8 +34,14 @@ namespace Boom_Manager_Project
             {
                 WithdrawMoneyController.WithdrawMoneyControllerInstance()
                     .InsertNewRecordWithdrawMoney((double)numUpDCashAmount.Value, cbManager.Text, DateTime.Parse(tbTime.Text));
+                Close();
             }
-            Close();
+            else
+            {
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(9));
+
+            }
+            
         }
 
         private bool CheckStringOnNull(string wordToTest)

@@ -68,7 +68,7 @@ namespace Boom_Manager_Project
 
         private void cbPlaystationId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CheckTableAvailability())
+            if (TableIsAvailable())
             {
                 SetDefaultPropertiesForFields();
             }
@@ -78,24 +78,33 @@ namespace Boom_Manager_Project
             }
         }
 
-        private bool CheckTableAvailability()
+        private bool TableIsAvailable()
         {
             return AddNewSessionController.AddNewSessionControllerInstance().CheckDoesConsoleExist(cbPlaystationId.Text);
         }
 
         private void SetDefaultPropertiesForFields()
         {
-
-            _repeatCallOfMethodCounter += 2;
-            numUpDHoursLeft.Value = 1;
-            numUpDMinutesLeft.Value = 0;
-            var t = AddNewSessionController.AddNewSessionControllerInstance()
-                .UpdatePrice(tbDiscountCards.Text, cbPlaystationId.Text, 1, 0);
-            numUpDPaidPrice.Minimum = t;
-            
-
-            numUpDPaidPrice.Value = t;
-
+            if (cbNighTime.Checked)
+            {
+                _repeatCallOfMethodCounter = 5;
+                numUpDPaidPrice.Value =
+                    (decimal)DataBaseClass.Instancedb().GetNightTimePriceForPlaystation(cbPlaystationId.Text);
+                numUpDPaidPrice.Invalidate();
+                tbDiscountCards.Enabled = false;
+                tbDiscountCards.Text = @"0";
+                tbDiscountCards.ReadOnly = true;
+            }
+            else
+            {
+                _repeatCallOfMethodCounter += 2;
+                numUpDHoursLeft.Value = 1;
+                numUpDMinutesLeft.Value = 0;
+                var t = AddNewSessionController.AddNewSessionControllerInstance()
+                    .UpdatePrice(tbDiscountCards.Text, cbPlaystationId.Text, 1, 0);
+                numUpDPaidPrice.Minimum = t;
+                numUpDPaidPrice.Value = t;
+            }
         }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -104,7 +113,7 @@ namespace Boom_Manager_Project
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------------------------------
-//            if (tbDiscountCards.Text == @"0")
+//            if (tbDiscountCards.Text == Options.OptionsInstance().UsualClient)
 //            {
 //                _repeatCallOfMethodCounter += 2;
 //                numUpDHoursLeft.Value = 1;
@@ -143,7 +152,7 @@ namespace Boom_Manager_Project
 //        }
         private void IsClientWithCardOrNot()
         {
-            if (tbDiscountCards.Text == @"0")
+            if (tbDiscountCards.Text == Options.OptionsInstance().UsualClient)
             {
                 gbDepositPayment.Location = AddNewSessionController.AddNewSessionControllerInstance().ActiveLocation;
                 gbDepositPayment.Enabled = true;
@@ -308,9 +317,9 @@ namespace Boom_Manager_Project
         {
             var adcs = new AddDiscountCardToSession();
             adcs.ShowDialog();
-            if (adcs.ClientID == "0" || String.IsNullOrWhiteSpace(adcs.ClientID))
+            if (adcs.ClientID == Options.OptionsInstance().UsualClient || String.IsNullOrWhiteSpace(adcs.ClientID))
             {
-                tbDiscountCards.Text = @"0";//---------------------------------------------------------------CHECK IF THE ANY GENERAL FOR ALL CLIENTS DISCOUNT 
+                tbDiscountCards.Text = Options.OptionsInstance().UsualClient;//---------------------------------------------------------------CHECK IF THE ANY GENERAL FOR ALL CLIENTS DISCOUNT 
             }
 
             //-------in case when client will have money on the card!-------------------
@@ -336,7 +345,7 @@ namespace Boom_Manager_Project
         {
             CheckTable(); 
             UsualClientPriceChanged();
-            if (tbDiscountCards.Text == @"0")
+            if (tbDiscountCards.Text == Options.OptionsInstance().UsualClient)
             {
                 TimeSpan paidTime =
                     TimeSpan.FromMinutes((double) numUpDHoursLeft.Value*60 + (double) numUpDMinutesLeft.Value);
@@ -518,7 +527,7 @@ namespace Boom_Manager_Project
                     else
                     {
                         MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(24));
-                        tbDiscountCards.Text = @"0";
+                        tbDiscountCards.Text = Options.OptionsInstance().UsualClient;
                         tbDiscountCards.SelectAll();
                         cbPlaystationId.Focus();
                     }
@@ -529,20 +538,21 @@ namespace Boom_Manager_Project
 
         private void CheckTable()
         {
-            if (!string.IsNullOrEmpty(cbPlaystationId.Text) && CheckTableAvailability())
-            {
-                SetDefaultPropertiesForFields();
-            }
-            else
+            if (string.IsNullOrEmpty(cbPlaystationId.Text) || !TableIsAvailable())
             {
                 UpdatePlaystationList();
-//                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(25));
+                SetDefaultPropertiesForFields();
             }
+//            else
+//            {
+//                
+////                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(25));
+//            }
         }
 
         private void cbPlaystationId_TextChanged(object sender, EventArgs e)
         {
-            if (CheckTableAvailability())
+            if (TableIsAvailable())
             {
                 SetDefaultPropertiesForFields();
             }
@@ -562,7 +572,7 @@ namespace Boom_Manager_Project
             CheckDiscount();
 
 
-            //            if (tbDiscountCards.Text != @"0")
+            //            if (tbDiscountCards.Text != Options.OptionsInstance().UsualClient)
             //            {
             //                int disc =
             //                    AddNewSessionController.AddNewSessionControllerInstance().GetDiscountSize((tbDiscountSize.Text));
@@ -583,7 +593,7 @@ namespace Boom_Manager_Project
 
 
 
-            //                if (tbDiscountSize.Text != @"0%")
+            //                if (tbDiscountSize.Text != "0%")
             //                {
             //                    var bonusMoney = paidPrice*AddNewSessionController.AddNewSessionControllerInstance()
             //                                     .GetDiscountSize(tbDiscountSize.Text)/100;
@@ -615,6 +625,71 @@ namespace Boom_Manager_Project
                     lPlusTime.Text = @" + " + Math.Round(bonusTime.TotalMinutes,0);
 //                }
 //                lPlusTime.Text = @" + " + bonusTime.ToString(bonusTime.Hours > 0 ? "HH:mm" : "mm");
+            }
+        }
+
+        private bool IsTimeIncludedIntoNightTime()
+        {
+            return DateTime.Now.Hour > 0 && DateTime.Now.Hour < 7;
+        }
+
+        private TimeSpan GetTimeUntil7()
+        {
+            if (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0) > (DateTime.Now))
+                return (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0) - (DateTime.Now));
+            
+                return ((DateTime.Now) - new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0));
+        }
+
+        private bool IsTimeNotExeed7Hours(TimeSpan time)
+        {
+            return time > TimeSpan.FromHours(1) && time < TimeSpan.FromHours(7);
+        }
+
+        private void cbNighTime_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbNighTime.Checked)
+            {
+                tbDiscountCards.Enabled = false;
+                tbDiscountCards.Text = @"0";
+                tbDiscountCards.ReadOnly = true;
+                if (IsTimeIncludedIntoNightTime())
+                {
+                    TimeSpan until7Am = GetTimeUntil7();
+                    if (IsTimeNotExeed7Hours(until7Am))
+                    {
+                        _repeatCallOfMethodCounter = 5;
+                        numUpDHoursLeft.Value = until7Am.Hours;
+                        numUpDHoursLeft.Invalidate();
+                        _repeatCallOfMethodCounter = 5;
+                        numUpDMinutesLeft.Value = until7Am.Minutes;
+                        numUpDMinutesLeft.Invalidate();
+                        _repeatCallOfMethodCounter = 5;
+                        numUpDPaidPrice.Minimum =
+                            (decimal) DataBaseClass.Instancedb().GetNightTimePriceForPlaystation(cbPlaystationId.Text);
+                        numUpDPaidPrice.Value = numUpDPaidPrice.Minimum;
+                        numUpDPaidPrice.Maximum = numUpDPaidPrice.Minimum;
+                        numUpDPaidPrice.Invalidate();
+                        gbDepositPayment.Enabled = false;
+                        _repeatCallOfMethodCounter = 5;
+                    }
+                    else
+                        MessageBox.Show("Time exeed 7 hours! \n Time until 7 am is " + until7Am.Hours + " hours and " +
+                                        until7Am.Minutes + " minutes");
+                }
+                else
+                {
+                    MessageBox.Show("В данный момент невозможно включить ночной тариф!");
+                    cbNighTime.Checked = false;
+                }
+            }
+            else
+            {
+                tbDiscountCards.Enabled = true;
+                tbDiscountCards.Text = @"0";
+                tbDiscountCards.ReadOnly = false;
+                gbDepositPayment.Enabled = true;
+                SetDefaultPropertiesForFields();
             }
         }
     }

@@ -53,7 +53,7 @@
             this.gbWithdrawMoney.ForeColor = System.Drawing.Color.White;
             this.gbWithdrawMoney.Location = new System.Drawing.Point(0, 0);
             this.gbWithdrawMoney.Name = "gbWithdrawMoney";
-            this.gbWithdrawMoney.Size = new System.Drawing.Size(334, 158);
+            this.gbWithdrawMoney.Size = new System.Drawing.Size(339, 158);
             this.gbWithdrawMoney.TabIndex = 0;
             this.gbWithdrawMoney.TabStop = false;
             this.gbWithdrawMoney.Text = "Снять кассу";
@@ -162,7 +162,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(334, 209);
+            this.ClientSize = new System.Drawing.Size(339, 209);
             this.ControlBox = false;
             this.Controls.Add(this.bApply);
             this.Controls.Add(this.bCancel);

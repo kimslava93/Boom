@@ -21,10 +21,10 @@ namespace Boom_Manager_Project.Controllers
             var result = new List<object>();
             if (clientToFind != null)
             {
-                if (clientToFind.client_id == "0")
+                if (clientToFind.client_id == Options.OptionsInstance().UsualClient)
                 {
                     result.Add(clientToFind.name);
-                    result.Add("0");
+                    result.Add(Options.OptionsInstance().UsualClient);
                 }
                 else if (savingsToFind != null && !string.IsNullOrWhiteSpace(clientToFind.name))
                 {
@@ -38,9 +38,9 @@ namespace Boom_Manager_Project.Controllers
             }
             else
             {
-//                result.Add("0");
+//                result.Add(Options.OptionsInstance().UsualClient);
                 result.Add("No client info");
-                result.Add("0");
+                result.Add(Options.OptionsInstance().UsualClient);
 //                MessageBox.Show(GetWarning("noClientInfo"));
             }
             return result;

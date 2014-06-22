@@ -96,7 +96,7 @@ namespace Boom_Manager_Project.Controllers
 
             tbPlayedSum.Text = c.played_sum.ToString(CultureInfo.InvariantCulture);
             
-            if (cbClients.Text == "0")
+            if (cbClients.Text == Options.OptionsInstance().UsualClient)
             {
                 tbName.Enabled = false;
                 tbActivationDate.Enabled = false;
@@ -143,7 +143,7 @@ namespace Boom_Manager_Project.Controllers
             var bday = new DateTime((int)numUpdBYear.Value, (int)numUpdBMonth.Value, (int)numUpdBDay.Value);
             ClientManagerController.ClientManagerControllerInstance()
                 .CreateNewClient(tbClientId.Text, tbName.Text, tbEmail.Text, bday,
-                    tbPhone.Text, tbActivationDate.Text, (double) numUpDSavings.Value, 0);
+                    tbPhone.Text, tbActivationDate.Text, (double) numUpDDiscount.Value, 0);
             Close();
         }
 

@@ -55,7 +55,7 @@ namespace Boom_Manager_Project
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            ClientID = "0";
+            ClientID = Options.OptionsInstance().UsualClient;
             ClientName = "Usual client";
             MoneyLeft = (decimal)0.0;
             Close();
@@ -76,7 +76,7 @@ namespace Boom_Manager_Project
         {
             List<string> result = AddDiscountToSessionModel.AddDiscountToSessionModelInstance().GetClientInfo(cbDiscountCard.Text);
             tbClientName.Text = result[1];
-            tbClientsMoneyLeft.Text = result[2]; //Остаток_денег.ToString(CultureInfo.InvariantCulture);
+            tbClientsMoneyLeft.Text = result[2]; //Счетчик.ToString(CultureInfo.InvariantCulture);
             ClientID = result[0];
             MoneyLeft = decimal.Parse(result[2].Replace(".", ",")); //if (double.TryParse(values[i, j].Replace(".", ","), out tmp))
             ClientName = result[1];

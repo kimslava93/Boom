@@ -33,6 +33,7 @@
             this.bCancel = new System.Windows.Forms.Button();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.lWarning = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbLogin
@@ -65,7 +66,7 @@
             this.bAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAccept.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAccept.ForeColor = System.Drawing.Color.White;
-            this.bAccept.Location = new System.Drawing.Point(40, 199);
+            this.bAccept.Location = new System.Drawing.Point(12, 210);
             this.bAccept.Name = "bAccept";
             this.bAccept.Size = new System.Drawing.Size(75, 34);
             this.bAccept.TabIndex = 2;
@@ -84,7 +85,7 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(187, 199);
+            this.bCancel.Location = new System.Drawing.Point(213, 210);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(75, 34);
             this.bCancel.TabIndex = 3;
@@ -119,6 +120,26 @@
             this.lWarning.TabIndex = 4;
             this.lWarning.Text = "Welcome";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(221, 157);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 26);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Card";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EnterPassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -126,6 +147,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.ClientSize = new System.Drawing.Size(300, 256);
             this.ControlBox = false;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lWarning);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.tbLogin);
@@ -160,5 +182,6 @@
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.TextBox tbLogin;
         private System.Windows.Forms.Label lWarning;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -97,5 +97,17 @@ namespace Boom_Manager_Project
                 
             }
         }
+
+        private void bEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvAllDevices.CurrentRow != null)
+            {
+                var ed = new EditDevice((int)dgvAllDevices.CurrentRow.Cells[0].Value,
+                    (string)dgvAllDevices.CurrentRow.Cells[1].Value);
+                ed.ShowDialog();
+                LoadDevicesList();
+//                dgvAllDevices.Invalidate();
+            }
+        }
     }
 }

@@ -79,6 +79,31 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
+        public void LoginOperatorToLastOpenedSession(string login)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var operatorInfo = GetUserInfoByLogin(login);
+                var lastGlobalSession = (from gs in db.GetTable<global_session_t>()
+                    where gs.end_session == gs.start_session
+                    select gs).SingleOrDefault();
+                if (lastGlobalSession != null && operatorInfo != null)
+                {
+                    lastGlobalSession.operator_id = operatorInfo.person_id;
+                    try
+                    {
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(31));
+                    }
+                    
+                }
+            }
+        }
+
         public List<ShiftsMyClass> GetAllGlobalSessions(int numberOfLastSessons)
         {
             var db = new dbDataContext();
@@ -274,13 +299,27 @@ namespace Boom_Manager_Project.DataBaseClasses
                         //----------------------------------------------------------
                         Клиент = ListToString(days.session_id, clientsList),
                         //to show all clients in one line and column instead of one as string
-                        Остаток_денег = days.money_left,
+                        Счетчик = days.played_money,
                         Скидка_сессии = (double) sessionDiscount,
-                        Оплаченная_сумма = days.payed_sum
+                        Оплачено = days.payed_sum
                     }).ToList<DaySessionClass>();
             }
         }
-
+        public void EditDevice(int deviceId, string ipAddress)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var device = (from d in db.GetTable<devices_t>()
+                    where d.device_id == deviceId
+                    select d).SingleOrDefault();
+                if (device != null)
+                {
+                    device.ip_address = ipAddress;
+                }
+                db.SubmitChanges();
+            }
+        }
         public void TransferOpenedSessionToNextGlobalSession(int sessionId)
         {
             var db = new dbDataContext();
@@ -359,9 +398,9 @@ namespace Boom_Manager_Project.DataBaseClasses
                                          Конец = (DateTime)endGame,
                                          Оставшееся_время = GetTimeLeft((DateTime)endGame),//----------------------------------------------------------
                                          Клиент = ListToString(d.session_id, clientsList), //to show all clients in one line and column instead of one
-                                         Остаток_денег = d.money_left,
+                                         Счетчик = d.played_money,
                                          Скидка_сессии = (double)d.session_discount,
-                                         Оплаченная_сумма = d.payed_sum
+                                         Оплачено = d.payed_sum
                                      }).ToList<DaySessionClass>();
                 return daySessionsReport;
             }
@@ -554,7 +593,16 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
-
+        public double? GetCashFromDailyId(int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from tb in db.GetTable<cash_t>()
+                        where tb.daily_id == dailyId
+                        select tb.cash_amount).SingleOrDefault();
+            }
+        }
         public List<tables_t> GetAllFreeTables()
         {
             var db = new dbDataContext();
@@ -590,6 +638,20 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return price;
             }
         }
+
+        public double GetNightTimePriceForPlaystation(string playstationId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                double? price = (from p in db.GetTable<playstation_timezone>()
+                                 where p.timezone_name == "NightTime"
+                                 where p.playstation_id == playstationId
+                                 select p.timezone_cost_per_hour).SingleOrDefault();
+                return (price ?? 0);
+            }
+        }
+
         public List<playstation_timezone> GetAllPricesForPlaystation()
         {
             var db = new dbDataContext();
@@ -711,7 +773,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     playstation_id = daySession.playstation_id,
                     session_state = "opened",
                     payed_sum = daySession.payed_sum,
-                    money_left = daySession.money_left,
+                    played_money = daySession.played_money,
                     session_discount = daySession.session_discount
                 };
                 daysT.InsertOnSubmit(daysSessionT);
@@ -1007,10 +1069,10 @@ namespace Boom_Manager_Project.DataBaseClasses
 
                 if (lastInsertedDaySession != null)
                 {
-                    if (clientId == "0")
+                    if (clientId == Options.OptionsInstance().UsualClient)
                     {
                         clientsPerSessionT.session_id = lastInsertedDaySession.session_id;
-                        clientsPerSessionT.client_id = "0";
+                        clientsPerSessionT.client_id = Options.OptionsInstance().UsualClient;
                         clientsPerSessionT.payed_sum = 0;
                         clientsPersessionTable.InsertOnSubmit(clientsPerSessionT);
                         db.SubmitChanges();
@@ -1058,9 +1120,10 @@ namespace Boom_Manager_Project.DataBaseClasses
 
 //                if (endTime - dsc.Начало < TimeSpan.FromHours(1))
 //                {
-//                    dsc.Остаток_денег = dsc.Оплаченная_сумма - dsc.Остаток_денег;
+//                    dsc.Счетчик = dsc.Оплачено - dsc.Счетчик;
 //                }
-                sessionIdtoDelete.money_left = dsc.Остаток_денег;
+                sessionIdtoDelete.payed_sum = dsc.Оплачено;
+                sessionIdtoDelete.played_money = dsc.Счетчик;
                 if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
                 {
                     sessionIdtoDelete.comments = comments;
@@ -1085,6 +1148,43 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
+
+        public DaySessionClass AccountDiscountMoney(DaySessionClass dsc)
+        {
+            List<clients_per_session_t> clientsOnSession = GetListOfClientsPerExactSession(dsc.Сессия);
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------Since client stoped play before timer, algorithm--------------------------------------------------- 
+//--------------------------------------------find the highest discount size and substract from end sum,----------------------------------------- 
+//--------------------------------------------in order client do not get discount as change money------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+            if (clientsOnSession.Count >= 1)
+            {
+                double realDiscount = 0;//applied discount
+                foreach (clients_per_session_t c in clientsOnSession)
+                {
+                    var clientDiscount = GetClientInfoById(c.client_id).pers_discount;
+                    if (clientDiscount > realDiscount)
+                    {
+                        realDiscount = (double)clientDiscount;
+                    }
+                }
+                double bonusMoney = ((dsc.Оплачено * realDiscount)/(100 + realDiscount));
+                dsc.Оплачено = dsc.Оплачено - bonusMoney;
+                if ((dsc.Счетчик) > (dsc.Оплачено - bonusMoney))//if played less than was real paid money
+                {
+                    dsc.Скидка_сессии = dsc.Счетчик - dsc.Оплачено - bonusMoney;
+                }
+                else if (dsc.Счетчик <= (dsc.Оплачено - bonusMoney))
+                {
+                    dsc.Скидка_сессии = 0;
+                }
+            }
+            return dsc;
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+        }
+
         public void CloseSessionWithCard(DaySessionClass dsc, string comments, DateTime endTime)
         {
             var db = new dbDataContext();
@@ -1095,49 +1195,24 @@ namespace Boom_Manager_Project.DataBaseClasses
                                          where s.daily_id == dayId
                                          where s.session_id == dsc.Сессия
                                          select s).SingleOrDefault();
+
+                var clientInfo = (from c in db.GetTable<client_info_t>()
+                    where c.name == dsc.Клиент
+                    select c).SingleOrDefault();
                 if (sessionIdtoDelete == null) return;
+                
                 sessionIdtoDelete.end_game = endTime;
                 sessionIdtoDelete.session_state = "closed";
-                sessionIdtoDelete.money_left = dsc.Остаток_денег;
-                List<clients_per_session_t> clientsOnSession = GetListOfClientsPerExactSession(dsc.Сессия);
-                double playedMoney = dsc.Оплаченная_сумма - dsc.Остаток_денег;//sessionIdtoDelete.payed_sum - sessionIdtoDelete.money_left;
-                double eachPlayerShouldPay = playedMoney/clientsOnSession.Count;
-                double nextShouldpayAdditional = 0;
-                do
+                sessionIdtoDelete.payed_sum = dsc.Оплачено;
+                if (clientInfo != null)
                 {
-                    foreach (var client in clientsOnSession)
-                    {
-                        var moneyOnClientCard = GetClientSavingsById(client.client_id);
-                        if (moneyOnClientCard != null)
-                        {
-                            if (moneyOnClientCard.savings >= (eachPlayerShouldPay + nextShouldpayAdditional))
-                            {
-                                playedMoney = playedMoney - (eachPlayerShouldPay + nextShouldpayAdditional);
-//                                moneyOnClientCard.savings = moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional);
-                                ChangeSavingsValueOfClient(moneyOnClientCard.client_id,
-                                    (moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional))*-1);
-                                nextShouldpayAdditional = 0;
-                            }
-                            else
-                            {
-                                nextShouldpayAdditional = eachPlayerShouldPay - moneyOnClientCard.savings;
-                                playedMoney = playedMoney - moneyOnClientCard.savings;
-//                                moneyOnClientCard.savings = 0;
-                                ChangeSavingsValueOfClient(moneyOnClientCard.client_id, 0);
-                            }
-                        }
-//                        try
-//                        {
-//                            db.SubmitChanges();
-//                        }
-//                        catch (Exception)
-//                        {
-//                            MessageBox.Show("Error during closing clients occured!");
-//                        }
-                    }
-                } while (nextShouldpayAdditional > 0 && playedMoney > 0);
-
-
+                    clientInfo.played_sum += dsc.Счетчик;
+                }
+                //                if (endTime - dsc.Начало < TimeSpan.FromHours(1))
+                //                {
+                //                    dsc.Счетчик = dsc.Оплачено - dsc.Счетчик;
+                //                }
+                sessionIdtoDelete.played_money = dsc.Счетчик;
                 if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
                 {
                     sessionIdtoDelete.comments = comments;
@@ -1162,7 +1237,101 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
-
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------When client will be able to store money on the card------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------This algorithm help to acount how much money should be paid by each client(if more than 1)--------------
+//---------------------------------------Account that each player will pay equal sum of money, but if one of the cards do not have enough money--
+//----------------------------------------another will pay for him!------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//        public void CloseSessionWithCard(DaySessionClass dsc, string comments, DateTime endTime)
+//        {
+//            var db = new dbDataContext();
+//            lock (db)
+//            {
+//                int dayId = GetOpenedGlobalSession().daily_id;
+//                var sessionIdtoDelete = (from s in db.GetTable<days_sessions_t>()
+//                                         where s.daily_id == dayId
+//                                         where s.session_id == dsc.Сессия
+//                                         select s).SingleOrDefault();
+//                if (sessionIdtoDelete == null) return;
+//                sessionIdtoDelete.end_game = endTime;
+//                sessionIdtoDelete.session_state = "closed";
+//                sessionIdtoDelete.money_left = dsc.Счетчик;
+//                List<clients_per_session_t> clientsOnSession = GetListOfClientsPerExactSession(dsc.Сессия);
+//                double playedMoney = dsc.Оплачено - dsc.Счетчик;//sessionIdtoDelete.payed_sum - sessionIdtoDelete.money_left;
+//                double eachPlayerShouldPay = playedMoney/clientsOnSession.Count;
+//                double nextShouldpayAdditional = 0;
+//                do
+//                {
+//                    foreach (var client in clientsOnSession)
+//                    {
+//                        var moneyOnClientCard = GetClientSavingsById(client.client_id);
+//                        if (moneyOnClientCard != null)
+//                        {
+//                            if (moneyOnClientCard.savings >= (eachPlayerShouldPay + nextShouldpayAdditional))
+//                            {
+//                                playedMoney = playedMoney - (eachPlayerShouldPay + nextShouldpayAdditional);
+////                                moneyOnClientCard.savings = moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional);
+//                                ChangeSavingsValueOfClient(moneyOnClientCard.client_id,
+//                                    (moneyOnClientCard.savings - (eachPlayerShouldPay + nextShouldpayAdditional))*-1);
+//                                nextShouldpayAdditional = 0;
+//                            }
+//                            else
+//                            {
+//                                nextShouldpayAdditional = eachPlayerShouldPay - moneyOnClientCard.savings;
+//                                playedMoney = playedMoney - moneyOnClientCard.savings;
+////                                moneyOnClientCard.savings = 0;
+//                                ChangeSavingsValueOfClient(moneyOnClientCard.client_id, 0);
+//                            }
+//                        }
+////                        try
+////                        {
+////                            db.SubmitChanges();
+////                        }
+////                        catch (Exception)
+////                        {
+////                            MessageBox.Show("Error during closing clients occured!");
+////                        }
+//                    }
+//                } while (nextShouldpayAdditional > 0 && playedMoney > 0);
+//
+//
+//                if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
+//                {
+//                    sessionIdtoDelete.comments = comments;
+//                }
+//                else
+//                {
+//                    sessionIdtoDelete.comments += "\n" + comments;
+//                }
+//                UpdatePlaystationState(dsc.Приставка, "free");
+//                while (true)
+//                {
+//                    try
+//                    {
+//                        db.SubmitChanges();
+//                        break;
+//                    }
+//                    catch
+//                    {
+//                        MessageBox.Show(
+//                            ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(3));
+//                    }
+//                }
+//            }
+//        }
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------------------------------
         public void ChangeSavingsValueOfClient(string clientID, double sumToAdd)
         {
             var db = new dbDataContext();
@@ -1206,7 +1375,24 @@ namespace Boom_Manager_Project.DataBaseClasses
                 db.SubmitChanges();
             }
         }
+        public void InsertExpensesRecord(double money, string comments, DateTime expensesTime)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<expenses_t> expensesTable = db.GetTable<expenses_t>();
+                var expenses = new expenses_t
+                {
 
+                    daily_id = GetLastOpenedGlobalSessionDailyId(),
+                    comments = comments,
+                    cash_amount = money,
+                    expenses_time = expensesTime
+                };
+                expensesTable.InsertOnSubmit(expenses);
+                db.SubmitChanges();
+            }
+        }
         public List<double?> GetAllWithdrawnMoneyOnDailyId(int dailyId)
         {
             var db = new dbDataContext();
@@ -1218,7 +1404,16 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return allMoney;
             }
         }
-
+        public List<expenses_t> GetAllExpensesOnDailyId(int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from m in db.GetTable<expenses_t>()
+                    where m.daily_id == dailyId
+                    select m).ToList();
+            }
+        }
         private void InsertNewPaymentToClientHistory(string clientId, double cash)
         {
             var db = new dbDataContext();

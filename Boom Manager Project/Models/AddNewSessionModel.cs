@@ -197,7 +197,7 @@ namespace Boom_Manager_Project.Models
                     playstation_id = playstationId,
                     session_state = "opened",
                     payed_sum = paidSum,
-                    money_left = paidSum,
+                    played_money = paidSum,
                     session_discount = 0//-----------------------------------------------------------------DISCOUNT ACCOUNTING
                 };
                 try
@@ -228,7 +228,7 @@ namespace Boom_Manager_Project.Models
                 }
                 try
                 {
-                    if (clientId == @"0")
+                    if (clientId == Options.OptionsInstance().UsualClient)
                     {
                         DataBaseClass.Instancedb().InsertClientsPerTable(clientId);
                     }

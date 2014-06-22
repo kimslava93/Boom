@@ -14,8 +14,8 @@ namespace Boom_Manager_Project.MyClasses
         public DateTime Конец { get; set; }
         public TimeSpan Оставшееся_время { get; set;}
         public string Клиент { get; set; }
-        public double Остаток_денег { get; set; }
+        public double Счетчик { get; set; }
         public double Скидка_сессии { get; set; }
-        public double Оплаченная_сумма { get; set; }
+        public double Оплачено { get; set; }
     }
 }

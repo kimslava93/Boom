@@ -189,5 +189,20 @@ namespace Boom_Manager_Project
         {
             _old = null;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var mcr = new ManagerCardReader();
+            mcr.ShowDialog();
+            Passed = mcr.Passed;
+            if (Passed)
+            {
+                Close();
+            }
+            else
+            {
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(10));
+            }
+        }
     }
 }

@@ -115,7 +115,7 @@
             // bSubmitAndClose
             // 
             this.bSubmitAndClose.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bSubmitAndClose.Location = new System.Drawing.Point(92, 405);
+            this.bSubmitAndClose.Location = new System.Drawing.Point(136, 405);
             this.bSubmitAndClose.Name = "bSubmitAndClose";
             this.bSubmitAndClose.Size = new System.Drawing.Size(213, 34);
             this.bSubmitAndClose.TabIndex = 7;
@@ -129,7 +129,7 @@
             this.rtbComments.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rtbComments.Location = new System.Drawing.Point(12, 288);
             this.rtbComments.Name = "rtbComments";
-            this.rtbComments.Size = new System.Drawing.Size(360, 111);
+            this.rtbComments.Size = new System.Drawing.Size(440, 111);
             this.rtbComments.TabIndex = 6;
             this.rtbComments.Text = "";
             // 
@@ -140,7 +140,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(464, 245);
+            this.ClientSize = new System.Drawing.Size(464, 242);
             this.ControlBox = false;
             this.Controls.Add(this.lProbleDescription);
             this.Controls.Add(this.bSubmitAndClose);

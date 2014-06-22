@@ -24,10 +24,10 @@ namespace Boom_Manager_Project
             FulFillTbs();
            
         }
-
+//        private void CheckOnNightTime
         private void SetPositionOfGb()
         {
-            if (_sessionToExtend.Клиент == "0")
+            if (_sessionToExtend.Клиент == @"Usual Client")//Options.OptionsInstance().UsualClient)
             {
                 gbExtendUsualClient.Location =
                     ExtendSessionTimeController.ExtendSessionTimeControllerInstance().VisibleLocation;
@@ -46,11 +46,11 @@ namespace Boom_Manager_Project
         private void FulFillTbs()
         {
             tbSessionID.Text = _sessionToExtend.Сессия.ToString(CultureInfo.InvariantCulture);
-            if (_sessionToExtend.Клиент == "0")
+            if (_sessionToExtend.Клиент == @"Usual Client")//Options.OptionsInstance().UsualClient)
             {
                 numUpDMinutesExtend.Value = 30; //minimum is 30 minutes
                 numUpDMoneyExtend.Minimum = AddNewSessionController.AddNewSessionControllerInstance()
-                    .UpdatePrice("0", _sessionToExtend.Приставка, 0, 30); //minimum price is 30 minutes
+                    .UpdatePrice(Options.OptionsInstance().UsualClient, _sessionToExtend.Приставка, 0, 30); //minimum price is 30 minutes
                 tbEndTimeWas.Text = _sessionToExtend.Конец.ToString("dd-MMMM HH:mm");
             }
             else
@@ -60,7 +60,6 @@ namespace Boom_Manager_Project
                         .GetClientsTable(_sessionToExtend.Сессия);
                 dgvClientsPerTable.Invalidate();
             }
-
         }
 
         private void bCancel_Click(object sender, EventArgs e)
@@ -85,7 +84,7 @@ namespace Boom_Manager_Project
             if (_repeatCallOfMethodCounter <= 0)
             {
                 _repeatCallOfMethodCounter++;
-                decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice("0", _sessionToExtend.Приставка,
+                decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice(Options.OptionsInstance().UsualClient, _sessionToExtend.Приставка,
                     numUpDHoursExtend.Value,
                     numUpDMinutesExtend.Value);
                 if (t > numUpDMoneyExtend.Maximum)
@@ -110,7 +109,7 @@ namespace Boom_Manager_Project
                     numUpDHoursExtend.Value++;
                 }
                 _repeatCallOfMethodCounter++;
-                decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice("0", _sessionToExtend.Приставка,
+                decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice(Options.OptionsInstance().UsualClient, _sessionToExtend.Приставка,
                     numUpDHoursExtend.Value, numUpDMinutesExtend.Value);
                 if (t < numUpDMoneyExtend.Minimum)
                 {

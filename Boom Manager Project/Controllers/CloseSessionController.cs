@@ -22,11 +22,11 @@ namespace Boom_Manager_Project.Controllers
                 if (EndPointsControl.EndPointsControlInstance().SwitchOff(sessionToClose.Приставка))
                 {
 
-                    if (clientOnSession.Count == 1 && clientOnSession[0].client_id.Equals("0"))
+                    if (clientOnSession.Count == 1 && clientOnSession[0].client_id.Equals(Options.OptionsInstance().UsualClient))
                     {
                         CloseUsualClient(sessionToClose, comments, closeTime);
                     }
-                    else if (clientOnSession.Count >= 1 && !clientOnSession[0].client_id.Equals("0"))
+                    else if (clientOnSession.Count >= 1 && !clientOnSession[0].client_id.Equals(Options.OptionsInstance().UsualClient))
                         //with discount card
                     {
                         CloseClientWithDiscount(sessionToClose, comments, closeTime);
@@ -42,7 +42,7 @@ namespace Boom_Manager_Project.Controllers
 
         private void CloseUsualClient(DaySessionClass sessionToClose, string comments, DateTime endTime)
         {
-            double changeMoney = GetOddMoney(sessionToClose);
+            double changeMoney =  Math.Round(GetOddMoney(sessionToClose));
             if (changeMoney > 1)
             {
                 DialogResult dresult =
@@ -56,8 +56,8 @@ namespace Boom_Manager_Project.Controllers
                     case DialogResult.Yes:
                         comments += ". " + changeMoney +
                                     ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(8);
-                        sessionToClose.Оплаченная_сумма = sessionToClose.Оплаченная_сумма - changeMoney;
-                        sessionToClose.Остаток_денег -= changeMoney;
+                        sessionToClose.Оплачено = sessionToClose.Оплачено - changeMoney;
+//                        sessionToClose.Счетчик -= changeMoney;
                         DataBaseClass.Instancedb().AddMoneyToCash(changeMoney*(-1));
                         DataBaseClass.Instancedb().CloseSessionWithUsualClient(sessionToClose, comments, endTime);
                         break;
@@ -71,27 +71,64 @@ namespace Boom_Manager_Project.Controllers
 
         private void CloseClientWithDiscount(DaySessionClass sessionToClose, string comments, DateTime endTime)
         {
-            DataBaseClass.Instancedb().CloseSessionWithCard(sessionToClose, comments, endTime);
+            sessionToClose = DataBaseClass.Instancedb().AccountDiscountMoney(sessionToClose);
+            double changeMoney = Math.Round(GetOddMoney(sessionToClose),0);
+            if (changeMoney > 1)
+            {
+                DialogResult dresult =
+                    MessageBox.Show(
+                        @" " + changeMoney +
+                        ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(7),
+                        ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetCaption(2), MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+                switch (dresult)
+                {
+                    case DialogResult.Yes:
+                        comments += ". " + changeMoney +
+                                    ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(8);
+                        sessionToClose.Оплачено = sessionToClose.Оплачено - changeMoney;
+                        sessionToClose.Счетчик -= changeMoney;
+                        DataBaseClass.Instancedb().AddMoneyToCash(changeMoney * (-1));
+                        DataBaseClass.Instancedb().CloseSessionWithCard(sessionToClose, comments, endTime);
+                        break;
+                    case DialogResult.No:
+                        DataBaseClass.Instancedb().CloseSessionWithCard(sessionToClose, comments, endTime);
+                        break;
+                }
+            }
+            else DataBaseClass.Instancedb().CloseSessionWithCard(sessionToClose, comments, endTime);
+//---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------When client will be able to store money on card--------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+            //DataBaseClass.Instancedb().CloseSessionWithCard(sessionToClose, comments, endTime);
+//---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
         }
 
         private double GetOddMoney(DaySessionClass sessionToCalculate)
             //substract one hour from game if client was playing lower than one hour 
         {
-            double moneyPlayed = sessionToCalculate.Оплаченная_сумма - sessionToCalculate.Остаток_денег;
+            double moneyPlayed = sessionToCalculate.Счетчик;
             double oneHourPrice = AddNewSessionModel.InstanceAddNewSessionModel()
                 .GetSumToPay(sessionToCalculate.Приставка, TimeSpan.FromHours(1), sessionToCalculate.Начало);
-            if (moneyPlayed <= oneHourPrice && (sessionToCalculate.Оплаченная_сумма - oneHourPrice) <= 0)
+            if (moneyPlayed <= oneHourPrice && (sessionToCalculate.Оплачено - oneHourPrice) <= 0)
             {
                 return 0;
             }
-            if (moneyPlayed <= oneHourPrice && (sessionToCalculate.Оплаченная_сумма - oneHourPrice) > 1)
+            if (moneyPlayed <= oneHourPrice && (sessionToCalculate.Оплачено - oneHourPrice) > 1)
             {
-                return sessionToCalculate.Оплаченная_сумма - oneHourPrice;
+                return sessionToCalculate.Оплачено - oneHourPrice;
             }
             if (moneyPlayed > oneHourPrice)
             {
-                return sessionToCalculate.Остаток_денег;
-                    //sessionToCalculate.Оплаченная_сумма - sessionToCalculate.Остаток_денег;
+                return sessionToCalculate.Счетчик;
+                    //sessionToCalculate.Оплачено - sessionToCalculate.Счетчик;
             }
             return 0;
         }

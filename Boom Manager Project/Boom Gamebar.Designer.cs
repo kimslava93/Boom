@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BoomMainForm));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.lOperator = new System.Windows.Forms.Label();
+            this.lAdmin = new System.Windows.Forms.Label();
+            this.bExpenses = new System.Windows.Forms.Button();
             this.bChangeShift = new System.Windows.Forms.Button();
             this.bExtendTime = new System.Windows.Forms.Button();
             this.bCloseSession = new System.Windows.Forms.Button();
@@ -43,6 +46,7 @@
             this.lCurrentTime = new System.Windows.Forms.Label();
             this.dgvOpenedSessions = new System.Windows.Forms.DataGridView();
             this.gbManageGroup = new System.Windows.Forms.GroupBox();
+            this.bDiscountSteps = new System.Windows.Forms.Button();
             this.bClientManager = new System.Windows.Forms.Button();
             this.bWithdrawMoney = new System.Windows.Forms.Button();
             this.bExitProgram = new System.Windows.Forms.Button();
@@ -50,7 +54,6 @@
             this.bAllGlobalSessions = new System.Windows.Forms.Button();
             this.bConsoleManager = new System.Windows.Forms.Button();
             this.bTimezoneManager = new System.Windows.Forms.Button();
-            this.bDiscountSteps = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -77,6 +80,9 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
+            this.splitContainer.Panel1.Controls.Add(this.lOperator);
+            this.splitContainer.Panel1.Controls.Add(this.lAdmin);
+            this.splitContainer.Panel1.Controls.Add(this.bExpenses);
             this.splitContainer.Panel1.Controls.Add(this.bChangeShift);
             this.splitContainer.Panel1.Controls.Add(this.bExtendTime);
             this.splitContainer.Panel1.Controls.Add(this.bCloseSession);
@@ -97,6 +103,50 @@
             this.splitContainer.SplitterWidth = 1;
             this.splitContainer.TabIndex = 3;
             // 
+            // lOperator
+            // 
+            this.lOperator.AutoSize = true;
+            this.lOperator.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lOperator.ForeColor = System.Drawing.Color.White;
+            this.lOperator.Location = new System.Drawing.Point(934, 33);
+            this.lOperator.Name = "lOperator";
+            this.lOperator.Size = new System.Drawing.Size(81, 21);
+            this.lOperator.TabIndex = 1006;
+            this.lOperator.Text = "Оператор";
+            this.lOperator.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lOperator.Click += new System.EventHandler(this.lOperator_Click);
+            // 
+            // lAdmin
+            // 
+            this.lAdmin.AutoSize = true;
+            this.lAdmin.ForeColor = System.Drawing.Color.White;
+            this.lAdmin.Location = new System.Drawing.Point(934, 8);
+            this.lAdmin.Name = "lAdmin";
+            this.lAdmin.Size = new System.Drawing.Size(123, 21);
+            this.lAdmin.TabIndex = 1005;
+            this.lAdmin.Text = "Администратор";
+            this.lAdmin.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // bExpenses
+            // 
+            this.bExpenses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bExpenses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bExpenses.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bExpenses.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bExpenses.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bExpenses.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bExpenses.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bExpenses.ForeColor = System.Drawing.Color.White;
+            this.bExpenses.Location = new System.Drawing.Point(714, 65);
+            this.bExpenses.Margin = new System.Windows.Forms.Padding(5);
+            this.bExpenses.Name = "bExpenses";
+            this.bExpenses.Size = new System.Drawing.Size(83, 38);
+            this.bExpenses.TabIndex = 1001;
+            this.bExpenses.Text = "ЗАТРАТЫ";
+            this.bExpenses.UseVisualStyleBackColor = false;
+            this.bExpenses.Click += new System.EventHandler(this.bExpenses_Click);
+            // 
             // bChangeShift
             // 
             this.bChangeShift.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -108,10 +158,10 @@
             this.bChangeShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bChangeShift.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bChangeShift.ForeColor = System.Drawing.Color.White;
-            this.bChangeShift.Location = new System.Drawing.Point(714, 25);
+            this.bChangeShift.Location = new System.Drawing.Point(714, 13);
             this.bChangeShift.Margin = new System.Windows.Forms.Padding(5);
             this.bChangeShift.Name = "bChangeShift";
-            this.bChangeShift.Size = new System.Drawing.Size(124, 38);
+            this.bChangeShift.Size = new System.Drawing.Size(83, 38);
             this.bChangeShift.TabIndex = 1001;
             this.bChangeShift.Text = "СМЕНА";
             this.bChangeShift.UseVisualStyleBackColor = false;
@@ -234,24 +284,24 @@
             this.dgvOpenedSessions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvOpenedSessions.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvOpenedSessions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOpenedSessions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOpenedSessions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvOpenedSessions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOpenedSessions.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOpenedSessions.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOpenedSessions.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvOpenedSessions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvOpenedSessions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvOpenedSessions.EnableHeadersVisualStyles = false;
@@ -288,6 +338,26 @@
             this.gbManageGroup.TabIndex = 4;
             this.gbManageGroup.TabStop = false;
             this.gbManageGroup.Text = "MANAGE";
+            // 
+            // bDiscountSteps
+            // 
+            this.bDiscountSteps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bDiscountSteps.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bDiscountSteps.BackgroundImage")));
+            this.bDiscountSteps.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bDiscountSteps.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.bDiscountSteps.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bDiscountSteps.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bDiscountSteps.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bDiscountSteps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bDiscountSteps.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bDiscountSteps.ForeColor = System.Drawing.Color.White;
+            this.bDiscountSteps.Location = new System.Drawing.Point(3, 232);
+            this.bDiscountSteps.Name = "bDiscountSteps";
+            this.bDiscountSteps.Size = new System.Drawing.Size(107, 33);
+            this.bDiscountSteps.TabIndex = 11;
+            this.bDiscountSteps.Text = "Уровни скидок";
+            this.bDiscountSteps.UseVisualStyleBackColor = false;
+            this.bDiscountSteps.Click += new System.EventHandler(this.bDiscountSteps_Click);
             // 
             // bClientManager
             // 
@@ -429,26 +499,6 @@
             this.bTimezoneManager.UseVisualStyleBackColor = false;
             this.bTimezoneManager.Click += new System.EventHandler(this.bTimezoneManager_Click_1);
             // 
-            // bDiscountSteps
-            // 
-            this.bDiscountSteps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bDiscountSteps.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bDiscountSteps.BackgroundImage")));
-            this.bDiscountSteps.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bDiscountSteps.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.bDiscountSteps.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bDiscountSteps.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
-            this.bDiscountSteps.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bDiscountSteps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bDiscountSteps.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bDiscountSteps.ForeColor = System.Drawing.Color.White;
-            this.bDiscountSteps.Location = new System.Drawing.Point(3, 232);
-            this.bDiscountSteps.Name = "bDiscountSteps";
-            this.bDiscountSteps.Size = new System.Drawing.Size(107, 33);
-            this.bDiscountSteps.TabIndex = 11;
-            this.bDiscountSteps.Text = "Уровни скидок";
-            this.bDiscountSteps.UseVisualStyleBackColor = false;
-            this.bDiscountSteps.Click += new System.EventHandler(this.bDiscountSteps_Click);
-            // 
             // BoomMainForm
             // 
             this.AllowDrop = true;
@@ -508,6 +558,9 @@
         private System.Windows.Forms.Button bWithdrawMoney;
         private System.Windows.Forms.Button bClientManager;
         private System.Windows.Forms.Button bDiscountSteps;
+        private System.Windows.Forms.Button bExpenses;
+        private System.Windows.Forms.Label lOperator;
+        private System.Windows.Forms.Label lAdmin;
     }
 }
 

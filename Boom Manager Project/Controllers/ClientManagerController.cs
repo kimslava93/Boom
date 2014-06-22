@@ -47,19 +47,19 @@ namespace Boom_Manager_Project.Controllers
             return false;
         }
 
-        public string GetClientIdFromInt(string clientInt)
-        {
-            string result = clientInt.ToString(CultureInfo.InvariantCulture);
-            if (result.Length == 1)
-            {
-                result = "00" + result;
-            }
-            else if (result.Length == 2)
-            {
-                result = "0" + result;
-            }
-            return result;
-        }
+//        public string GetClientIdFromInt(string clientInt)
+//        {
+//            string result = clientInt.ToString(CultureInfo.InvariantCulture);
+//            if (result.Length == 1)
+//            {
+//                result = "00" + result;
+//            }
+//            else if (result.Length == 2)
+//            {
+//                result = Options.OptionsInstance().UsualClient + result;
+//            }
+//            return result;
+//        }
 
         public void CreateNewClient(string clientId, string name, string email, DateTime birthday, string phone,
             string activationdate, double personalDiscount, double playedSum)

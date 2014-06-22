@@ -11,7 +11,7 @@ namespace Boom_Manager_Project
 {
     public partial class BoomMainForm : Form
     {
-        private bool EXIT = false;
+        private bool _exit;
         private DateTime _curDateTime;
         private List<DaySessionClass> _currentOpenedSessionsList;//for controlling update dgv
 
@@ -29,6 +29,7 @@ namespace Boom_Manager_Project
             _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().GetAllOpenedDaySessions();
             BoomGamebarController.InstanceBgController().OpenGlobalSession();
             TimeOutChecking();
+            UpdateWorkingStaff();
         }
 
         private void BoomMainForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -37,7 +38,7 @@ namespace Boom_Manager_Project
 
         private void BoomMainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (!EXIT)
+            if (!_exit)
             {
                 Application.Restart();
             }
@@ -45,14 +46,7 @@ namespace Boom_Manager_Project
 
         private void BoomMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!EXIT)
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
+            e.Cancel = !_exit;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -92,7 +86,7 @@ namespace Boom_Manager_Project
                 }
                 else
                 {
-                    MessageBox.Show("Access denied!");
+                    MessageBox.Show(@"Access denied!");
                 }
             }
             else
@@ -160,6 +154,13 @@ namespace Boom_Manager_Project
         {
             var cs = new ChangeShift(false);
             cs.ShowDialog();
+            UpdateWorkingStaff();
+        }
+
+        private void UpdateWorkingStaff()
+        {
+            lAdmin.Text = @"Администратор: " +  BoomGamebarController.InstanceBgController().GetCurrentAdminName();
+            lOperator.Text = @"Оператор: " + BoomGamebarController.InstanceBgController().GetCurrentOperatorName();
         }
 
         private void bTimezoneManager_Click_1(object sender, EventArgs e)
@@ -245,7 +246,7 @@ namespace Boom_Manager_Project
         {
             if(BoomGamebarController.InstanceBgController().AskManagerPassword())
             {
-                EXIT = true;
+                _exit = true;
                 Close();
             }
         }
@@ -266,6 +267,19 @@ namespace Boom_Manager_Project
         {
             var ds = new DiscountStepsManager();
             ds.ShowDialog();
+        }
+
+        private void bExpenses_Click(object sender, EventArgs e)
+        {
+            var ex = new Expences();
+            ex.ShowDialog();
+        }
+
+        private void lOperator_Click(object sender, EventArgs e)
+        {
+            var ol = new OperatorLogin();
+            ol.ShowDialog();
+            UpdateWorkingStaff();
         }
     }
 }

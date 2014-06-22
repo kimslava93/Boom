@@ -72,7 +72,7 @@ namespace Boom_Manager_Project.Controllers
             if (dSessions.Count <= 0) return dSessions;
             foreach (DaySessionClass os in dSessions)
             {
-                os.Остаток_денег = Math.Round(GetAlreadyPlayedMoneySum(os.Приставка, os.Начало, os.Оплаченная_сумма), 0);
+                os.Счетчик = Math.Round(GetAlreadyPlayedMoneySum(os.Приставка, os.Начало, os.Оплачено), 0);
                 os.Оставшееся_время = GetTimeLeft(os.Конец);
             }
             return dSessions;
@@ -91,7 +91,7 @@ namespace Boom_Manager_Project.Controllers
             }
             if (startDate >= curTime) return 0.0;
             TimeSpan paidTime = curTime - startDate;
-            double t = paidSum - AddNewSessionModel.InstanceAddNewSessionModel().GetSumToPay(plstId, paidTime, startDate);
+            double t = /*paidSum -*/ AddNewSessionModel.InstanceAddNewSessionModel().GetSumToPay(plstId, paidTime, startDate);
 //            MessageBox.Show(paidTime + "\n" + paidSum);
 //            MessageBox.Show("paid time = " + paidTime + "\n" + t.ToString(CultureInfo.InvariantCulture));
             return t;
@@ -116,7 +116,7 @@ namespace Boom_Manager_Project.Controllers
                 }
                 else if (os.Оставшееся_время <= TimeSpan.FromMinutes(0))
                 {
-                    if (os.Клиент.Equals("0"))
+                    if (os.Клиент.Equals(Options.OptionsInstance().UsualClient))
                     {
                         DataBaseClass.Instancedb().CloseSessionWithUsualClient(os, "", DateTime.Now);
                     }
@@ -201,6 +201,27 @@ namespace Boom_Manager_Project.Controllers
                 return true;
             }
             return false;
+        }
+
+        public string GetCurrentAdminName()
+        {
+            string opId = DataBaseClass.Instancedb().GetOpenedGlobalSession().administrator_id;
+            if (opId == null)
+            {
+                return "LOG IN THE ADMINISTRATOR";
+            }
+            var name = DataBaseClass.Instancedb().GetUserInfoByPersonID(opId);
+            return name.name;
+        }
+        public string GetCurrentOperatorName()
+        {
+            string opId = DataBaseClass.Instancedb().GetOpenedGlobalSession().operator_id;
+            if (opId == "no operator" || opId == null)
+            {
+                return "LOG IN THE OPERATOR";
+            }
+            var name = DataBaseClass.Instancedb().GetUserInfoByPersonID(opId);
+            return name.name;
         }
     }
 }

@@ -45,16 +45,15 @@ namespace Boom_Manager_Project.Controllers
             return "Неизвестное предупреждение! Обратитесь к разработчику!";
         }
 
-        public void PasswordChecking(string login, string password)
+        public bool PasswordChecking(string login, string password)
         {
             if (CheckPassword(login, password))
             {
                 CreateNewShift(login);
+                return true;
             }
-            else
-            {
-                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(10));
-            }
+            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(10));
+            return false;
         }
 
         private bool CheckPassword(string login, string password)
@@ -102,7 +101,13 @@ namespace Boom_Manager_Project.Controllers
                     DataBaseClass.Instancedb().TransferOpenedSessionToNextGlobalSession(t.Сессия);
                 }
             }
-
+//            lastOpenedSession = DataBaseClass.Instancedb().GetOpenedGlobalSession();
+            if (lastOpenedSession != null)
+            {
+                var lastDailyId = DataBaseClass.Instancedb().GetCashFromDailyId(lastOpenedSession.daily_id);
+                if (lastDailyId != null)
+                    DataBaseClass.Instancedb().AddMoneyToCash((double) lastDailyId);
+            }
 //                MessageBox.Show(WarningMessage("CloseOldSession"),
 //                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 

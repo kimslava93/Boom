@@ -118,7 +118,7 @@ namespace Boom_Manager_Project.Controllers
             {
                 return 0;
             }
-//            if (discountSize == "0")
+//            if (discountSize == Options.OptionsInstance().UsualClient)
 //            {
                 if (hoursLeft >= 0 || minutesLeft >= 0)
                 {
@@ -219,7 +219,7 @@ namespace Boom_Manager_Project.Controllers
 //            var result = new List<string>();
 //            if (!AddNewSessionModel.InstanceAddNewSessionModel().IsRepeated(clientId, idsTextBox))
 //            {
-//                if (String.IsNullOrWhiteSpace(idsTextBox) || idsTextBox == "0")
+//                if (String.IsNullOrWhiteSpace(idsTextBox) || idsTextBox == Options.OptionsInstance().UsualClient)
 //                {
 //                    result.Add(clientId);
 //                    result.Add(clientName);

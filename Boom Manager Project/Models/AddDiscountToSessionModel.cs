@@ -65,11 +65,11 @@ namespace Boom_Manager_Project.Models
             var result = new List<string>();
             if (clientToFind != null)
             {
-                if (clientToFind.client_id == "0")
+                if (clientToFind.client_id == Options.OptionsInstance().UsualClient)
                 {
                     result.Add(clientToFind.client_id);
                     result.Add(clientToFind.name);
-                    result.Add("0");
+                    result.Add(Options.OptionsInstance().UsualClient);
                 }
                 else if (savingsToFind != null)
                 {
@@ -79,7 +79,7 @@ namespace Boom_Manager_Project.Models
 
 //                    adc.ClientID = id;
 //                    adc.ClientName = clientToFind.name;
-//                    adc.Остаток_денег = (decimal)savingsToFind.savings;
+//                    adc.Счетчик = (decimal)savingsToFind.savings;
                 }
                 else
                 {
@@ -88,9 +88,9 @@ namespace Boom_Manager_Project.Models
             }
             else
             {
-                result.Add("0");
+                result.Add(Options.OptionsInstance().UsualClient);
                 result.Add("Usual client");
-                result.Add("0");
+                result.Add(Options.OptionsInstance().UsualClient);
                 MessageBox.Show(GetWarning("noClientInfo"));
             }
             return result;

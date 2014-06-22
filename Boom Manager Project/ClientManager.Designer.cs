@@ -34,7 +34,6 @@
             this.numUpdBYear = new System.Windows.Forms.NumericUpDown();
             this.numUpdBMonth = new System.Windows.Forms.NumericUpDown();
             this.numUpdBDay = new System.Windows.Forms.NumericUpDown();
-            this.tbClientId = new System.Windows.Forms.TextBox();
             this.numUpDSavings = new System.Windows.Forms.NumericUpDown();
             this.numUpDDiscount = new System.Windows.Forms.NumericUpDown();
             this.tbPlayedSum = new System.Windows.Forms.TextBox();
@@ -52,6 +51,7 @@
             this.lEmail = new System.Windows.Forms.Label();
             this.lBirthday = new System.Windows.Forms.Label();
             this.lName = new System.Windows.Forms.Label();
+            this.tbClientId = new System.Windows.Forms.TextBox();
             this.gbClientInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpdBYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpdBMonth)).BeginInit();
@@ -125,7 +125,7 @@
             this.gbClientInfo.ForeColor = System.Drawing.Color.White;
             this.gbClientInfo.Location = new System.Drawing.Point(0, 0);
             this.gbClientInfo.Name = "gbClientInfo";
-            this.gbClientInfo.Size = new System.Drawing.Size(435, 362);
+            this.gbClientInfo.Size = new System.Drawing.Size(443, 362);
             this.gbClientInfo.TabIndex = 28;
             this.gbClientInfo.TabStop = false;
             this.gbClientInfo.Text = "Информация о клиенте";
@@ -204,17 +204,6 @@
             0,
             0,
             0});
-            // 
-            // tbClientId
-            // 
-            this.tbClientId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.tbClientId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbClientId.ForeColor = System.Drawing.Color.White;
-            this.tbClientId.Location = new System.Drawing.Point(510, 39);
-            this.tbClientId.MaxLength = 15;
-            this.tbClientId.Name = "tbClientId";
-            this.tbClientId.Size = new System.Drawing.Size(160, 29);
-            this.tbClientId.TabIndex = 0;
             // 
             // numUpDSavings
             // 
@@ -405,12 +394,23 @@
             this.lName.TabIndex = 29;
             this.lName.Text = "Имя";
             // 
+            // tbClientId
+            // 
+            this.tbClientId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbClientId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbClientId.ForeColor = System.Drawing.Color.White;
+            this.tbClientId.Location = new System.Drawing.Point(510, 39);
+            this.tbClientId.MaxLength = 15;
+            this.tbClientId.Name = "tbClientId";
+            this.tbClientId.Size = new System.Drawing.Size(160, 29);
+            this.tbClientId.TabIndex = 0;
+            // 
             // ClientManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(435, 425);
+            this.ClientSize = new System.Drawing.Size(443, 425);
             this.ControlBox = false;
             this.Controls.Add(this.gbClientInfo);
             this.Controls.Add(this.bCancel);
@@ -458,10 +458,10 @@
         private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.Label lPhone;
         private System.Windows.Forms.NumericUpDown numUpDSavings;
-        private System.Windows.Forms.TextBox tbClientId;
         private System.Windows.Forms.NumericUpDown numUpdBYear;
         private System.Windows.Forms.NumericUpDown numUpdBMonth;
         private System.Windows.Forms.NumericUpDown numUpdBDay;
+        private System.Windows.Forms.TextBox tbClientId;
 
     }
 }

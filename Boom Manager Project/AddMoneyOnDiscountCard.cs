@@ -25,7 +25,7 @@ namespace Boom_Manager_Project
 
         private void FulFillCLientInfo()
         {
-            if (_clientId != "0")
+            if (_clientId != Options.OptionsInstance().UsualClient)
             {
                 tbID.Text = _clientId;
                 data = AddMoneyOnDiscountCardController.AddMoneyOnCardControllerInstance().GetClientInfo(_clientId);

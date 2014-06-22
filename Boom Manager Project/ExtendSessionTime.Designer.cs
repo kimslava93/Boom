@@ -338,6 +338,7 @@
             this.MinimizeBox = false;
             this.Name = "ExtendSessionTime";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExtendSessionTime";
             this.Load += new System.EventHandler(this.ExtendSessionTime_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ExtendSessionTime_MouseDown);

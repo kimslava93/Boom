@@ -102,6 +102,15 @@
                 case 29:
                     error = "Ошибка! Некоректное название уровня! Удаление не было выполнено!";
                     break;
+                case 30:
+                    error = "Невозможно создать или изменнить файл! Возможно этот файл открыт, закройте его перед созданием нового отчета!";
+                    break;
+                case 31:
+                    error = "Невозможно создать или изменнить ID оператора!";
+                    break;
+                case 32:
+                    error = "Неверная карта!";
+                    break;
                 default:
                     error = "Неизвестная оценка!";//"Unknown error!";
                     break;
@@ -138,6 +147,10 @@
                 case 8:
                     warning = " сом было возвращено!";//" soms were returned";
                     break;
+                case 9:
+                    warning = "Отчет был успешно сформирован!\nХотите его открыть сейчас?";//"Report was successfully generated.\nWould younlike to open generated report?";
+                    break;
+
                 default:
                     warning = "Неизвестное предупреждение!";//"Unknown warning!";
                     break;

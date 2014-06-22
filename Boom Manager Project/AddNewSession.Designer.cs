@@ -58,6 +58,7 @@
             this.lPlusTime = new System.Windows.Forms.Label();
             this.tbDiscountSize = new System.Windows.Forms.TextBox();
             this.lDiscount = new System.Windows.Forms.Label();
+            this.cbNighTime = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).BeginInit();
             this.gbClientInfo.SuspendLayout();
@@ -82,7 +83,7 @@
             0});
             this.numUpDMinutesLeft.Name = "numUpDMinutesLeft";
             this.numUpDMinutesLeft.Size = new System.Drawing.Size(54, 29);
-            this.numUpDMinutesLeft.TabIndex = 6;
+            this.numUpDMinutesLeft.TabIndex = 4;
             this.numUpDMinutesLeft.ValueChanged += new System.EventHandler(this.numUpDMinutesLeft_ValueChanged);
             // 
             // bCancel
@@ -97,7 +98,7 @@
             this.bCancel.Location = new System.Drawing.Point(285, 334);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(96, 38);
-            this.bCancel.TabIndex = 30;
+            this.bCancel.TabIndex = 3;
             this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
@@ -112,7 +113,7 @@
             this.numUpDHoursLeft.ForeColor = System.Drawing.Color.White;
             this.numUpDHoursLeft.Location = new System.Drawing.Point(163, 25);
             this.numUpDHoursLeft.Maximum = new decimal(new int[] {
-            120,
+            24,
             0,
             0,
             0});
@@ -123,7 +124,7 @@
             0});
             this.numUpDHoursLeft.Name = "numUpDHoursLeft";
             this.numUpDHoursLeft.Size = new System.Drawing.Size(54, 29);
-            this.numUpDHoursLeft.TabIndex = 5;
+            this.numUpDHoursLeft.TabIndex = 0;
             this.numUpDHoursLeft.ThousandsSeparator = true;
             this.numUpDHoursLeft.Value = new decimal(new int[] {
             1,
@@ -165,8 +166,8 @@
             this.tbDiscountCards.MaxLength = 50;
             this.tbDiscountCards.Name = "tbDiscountCards";
             this.tbDiscountCards.ShortcutsEnabled = false;
-            this.tbDiscountCards.Size = new System.Drawing.Size(116, 29);
-            this.tbDiscountCards.TabIndex = 28;
+            this.tbDiscountCards.Size = new System.Drawing.Size(148, 29);
+            this.tbDiscountCards.TabIndex = 6;
             this.tbDiscountCards.Text = "0";
             this.tbDiscountCards.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tbDiscountCards_MouseClick);
             this.tbDiscountCards.TextChanged += new System.EventHandler(this.tbDiscountCards_TextChanged);
@@ -193,10 +194,10 @@
             this.bAddDiscountCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddDiscountCard.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddDiscountCard.ForeColor = System.Drawing.Color.White;
-            this.bAddDiscountCard.Location = new System.Drawing.Point(288, 49);
+            this.bAddDiscountCard.Location = new System.Drawing.Point(466, 52);
             this.bAddDiscountCard.Name = "bAddDiscountCard";
             this.bAddDiscountCard.Size = new System.Drawing.Size(94, 29);
-            this.bAddDiscountCard.TabIndex = 29;
+            this.bAddDiscountCard.TabIndex = 100;
             this.bAddDiscountCard.Text = "Добавить";
             this.bAddDiscountCard.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.bAddDiscountCard.UseVisualStyleBackColor = false;
@@ -363,7 +364,7 @@
             this.cbPlaystationId.Location = new System.Drawing.Point(146, 97);
             this.cbPlaystationId.Name = "cbPlaystationId";
             this.cbPlaystationId.Size = new System.Drawing.Size(61, 29);
-            this.cbPlaystationId.TabIndex = 21;
+            this.cbPlaystationId.TabIndex = 5;
             this.cbPlaystationId.SelectedIndexChanged += new System.EventHandler(this.cbPlaystationId_SelectedIndexChanged);
             this.cbPlaystationId.TextChanged += new System.EventHandler(this.cbPlaystationId_TextChanged);
             // 
@@ -401,7 +402,7 @@
             this.bAddSession.Location = new System.Drawing.Point(12, 334);
             this.bAddSession.Name = "bAddSession";
             this.bAddSession.Size = new System.Drawing.Size(96, 38);
-            this.bAddSession.TabIndex = 25;
+            this.bAddSession.TabIndex = 2;
             this.bAddSession.Text = "Добавить";
             this.bAddSession.UseVisualStyleBackColor = false;
             this.bAddSession.Click += new System.EventHandler(this.bAddSession_Click);
@@ -422,7 +423,7 @@
             0});
             this.numUpDPaidPrice.Name = "numUpDPaidPrice";
             this.numUpDPaidPrice.Size = new System.Drawing.Size(113, 29);
-            this.numUpDPaidPrice.TabIndex = 4;
+            this.numUpDPaidPrice.TabIndex = 1;
             this.numUpDPaidPrice.ValueChanged += new System.EventHandler(this.numUpDPaidPrice_ValueChanged);
             // 
             // gbDepositPayment
@@ -443,7 +444,7 @@
             this.gbDepositPayment.Location = new System.Drawing.Point(12, 150);
             this.gbDepositPayment.Name = "gbDepositPayment";
             this.gbDepositPayment.Size = new System.Drawing.Size(370, 178);
-            this.gbDepositPayment.TabIndex = 22;
+            this.gbDepositPayment.TabIndex = 0;
             this.gbDepositPayment.TabStop = false;
             this.gbDepositPayment.Text = "Оплата по депозиту";
             // 
@@ -489,7 +490,7 @@
             this.tbDiscountSize.ReadOnly = true;
             this.tbDiscountSize.ShortcutsEnabled = false;
             this.tbDiscountSize.Size = new System.Drawing.Size(57, 29);
-            this.tbDiscountSize.TabIndex = 29;
+            this.tbDiscountSize.TabIndex = 100;
             this.tbDiscountSize.Text = "0";
             this.tbDiscountSize.TextChanged += new System.EventHandler(this.tbDiscountSize_TextChanged);
             // 
@@ -504,13 +505,28 @@
             this.lDiscount.TabIndex = 8;
             this.lDiscount.Text = "Скидка";
             // 
+            // cbNighTime
+            // 
+            this.cbNighTime.AutoSize = true;
+            this.cbNighTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbNighTime.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbNighTime.ForeColor = System.Drawing.Color.White;
+            this.cbNighTime.Location = new System.Drawing.Point(256, 101);
+            this.cbNighTime.Name = "cbNighTime";
+            this.cbNighTime.Size = new System.Drawing.Size(123, 25);
+            this.cbNighTime.TabIndex = 101;
+            this.cbNighTime.Text = "Ночной пакет";
+            this.cbNighTime.UseVisualStyleBackColor = true;
+            this.cbNighTime.CheckedChanged += new System.EventHandler(this.cbNighTime_CheckedChanged);
+            // 
             // FAddNewSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(393, 383);
+            this.ClientSize = new System.Drawing.Size(389, 383);
             this.ControlBox = false;
+            this.Controls.Add(this.cbNighTime);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);
             this.Controls.Add(this.bAddDiscountCard);
@@ -580,5 +596,6 @@
         private System.Windows.Forms.Label lPlusMoney;
         private System.Windows.Forms.Label lPlusTime;
         private System.Windows.Forms.Label lPercentage;
+        private System.Windows.Forms.CheckBox cbNighTime;
     }
 }
