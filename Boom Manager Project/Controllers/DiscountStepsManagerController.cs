@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Linq.Mapping;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Boom_Manager_Project.DataBaseClasses;
 
-namespace Boom_Manager_Project
+namespace Boom_Manager_Project.Controllers
 {
     class DiscountStepsManagerController
     {

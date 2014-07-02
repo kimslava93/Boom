@@ -6,7 +6,7 @@
 
 using System.Security.Cryptography;
 
-namespace LINQ_test.Driver
+namespace Boom_Manager_Project.HardwareConnectionDriver
 {
     class Crypto
     {

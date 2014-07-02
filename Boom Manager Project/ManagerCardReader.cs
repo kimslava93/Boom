@@ -31,12 +31,10 @@ namespace Boom_Manager_Project
             {
                 if (!string.IsNullOrWhiteSpace(tbDiscountCards.Text))
                 {
-                    var c =
-                        AddNewSessionController.AddNewSessionControllerInstance().GetClientById(tbDiscountCards.Text);
+                    var c = ManagerCardReaderController.ManagerCardReaderControllerInstance()
+                             .GetManagerById(tbDiscountCards.Text);
                     if (c != null)
                     {
-                        ManagerCardReaderController.ManagerCardReaderControllerInstance()
-                            .GetManagerById(tbDiscountCards.Text);
                         _passed = true;
                     }
                     else

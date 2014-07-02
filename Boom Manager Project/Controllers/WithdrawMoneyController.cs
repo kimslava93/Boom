@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Boom_Manager_Project.DataBaseClasses;
 
-namespace Boom_Manager_Project
+namespace Boom_Manager_Project.Controllers
 {
     class WithdrawMoneyController
     {
@@ -21,7 +21,8 @@ namespace Boom_Manager_Project
         public void InsertNewRecordWithdrawMoney(double money, string managerName, DateTime withdrawTime)
         {
             DataBaseClass.Instancedb().InsertWithdrawRecord(money, managerName, withdrawTime);
-            DataBaseClass.Instancedb().AddMoneyToCash(money*(-1));
+            int dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
+            DataBaseClass.Instancedb().AddMoneyToCash(money*(-1),dailyId);
         }
     }
 }

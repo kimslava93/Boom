@@ -9,8 +9,8 @@ namespace Boom_Manager_Project
     public partial class EnterPassword : Form
     {
         private Point? _old;
-        private const string MANAGER = "MANAGER";
-//        private const string ADMIN = "admin";
+        private const string Manager = "MANAGER";
+        private const string Admin = "ADMINISTRATOR";
 //        private const string  = "shift";
 
         private readonly string _accessPosition;
@@ -40,9 +40,9 @@ namespace Boom_Manager_Project
 
                 if (matchedStaff != null)
                 {
-                    if (matchedStaff.position == MANAGER)
+                    if (matchedStaff.position == Manager)
                     {
-                        if (_accessPosition == MANAGER && matchedStaff.staff_password == tbPassword.Text)
+                        if (_accessPosition == Manager && matchedStaff.staff_password == tbPassword.Text)
                         {
                             Passed = true;
                             Close();
@@ -52,13 +52,13 @@ namespace Boom_Manager_Project
                             MessageWrongInput();
                         }
                     }
-                    else if (matchedStaff.position == "administrator")
+                    else if (matchedStaff.position == Admin)
                     {
-                        if (_accessPosition == MANAGER)
+                        if (_accessPosition == Manager)
                         {
                             MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(12));
                         }
-                        else if (_accessPosition != MANAGER && matchedStaff.staff_password == tbPassword.Text)
+                        else if (_accessPosition != Manager && matchedStaff.staff_password == tbPassword.Text)
                         {
                             Passed = true;
                             Close();

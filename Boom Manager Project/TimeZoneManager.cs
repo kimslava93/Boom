@@ -11,7 +11,7 @@ namespace Boom_Manager_Project
     public partial class TimeZoneManager : Form
     {
         private Point? _old;
-        private bool _isNewTimeZoneCreated = false;
+        private bool _isNewTimeZoneCreated;
         public TimeZoneManager()
         {
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace Boom_Manager_Project
                 tbTimezoneName.Text = "";
                 RefreshTable();
                 _isNewTimeZoneCreated = true;
-                MessageBox.Show("Set prices new just created timezone in the right table.");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(10));
             }
         }
 
@@ -65,7 +65,7 @@ namespace Boom_Manager_Project
             }
             else
             {
-                MessageBox.Show("Please apple changes");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(11));
             }
         }
 
@@ -102,7 +102,7 @@ namespace Boom_Manager_Project
             }
             else
             {
-                MessageBox.Show("Choose at least one playstation");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(43));
             }
         }
 

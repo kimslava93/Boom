@@ -181,7 +181,7 @@ namespace Boom_Manager_Project.Models
             }
             return false;
         }
-        public void AddNewDaySession(string playstationId, string clientId, TimeSpan timeToPlay, double paidSum, DateTime curTime)
+        public void AddNewDaySession(string playstationId, string clientId,double discountMoney, TimeSpan timeToPlay, double paidSum, DateTime curTime)
         {
             if (!String.IsNullOrWhiteSpace(playstationId) && !String.IsNullOrWhiteSpace(clientId))
             {
@@ -197,8 +197,8 @@ namespace Boom_Manager_Project.Models
                     playstation_id = playstationId,
                     session_state = "opened",
                     payed_sum = paidSum,
-                    played_money = paidSum,
-                    session_discount = 0//-----------------------------------------------------------------DISCOUNT ACCOUNTING
+                    played_money = 0,
+                    session_discount = discountMoney//-----------------------------------------------------------------DISCOUNT ACCOUNTING
                 };
                 try
                 {
@@ -210,7 +210,8 @@ namespace Boom_Manager_Project.Models
                 }
                 try
                 {
-                    DataBaseClass.Instancedb().AddMoneyToCash(daysSessionT.payed_sum);
+//                     int dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
+                    DataBaseClass.Instancedb().AddMoneyToCash(daysSessionT.payed_sum, globalSession.daily_id);
                 }
                 catch (Exception)
                 {

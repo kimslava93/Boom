@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Boom_Manager_Project.Controllers;
 
 namespace Boom_Manager_Project
 {
@@ -30,7 +31,7 @@ namespace Boom_Manager_Project
         private void LoadConsolesList()
         {
             cbConsolesList.ValueMember = "playstation_id";
-            cbConsolesList.DataSource = ChangeEndpointConsoleIDContolller.EndPointsManagerContolllerInstance().GetConsolesList();
+            cbConsolesList.DataSource = ChangeEndpointConsoleIdContolller.EndPointsManagerContolllerInstance().GetConsolesList();
             if (cbConsolesList.Items.Count > 0)
                 cbConsolesList.SelectedIndex = 0;
             else
@@ -47,7 +48,7 @@ namespace Boom_Manager_Project
         {
             if (!string.IsNullOrWhiteSpace(tbEndPointID.Text) && !string.IsNullOrWhiteSpace(cbConsolesList.Text))
             {
-                ChangeEndpointConsoleIDContolller.EndPointsManagerContolllerInstance()
+                ChangeEndpointConsoleIdContolller.EndPointsManagerContolllerInstance()
                     .ChangePlaystationForEndPoint(int.Parse(tbEndPointID.Text), cbConsolesList.Text, _deviceId);
                 Close();
             }
@@ -64,7 +65,7 @@ namespace Boom_Manager_Project
                 "Warning!", MessageBoxButtons.OKCancel);
             if (dr == DialogResult.OK)
             {
-                ChangeEndpointConsoleIDContolller.EndPointsManagerContolllerInstance()
+                ChangeEndpointConsoleIdContolller.EndPointsManagerContolllerInstance()
                     .ChangePlaystationForEndPoint(int.Parse(tbEndPointID.Text), null, _deviceId);
                 Close();
             }

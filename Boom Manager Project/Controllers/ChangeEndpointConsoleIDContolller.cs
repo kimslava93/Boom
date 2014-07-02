@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
-namespace Boom_Manager_Project
+namespace Boom_Manager_Project.Controllers
 {
-    class ChangeEndpointConsoleIDContolller
+    class ChangeEndpointConsoleIdContolller
     {
-        private static ChangeEndpointConsoleIDContolller _changeEndpointConsoleIDContolller;
+        private static ChangeEndpointConsoleIdContolller _changeEndpointConsoleIdContolller;
 
-        public static ChangeEndpointConsoleIDContolller EndPointsManagerContolllerInstance()
+        public static ChangeEndpointConsoleIdContolller EndPointsManagerContolllerInstance()
         {
-            return _changeEndpointConsoleIDContolller ?? (_changeEndpointConsoleIDContolller = new ChangeEndpointConsoleIDContolller());
+            return _changeEndpointConsoleIdContolller ?? (_changeEndpointConsoleIdContolller = new ChangeEndpointConsoleIdContolller());
         }
 
         public List<DevicesEndPointsMyClass> GetAllEndPoints(int deviceId)

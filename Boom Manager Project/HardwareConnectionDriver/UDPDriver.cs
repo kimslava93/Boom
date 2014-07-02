@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace LINQ_test.Driver
+namespace Boom_Manager_Project.HardwareConnectionDriver
 {
 
     public delegate void OnPacketReceive(IPEndPoint source, byte[] data);
@@ -85,6 +85,9 @@ namespace LINQ_test.Driver
                     return false;
                 }
                 packetReceived(dev, response);
+            //Check if this is not a connection checker packet with 00 inside
+                if(response[0] == 0 && response[1] == 0)
+                    return false;
                 return true;
         }
 

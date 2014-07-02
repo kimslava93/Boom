@@ -106,27 +106,36 @@
             // 
             this.lProbleDescription.AutoSize = true;
             this.lProbleDescription.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lProbleDescription.Location = new System.Drawing.Point(98, 257);
+            this.lProbleDescription.ForeColor = System.Drawing.Color.White;
+            this.lProbleDescription.Location = new System.Drawing.Point(132, 265);
             this.lProbleDescription.Name = "lProbleDescription";
-            this.lProbleDescription.Size = new System.Drawing.Size(189, 20);
+            this.lProbleDescription.Size = new System.Drawing.Size(217, 20);
             this.lProbleDescription.TabIndex = 8;
-            this.lProbleDescription.Text = "Please, describe the problem";
+            this.lProbleDescription.Text = "Пожалуйста опишите проблему";
             // 
             // bSubmitAndClose
             // 
-            this.bSubmitAndClose.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bSubmitAndClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSubmitAndClose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSubmitAndClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bSubmitAndClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSubmitAndClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bSubmitAndClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bSubmitAndClose.ForeColor = System.Drawing.Color.White;
             this.bSubmitAndClose.Location = new System.Drawing.Point(136, 405);
             this.bSubmitAndClose.Name = "bSubmitAndClose";
             this.bSubmitAndClose.Size = new System.Drawing.Size(213, 34);
             this.bSubmitAndClose.TabIndex = 7;
-            this.bSubmitAndClose.Text = "Submit and close";
-            this.bSubmitAndClose.UseVisualStyleBackColor = true;
+            this.bSubmitAndClose.Text = "Применить и закрыть";
+            this.bSubmitAndClose.UseVisualStyleBackColor = false;
             this.bSubmitAndClose.Click += new System.EventHandler(this.bSubmitAndClose_Click);
             // 
             // rtbComments
             // 
-            this.rtbComments.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtbComments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.rtbComments.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbComments.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rtbComments.ForeColor = System.Drawing.Color.White;
             this.rtbComments.Location = new System.Drawing.Point(12, 288);
             this.rtbComments.Name = "rtbComments";
             this.rtbComments.Size = new System.Drawing.Size(440, 111);
@@ -140,7 +149,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(464, 242);
+            this.ClientSize = new System.Drawing.Size(464, 245);
             this.ControlBox = false;
             this.Controls.Add(this.lProbleDescription);
             this.Controls.Add(this.bSubmitAndClose);

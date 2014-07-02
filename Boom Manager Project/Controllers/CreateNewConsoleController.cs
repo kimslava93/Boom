@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 
-namespace Boom_Manager_Project
+namespace Boom_Manager_Project.Controllers
 {
     class CreateNewConsoleController
     {

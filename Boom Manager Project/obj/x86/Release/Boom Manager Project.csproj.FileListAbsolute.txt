@@ -1,0 +1,69 @@
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\bin\Release\Boom Manager Project.exe.config
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\bin\Release\Boom Manager Project.exe
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\bin\Release\Boom Manager Project.pdb
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\bin\Release\DocX.dll
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddDiscountCardToSession.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddNewClientWithDiscountCard.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.FAddNewSession.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddNewStaffUser.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.BoomMainForm.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangePlaystationPrice.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ConsoleManager.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddNewDevice.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.Controllers.ClientManager.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CreateNewConsole.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CreateNewDiscountStep.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.DeviceManager.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangeEndpointConsoleID.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.DiscountStepsManager.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.EditDevice.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.Expences.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ManagerCardReader.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.OperatorLogin.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ShiftsManager.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.TimeZoneManager.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.WithdrawMoney.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangeShift.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CloseSessionForm.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddMoneyOnDiscountCard.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ExtendSessionTime.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.EnterPassword.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.Properties.Resources.resources
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom Manager Project.csproj.GenerateResource.Cache
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom Manager Project.exe
+D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom Manager Project.pdb
+E:\Boom Manager Project\Boom Manager Project\bin\Release\Boom Manager Project.exe.config
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom Manager Project.exe
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom Manager Project.pdb
+E:\Boom Manager Project\Boom Manager Project\bin\Release\Boom Manager Project.exe
+E:\Boom Manager Project\Boom Manager Project\bin\Release\Boom Manager Project.pdb
+E:\Boom Manager Project\Boom Manager Project\bin\Release\DocX.dll
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom Manager Project.csprojResolveAssemblyReference.cache
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddDiscountCardToSession.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddNewClientWithDiscountCard.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.FAddNewSession.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddNewStaffUser.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.BoomMainForm.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangePlaystationPrice.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ConsoleManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddNewDevice.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.Controllers.ClientManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CreateNewConsole.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CreateNewDiscountStep.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.DeviceManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangeEndpointConsoleID.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.DiscountStepsManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.EditDevice.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.Expences.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ManagerCardReader.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.OperatorLogin.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ShiftsManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.TimeZoneManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.WithdrawMoney.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangeShift.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CloseSessionForm.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddMoneyOnDiscountCard.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ExtendSessionTime.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.EnterPassword.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.Properties.Resources.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom Manager Project.csproj.GenerateResource.Cache

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Dynamic;
 using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
-using LINQ_test;
+using Boom_Manager_Project.MyClasses;
 
-namespace Boom_Manager_Project
+namespace Boom_Manager_Project.Controllers
 {
     class ConsoleManagerController
     {

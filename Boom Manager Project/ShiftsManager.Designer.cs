@@ -98,7 +98,6 @@
             this.dgvAllGlobalSessions.Name = "dgvAllGlobalSessions";
             this.dgvAllGlobalSessions.ReadOnly = true;
             this.dgvAllGlobalSessions.RowHeadersVisible = false;
-            this.dgvAllGlobalSessions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvAllGlobalSessions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAllGlobalSessions.ShowCellErrors = false;
             this.dgvAllGlobalSessions.ShowCellToolTips = false;

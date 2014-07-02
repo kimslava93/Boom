@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.Models;
 using Boom_Manager_Project.MyClasses;
-using LINQ_test;
 
 namespace Boom_Manager_Project.Controllers
 {
     internal class ExtendSessionTimeController
     {
         public Point VisibleLocation = new Point(24, 61);
-        public Point HiddenLocation = new Point(405, 61);
+        public Point HiddenLocation = new Point(513, 61);
 
         private static ExtendSessionTimeController _extendSessionTimeController;
 
@@ -46,6 +46,29 @@ namespace Boom_Manager_Project.Controllers
             amodc.ShowDialog();
         }
 
+        private List<clients_per_session_t> GetClientsPesSession(int sessionId)
+        {
+            return DataBaseClass.Instancedb().GetListOfClientsPerExactSession(sessionId);
+        }
+
+        public double GetClientsDiscountInfoBySessionId(int sessioId)
+        {
+            string clientId = @"Usual Client";
+            var clientsPerSession = GetClientsPesSession(sessioId);
+            if (clientsPerSession.Count == 1)
+            {
+                clientId = clientsPerSession[0].client_id;
+            }
+            else
+            {
+                ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(38);
+            }
+            var persDiscount = DataBaseClass.Instancedb().GetClientInfoById(clientId).pers_discount;
+            if (persDiscount != null)
+                return (double) persDiscount;
+            return 0;
+        }
+        
         public void UpdatePrices(DaySessionClass sessionToUpdate) //, List<clients_per_session_t> clientsPerSession)
         {
 //            TimeSpan timeToPlay = new TimeSpan();

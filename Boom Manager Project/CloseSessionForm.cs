@@ -38,7 +38,7 @@ namespace Boom_Manager_Project
         {
             DateTime currentTime = DateTime.Now;
             CloseSessionController.InstanceCloseSessionController()
-                .CloseClientBeforeTimeOut(_sessionToClose, _clientsPerSession, currentTime, "Сlient gone, before time up");
+                .CloseClientBeforeTimeOut(_sessionToClose, _clientsPerSession, currentTime, "Клиент ушел до окончания времени. ");
             Close();
 //            BoomGamebarController.InstanceBgController().CloseSessionBeforeTimer(sessionToClose, DateTime.Now);
         }

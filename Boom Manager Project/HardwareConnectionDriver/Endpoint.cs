@@ -1,4 +1,4 @@
-﻿namespace LINQ_test.Driver
+﻿namespace Boom_Manager_Project.HardwareConnectionDriver
 {
     public class Endpoint
     {

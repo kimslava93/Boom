@@ -4,8 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
+using Boom_Manager_Project.HardwareConnectionDriver;
 using Boom_Manager_Project.Models;
-using LINQ_test.Driver;
 
 namespace Boom_Manager_Project.Controllers
 {
@@ -111,9 +111,9 @@ namespace Boom_Manager_Project.Controllers
             return null;
         }
 
-        public decimal UpdatePrice(string discountSize, string playstationId, decimal hoursLeft, decimal minutesLeft)
+        public decimal UpdatePrice(string discountSize, string playstationId, decimal hoursLeft, decimal minutesLeft,DateTime fromTime)
         {
-            var currentDateTime = DateTime.Now;
+            var currentDateTime = fromTime;
             if (hoursLeft < 0 || minutesLeft < 0)
             {
                 return 0;
@@ -240,12 +240,13 @@ namespace Boom_Manager_Project.Controllers
 //        }
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
-        public void AddNewDaySession(string playstationId, string clientId, TimeSpan timeToPlay, double paidSum, DateTime curTime)
+        public void AddNewDaySession(string playstationId, string clientId, double discountMoney, TimeSpan timeToPlay, double paidSum, DateTime curTime)
         {
             if (EndPointsControl.EndPointsControlInstance().SwitchOn(playstationId))
             {
                 AddNewSessionModel.InstanceAddNewSessionModel()
-                    .AddNewDaySession(playstationId, clientId, timeToPlay, paidSum, curTime);
+                    .AddNewDaySession(playstationId, clientId,discountMoney, timeToPlay, paidSum, curTime);
+                
             }
         }
 

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.Models;
 using Boom_Manager_Project.MyClasses;
-using LINQ_test.Driver;
 
 namespace Boom_Manager_Project.Controllers
 {
@@ -21,7 +20,7 @@ namespace Boom_Manager_Project.Controllers
             switch (id)
             {
                 case 1:
-                    MessageBox.Show("Please, select row that you would like to close, before it will be closed by timer");
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(41));
                     break;
             }
         }
@@ -98,32 +97,35 @@ namespace Boom_Manager_Project.Controllers
         }
         public List<DaySessionClass> CheckSoonToCloseClients(List<DaySessionClass> dSessions)
         {
-//            List<DaySessionClass> dSessions = GetAllOpenedDaySessions();
+//            List<DaySessionClass> dSessions = GetAllOpenedConsoles();
             foreach (DaySessionClass os in dSessions)
             {
 //                if (os.Оставшееся_время > TimeSpan.FromMinutes(5))
 //                {
 //                    //continue;
 //                }
-                if (os.Оставшееся_время > TimeSpan.FromMinutes(3) && os.Оставшееся_время < TimeSpan.FromMinutes(6))
-                {
+//                if (os.Оставшееся_время > TimeSpan.FromMinutes(3) && os.Оставшееся_время < TimeSpan.FromMinutes(6))
+//                {
 //                    HighLight(os.Сессия, 0);
                     //warning highlight
-                }
-                else if (os.Оставшееся_время > TimeSpan.FromMinutes(0) && os.Оставшееся_время <= TimeSpan.FromMinutes(3))
-                {
+//                }
+//                else if (os.Оставшееся_время > TimeSpan.FromMinutes(0) && os.Оставшееся_время <= TimeSpan.FromMinutes(3))
+//                {
 //                    HighLight(os.Сессия, 1);
-                }
-                else if (os.Оставшееся_время <= TimeSpan.FromMinutes(0))
+//                }
+                if (os.Оставшееся_время <= TimeSpan.FromMinutes(0))
                 {
-                    if (os.Клиент.Equals(Options.OptionsInstance().UsualClient))
-                    {
-                        DataBaseClass.Instancedb().CloseSessionWithUsualClient(os, "", DateTime.Now);
-                    }
-                    else if(os.Клиент.Length > 1 && !string.IsNullOrWhiteSpace(os.Клиент))
-                    {
-                        DataBaseClass.Instancedb().CloseSessionWithCard(os, "", DateTime.Now);
-                    }
+                    //if (os.Клиент.Equals(Options.OptionsInstance().UsualClient))
+                    //{
+                    List<clients_per_session_t> clientPerSession = DataBaseClass.Instancedb().GetListOfClientsPerExactSession(os.Сессия);
+                    CloseSessionController.InstanceCloseSessionController()
+                        .CloseClientBeforeTimeOut(os, clientPerSession, DateTime.Now, "");
+                        //DataBaseClass.Instancedb().CloseSessionWithUsualClient(os, "", DateTime.Now);
+                    //}
+                    //else if(os.Клиент.Length > 1 && !string.IsNullOrWhiteSpace(os.Клиент))
+                    //{
+                    //    DataBaseClass.Instancedb().CloseSessionWithCard(os, "", DateTime.Now);
+                    //}
 //                    GetExactGlobalSession();
                     dSessions = GetAllOpenedDaySessions();
 //                    SyncDbContextAndDaySessionList();
@@ -210,7 +212,7 @@ namespace Boom_Manager_Project.Controllers
             {
                 return "LOG IN THE ADMINISTRATOR";
             }
-            var name = DataBaseClass.Instancedb().GetUserInfoByPersonID(opId);
+            var name = DataBaseClass.Instancedb().GetUserInfoByPersonId(opId);
             return name.name;
         }
         public string GetCurrentOperatorName()
@@ -220,7 +222,7 @@ namespace Boom_Manager_Project.Controllers
             {
                 return "LOG IN THE OPERATOR";
             }
-            var name = DataBaseClass.Instancedb().GetUserInfoByPersonID(opId);
+            var name = DataBaseClass.Instancedb().GetUserInfoByPersonId(opId);
             return name.name;
         }
     }

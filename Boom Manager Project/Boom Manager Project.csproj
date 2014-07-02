@@ -78,12 +78,25 @@
     <Compile Include="AddNewClientWithDiscountCard.Designer.cs">
       <DependentUpon>AddNewClientWithDiscountCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="BarRevision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BarRevision.Designer.cs">
+      <DependentUpon>BarRevision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeNumberOfItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeNumberOfItem.Designer.cs">
+      <DependentUpon>ChangeNumberOfItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChangePlaystationPrice.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChangePlaystationPrice.Designer.cs">
       <DependentUpon>ChangePlaystationPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckConnectionWithDevices.cs" />
     <Compile Include="Controllers\CreateNewDiscountStepController.cs" />
     <Compile Include="ConsoleManager.cs">
       <SubType>Form</SubType>
@@ -114,6 +127,8 @@
     <Compile Include="AddMoneyOnDiscountCard.Designer.cs">
       <DependentUpon>AddMoneyOnDiscountCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\LightCutsOffController.cs" />
+    <Compile Include="Controllers\SellBarItemController.cs" />
     <Compile Include="CreateNewConsole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +141,39 @@
     </Compile>
     <Compile Include="CreateNewDiscountStep.Designer.cs">
       <DependentUpon>CreateNewDiscountStep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewItem.Designer.cs">
+      <DependentUpon>AddNewItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllBarItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllBarItems.Designer.cs">
+      <DependentUpon>AllBarItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePlaystation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePlaystation.Designer.cs">
+      <DependentUpon>ChangePlaystation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ChangePlaystationController.cs" />
+    <Compile Include="MyClasses\BarRevisionMyClass.cs" />
+    <Compile Include="MyClasses\ListOfItemsWithPrice.cs" />
+    <Compile Include="SellBarItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SellBarItem.Designer.cs">
+      <DependentUpon>SellBarItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LightCutOff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LightCutOff.Designer.cs">
+      <DependentUpon>LightCutOff.cs</DependentUpon>
     </Compile>
     <Compile Include="DeviceManager.cs">
       <SubType>Form</SubType>
@@ -162,14 +210,16 @@
     <Compile Include="Expenses.Designer.cs">
       <DependentUpon>Expenses.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExpensesController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="ManagerCardReader.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ManagerCardReader.Designer.cs">
       <DependentUpon>ManagerCardReader.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManagerCardReaderController.cs" />
+    <Compile Include="Controllers\ManagerCardReaderController.cs" />
+    <Compile Include="MyClasses\AllItemsMyClass.cs" />
+    <Compile Include="MyClasses\DaySessionForShiftReport.cs" />
     <Compile Include="MyClasses\DevicesEndPointsMyClass.cs" />
     <Compile Include="ExtendSessionTime.cs">
       <SubType>Form</SubType>
@@ -251,7 +301,7 @@
     <Compile Include="OperatorLogin.Designer.cs">
       <DependentUpon>OperatorLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorLoginController.cs" />
+    <Compile Include="Controllers\OperatorLoginController.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -292,9 +342,15 @@
       <DependentUpon>AddNewStaffUser.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="BarRevision.resx">
+      <DependentUpon>BarRevision.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Boom Gamebar.resx">
       <DependentUpon>Boom Gamebar.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeNumberOfItem.resx">
+      <DependentUpon>ChangeNumberOfItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangePlaystationPrice.resx">
       <DependentUpon>ChangePlaystationPrice.cs</DependentUpon>
@@ -320,6 +376,18 @@
       <DependentUpon>CreateNewDiscountStep.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddNewItem.resx">
+      <DependentUpon>AddNewItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllBarItems.resx">
+      <DependentUpon>AllBarItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePlaystation.resx">
+      <DependentUpon>ChangePlaystation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LightCutOff.resx">
+      <DependentUpon>LightCutOff.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeviceManager.resx">
       <DependentUpon>DeviceManager.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -343,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorLogin.resx">
       <DependentUpon>OperatorLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SellBarItem.resx">
+      <DependentUpon>SellBarItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShiftsManager.resx">
       <DependentUpon>ShiftsManager.cs</DependentUpon>

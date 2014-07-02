@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace LINQ_test.Driver
+namespace Boom_Manager_Project.HardwareConnectionDriver
 {
     public class Device
     {
@@ -11,13 +11,13 @@ namespace LINQ_test.Driver
         public int serial;
         public IPAddress ip;
 
-        private readonly byte[] _key =
+        private static readonly byte[] _key =
         {
             0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF, 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD,
             0xEF
         };
 
-        private readonly byte[] _checksumkey =
+        private static readonly byte[] _checksumkey =
         {
             0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF, 0x01, 0x23, 0x45, 0x67, 0x89, 0xAB,
             0xCD, 0xEF
@@ -27,27 +27,39 @@ namespace LINQ_test.Driver
         public Device(IPAddress ip_addr)
         {
             serial = 0;
-            ip = ip_addr;
+            ip = ip_addr;/*
             if (devices == null) devices = new List<Device>();
-            devices.Add(this);
+            devices.Add(this);*/
         }
+/*
+        public static List<Device> devices;*/
 
-        static List<Device> devices;
 
-
-        public static void packet_received(IPEndPoint source, byte[] data)
+        public static void packet_received(IPEndPoint source, byte[] enc_data)
         {
-            if (devices == null | devices.Count == 0)
+
+
+            byte[] old = new byte[16];
+            byte[] data = new byte[16];
+            Array.Copy(enc_data, 16, old, 0, 16);
+            Array.Copy(enc_data, 0, data, 0, 16);
+            byte[] checksum = Crypto.Decrypt(old, _checksumkey);
+            if (!Enumerable.SequenceEqual(checksum, data))
+            {
+                throw new Exception("Wrong Checksum!");
+            }
+
+           /* if (devices == null | devices.Count == 0)
             {
                 throw (new Exception("No devices initialized!"));
-            }
-            foreach (Device d in devices)
+            }*/
+            /*foreach (Device d in devices)
             {
                 if (d.ip.Equals(source.Address))
                 {
                     d.received(source, data);
                 }
-            }
+            }*/
         }
 
         void received(IPEndPoint source, byte[] enc_data)

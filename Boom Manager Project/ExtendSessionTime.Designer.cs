@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lSessionID = new System.Windows.Forms.Label();
             this.tbSessionID = new System.Windows.Forms.TextBox();
             this.gbExtendUsualClient = new System.Windows.Forms.GroupBox();
+            this.lPercentage = new System.Windows.Forms.Label();
+            this.tbDiscountSize = new System.Windows.Forms.TextBox();
+            this.lDiscount = new System.Windows.Forms.Label();
+            this.tbDiscountCards = new System.Windows.Forms.TextBox();
+            this.lClientDiscountId = new System.Windows.Forms.Label();
+            this.lPlusMoney = new System.Windows.Forms.Label();
+            this.lPlusTime = new System.Windows.Forms.Label();
             this.tbEndTimeWill = new System.Windows.Forms.TextBox();
             this.tbEndTimeWas = new System.Windows.Forms.TextBox();
             this.numUpDMinutesExtend = new System.Windows.Forms.NumericUpDown();
@@ -78,6 +85,13 @@
             // 
             // gbExtendUsualClient
             // 
+            this.gbExtendUsualClient.Controls.Add(this.lPercentage);
+            this.gbExtendUsualClient.Controls.Add(this.tbDiscountSize);
+            this.gbExtendUsualClient.Controls.Add(this.lDiscount);
+            this.gbExtendUsualClient.Controls.Add(this.tbDiscountCards);
+            this.gbExtendUsualClient.Controls.Add(this.lClientDiscountId);
+            this.gbExtendUsualClient.Controls.Add(this.lPlusMoney);
+            this.gbExtendUsualClient.Controls.Add(this.lPlusTime);
             this.gbExtendUsualClient.Controls.Add(this.tbEndTimeWill);
             this.gbExtendUsualClient.Controls.Add(this.tbEndTimeWas);
             this.gbExtendUsualClient.Controls.Add(this.numUpDMinutesExtend);
@@ -90,17 +104,100 @@
             this.gbExtendUsualClient.ForeColor = System.Drawing.Color.White;
             this.gbExtendUsualClient.Location = new System.Drawing.Point(12, 56);
             this.gbExtendUsualClient.Name = "gbExtendUsualClient";
-            this.gbExtendUsualClient.Size = new System.Drawing.Size(339, 216);
+            this.gbExtendUsualClient.Size = new System.Drawing.Size(400, 256);
             this.gbExtendUsualClient.TabIndex = 2;
             this.gbExtendUsualClient.TabStop = false;
             this.gbExtendUsualClient.Text = "Продлить время обычного клиента";
+            this.gbExtendUsualClient.Enter += new System.EventHandler(this.gbExtendUsualClient_Enter);
+            // 
+            // lPercentage
+            // 
+            this.lPercentage.AutoSize = true;
+            this.lPercentage.Location = new System.Drawing.Point(260, 67);
+            this.lPercentage.Name = "lPercentage";
+            this.lPercentage.Size = new System.Drawing.Size(23, 21);
+            this.lPercentage.TabIndex = 102;
+            this.lPercentage.Text = "%";
+            // 
+            // tbDiscountSize
+            // 
+            this.tbDiscountSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbDiscountSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbDiscountSize.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbDiscountSize.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tbDiscountSize.Enabled = false;
+            this.tbDiscountSize.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDiscountSize.ForeColor = System.Drawing.Color.White;
+            this.tbDiscountSize.Location = new System.Drawing.Point(203, 63);
+            this.tbDiscountSize.MaxLength = 50;
+            this.tbDiscountSize.Name = "tbDiscountSize";
+            this.tbDiscountSize.ReadOnly = true;
+            this.tbDiscountSize.ShortcutsEnabled = false;
+            this.tbDiscountSize.Size = new System.Drawing.Size(57, 29);
+            this.tbDiscountSize.TabIndex = 103;
+            this.tbDiscountSize.Text = "0";
+            // 
+            // lDiscount
+            // 
+            this.lDiscount.AutoSize = true;
+            this.lDiscount.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lDiscount.ForeColor = System.Drawing.Color.White;
+            this.lDiscount.Location = new System.Drawing.Point(19, 65);
+            this.lDiscount.Name = "lDiscount";
+            this.lDiscount.Size = new System.Drawing.Size(59, 21);
+            this.lDiscount.TabIndex = 101;
+            this.lDiscount.Text = "Скидка";
+            // 
+            // tbDiscountCards
+            // 
+            this.tbDiscountCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbDiscountCards.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbDiscountCards.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tbDiscountCards.Enabled = false;
+            this.tbDiscountCards.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDiscountCards.ForeColor = System.Drawing.Color.White;
+            this.tbDiscountCards.Location = new System.Drawing.Point(203, 28);
+            this.tbDiscountCards.MaxLength = 50;
+            this.tbDiscountCards.Name = "tbDiscountCards";
+            this.tbDiscountCards.ReadOnly = true;
+            this.tbDiscountCards.ShortcutsEnabled = false;
+            this.tbDiscountCards.Size = new System.Drawing.Size(148, 29);
+            this.tbDiscountCards.TabIndex = 5;
+            this.tbDiscountCards.Text = "0";
+            // 
+            // lClientDiscountId
+            // 
+            this.lClientDiscountId.AutoSize = true;
+            this.lClientDiscountId.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lClientDiscountId.ForeColor = System.Drawing.Color.White;
+            this.lClientDiscountId.Location = new System.Drawing.Point(19, 30);
+            this.lClientDiscountId.Name = "lClientDiscountId";
+            this.lClientDiscountId.Size = new System.Drawing.Size(125, 21);
+            this.lClientDiscountId.TabIndex = 28;
+            this.lClientDiscountId.Text = "Карточки сессии";
+            // 
+            // lPlusMoney
+            // 
+            this.lPlusMoney.AutoSize = true;
+            this.lPlusMoney.Location = new System.Drawing.Point(331, 134);
+            this.lPlusMoney.Name = "lPlusMoney";
+            this.lPlusMoney.Size = new System.Drawing.Size(0, 21);
+            this.lPlusMoney.TabIndex = 6;
+            // 
+            // lPlusTime
+            // 
+            this.lPlusTime.AutoSize = true;
+            this.lPlusTime.Location = new System.Drawing.Point(331, 99);
+            this.lPlusTime.Name = "lPlusTime";
+            this.lPlusTime.Size = new System.Drawing.Size(0, 21);
+            this.lPlusTime.TabIndex = 6;
             // 
             // tbEndTimeWill
             // 
             this.tbEndTimeWill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.tbEndTimeWill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbEndTimeWill.ForeColor = System.Drawing.Color.White;
-            this.tbEndTimeWill.Location = new System.Drawing.Point(177, 166);
+            this.tbEndTimeWill.Location = new System.Drawing.Point(203, 222);
             this.tbEndTimeWill.Name = "tbEndTimeWill";
             this.tbEndTimeWill.ReadOnly = true;
             this.tbEndTimeWill.Size = new System.Drawing.Size(148, 29);
@@ -111,7 +208,7 @@
             this.tbEndTimeWas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.tbEndTimeWas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbEndTimeWas.ForeColor = System.Drawing.Color.White;
-            this.tbEndTimeWas.Location = new System.Drawing.Point(177, 131);
+            this.tbEndTimeWas.Location = new System.Drawing.Point(203, 187);
             this.tbEndTimeWas.Name = "tbEndTimeWas";
             this.tbEndTimeWas.ReadOnly = true;
             this.tbEndTimeWas.Size = new System.Drawing.Size(148, 29);
@@ -122,7 +219,7 @@
             this.numUpDMinutesExtend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDMinutesExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDMinutesExtend.ForeColor = System.Drawing.Color.White;
-            this.numUpDMinutesExtend.Location = new System.Drawing.Point(267, 47);
+            this.numUpDMinutesExtend.Location = new System.Drawing.Point(267, 97);
             this.numUpDMinutesExtend.Maximum = new decimal(new int[] {
             59,
             0,
@@ -130,7 +227,7 @@
             0});
             this.numUpDMinutesExtend.Name = "numUpDMinutesExtend";
             this.numUpDMinutesExtend.Size = new System.Drawing.Size(58, 29);
-            this.numUpDMinutesExtend.TabIndex = 3;
+            this.numUpDMinutesExtend.TabIndex = 1;
             this.numUpDMinutesExtend.ValueChanged += new System.EventHandler(this.numUpDMinutesExtend_ValueChanged);
             // 
             // numUpDHoursExtend
@@ -138,7 +235,7 @@
             this.numUpDHoursExtend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDHoursExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDHoursExtend.ForeColor = System.Drawing.Color.White;
-            this.numUpDHoursExtend.Location = new System.Drawing.Point(203, 47);
+            this.numUpDHoursExtend.Location = new System.Drawing.Point(203, 97);
             this.numUpDHoursExtend.Maximum = new decimal(new int[] {
             15,
             0,
@@ -154,7 +251,7 @@
             this.numUpDMoneyExtend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.numUpDMoneyExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numUpDMoneyExtend.ForeColor = System.Drawing.Color.White;
-            this.numUpDMoneyExtend.Location = new System.Drawing.Point(203, 82);
+            this.numUpDMoneyExtend.Location = new System.Drawing.Point(203, 132);
             this.numUpDMoneyExtend.Maximum = new decimal(new int[] {
             19400,
             0,
@@ -162,14 +259,14 @@
             0});
             this.numUpDMoneyExtend.Name = "numUpDMoneyExtend";
             this.numUpDMoneyExtend.Size = new System.Drawing.Size(122, 29);
-            this.numUpDMoneyExtend.TabIndex = 1;
+            this.numUpDMoneyExtend.TabIndex = 3;
             this.numUpDMoneyExtend.ValueChanged += new System.EventHandler(this.numUpDMoneyExtend_ValueChanged);
             // 
             // EndTimeWill
             // 
             this.EndTimeWill.AutoSize = true;
             this.EndTimeWill.ForeColor = System.Drawing.Color.White;
-            this.EndTimeWill.Location = new System.Drawing.Point(19, 169);
+            this.EndTimeWill.Location = new System.Drawing.Point(19, 224);
             this.EndTimeWill.Name = "EndTimeWill";
             this.EndTimeWill.Size = new System.Drawing.Size(110, 21);
             this.EndTimeWill.TabIndex = 0;
@@ -179,7 +276,7 @@
             // 
             this.lEndTimeWas.AutoSize = true;
             this.lEndTimeWas.ForeColor = System.Drawing.Color.White;
-            this.lEndTimeWas.Location = new System.Drawing.Point(19, 134);
+            this.lEndTimeWas.Location = new System.Drawing.Point(19, 189);
             this.lEndTimeWas.Name = "lEndTimeWas";
             this.lEndTimeWas.Size = new System.Drawing.Size(85, 21);
             this.lEndTimeWas.TabIndex = 0;
@@ -189,7 +286,7 @@
             // 
             this.lExtend.AutoSize = true;
             this.lExtend.ForeColor = System.Drawing.Color.White;
-            this.lExtend.Location = new System.Drawing.Point(19, 49);
+            this.lExtend.Location = new System.Drawing.Point(19, 99);
             this.lExtend.Name = "lExtend";
             this.lExtend.Size = new System.Drawing.Size(163, 21);
             this.lExtend.TabIndex = 0;
@@ -199,7 +296,7 @@
             // 
             this.lMoneyToExtend.AutoSize = true;
             this.lMoneyToExtend.ForeColor = System.Drawing.Color.White;
-            this.lMoneyToExtend.Location = new System.Drawing.Point(19, 84);
+            this.lMoneyToExtend.Location = new System.Drawing.Point(19, 134);
             this.lMoneyToExtend.Name = "lMoneyToExtend";
             this.lMoneyToExtend.Size = new System.Drawing.Size(153, 21);
             this.lMoneyToExtend.TabIndex = 0;
@@ -211,7 +308,7 @@
             this.gbExtendWithCard.Controls.Add(this.bAddMoney);
             this.gbExtendWithCard.Controls.Add(this.dgvClientsPerTable);
             this.gbExtendWithCard.ForeColor = System.Drawing.Color.White;
-            this.gbExtendWithCard.Location = new System.Drawing.Point(405, 61);
+            this.gbExtendWithCard.Location = new System.Drawing.Point(513, 56);
             this.gbExtendWithCard.Name = "gbExtendWithCard";
             this.gbExtendWithCard.Size = new System.Drawing.Size(298, 216);
             this.gbExtendWithCard.TabIndex = 3;
@@ -256,14 +353,14 @@
             this.dgvClientsPerTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientsPerTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvClientsPerTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientsPerTable.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientsPerTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvClientsPerTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvClientsPerTable.Location = new System.Drawing.Point(6, 66);
             this.dgvClientsPerTable.MultiSelect = false;
@@ -290,10 +387,10 @@
             this.bApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bApply.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bApply.ForeColor = System.Drawing.Color.White;
-            this.bApply.Location = new System.Drawing.Point(253, 278);
+            this.bApply.Location = new System.Drawing.Point(311, 318);
             this.bApply.Name = "bApply";
             this.bApply.Size = new System.Drawing.Size(98, 37);
-            this.bApply.TabIndex = 4;
+            this.bApply.TabIndex = 0;
             this.bApply.Text = "Продлить";
             this.bApply.UseVisualStyleBackColor = false;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
@@ -309,22 +406,20 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(12, 278);
+            this.bCancel.Location = new System.Drawing.Point(12, 318);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(95, 37);
-            this.bCancel.TabIndex = 5;
+            this.bCancel.TabIndex = 4;
             this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // ExtendSessionTime
             // 
-            this.AcceptButton = this.bApply;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(365, 323);
+            this.ClientSize = new System.Drawing.Size(421, 367);
             this.ControlBox = false;
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bApply);
@@ -377,5 +472,12 @@
         private System.Windows.Forms.Button bAddMoney;
         private System.Windows.Forms.DataGridView dgvClientsPerTable;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lPlusMoney;
+        private System.Windows.Forms.Label lPlusTime;
+        private System.Windows.Forms.TextBox tbDiscountCards;
+        private System.Windows.Forms.Label lClientDiscountId;
+        private System.Windows.Forms.Label lPercentage;
+        private System.Windows.Forms.TextBox tbDiscountSize;
+        private System.Windows.Forms.Label lDiscount;
     }
 }

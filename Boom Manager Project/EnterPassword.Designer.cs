@@ -114,11 +114,12 @@
             this.lWarning.AutoSize = true;
             this.lWarning.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lWarning.ForeColor = System.Drawing.Color.White;
-            this.lWarning.Location = new System.Drawing.Point(40, 30);
+            this.lWarning.Location = new System.Drawing.Point(56, 35);
             this.lWarning.Name = "lWarning";
             this.lWarning.Size = new System.Drawing.Size(75, 21);
             this.lWarning.TabIndex = 4;
             this.lWarning.Text = "Welcome";
+            this.lWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
             // 

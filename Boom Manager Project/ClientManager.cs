@@ -65,7 +65,7 @@ namespace Boom_Manager_Project.Controllers
             }
             else
             {
-                MessageBox.Show("Unknown mode! Please check the input data!");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(37));
             }
         }
 

@@ -79,7 +79,7 @@ namespace Boom_Manager_Project.Controllers
             var openedSessions = new List<DaySessionClass>();
             if (lastOpenedSession != null)
             {
-                operatorInfo = DataBaseClass.Instancedb().GetUserInfoByPersonID(lastOpenedSession.operator_id);
+                operatorInfo = DataBaseClass.Instancedb().GetUserInfoByPersonId(lastOpenedSession.operator_id);
                 openedSessions = DataBaseClass.Instancedb().GetOpenedDaySessions(lastOpenedSession.daily_id,
                     DataBaseClass.Instancedb().GetListOfAllClientsPerSessionT());
             }
@@ -104,9 +104,10 @@ namespace Boom_Manager_Project.Controllers
 //            lastOpenedSession = DataBaseClass.Instancedb().GetOpenedGlobalSession();
             if (lastOpenedSession != null)
             {
-                var lastDailyId = DataBaseClass.Instancedb().GetCashFromDailyId(lastOpenedSession.daily_id);
-                if (lastDailyId != null)
-                    DataBaseClass.Instancedb().AddMoneyToCash((double) lastDailyId);
+                var cashFromLastDailyId = DataBaseClass.Instancedb().GetCashFromDailyId(lastOpenedSession.daily_id);
+                int dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
+                if (cashFromLastDailyId != null)
+                    DataBaseClass.Instancedb().AddMoneyToCash((double) cashFromLastDailyId, dailyId);
             }
 //                MessageBox.Show(WarningMessage("CloseOldSession"),
 //                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);

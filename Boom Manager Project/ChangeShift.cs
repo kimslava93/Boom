@@ -87,8 +87,8 @@ namespace Boom_Manager_Project
             }
             else
             {
-                tbOutAdminName.Text = DataBaseClass.Instancedb().GetUserInfoByPersonID(session.administrator_id).name;
-                tbOutOperatorName.Text = session.operator_id == null ? @"no operator" : DataBaseClass.Instancedb().GetUserInfoByPersonID(session.operator_id).name;
+                tbOutAdminName.Text = DataBaseClass.Instancedb().GetUserInfoByPersonId(session.administrator_id).name;
+                tbOutOperatorName.Text = session.operator_id == null ? @"no operator" : DataBaseClass.Instancedb().GetUserInfoByPersonId(session.operator_id).name;
             }
         }
 

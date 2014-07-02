@@ -125,7 +125,6 @@
             this.numUpDHoursLeft.Name = "numUpDHoursLeft";
             this.numUpDHoursLeft.Size = new System.Drawing.Size(54, 29);
             this.numUpDHoursLeft.TabIndex = 0;
-            this.numUpDHoursLeft.ThousandsSeparator = true;
             this.numUpDHoursLeft.Value = new decimal(new int[] {
             1,
             0,
@@ -363,7 +362,7 @@
             this.cbPlaystationId.ForeColor = System.Drawing.Color.White;
             this.cbPlaystationId.Location = new System.Drawing.Point(146, 97);
             this.cbPlaystationId.Name = "cbPlaystationId";
-            this.cbPlaystationId.Size = new System.Drawing.Size(61, 29);
+            this.cbPlaystationId.Size = new System.Drawing.Size(95, 29);
             this.cbPlaystationId.TabIndex = 5;
             this.cbPlaystationId.SelectedIndexChanged += new System.EventHandler(this.cbPlaystationId_SelectedIndexChanged);
             this.cbPlaystationId.TextChanged += new System.EventHandler(this.cbPlaystationId_TextChanged);
@@ -425,6 +424,7 @@
             this.numUpDPaidPrice.Size = new System.Drawing.Size(113, 29);
             this.numUpDPaidPrice.TabIndex = 1;
             this.numUpDPaidPrice.ValueChanged += new System.EventHandler(this.numUpDPaidPrice_ValueChanged);
+            this.numUpDPaidPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numUpDPaidPrice_KeyPress);
             // 
             // gbDepositPayment
             // 

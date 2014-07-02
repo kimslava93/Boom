@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
+using Boom_Manager_Project.DataBaseClasses;
+using Boom_Manager_Project.HardwareConnectionDriver;
 using Boom_Manager_Project.MyClasses;
-using LINQ_test.Driver;
 
 namespace Boom_Manager_Project
 {
@@ -14,15 +16,17 @@ namespace Boom_Manager_Project
         private bool _exit;
         private DateTime _curDateTime;
         private List<DaySessionClass> _currentOpenedSessionsList;//for controlling update dgv
-
+        private CheckConnectionWithDevices _checkConnectionWithDevices;
         public BoomMainForm()
         {
             InitializeComponent();
+//            CenterTime();
             UDPDriver.Instance.Init();
         }
 
         private void BoomMainForm_Load(object sender, EventArgs e)
         {
+            _checkConnectionWithDevices = new CheckConnectionWithDevices();
             _curDateTime = DateTime.Now;
             lCurrentTime.Text = DateTime.Now.ToString("HH:mm:ss");
             lCurrentDate.Text = DateTime.Now.ToLongDateString();
@@ -31,7 +35,12 @@ namespace Boom_Manager_Project
             TimeOutChecking();
             UpdateWorkingStaff();
         }
-
+//        private void CenterTime()
+//        {
+////            lCurrentTime.Location.X = 500;
+//            dgvOpenedSessions.Height = Height - 100;
+//            dgvOpenedSessions.Invalidate();
+//        }
         private void BoomMainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
         }
@@ -51,6 +60,7 @@ namespace Boom_Manager_Project
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            _checkConnectionWithDevices.Check();
             _curDateTime = DateTime.Now;
             lCurrentTime.Text = _curDateTime.ToString("HH:mm:ss");
 
@@ -66,6 +76,7 @@ namespace Boom_Manager_Project
             dgvOpenedSessions.DataSource = _currentOpenedSessionsList;
             dgvOpenedSessions.Invalidate();
         }
+
 
         private void CheckSoonToCloseClients()
         {
@@ -280,6 +291,54 @@ namespace Boom_Manager_Project
             var ol = new OperatorLogin();
             ol.ShowDialog();
             UpdateWorkingStaff();
+        }
+
+        private void bReplace_Click(object sender, EventArgs e)
+        {
+            if (dgvOpenedSessions.CurrentRow != null)
+            {
+                DaySessionClass sessionToReplace = _currentOpenedSessionsList.FirstOrDefault(ds => ds.Сессия == (int) dgvOpenedSessions.CurrentRow.Cells[0].Value);
+                if (sessionToReplace != null)
+                {
+
+                    var cp = new ChangePlaystation(sessionToReplace);
+                    cp.ShowDialog();
+                    _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().GetAllOpenedDaySessions();
+                    dgvOpenedSessions.Invalidate();
+                }
+            }
+        }
+
+        private void bItems_Click(object sender, EventArgs e)
+        {
+            var ai = new AllBarItems();
+            ai.ShowDialog();
+        }
+
+        private void bLightCutOff_Click(object sender, EventArgs e)
+        {
+            var ep = new EnterPassword("ADMINISTRATOR");
+            ep.ShowDialog();
+            if (ep.Passed)
+            {
+                timer.Stop();
+                var lco = new LightCutOff(_currentOpenedSessionsList);
+                lco.ShowDialog();
+                _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().GetAllOpenedDaySessions();
+                dgvOpenedSessions.Invalidate();
+                timer.Start();
+                if (lco.AllSessionAreClosedAndApplicationCanBeClosed)
+                {
+                    _exit = true;
+                    Close();
+                }
+            }
+        }
+
+        private void bSellBarItem_Click(object sender, EventArgs e)
+        {
+            var si = new SellBarItem();
+            si.ShowDialog();
         }
     }
 }

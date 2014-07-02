@@ -25,12 +25,12 @@ namespace Boom_Manager_Project.Controllers
             if (string.IsNullOrWhiteSpace(name) || name.Length < 4)
             {
                 MessageBox.Show(
-                    "Length of the name of timeZone not suit to requirments. Please input name containing more than 4 symbols");
+                    ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(44));
                 return false;
             }
             if (endHour == startHour)
             {
-                MessageBox.Show("Change time length");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(45));
                 return false;
             }
             return true;
@@ -56,7 +56,7 @@ namespace Boom_Manager_Project.Controllers
                 select p.playstation_id).ToList();
             if (nullPrices.Count > 0)
             {
-                MessageBox.Show("Some playstations has null prices. Please set prices to all timezones!");
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(46));
                 return false;
             }
             return true;

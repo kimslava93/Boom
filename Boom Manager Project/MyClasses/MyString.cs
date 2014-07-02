@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LINQ_test
+﻿namespace Boom_Manager_Project.MyClasses
 {
-    internal class MyString
+    public class MyString
     {
 
         public MyString(string s)

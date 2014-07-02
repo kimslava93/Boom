@@ -40,7 +40,7 @@ namespace Boom_Manager_Project
         {
             dgvAllEndPointsIndexes.DataSource =
                 DeviceManagerContoller.DeviceManagerContollerInstance().GetAllEndpoints(deviceId);
-            dgvAllDevices.Invalidate();
+//            dgvAllDevices.Invalidate();
         }
 
         private void bClose_Click(object sender, EventArgs e)
@@ -107,6 +107,15 @@ namespace Boom_Manager_Project
                 ed.ShowDialog();
                 LoadDevicesList();
 //                dgvAllDevices.Invalidate();
+            }
+        }
+
+        private void dgvAllDevices_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvAllDevices.CurrentRow != null)
+            {
+                LoadEndpointsIndexes((int)dgvAllDevices.CurrentRow.Cells[0].Value);
+                dgvAllDevices.Invalidate();
             }
         }
     }
