@@ -87,6 +87,9 @@ namespace Boom_Manager_Project.DataBaseClasses
     partial void Insertsold_bar_history_table(sold_bar_history_table instance);
     partial void Updatesold_bar_history_table(sold_bar_history_table instance);
     partial void Deletesold_bar_history_table(sold_bar_history_table instance);
+    partial void Insertbar_revision_t(bar_revision_t instance);
+    partial void Updatebar_revision_t(bar_revision_t instance);
+    partial void Deletebar_revision_t(bar_revision_t instance);
     #endregion
 		
 		public dbDataContext() : 
@@ -2717,6 +2720,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private EntitySet<sold_bar_history_table> _sold_bar_history_tables;
 		
+		private EntitySet<bar_revision_t> _bar_revision_ts;
+		
 		private EntityRef<personal_info_t> _personal_info_t;
 		
 		private EntityRef<personal_info_t> _personal_info_t1;
@@ -2744,6 +2749,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 			this._days_sessions_ts = new EntitySet<days_sessions_t>(new Action<days_sessions_t>(this.attach_days_sessions_ts), new Action<days_sessions_t>(this.detach_days_sessions_ts));
 			this._expenses_ts = new EntitySet<expenses_t>(new Action<expenses_t>(this.attach_expenses_ts), new Action<expenses_t>(this.detach_expenses_ts));
 			this._sold_bar_history_tables = new EntitySet<sold_bar_history_table>(new Action<sold_bar_history_table>(this.attach_sold_bar_history_tables), new Action<sold_bar_history_table>(this.detach_sold_bar_history_tables));
+			this._bar_revision_ts = new EntitySet<bar_revision_t>(new Action<bar_revision_t>(this.attach_bar_revision_ts), new Action<bar_revision_t>(this.detach_bar_revision_ts));
 			this._personal_info_t = default(EntityRef<personal_info_t>);
 			this._personal_info_t1 = default(EntityRef<personal_info_t>);
 			OnCreated();
@@ -2922,6 +2928,19 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_bar_revision_t", Storage="_bar_revision_ts", ThisKey="daily_id", OtherKey="daily_id")]
+		public EntitySet<bar_revision_t> bar_revision_ts
+		{
+			get
+			{
+				return this._bar_revision_ts;
+			}
+			set
+			{
+				this._bar_revision_ts.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="personal_info_t_global_session_t", Storage="_personal_info_t", ThisKey="administrator_id", OtherKey="person_id", IsForeignKey=true)]
 		public personal_info_t personal_info_t
 		{
@@ -3065,6 +3084,18 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 		
 		private void detach_sold_bar_history_tables(sold_bar_history_table entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = null;
+		}
+		
+		private void attach_bar_revision_ts(bar_revision_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = this;
+		}
+		
+		private void detach_bar_revision_ts(bar_revision_t entity)
 		{
 			this.SendPropertyChanging();
 			entity.global_session_t = null;
@@ -4308,6 +4339,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private EntitySet<sold_bar_history_table> _sold_bar_history_tables;
 		
+		private EntitySet<bar_revision_t> _bar_revision_ts;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4327,6 +4360,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 		public items_table()
 		{
 			this._sold_bar_history_tables = new EntitySet<sold_bar_history_table>(new Action<sold_bar_history_table>(this.attach_sold_bar_history_tables), new Action<sold_bar_history_table>(this.detach_sold_bar_history_tables));
+			this._bar_revision_ts = new EntitySet<bar_revision_t>(new Action<bar_revision_t>(this.attach_bar_revision_ts), new Action<bar_revision_t>(this.detach_bar_revision_ts));
 			OnCreated();
 		}
 		
@@ -4443,6 +4477,19 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="items_table_bar_revision_t", Storage="_bar_revision_ts", ThisKey="item_id", OtherKey="item_id")]
+		public EntitySet<bar_revision_t> bar_revision_ts
+		{
+			get
+			{
+				return this._bar_revision_ts;
+			}
+			set
+			{
+				this._bar_revision_ts.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -4470,6 +4517,18 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 		
 		private void detach_sold_bar_history_tables(sold_bar_history_table entity)
+		{
+			this.SendPropertyChanging();
+			entity.items_table = null;
+		}
+		
+		private void attach_bar_revision_ts(bar_revision_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.items_table = this;
+		}
+		
+		private void detach_bar_revision_ts(bar_revision_t entity)
 		{
 			this.SendPropertyChanging();
 			entity.items_table = null;
@@ -4741,8 +4800,10 @@ namespace Boom_Manager_Project.DataBaseClasses
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bar_revision_t")]
-	public partial class bar_revision_t
+	public partial class bar_revision_t : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private System.Nullable<int> _daily_id;
 		
@@ -4754,8 +4815,35 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private System.Nullable<int> _left_num;
 		
+		private int _bar_revision_id;
+		
+		private EntityRef<global_session_t> _global_session_t;
+		
+		private EntityRef<items_table> _items_table;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Ondaily_idChanging(System.Nullable<int> value);
+    partial void Ondaily_idChanged();
+    partial void Onitem_idChanging(string value);
+    partial void Onitem_idChanged();
+    partial void Onamount_soldChanging(System.Nullable<int> value);
+    partial void Onamount_soldChanged();
+    partial void Onamount_boughtChanging(System.Nullable<int> value);
+    partial void Onamount_boughtChanged();
+    partial void Onleft_numChanging(System.Nullable<int> value);
+    partial void Onleft_numChanged();
+    partial void Onbar_revision_idChanging(int value);
+    partial void Onbar_revision_idChanged();
+    #endregion
+		
 		public bar_revision_t()
 		{
+			this._global_session_t = default(EntityRef<global_session_t>);
+			this._items_table = default(EntityRef<items_table>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_daily_id", DbType="Int")]
@@ -4769,7 +4857,15 @@ namespace Boom_Manager_Project.DataBaseClasses
 			{
 				if ((this._daily_id != value))
 				{
+					if (this._global_session_t.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondaily_idChanging(value);
+					this.SendPropertyChanging();
 					this._daily_id = value;
+					this.SendPropertyChanged("daily_id");
+					this.Ondaily_idChanged();
 				}
 			}
 		}
@@ -4785,7 +4881,15 @@ namespace Boom_Manager_Project.DataBaseClasses
 			{
 				if ((this._item_id != value))
 				{
+					if (this._items_table.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onitem_idChanging(value);
+					this.SendPropertyChanging();
 					this._item_id = value;
+					this.SendPropertyChanged("item_id");
+					this.Onitem_idChanged();
 				}
 			}
 		}
@@ -4801,7 +4905,11 @@ namespace Boom_Manager_Project.DataBaseClasses
 			{
 				if ((this._amount_sold != value))
 				{
+					this.Onamount_soldChanging(value);
+					this.SendPropertyChanging();
 					this._amount_sold = value;
+					this.SendPropertyChanged("amount_sold");
+					this.Onamount_soldChanged();
 				}
 			}
 		}
@@ -4817,7 +4925,11 @@ namespace Boom_Manager_Project.DataBaseClasses
 			{
 				if ((this._amount_bought != value))
 				{
+					this.Onamount_boughtChanging(value);
+					this.SendPropertyChanging();
 					this._amount_bought = value;
+					this.SendPropertyChanged("amount_bought");
+					this.Onamount_boughtChanged();
 				}
 			}
 		}
@@ -4833,8 +4945,120 @@ namespace Boom_Manager_Project.DataBaseClasses
 			{
 				if ((this._left_num != value))
 				{
+					this.Onleft_numChanging(value);
+					this.SendPropertyChanging();
 					this._left_num = value;
+					this.SendPropertyChanged("left_num");
+					this.Onleft_numChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bar_revision_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int bar_revision_id
+		{
+			get
+			{
+				return this._bar_revision_id;
+			}
+			set
+			{
+				if ((this._bar_revision_id != value))
+				{
+					this.Onbar_revision_idChanging(value);
+					this.SendPropertyChanging();
+					this._bar_revision_id = value;
+					this.SendPropertyChanged("bar_revision_id");
+					this.Onbar_revision_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_bar_revision_t", Storage="_global_session_t", ThisKey="daily_id", OtherKey="daily_id", IsForeignKey=true)]
+		public global_session_t global_session_t
+		{
+			get
+			{
+				return this._global_session_t.Entity;
+			}
+			set
+			{
+				global_session_t previousValue = this._global_session_t.Entity;
+				if (((previousValue != value) 
+							|| (this._global_session_t.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._global_session_t.Entity = null;
+						previousValue.bar_revision_ts.Remove(this);
+					}
+					this._global_session_t.Entity = value;
+					if ((value != null))
+					{
+						value.bar_revision_ts.Add(this);
+						this._daily_id = value.daily_id;
+					}
+					else
+					{
+						this._daily_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("global_session_t");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="items_table_bar_revision_t", Storage="_items_table", ThisKey="item_id", OtherKey="item_id", IsForeignKey=true)]
+		public items_table items_table
+		{
+			get
+			{
+				return this._items_table.Entity;
+			}
+			set
+			{
+				items_table previousValue = this._items_table.Entity;
+				if (((previousValue != value) 
+							|| (this._items_table.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._items_table.Entity = null;
+						previousValue.bar_revision_ts.Remove(this);
+					}
+					this._items_table.Entity = value;
+					if ((value != null))
+					{
+						value.bar_revision_ts.Add(this);
+						this._item_id = value.item_id;
+					}
+					else
+					{
+						this._item_id = default(string);
+					}
+					this.SendPropertyChanged("items_table");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

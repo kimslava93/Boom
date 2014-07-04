@@ -42,7 +42,7 @@ namespace Boom_Manager_Project.Controllers
 
         private void CloseUsualClient(DaySessionClass sessionToClose, string comments, DateTime endTime)
         {
-//            double changeMoney =  Math.Round(GetOddMoney(sessionToClose));
+//            double changeMoney =  Math.Ceiling(GetOddMoney(sessionToClose));
 //            if (changeMoney > 1)
 //            {
 //                DialogResult dresult =
@@ -73,7 +73,7 @@ namespace Boom_Manager_Project.Controllers
         private void CloseClientWithDiscount(DaySessionClass sessionToClose, string comments, DateTime endTime)
         {
             //sessionToClose = DataBaseClass.Instancedb().AccountDiscountMoney(sessionToClose);
-            //double changeMoney = Math.Round(GetOddMoney(sessionToClose),0);
+            //double changeMoney = Math.Ceiling(GetOddMoney(sessionToClose),0);
             //if (changeMoney > 1)
             //{
             //    DialogResult dresult =
@@ -139,7 +139,7 @@ namespace Boom_Manager_Project.Controllers
         }
         private void CloseUsualClientLightCutOff(DaySessionClass sessionToClose, string comments, DateTime endTime)
         {
-            double changeMoney = Math.Round(GetOddMoney(sessionToClose));
+            double changeMoney = Math.Ceiling(GetOddMoney(sessionToClose));
             if (changeMoney > 1)
             {
                 DialogResult dresult =
@@ -172,7 +172,7 @@ namespace Boom_Manager_Project.Controllers
         private void CloseLightCutOffClientWithDiscount(DaySessionClass sessionToClose, string comments, DateTime endTime)
         {
             sessionToClose = DataBaseClass.Instancedb().AccountDiscountMoney(sessionToClose);
-            double changeMoney = Math.Round(GetOddMoney(sessionToClose),0);
+            double changeMoney = Math.Ceiling(GetOddMoney(sessionToClose));
             if (changeMoney > 1)
             {
                 DialogResult dresult =

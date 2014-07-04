@@ -117,11 +117,6 @@
             0,
             0,
             0});
-            this.numUpDHoursLeft.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.numUpDHoursLeft.Name = "numUpDHoursLeft";
             this.numUpDHoursLeft.Size = new System.Drawing.Size(54, 29);
             this.numUpDHoursLeft.TabIndex = 0;

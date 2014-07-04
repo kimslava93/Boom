@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
+using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.HardwareConnectionDriver;
 using Boom_Manager_Project.MyClasses;
 
@@ -441,6 +441,10 @@ namespace Boom_Manager_Project.DataBaseClasses
                     UpdatePlaystationState(matchDs.playstation_id, "free");
                     db.SubmitChanges();
                     matchDs.playstation_id = newPlaystation;
+                    TimeSpan paidTime =
+                        AddNewSessionController.AddNewSessionControllerInstance()
+                            .UpdateTimeLeft((decimal)matchDs.payed_sum, newPlaystation, 0, 18900);
+                    if (matchDs.start_game != null) matchDs.end_game = matchDs.start_game.Value.Add(paidTime);
                     if (String.IsNullOrWhiteSpace(matchDs.comments))
                     {
                         matchDs.comments = "Пересел с " + ds.Приставка + " на "+newPlaystation +" " + comments;
@@ -650,6 +654,24 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
+
+        public List<SoldItemMyClass> GetListOfSoldItems(int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from i in db.GetTable<sold_bar_history_table>()
+                    where i.daily_id == dailyId
+                    orderby i.sale_time
+                    select new SoldItemMyClass()
+                    {
+                        Время = (DateTime) i.sale_time,
+                        Наименование = i.item_id,
+                        Количество = (int) i.amount_sold
+                    }).ToList();
+            }
+        }
+
         public void ChangeItemNumber(string itemId, int newNumber)
         {
             var db = new dbDataContext();
@@ -669,6 +691,19 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
+
+        public List<sold_bar_history_table> GetListOfSoldItemId(string itemId, int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from i in db.GetTable<sold_bar_history_table>()
+                    where i.item_id == itemId
+                    where i.daily_id == dailyId
+                    select i).ToList();
+            }
+        }
+
         public List<AllItemsMyClass> GetAllItems()
         {
              var db = new dbDataContext();
@@ -686,12 +721,13 @@ namespace Boom_Manager_Project.DataBaseClasses
                     }).ToList<AllItemsMyClass>();
             }
         }
-        public List<BarRevisionMyClass> GetAllBarRevisionItems()
+        public List<BarRevisionMyClass> GetAllBarRevisionItems(int dailyId)
         {
             var db = new dbDataContext();
             lock (db)
             {
                 return (from i in db.GetTable<bar_revision_t>()
+                        where i.daily_id == dailyId
                         orderby i.item_id
                         select new BarRevisionMyClass
                         {
@@ -738,11 +774,11 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                int dalyId = GetLastOpenedGlobalSessionDailyId();
+                int dailyId = GetLastOpenedGlobalSessionDailyId();
                 Table<sold_bar_history_table> soldBarTable = db.GetTable<sold_bar_history_table>();
                 var soldItem = new sold_bar_history_table
                 {
-                    daily_id = dalyId,
+                    daily_id = dailyId,
                     amount_sold = number,
                     item_id = itemId,
                     sale_time = timeOfSelling,
@@ -750,9 +786,39 @@ namespace Boom_Manager_Project.DataBaseClasses
                 };
                 soldBarTable.InsertOnSubmit(soldItem);
                 db.SubmitChanges();
+                AddMoneyToCash(sum, dailyId);
+                AddItemToRevision(itemId, number*(-1));
             }
         }
-        public void AddNewBarRevisionRecord(int dailyId, string itemId, int amountSold, int amountBought,int left)
+        public void AddItemToRevision(string itemId, int newNumber)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var match = (from i in db.GetTable<items_table>()
+                             where i.item_id == itemId
+                             select i).SingleOrDefault();
+                if (match != null)
+                {
+                    match.number_left+=newNumber;
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(42));
+                }
+            }
+        }
+//        public void AddItemsToRevision(string itemId, int amountsold)
+//        {
+//            var db = new dbDataContext();
+//            lock (db)
+//            {
+//
+//            }
+//        }
+
+        public void AddNewOrUpdateBarRevisionRecord(int dailyId, string itemId, int amountSold, int amountBought,int left)
         {
             var db = new dbDataContext();
             lock (db)

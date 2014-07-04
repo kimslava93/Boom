@@ -136,7 +136,7 @@ namespace Boom_Manager_Project
                 var bonusMoney = numUpDMoneyExtend.Value * discount / 100;
                 var bonusTime = AddNewSessionController.AddNewSessionControllerInstance()
                     .UpdateTimeLeft(bonusMoney, _sessionToExtend.Приставка, 0, numUpDMoneyExtend.Maximum);
-                lPlusMoney.Text = @" + " + Math.Round(bonusMoney, 0).ToString(CultureInfo.InvariantCulture);
+                lPlusMoney.Text = @" + " + Math.Ceiling(bonusMoney).ToString(CultureInfo.InvariantCulture);
                 //                if (bonusTime.Hours > 0)
                 //                {
                 ////                    MessageBox.Show();
@@ -144,7 +144,7 @@ namespace Boom_Manager_Project
                 //                }
                 //                else
                 //                {
-                lPlusTime.Text = @" + " + Math.Round(bonusTime.TotalMinutes, 0);
+                lPlusTime.Text = @" + " + Math.Ceiling(bonusTime.TotalMinutes);
                 //                }
                 //                lPlusTime.Text = @" + " + bonusTime.ToString(bonusTime.Hours > 0 ? "HH:mm" : "mm");
             }

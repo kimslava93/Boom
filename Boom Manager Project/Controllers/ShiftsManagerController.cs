@@ -108,25 +108,29 @@ namespace Boom_Manager_Project.Controllers
             if (cashFromDailyId != null)
             {
                 var currentCash = (double)cashFromDailyId;
-                moneyFromPrevShift = moneyFromPrevShift == null ? 0 : Math.Round((double) moneyFromPrevShift, 0);
+                moneyFromPrevShift = moneyFromPrevShift == null ? 0 : Math.Ceiling((double) moneyFromPrevShift);
 
-                doc.InsertParagraph("Общая касса (со скидками и с не наигранными деньгами) = " + Math.Round(playedSum,0) + " сом");
-                doc.InsertParagraph("Сгоревшие деньги = " + Math.Round(playedSum - allRegisteredCash,0) + " сом");
+                doc.InsertParagraph("Деньги с игры = " + Math.Ceiling(playedSum) + " сом");
+                doc.InsertParagraph("Деньги с бара " + GetAllMoneyFromBarItems() + " сом");
+                doc.InsertParagraph("Остаток с прошлой смены " + moneyFromPrevShift + " сом");
                 doc.InsertParagraph("Скидки = " + allDiscounts + " сом");
                 doc.InsertParagraph("Снято = " + withdrawnMoney + " сом");
-                doc.InsertParagraph("Остаток с прошлой смены " + moneyFromPrevShift + " сом");
                 doc.InsertParagraph("Сумма затрат = " + expensesSum + " сом");
-                doc.InsertParagraph("Сумма денег в кассе на момент Просмотра отчета= " + Math.Round(currentCash, 0) + " сом");
-
+                doc.InsertParagraph("Сумма денег в кассе на момент Просмотра отчета= " + Math.Ceiling(currentCash) + " сом");
 
                 doc.InsertParagraph();
+                doc.InsertParagraph();
+                doc.InsertParagraph("Сгоревшие деньги = " + Math.Ceiling(playedSum - allRegisteredCash) + " сом");
+                doc.InsertParagraph();
+                doc.InsertParagraph();
+
                 doc.InsertTable(2, 9);
                 doc.PageLayout.Orientation = Orientation.Landscape;
                 Table accountingTable = doc.Tables[1];
                 accountingTable.AutoFit = AutoFit.Contents;
                 accountingTable.Design = TableDesign.TableGrid;
 
-                accountingTable.Rows[0].Cells[0].Paragraphs[0].InsertText("Число");
+                accountingTable.Rows[0].Cells[0].Paragraphs[0].InsertText("Дата");
                 accountingTable.Rows[0].Cells[1].Paragraphs[0].InsertText("Смена");
                 accountingTable.Rows[0].Cells[2].Paragraphs[0].InsertText("Касса");
                 accountingTable.Rows[0].Cells[3].Paragraphs[0].InsertText("Снято");
@@ -138,10 +142,10 @@ namespace Boom_Manager_Project.Controllers
 
                 accountingTable.Rows[1].Cells[0].Paragraphs[0].InsertText(gs.start_session.Day + " " + gs.start_session.ToString("MMM"));
                 accountingTable.Rows[1].Cells[1].Paragraphs[0].InsertText(gs.administrator_id + " и " + gs.operator_id);
-                accountingTable.Rows[1].Cells[2].Paragraphs[0].InsertText(Math.Round(playedSum, 0) + "");
+                accountingTable.Rows[1].Cells[2].Paragraphs[0].InsertText((Math.Ceiling(playedSum) + GetAllMoneyFromBarItems() + moneyFromPrevShift).ToString());
                 accountingTable.Rows[1].Cells[3].Paragraphs[0].InsertText(withdrawnMoney + "");
-                accountingTable.Rows[1].Cells[4].Paragraphs[0].InsertText("Расход");
-                accountingTable.Rows[1].Cells[5].Paragraphs[0].InsertText("Остаток");
+                accountingTable.Rows[1].Cells[4].Paragraphs[0].InsertText(expensesSum + "");
+                accountingTable.Rows[1].Cells[5].Paragraphs[0].InsertText(Math.Ceiling(currentCash).ToString());
                 accountingTable.Rows[1].Cells[6].Paragraphs[0].InsertText("-%");
                 accountingTable.Rows[1].Cells[7].Paragraphs[0].InsertText("+%");
                 accountingTable.Rows[1].Cells[8].Paragraphs[0].InsertText("Комментарии");
@@ -214,6 +218,14 @@ namespace Boom_Manager_Project.Controllers
             {
                 doc.InsertParagraph(exp.expenses_time.ToString("HH:mm") + ":     " + exp.comments + "       -      " + exp.cash_amount + " сом");
             }
+        }
+
+        private double GetAllMoneyFromBarItems()
+        {
+            int dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
+            var allSolItems = DataBaseClass.Instancedb().GetListOfSoldItems(dailyId);
+            double sum = (from item in allSolItems let itemData = DataBaseClass.Instancedb().GetItemDataById(item.Наименование) select itemData.Цена*item.Количество).Sum();
+            return sum;
         }
     }
 }

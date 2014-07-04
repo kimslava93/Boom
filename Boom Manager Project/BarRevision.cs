@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.DataBaseClasses;
 
 namespace Boom_Manager_Project
@@ -18,7 +19,9 @@ namespace Boom_Manager_Project
 
         private void LoadDgv()
         {
-            dgvAllItems.DataSource = DataBaseClass.Instancedb().GetAllBarRevisionItems();
+            BarRevisionController.BarRevisionControllerInstance().InsertOrUpdateAllItemsInBar();
+            int dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
+            dgvAllItems.DataSource = DataBaseClass.Instancedb().GetAllBarRevisionItems(dailyId);
             dgvAllItems.Invalidate();
         }
 

@@ -71,7 +71,7 @@ namespace Boom_Manager_Project.Controllers
             if (dSessions.Count <= 0) return dSessions;
             foreach (DaySessionClass os in dSessions)
             {
-                os.Счетчик = Math.Round(GetAlreadyPlayedMoneySum(os.Приставка, os.Начало, os.Оплачено), 0);
+                os.Счетчик = Math.Ceiling(GetAlreadyPlayedMoneySum(os.Приставка, os.Начало, os.Оплачено));
                 os.Оставшееся_время = GetTimeLeft(os.Конец);
             }
             return dSessions;

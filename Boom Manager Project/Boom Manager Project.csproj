@@ -97,6 +97,7 @@
       <DependentUpon>ChangePlaystationPrice.cs</DependentUpon>
     </Compile>
     <Compile Include="CheckConnectionWithDevices.cs" />
+    <Compile Include="Controllers\BarRevisionController.cs" />
     <Compile Include="Controllers\CreateNewDiscountStepController.cs" />
     <Compile Include="ConsoleManager.cs">
       <SubType>Form</SubType>
@@ -163,6 +164,7 @@
     <Compile Include="Controllers\ChangePlaystationController.cs" />
     <Compile Include="MyClasses\BarRevisionMyClass.cs" />
     <Compile Include="MyClasses\ListOfItemsWithPrice.cs" />
+    <Compile Include="MyClasses\SoldItemMyClass.cs" />
     <Compile Include="SellBarItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -312,6 +314,12 @@
     <Compile Include="ShiftsManager.Designer.cs">
       <DependentUpon>ShiftsManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="SoldItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SoldItems.Designer.cs">
+      <DependentUpon>SoldItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimeZoneManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -418,6 +426,9 @@
     <EmbeddedResource Include="ShiftsManager.resx">
       <DependentUpon>ShiftsManager.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SoldItems.resx">
+      <DependentUpon>SoldItems.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TimeZoneManager.resx">
       <DependentUpon>TimeZoneManager.cs</DependentUpon>

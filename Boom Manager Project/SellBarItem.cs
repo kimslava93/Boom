@@ -35,11 +35,15 @@ namespace Boom_Manager_Project
                 SellBarItemController.SellBarItemControllerInstance()
                     .SellItem((string) dgvAllItems.CurrentRow.Cells[1].Value, (int) numUpDNumber.Value,
                         double.Parse(tbSum.Text.ToString(CultureInfo.InvariantCulture)));
+                MessageBox.Show(@"Товар " + dgvAllItems.CurrentRow.Cells[1].Value + @" в количестве " + numUpDNumber.Value + @"шт. был успешно занесен в список проданных товаров!");
                 SetDefaultValues();
+
             }
             else
             {
-                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(47));
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(47),
+                    ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetCaption(2), MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 

@@ -68,10 +68,10 @@ E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.exe
 E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.pdb
 E:\Boom Manager Project\Boom Manager Project\bin\Debug\DocX.dll
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.DataBaseClasses.ChangePlaystation.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csprojResolveAssemblyReference.cache
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewItem.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AllBarItems.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.LightCutOff.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.SellBarItem.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ChangeNumberOfItem.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.BarRevision.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.SoldItems.resources

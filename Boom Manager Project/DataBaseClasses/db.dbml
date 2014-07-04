@@ -225,6 +225,7 @@
       <Column Name="amount_sold" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="amount_bought" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="left_num" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bar_revision_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="global_session_t_bar_revision_t" Member="global_session_t" ThisKey="daily_id" OtherKey="daily_id" Type="global_session_t" IsForeignKey="true" />
       <Association Name="items_table_bar_revision_t" Member="items_table" ThisKey="item_id" OtherKey="item_id" Type="items_table" IsForeignKey="true" />
     </Type>

@@ -129,7 +129,7 @@ namespace Boom_Manager_Project.Controllers
                     {
                         return 0;
                     }
-                    return Math.Round((decimal) price, 2);
+                    return Math.Ceiling((decimal) price);
                 }
 //            }
 //            else
@@ -140,7 +140,7 @@ namespace Boom_Manager_Project.Controllers
 //                        (int) minutesLeft, 0);
 //
 //                    double price = _addNewSessionModel.GetSumToPay(playstationId, toPlay, currentDateTime);
-//                    return Math.Round((decimal) price, 2);
+//                    return Math.Ceiling((decimal) price, 2);
 //                }
 //            }
             return 0;

@@ -340,5 +340,18 @@ namespace Boom_Manager_Project
             var si = new SellBarItem();
             si.ShowDialog();
         }
+
+        private void bBarRevision_Click(object sender, EventArgs e)
+        {
+            var r = new BarRevision();
+            r.ShowDialog();
+        }
+
+        private void bSolItemsList_Click(object sender, EventArgs e)
+        {
+            var si = new SoldItems();
+            si.ShowDialog();
+        }
+        //4970
     }
 }

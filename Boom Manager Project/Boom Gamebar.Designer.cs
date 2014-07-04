@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BoomMainForm));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.splitContainer = new System.Windows.Forms.SplitContainer();
@@ -38,8 +38,10 @@
             this.lAdmin = new System.Windows.Forms.Label();
             this.bExpenses = new System.Windows.Forms.Button();
             this.bLightCutOff = new System.Windows.Forms.Button();
+            this.bBarRevision = new System.Windows.Forms.Button();
             this.bChangeShift = new System.Windows.Forms.Button();
             this.bExtendTime = new System.Windows.Forms.Button();
+            this.bSolItemsList = new System.Windows.Forms.Button();
             this.bSellBarItem = new System.Windows.Forms.Button();
             this.bReplace = new System.Windows.Forms.Button();
             this.bCloseSession = new System.Windows.Forms.Button();
@@ -88,8 +90,10 @@
             this.splitContainer.Panel1.Controls.Add(this.lAdmin);
             this.splitContainer.Panel1.Controls.Add(this.bExpenses);
             this.splitContainer.Panel1.Controls.Add(this.bLightCutOff);
+            this.splitContainer.Panel1.Controls.Add(this.bBarRevision);
             this.splitContainer.Panel1.Controls.Add(this.bChangeShift);
             this.splitContainer.Panel1.Controls.Add(this.bExtendTime);
+            this.splitContainer.Panel1.Controls.Add(this.bSolItemsList);
             this.splitContainer.Panel1.Controls.Add(this.bSellBarItem);
             this.splitContainer.Panel1.Controls.Add(this.bReplace);
             this.splitContainer.Panel1.Controls.Add(this.bCloseSession);
@@ -148,10 +152,10 @@
             this.bExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bExpenses.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bExpenses.ForeColor = System.Drawing.Color.White;
-            this.bExpenses.Location = new System.Drawing.Point(1124, 65);
+            this.bExpenses.Location = new System.Drawing.Point(1124, 61);
             this.bExpenses.Margin = new System.Windows.Forms.Padding(5);
             this.bExpenses.Name = "bExpenses";
-            this.bExpenses.Size = new System.Drawing.Size(83, 38);
+            this.bExpenses.Size = new System.Drawing.Size(83, 44);
             this.bExpenses.TabIndex = 1001;
             this.bExpenses.Text = "ЗАТРАТЫ";
             this.bExpenses.UseVisualStyleBackColor = false;
@@ -168,14 +172,34 @@
             this.bLightCutOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bLightCutOff.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bLightCutOff.ForeColor = System.Drawing.Color.White;
-            this.bLightCutOff.Location = new System.Drawing.Point(1313, 65);
+            this.bLightCutOff.Location = new System.Drawing.Point(1217, 61);
             this.bLightCutOff.Margin = new System.Windows.Forms.Padding(5);
             this.bLightCutOff.Name = "bLightCutOff";
-            this.bLightCutOff.Size = new System.Drawing.Size(93, 38);
+            this.bLightCutOff.Size = new System.Drawing.Size(83, 44);
             this.bLightCutOff.TabIndex = 1001;
             this.bLightCutOff.Text = "ВЫКЛ СВЕТ";
             this.bLightCutOff.UseVisualStyleBackColor = false;
             this.bLightCutOff.Click += new System.EventHandler(this.bLightCutOff_Click);
+            // 
+            // bBarRevision
+            // 
+            this.bBarRevision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bBarRevision.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bBarRevision.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bBarRevision.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bBarRevision.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bBarRevision.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bBarRevision.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bBarRevision.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bBarRevision.ForeColor = System.Drawing.Color.White;
+            this.bBarRevision.Location = new System.Drawing.Point(1217, 7);
+            this.bBarRevision.Margin = new System.Windows.Forms.Padding(5);
+            this.bBarRevision.Name = "bBarRevision";
+            this.bBarRevision.Size = new System.Drawing.Size(83, 44);
+            this.bBarRevision.TabIndex = 1001;
+            this.bBarRevision.Text = "РЕВИЗИЯ";
+            this.bBarRevision.UseVisualStyleBackColor = false;
+            this.bBarRevision.Click += new System.EventHandler(this.bBarRevision_Click);
             // 
             // bChangeShift
             // 
@@ -188,10 +212,10 @@
             this.bChangeShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bChangeShift.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bChangeShift.ForeColor = System.Drawing.Color.White;
-            this.bChangeShift.Location = new System.Drawing.Point(1124, 13);
+            this.bChangeShift.Location = new System.Drawing.Point(1124, 7);
             this.bChangeShift.Margin = new System.Windows.Forms.Padding(5);
             this.bChangeShift.Name = "bChangeShift";
-            this.bChangeShift.Size = new System.Drawing.Size(83, 38);
+            this.bChangeShift.Size = new System.Drawing.Size(83, 44);
             this.bChangeShift.TabIndex = 1001;
             this.bChangeShift.Text = "СМЕНА";
             this.bChangeShift.UseVisualStyleBackColor = false;
@@ -209,16 +233,35 @@
             this.bExtendTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bExtendTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bExtendTime.ForeColor = System.Drawing.Color.White;
-            this.bExtendTime.Location = new System.Drawing.Point(182, 39);
-            this.bExtendTime.Margin = new System.Windows.Forms.Padding(5);
+            this.bExtendTime.Location = new System.Drawing.Point(122, 38);
+            this.bExtendTime.Margin = new System.Windows.Forms.Padding(10);
             this.bExtendTime.Name = "bExtendTime";
-            this.bExtendTime.Size = new System.Drawing.Size(124, 48);
+            this.bExtendTime.Size = new System.Drawing.Size(98, 48);
             this.bExtendTime.TabIndex = 1000;
             this.bExtendTime.Text = "ПРОДЛИТЬ ВРЕМЯ";
             this.bExtendTime.UseVisualStyleBackColor = false;
             this.bExtendTime.Click += new System.EventHandler(this.bExtendTime_Click);
             this.bExtendTime.MouseLeave += new System.EventHandler(this.bExtendTime_MouseLeave);
             this.bExtendTime.MouseHover += new System.EventHandler(this.bExtendTime_MouseHover);
+            // 
+            // bSolItemsList
+            // 
+            this.bSolItemsList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSolItemsList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bSolItemsList.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSolItemsList.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bSolItemsList.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bSolItemsList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bSolItemsList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bSolItemsList.ForeColor = System.Drawing.Color.White;
+            this.bSolItemsList.Location = new System.Drawing.Point(581, 39);
+            this.bSolItemsList.Margin = new System.Windows.Forms.Padding(10);
+            this.bSolItemsList.Name = "bSolItemsList";
+            this.bSolItemsList.Size = new System.Drawing.Size(70, 48);
+            this.bSolItemsList.TabIndex = 8;
+            this.bSolItemsList.Text = "БАР";
+            this.bSolItemsList.UseVisualStyleBackColor = false;
+            this.bSolItemsList.Click += new System.EventHandler(this.bSolItemsList_Click);
             // 
             // bSellBarItem
             // 
@@ -230,10 +273,10 @@
             this.bSellBarItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bSellBarItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bSellBarItem.ForeColor = System.Drawing.Color.White;
-            this.bSellBarItem.Location = new System.Drawing.Point(508, 71);
-            this.bSellBarItem.Margin = new System.Windows.Forms.Padding(5);
+            this.bSellBarItem.Location = new System.Drawing.Point(357, 75);
+            this.bSellBarItem.Margin = new System.Windows.Forms.Padding(10);
             this.bSellBarItem.Name = "bSellBarItem";
-            this.bSellBarItem.Size = new System.Drawing.Size(123, 48);
+            this.bSellBarItem.Size = new System.Drawing.Size(97, 48);
             this.bSellBarItem.TabIndex = 8;
             this.bSellBarItem.Text = "ПРОДАТЬ";
             this.bSellBarItem.UseVisualStyleBackColor = false;
@@ -249,10 +292,10 @@
             this.bReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bReplace.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bReplace.ForeColor = System.Drawing.Color.White;
-            this.bReplace.Location = new System.Drawing.Point(508, 13);
-            this.bReplace.Margin = new System.Windows.Forms.Padding(5);
+            this.bReplace.Location = new System.Drawing.Point(357, 7);
+            this.bReplace.Margin = new System.Windows.Forms.Padding(10);
             this.bReplace.Name = "bReplace";
-            this.bReplace.Size = new System.Drawing.Size(123, 48);
+            this.bReplace.Size = new System.Drawing.Size(97, 48);
             this.bReplace.TabIndex = 8;
             this.bReplace.Text = "СМЕНА ПРИСТАВКИ";
             this.bReplace.UseVisualStyleBackColor = false;
@@ -268,10 +311,10 @@
             this.bCloseSession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCloseSession.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCloseSession.ForeColor = System.Drawing.Color.White;
-            this.bCloseSession.Location = new System.Drawing.Point(352, 39);
-            this.bCloseSession.Margin = new System.Windows.Forms.Padding(5);
+            this.bCloseSession.Location = new System.Drawing.Point(240, 39);
+            this.bCloseSession.Margin = new System.Windows.Forms.Padding(10);
             this.bCloseSession.Name = "bCloseSession";
-            this.bCloseSession.Size = new System.Drawing.Size(123, 48);
+            this.bCloseSession.Size = new System.Drawing.Size(97, 48);
             this.bCloseSession.TabIndex = 8;
             this.bCloseSession.Text = "ЗАКРЫТЬ СЕССИЮ";
             this.bCloseSession.UseVisualStyleBackColor = false;
@@ -289,10 +332,10 @@
             this.bAddNewClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddNewClient.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddNewClient.ForeColor = System.Drawing.Color.White;
-            this.bAddNewClient.Location = new System.Drawing.Point(19, 39);
-            this.bAddNewClient.Margin = new System.Windows.Forms.Padding(5);
+            this.bAddNewClient.Location = new System.Drawing.Point(4, 38);
+            this.bAddNewClient.Margin = new System.Windows.Forms.Padding(10);
             this.bAddNewClient.Name = "bAddNewClient";
-            this.bAddNewClient.Size = new System.Drawing.Size(124, 48);
+            this.bAddNewClient.Size = new System.Drawing.Size(98, 48);
             this.bAddNewClient.TabIndex = 7;
             this.bAddNewClient.Text = "ОТКРЫТЬ СЕССИЮ";
             this.bAddNewClient.UseVisualStyleBackColor = false;
@@ -350,24 +393,24 @@
             this.dgvOpenedSessions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvOpenedSessions.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvOpenedSessions.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOpenedSessions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOpenedSessions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOpenedSessions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOpenedSessions.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOpenedSessions.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOpenedSessions.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvOpenedSessions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvOpenedSessions.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvOpenedSessions.EnableHeadersVisualStyles = false;
@@ -652,6 +695,8 @@
         private System.Windows.Forms.Button bItems;
         private System.Windows.Forms.Button bLightCutOff;
         private System.Windows.Forms.Button bSellBarItem;
+        private System.Windows.Forms.Button bBarRevision;
+        private System.Windows.Forms.Button bSolItemsList;
     }
 }
 
