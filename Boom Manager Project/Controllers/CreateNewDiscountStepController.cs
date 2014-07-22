@@ -19,7 +19,7 @@ namespace Boom_Manager_Project.Controllers
             {
                 return false;
             }
-            if (string.IsNullOrEmpty(name) || res < 10 || discount > 100 || discount < 1)
+            if (string.IsNullOrEmpty(name) || res < 0 || discount > 100 || discount < 1)
             {
                 return false;
             }

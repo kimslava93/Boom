@@ -95,7 +95,7 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(285, 334);
+            this.bCancel.Location = new System.Drawing.Point(12, 333);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(96, 38);
             this.bCancel.TabIndex = 3;
@@ -393,7 +393,7 @@
             this.bAddSession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddSession.ForeColor = System.Drawing.Color.White;
-            this.bAddSession.Location = new System.Drawing.Point(12, 334);
+            this.bAddSession.Location = new System.Drawing.Point(281, 333);
             this.bAddSession.Name = "bAddSession";
             this.bAddSession.Size = new System.Drawing.Size(96, 38);
             this.bAddSession.TabIndex = 2;

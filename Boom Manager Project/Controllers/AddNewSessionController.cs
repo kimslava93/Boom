@@ -57,18 +57,18 @@ namespace Boom_Manager_Project.Controllers
         {
             if (type == "NoFreePlaces")
             {
-                return "There is no available free consoles. Sorry for that!";
+                return "Нет свободных приставок!";
             }
             if (type == "TimeZoePriceError")
             {
-                return "Probably that the price of this playstation is lower than 0.\n" +
-                       "To solve this problem you need to change price of this table in the Timezone redactor!";
+                return "Стоимость часа на данной приставки равна 0\n" +
+                       "Поменяйте стоимость в редакторе временных зон";
             }
             if (type == "UpdateTimeError")
             {
-                return "Error occured during updating paid time values!";
+                return "Возникла ошибка во время обновления оплаченного времени!";
             }
-            return "";
+            return "Неизвестная ошибка";
         }
 
         public List<tables_t> GetAllFreeTablesId()
@@ -161,7 +161,25 @@ namespace Boom_Manager_Project.Controllers
             }
             return false;
         }
-
+        public bool CheckDoesClientExist(string clientId)
+        {
+            if (clientId == Options.OptionsInstance().UsualClient)
+            {
+                return true;
+            }
+            var allClients = DataBaseClass.Instancedb().GetAllClients();
+            if (allClients != null)
+            {
+                var result = (from t in allClients
+                    where t.name == clientId
+                    select t).SingleOrDefault();
+                if (result != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public TimeSpan UpdateTimeLeft(decimal priceValue, string playstationId, decimal minimumValue,
             decimal maximumValue)
         {

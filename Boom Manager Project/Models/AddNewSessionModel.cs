@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Boom_Manager_Project.DataBaseClasses;
 
 namespace Boom_Manager_Project.Models
@@ -103,11 +104,35 @@ namespace Boom_Manager_Project.Models
             }
             return result;
         }
+
+        private double GetPriceForPlaystationForOneHourWithAllTimeZoneTransferring(string playstationId, DateTime curTime)//VERY IMPORTANT!!!! Should be used for only timeSpan lower than 1 hour!!!!!
+        {
+//            int nearestHour = curTime.Hour + 1;
+//            if (nearestHour > 23)
+//            {
+//                nearestHour = 0;
+//            }
+            var nextHour = new DateTime(curTime.Year, curTime.Month, curTime.Day, curTime.Hour, 0, 0, 0).AddHours(1);
+            var difference = nextHour - curTime;
+            double price = 0;
+            if (difference < TimeSpan.FromHours(1))
+            {
+                price = difference.TotalMinutes*GetCurrentPriceForPlaystation(playstationId, curTime)/60;
+                price += (TimeSpan.FromHours(1).Subtract(difference).TotalMinutes)*
+                         GetCurrentPriceForPlaystation(playstationId, nextHour)/60;
+            }
+            else
+            {
+                return GetCurrentPriceForPlaystation(playstationId, curTime);
+            }
+            return price;
+        }
+
         public TimeSpan GetTimeToPlay(double paidSum, string playstationId, DateTime fromTime)
         {
             var result = new TimeSpan(0, 0, 0, 0);
             DateTime currentTime = DateTime.Now;
-            if (paidSum >= GetCurrentPriceForPlaystation(playstationId, currentTime))
+            if (Math.Abs(paidSum - GetPriceForPlaystationForOneHourWithAllTimeZoneTransferring(playstationId, currentTime)) <= 1)
             {
                 if (currentTime.Minute != 0)
                 {
@@ -130,8 +155,24 @@ namespace Boom_Manager_Project.Models
             }
             if (paidSum > 0)
             {
-                result =
-                    result.Add(TimeSpan.FromMinutes(paidSum*60/GetCurrentPriceForPlaystation(playstationId, currentTime)));//by cross formula
+                var nextHour =
+                    new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, currentTime.Hour, 0, 0, 0)
+                        .AddHours(1);
+                var difference = nextHour - currentTime;
+                double priceForDifference = GetSumToPay(playstationId, difference, currentTime);
+                if (paidSum > priceForDifference)
+                {
+                    paidSum -= priceForDifference;
+                    result.Add(difference);
+                    return result.Add(TimeSpan.FromMinutes(paidSum*60/GetCurrentPriceForPlaystation(playstationId, currentTime)));
+                }
+                return result.Add(TimeSpan.FromMinutes(paidSum*60/GetCurrentPriceForPlaystation(playstationId, currentTime)));//by cross formula
+//
+//            if (difference < TimeSpan.FromHours(1))
+//            {
+//                price = difference.TotalMinutes*GetCurrentPriceForPlaystation(playstationId, currentTime)/60;
+//                price += (TimeSpan.FromHours(1).Subtract(difference).TotalMinutes)*
+//                         GetCurrentPriceForPlaystation(playstationId, nextHour)/60;
             }
             return result;
         }

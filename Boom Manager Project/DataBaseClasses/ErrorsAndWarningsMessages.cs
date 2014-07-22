@@ -9,6 +9,22 @@
             return _errorsAndWarningsMessages ?? (_errorsAndWarningsMessages = new ErrorsAndWarningsMessages());
         }
 
+        public string GetErrorWithLine(int errorId, int lineNum)
+        {
+            string error;
+            switch (errorId)
+            {
+                case 1:
+                    error = "В базе не была выполнена команда на строке " + lineNum;
+                    break;
+                default:
+                    error = "Неизвестная ошибка!";
+                    break;
+            }
+            
+            return error;
+        }
+
         public string GetError(int errorId)
         {
             string error;
@@ -190,9 +206,18 @@
                     error =
                         "Возможно вы не выключили все приставки!!! Требуеться закрыть все сессии перед выходом из программы!";//"Some playstations has null prices. Please set prices to all timezones!"
                     break;
-//                case 50:
-//                    error ="!";//"Some playstations has null prices. Please set prices to all timezones!"
-//                    break;
+                case 50:
+                    error ="Карточка не найдена!";//"Some playstations has null prices. Please set prices to all timezones!"
+                    break;
+                case 51:
+                    error ="Пожалуйста, настройте перед добавлением клиентов шаги скидок!";//"Some playstations has null prices. Please set prices to all timezones!"
+                    break;
+                case 52:
+                    error ="Клиент не найден в базе данных.";//"Some playstations has null prices. Please set prices to all timezones!"
+                    break;
+                case 53:
+                    error ="Клиент Usual Client запрещен на удаление! В случае проблем свяжитесь с разрабочиком!";//"Some playstations has null prices. Please set prices to all timezones!"
+                    break;
 
                 default:
                     error = "Неизвестная оценка!"; //"Unknown error!";
@@ -270,7 +295,7 @@
             switch (captionId)
             {
                 case 1:
-                    caption = "Предупрездение!";//"Attention!";
+                    caption = "Предупреждение!";//"Attention!";
                     break;
                 case 2:
                     caption = "Вопрос";//"Question";

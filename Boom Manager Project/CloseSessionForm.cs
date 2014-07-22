@@ -37,6 +37,9 @@ namespace Boom_Manager_Project
         private void bClientHasGone_Click(object sender, EventArgs e)
         {
             DateTime currentTime = DateTime.Now;
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("В форме \"Закрыть\" была нажата кнопка \"Клиент ушел раньше времени\" ",
+                    Options.FileTypeActionsLogs);
             CloseSessionController.InstanceCloseSessionController()
                 .CloseClientBeforeTimeOut(_sessionToClose, _clientsPerSession, currentTime, "Клиент ушел до окончания времени. ");
             Close();
@@ -52,11 +55,20 @@ namespace Boom_Manager_Project
 
         private void bSubmitAndClose_Click(object sender, EventArgs e)
         {
-            if (rtbComments.Text.Length > 5)
+            if (rtbComments.Text.Length > 5 || rbCheckConsole.Checked)
             {
                 DateTime currentTime = DateTime.Now;
-                CloseSessionController.InstanceCloseSessionController()
-                    .CloseClientBeforeTimeOut(_sessionToClose, _clientsPerSession, currentTime, rtbComments.Text);
+                if (rbCheckConsole.Checked)
+                {
+                    CloseSessionController.InstanceCloseSessionController()
+                        .CloseClientBeforeTimeOut(_sessionToClose, _clientsPerSession, currentTime, @"Проверка");
+                }
+                else
+                {
+                    CloseSessionController.InstanceCloseSessionController()
+                        .CloseClientBeforeTimeOut(_sessionToClose, _clientsPerSession, currentTime, rtbComments.Text);
+                }
+
                 Close();
             }
             else
@@ -84,6 +96,27 @@ namespace Boom_Manager_Project
         private void CloseSessionForm_MouseUp(object sender, MouseEventArgs e)
         {
             _old = null;
+        }
+
+        private void rbProblemHappened_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbProblemHappened.Checked)
+            {
+                rbCheckConsole.Checked = false;
+                rtbComments.Enabled = true;
+                rtbComments.ReadOnly = false;
+            }
+        }
+
+        private void rbCheckConsole_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbCheckConsole.Checked)
+            {
+                rbProblemHappened.Checked = false;
+
+                rtbComments.Enabled = false;
+                rtbComments.ReadOnly = true;
+            }
         }
     }
 }

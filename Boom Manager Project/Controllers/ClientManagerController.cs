@@ -30,6 +30,27 @@ namespace Boom_Manager_Project.Controllers
             return DataBaseClass.Instancedb().GetClientInfoById(clientId);
         }
 
+        private IEnumerable<steps_of_discount_upgrading> GetAllDiscountSteps()
+        {
+            return DataBaseClass.Instancedb().GetAllDiscountSteps();
+        }
+
+        public double GetPriceForDiscount(int discount)
+        {
+            var allDiscounts = GetAllDiscountSteps();
+            if (allDiscounts != null)
+            {
+                return (from step in allDiscounts where Math.Abs(discount - (int)step.discount) == 0 select step.required_played_sum).FirstOrDefault();
+            }
+            return 0;
+        }
+
+        public List<double> GetListOfAvailableDiscounts()
+        {
+            var allDiscounts = DataBaseClass.Instancedb().GetAllDiscountSteps();
+            return allDiscounts.Select(step => step.discount).ToList();
+        }
+
         public account_savings_t GetClientSavings(string clientId)
         {
             return DataBaseClass.Instancedb().GetClientSavingsById(clientId);

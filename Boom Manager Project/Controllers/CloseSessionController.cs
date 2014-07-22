@@ -259,7 +259,7 @@ namespace Boom_Manager_Project.Controllers
         }
         public int ExpandForProblemReportOrMinimize(int height)
         {
-            height = height <= 250 ? 450 : 250;
+            height = height <= 250 ? 512 : 250;
             return height;
         }
     }

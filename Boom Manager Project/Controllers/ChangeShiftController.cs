@@ -45,11 +45,11 @@ namespace Boom_Manager_Project.Controllers
             return "Неизвестное предупреждение! Обратитесь к разработчику!";
         }
 
-        public bool PasswordChecking(string login, string password)
+        public bool PasswordChecking(string login, string password,string prevAdminLogin)
         {
             if (CheckPassword(login, password))
             {
-                CreateNewShift(login);
+                CreateNewShift(login, prevAdminLogin);
                 return true;
             }
             MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(10));
@@ -69,9 +69,9 @@ namespace Boom_Manager_Project.Controllers
             return false;
         }
 
-        private void CreateNewShift(string login)
+        private void CreateNewShift(string login,string prevAdminName)
         {
-
+            BarRevisionController.BarRevisionControllerInstance().InsertOrUpdateAllItemsInBar();
             var adminInfo = DataBaseClass.Instancedb().GetUserInfoByLogin(login);
 
             var lastOpenedSession = DataBaseClass.Instancedb().GetOpenedGlobalSession();
@@ -89,6 +89,7 @@ namespace Boom_Manager_Project.Controllers
             {
                 DataBaseClass.Instancedb()
                     .AddNewGlobalSession(adminInfo.person_id, operatorInfo.person_id, DateTime.Now);
+                TextFileWriter.TextFileWriterInstance().RecordLoginTime(adminInfo.name, prevAdminName,Options.StaffTypeAdmnistrator);
             }
             else if (adminInfo != null)
             {
@@ -108,6 +109,7 @@ namespace Boom_Manager_Project.Controllers
                 int dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
                 if (cashFromLastDailyId != null)
                     DataBaseClass.Instancedb().AddMoneyToCash((double) cashFromLastDailyId, dailyId);
+
             }
 //                MessageBox.Show(WarningMessage("CloseOldSession"),
 //                    "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);

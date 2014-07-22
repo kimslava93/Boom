@@ -16,8 +16,6 @@ namespace Boom_Manager_Project.Controllers
         {
             var allItems = DataBaseClass.Instancedb().GetAllItems();
             var dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
-            
-
 
             foreach (AllItemsMyClass item in allItems)
             {

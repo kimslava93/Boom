@@ -111,7 +111,7 @@ namespace Boom_Manager_Project.Controllers
                 moneyFromPrevShift = moneyFromPrevShift == null ? 0 : Math.Ceiling((double) moneyFromPrevShift);
 
                 doc.InsertParagraph("Деньги с игры = " + Math.Ceiling(playedSum) + " сом");
-                doc.InsertParagraph("Деньги с бара " + GetAllMoneyFromBarItems() + " сом");
+                doc.InsertParagraph("Деньги с бара " + GetAllMoneyFromBarItems(dailyId) + " сом");
                 doc.InsertParagraph("Остаток с прошлой смены " + moneyFromPrevShift + " сом");
                 doc.InsertParagraph("Скидки = " + allDiscounts + " сом");
                 doc.InsertParagraph("Снято = " + withdrawnMoney + " сом");
@@ -142,17 +142,19 @@ namespace Boom_Manager_Project.Controllers
 
                 accountingTable.Rows[1].Cells[0].Paragraphs[0].InsertText(gs.start_session.Day + " " + gs.start_session.ToString("MMM"));
                 accountingTable.Rows[1].Cells[1].Paragraphs[0].InsertText(gs.administrator_id + " и " + gs.operator_id);
-                accountingTable.Rows[1].Cells[2].Paragraphs[0].InsertText((Math.Ceiling(playedSum) + GetAllMoneyFromBarItems() + moneyFromPrevShift).ToString());
+                accountingTable.Rows[1].Cells[2].Paragraphs[0].InsertText((Math.Ceiling(playedSum) + GetAllMoneyFromBarItems(dailyId) + moneyFromPrevShift).ToString());
                 accountingTable.Rows[1].Cells[3].Paragraphs[0].InsertText(withdrawnMoney + "");
                 accountingTable.Rows[1].Cells[4].Paragraphs[0].InsertText(expensesSum + "");
                 accountingTable.Rows[1].Cells[5].Paragraphs[0].InsertText(Math.Ceiling(currentCash).ToString());
                 accountingTable.Rows[1].Cells[6].Paragraphs[0].InsertText("-%");
                 accountingTable.Rows[1].Cells[7].Paragraphs[0].InsertText("+%");
                 accountingTable.Rows[1].Cells[8].Paragraphs[0].InsertText("Комментарии");
+                accountingTable.Rows[1].Cells[8].Paragraphs[0].InsertText("Комментарии");
 
             }
 
             PrintExpenses(expenses, doc);
+            PrintSoldBarRevision(DataBaseClass.Instancedb().GetListOfSoldItems(dailyId), doc);
             PrintWithdrownMoney(allWithdrownMoney, doc);
             try
             {
@@ -206,7 +208,20 @@ namespace Boom_Manager_Project.Controllers
                 doc.InsertParagraph(w.transaction_time.ToString("HH:mm") + ":     " + w.manager + "       -      " + w.cash_amount + " сом");
             }
         }
-
+        private void PrintSoldBarRevision(IEnumerable<SoldItemMyClass> allSoldItems, DocX doc)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                doc.InsertParagraph();
+            }
+            doc.InsertParagraph("Таблица проданных товаров:");
+            foreach (var si in allSoldItems)
+            {
+                double price = DataBaseClass.Instancedb().GetItemDataById(si.Наименование).Цена;
+                doc.InsertParagraph(si.Время + ":     " + si.Наименование + "          " + price
+                                    + "    " + si.Количество  +"        " + (price*si.Количество) + " сом");
+            }
+        }
         private void PrintExpenses(IEnumerable<expenses_t> allExpenses, DocX doc)
         {
             for (int i = 0; i < 5; i++)
@@ -220,9 +235,9 @@ namespace Boom_Manager_Project.Controllers
             }
         }
 
-        private double GetAllMoneyFromBarItems()
+        private double GetAllMoneyFromBarItems(int dailyId)
         {
-            int dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
+//            int dailyId = DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id;
             var allSolItems = DataBaseClass.Instancedb().GetListOfSoldItems(dailyId);
             double sum = (from item in allSolItems let itemData = DataBaseClass.Instancedb().GetItemDataById(item.Наименование) select itemData.Цена*item.Количество).Sum();
             return sum;

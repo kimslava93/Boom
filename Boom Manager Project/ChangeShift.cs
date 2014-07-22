@@ -56,9 +56,11 @@ namespace Boom_Manager_Project
             if (FieldsAreFulFilled())
             {
                 if (ChangeShiftController.ChangeShiftControllerInstance()
-                    .PasswordChecking(tbInAdminLogin.Text, tbInAdminPassword.Text))
+                    .PasswordChecking(tbInAdminLogin.Text, tbInAdminPassword.Text,tbOutAdminName.Text))
                 {
                     MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetMessage(0));
+                    var anv = new CashAccept();
+                    anv.ShowDialog();
                     _formCanBeClosed = true;
 
                     Close();

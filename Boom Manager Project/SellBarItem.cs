@@ -36,8 +36,11 @@ namespace Boom_Manager_Project
                     .SellItem((string) dgvAllItems.CurrentRow.Cells[1].Value, (int) numUpDNumber.Value,
                         double.Parse(tbSum.Text.ToString(CultureInfo.InvariantCulture)));
                 MessageBox.Show(@"Товар " + dgvAllItems.CurrentRow.Cells[1].Value + @" в количестве " + numUpDNumber.Value + @"шт. был успешно занесен в список проданных товаров!");
+                TextFileWriter.TextFileWriterInstance()
+                    .AddSomeDataToLogReport(
+                        "В форме \"Продать товар\" была нажата кнопка Продать с введеными данными: Товар " + dgvAllItems.CurrentRow.Cells[1].Value + @" в количестве " + numUpDNumber.Value + @"шт. был успешно занесен в список проданных товаров!",
+                        Options.FileTypeActionsLogs);
                 SetDefaultValues();
-
             }
             else
             {

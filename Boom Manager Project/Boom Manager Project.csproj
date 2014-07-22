@@ -78,6 +78,19 @@
     <Compile Include="AddNewClientWithDiscountCard.Designer.cs">
       <DependentUpon>AddNewClientWithDiscountCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllClients.Designer.cs">
+      <DependentUpon>AllClients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CashAccept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CashAccept.Designer.cs">
+      <DependentUpon>CashAccept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AllClientsController.cs" />
     <Compile Include="BarRevision.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +141,19 @@
     <Compile Include="AddMoneyOnDiscountCard.Designer.cs">
       <DependentUpon>AddMoneyOnDiscountCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckoutPriceAndTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckoutPriceAndTime.Designer.cs">
+      <DependentUpon>CheckoutPriceAndTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseClasses\CheckoutPriceAndTimeController.cs" />
+    <Compile Include="LastSessions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LastSessions.Designer.cs">
+      <DependentUpon>LastSessions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\LightCutsOffController.cs" />
     <Compile Include="Controllers\SellBarItemController.cs" />
     <Compile Include="CreateNewConsole.cs">
@@ -163,6 +189,8 @@
     </Compile>
     <Compile Include="Controllers\ChangePlaystationController.cs" />
     <Compile Include="MyClasses\BarRevisionMyClass.cs" />
+    <Compile Include="MyClasses\ClientMyClass.cs" />
+    <Compile Include="MyClasses\DaySessionsForLastSessions.cs" />
     <Compile Include="MyClasses\ListOfItemsWithPrice.cs" />
     <Compile Include="MyClasses\SoldItemMyClass.cs" />
     <Compile Include="SellBarItem.cs">
@@ -320,6 +348,7 @@
     <Compile Include="SoldItems.Designer.cs">
       <DependentUpon>SoldItems.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextFileWriter.cs" />
     <Compile Include="TimeZoneManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -350,12 +379,18 @@
       <DependentUpon>AddNewStaffUser.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="AllClients.resx">
+      <DependentUpon>AllClients.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BarRevision.resx">
       <DependentUpon>BarRevision.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Boom Gamebar.resx">
       <DependentUpon>Boom Gamebar.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CashAccept.resx">
+      <DependentUpon>CashAccept.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChangeNumberOfItem.resx">
       <DependentUpon>ChangeNumberOfItem.cs</DependentUpon>
@@ -375,6 +410,12 @@
     <EmbeddedResource Include="ClientManager.resx">
       <DependentUpon>ClientManager.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckoutPriceAndTime.resx">
+      <DependentUpon>CheckoutPriceAndTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LastSessions.resx">
+      <DependentUpon>LastSessions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateNewConsole.resx">
       <DependentUpon>CreateNewConsole.cs</DependentUpon>

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
@@ -10,7 +11,10 @@ namespace Boom_Manager_Project
     public partial class ExtendSessionTime : Form
     {
         private int _repeatCallOfMethodCounter;
+        private bool toChange = false;
         private Point? _old;
+        private int buttonPressCounter = 1;
+
         private readonly DaySessionClass _sessionToExtend;
         public ExtendSessionTime(DaySessionClass sessionToExtend)
         {
@@ -23,6 +27,12 @@ namespace Boom_Manager_Project
             SetPositionOfGb();
             FulFillTbs();
             CheckDiscount();
+            TextFileWriter.TextFileWriterInstance()
+                           .AddSomeDataToLogReport(
+                               "В форме \"Продлить сессию\" были введены данные в поле Оплачено = " +
+                               numUpDMoneyExtend.Value + " сом. Оплаченное время = " + numUpDHoursExtend.Value +":" +numUpDMinutesExtend.Value + ", на приставку " +
+                               _sessionToExtend.Приставка + ", с Карточкой " + tbDiscountCards.Text,
+                               Options.FileTypeActionsLogs);
         }
 //        private void CheckOnNightTime
         private void SetPositionOfGb()
@@ -76,31 +86,62 @@ namespace Boom_Manager_Project
 
         private void bCancel_Click(object sender, EventArgs e)
         {
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport(
+                    "В форме \"Продлить сессию\" была нажата кнопка ОТМЕНА ", Options.FileTypeActionsLogs);
             Close();
         }
 
         private void bApply_Click(object sender, EventArgs e)
         {
+            if (buttonPressCounter-- <= 0)
+            {
 //            if (tbEndTimeWas.Text != tbEndTimeWill.Text)
+                if (tbDiscountCards.Text == @"Usual Client" /*Options.OptionsInstance().UsualClient*/)
+                {
+                    ExtendSessionTimeController.ExtendSessionTimeControllerInstance()
+                        .ExtendTimeForSession(_sessionToExtend, (int) numUpDHoursExtend.Value,
+                            (int) numUpDMinutesExtend.Value, (double) numUpDMoneyExtend.Value);
+                }
+                else if (tbDiscountCards.Text.Length > 2 && AreBonusLablesEmpty(lPlusTime.Text, lPlusMoney.Text))
+                {
+                    TimeSpan paidTime =
+                        TimeSpan.FromMinutes((double) numUpDHoursExtend.Value*60 + (double) numUpDMinutesExtend.Value)
+                            .Add(StringToTime(lPlusTime.Text));
+                    double paidMoney = (double) numUpDMoneyExtend.Value + StringToDouble(lPlusMoney.Text);
+                    DataBaseClass.Instancedb()
+                        .AddToSessionDiscountSum(_sessionToExtend.Сессия, StringToDouble(lPlusMoney.Text));//Add to session discount sum in order to account more precisely during accepting new shift
+                    ExtendSessionTimeController.ExtendSessionTimeControllerInstance()
+                        .ExtendTimeForSession(_sessionToExtend, paidTime.Hours,
+                            paidTime.Minutes, paidMoney);
 
-            if(tbDiscountCards.Text == @"Usual Client"/*Options.OptionsInstance().UsualClient*/)
-            {
-               ExtendSessionTimeController.ExtendSessionTimeControllerInstance()
-                    .ExtendTimeForSession(_sessionToExtend, (int) numUpDHoursExtend.Value,
-                        (int) numUpDMinutesExtend.Value, (double) numUpDMoneyExtend.Value);
+                    TextFileWriter.TextFileWriterInstance()
+                        .AddSomeDataToLogReport(
+                            "В форме \"Продлить сессию\" была нажата кнопка \"Продлить\" с введеными данными Время на продление = " +
+                            numUpDHoursExtend.Value + ":" + numUpDMinutesExtend.Value + "Сумма на продление = " +
+                            numUpDMoneyExtend.Value +",на приставку " + _sessionToExtend.Приставка, Options.FileTypeActionsLogs);
+                }
+                Close();
             }
-            else if (tbDiscountCards.Text.Length > 2 && AreBonusLablesEmpty(lPlusTime.Text, lPlusMoney.Text))
+            else
             {
-                TimeSpan paidTime =
-                   TimeSpan.FromMinutes((double)numUpDHoursExtend.Value * 60 + (double)numUpDMinutesExtend.Value).Add(StringToTime(lPlusTime.Text));
-                double paidMoney = (double)numUpDMoneyExtend.Value + StringToDouble(lPlusMoney.Text);
-                ExtendSessionTimeController.ExtendSessionTimeControllerInstance()
-                    .ExtendTimeForSession(_sessionToExtend, paidTime.Hours,
-                        paidTime.Minutes, paidMoney);
+                ValidateFields();
             }
-            Close();
-
         }
+
+        private void ValidateFields()
+        {
+            var time = new TimeSpan((int)numUpDHoursExtend.Value/24, (int)numUpDHoursExtend.Value%24, (int)numUpDMinutesExtend.Value, 0);
+            var paidTime =
+                AddNewSessionController.AddNewSessionControllerInstance()
+                    .UpdateTimeLeft(numUpDMoneyExtend.Value, _sessionToExtend.Приставка, 0, 18900);
+            if (time != paidTime)
+            {
+                numUpDHoursExtend.Value = paidTime.Hours;
+                numUpDMinutesExtend.Value = paidTime.Minutes;
+            }
+        }
+
         private bool AreBonusLablesEmpty(string lTime, string lMoney)
         {
             if (string.IsNullOrEmpty(lTime) || string.IsNullOrEmpty(lMoney)) return false;
@@ -156,10 +197,13 @@ namespace Boom_Manager_Project
         }
         private void numUpDHoursExtend_ValueChanged(object sender, EventArgs e)
         {
+            buttonPressCounter = 1;
             numUpDMinutesExtend.Minimum = numUpDHoursExtend.Value == 0 ? 30 : 0;
-            if (_repeatCallOfMethodCounter <= 0)
+//            if (_repeatCallOfMethodCounter <= 0)
+            if (toChange)
             {
-                _repeatCallOfMethodCounter++;
+                toChange = false;
+//                _repeatCallOfMethodCounter++;
                 decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice(Options.OptionsInstance().UsualClient, _sessionToExtend.Приставка,
                     numUpDHoursExtend.Value,
                     numUpDMinutesExtend.Value, DateTime.Now);
@@ -168,24 +212,39 @@ namespace Boom_Manager_Project
                 else if (t < numUpDMoneyExtend.Minimum)
                     numUpDMoneyExtend.Value = numUpDMoneyExtend.Minimum;
                 else
+                {
                     numUpDMoneyExtend.Value = t;
+                    TextFileWriter.TextFileWriterInstance()
+                        .AddSomeDataToLogReport(
+                            "В форме \"Продлить сессию\" были введены данные в поле время на продление = " +
+                            numUpDHoursExtend.Value + ":" + numUpDMinutesExtend.Value, Options.FileTypeActionsLogs);
+                    TextFileWriter.TextFileWriterInstance()
+                        .AddSomeDataToLogReport(
+                            "В форме \"Продлить сессию\" были введены данные в поле Сумма на продление = " + t,
+                            Options.FileTypeActionsLogs);
+                }
+                toChange = true;
             }
             UpdateEndTime();
             CheckDiscount();
-            _repeatCallOfMethodCounter = 0;
+           
+//            _repeatCallOfMethodCounter = 0;
         }
 
         private void numUpDMinutesExtend_ValueChanged(object sender, EventArgs e)
         {
+            buttonPressCounter = 1;
             numUpDMinutesExtend.Minimum = numUpDHoursExtend.Value == 0 ? 30 : 0;
-            if (_repeatCallOfMethodCounter <= 0)
+//            if (_repeatCallOfMethodCounter <= 0)
+            if (toChange)
             {
                 if (numUpDMinutesExtend.Value > 59)
                 {
                     numUpDMinutesExtend.Value = 0;
                     numUpDHoursExtend.Value++;
                 }
-                _repeatCallOfMethodCounter++;
+                toChange = false;
+//                _repeatCallOfMethodCounter++;
                 decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice(Options.OptionsInstance().UsualClient, _sessionToExtend.Приставка,
                     numUpDHoursExtend.Value, numUpDMinutesExtend.Value, DateTime.Now);
                 if (t < numUpDMoneyExtend.Minimum)
@@ -199,15 +258,25 @@ namespace Boom_Manager_Project
                 else
                 {
                     numUpDMoneyExtend.Value = t;
+                    TextFileWriter.TextFileWriterInstance()
+                        .AddSomeDataToLogReport(
+                            "В форме \"Продлить сессию\" были введены данные в поле время на продление = " +
+                            numUpDHoursExtend.Value + ":" + numUpDMinutesExtend.Value, Options.FileTypeActionsLogs);
+                    TextFileWriter.TextFileWriterInstance()
+                        .AddSomeDataToLogReport(
+                            "В форме \"Продлить сессию\" были введены данные в поле Сумма на продление = " + t,
+                            Options.FileTypeActionsLogs);
                 }
             }
             UpdateEndTime();
             CheckDiscount();
-            _repeatCallOfMethodCounter = 0;
+            toChange = true;
+//            _repeatCallOfMethodCounter = 0;
         }
 
         private void numUpDMoneyExtend_ValueChanged(object sender, EventArgs e)
         {
+            buttonPressCounter = 1;
             if (numUpDMoneyExtend.Value > numUpDMoneyExtend.Minimum)
             {
                 UsualClientPriceChanged();
@@ -220,9 +289,11 @@ namespace Boom_Manager_Project
 
         private void UsualClientPriceChanged()
         {
-            if (_repeatCallOfMethodCounter <= 0)
+//            if (_repeatCallOfMethodCounter <= 0)
+            if (toChange)
             {
-                _repeatCallOfMethodCounter++;
+                toChange = false;
+//                _repeatCallOfMethodCounter++;
                 TimeSpan t =
                     AddNewSessionController.AddNewSessionControllerInstance()
                         .UpdateTimeLeft(numUpDMoneyExtend.Value, _sessionToExtend.Приставка,
@@ -249,9 +320,18 @@ namespace Boom_Manager_Project
 //                    bApply.Enabled = true;
                     numUpDHoursExtend.Value = t.Hours + t.Days * 24;
                     numUpDMinutesExtend.Value = t.Minutes;
+                    TextFileWriter.TextFileWriterInstance()
+                        .AddSomeDataToLogReport(
+                            "В форме \"Продлить сессию\" были введены данные в поле время на продление = " +
+                            numUpDHoursExtend.Value + ":" + numUpDMinutesExtend.Value, Options.FileTypeActionsLogs);
+                    TextFileWriter.TextFileWriterInstance()
+                        .AddSomeDataToLogReport(
+                            "В форме \"Продлить сессию\" были введены данные в поле Сумма на продление = " + numUpDMoneyExtend.Value,
+                            Options.FileTypeActionsLogs);
                 }
             }
-            _repeatCallOfMethodCounter = 0;
+            toChange = true;
+//            _repeatCallOfMethodCounter = 0;
         }
 
         private void UpdateEndTime()

@@ -1,4 +1,4 @@
-﻿namespace Boom_Manager_Project.Controllers
+﻿namespace Boom_Manager_Project
 {
     partial class ClientManager
     {
@@ -34,8 +34,8 @@
             this.numUpdBYear = new System.Windows.Forms.NumericUpDown();
             this.numUpdBMonth = new System.Windows.Forms.NumericUpDown();
             this.numUpdBDay = new System.Windows.Forms.NumericUpDown();
+            this.tbClientId = new System.Windows.Forms.TextBox();
             this.numUpDSavings = new System.Windows.Forms.NumericUpDown();
-            this.numUpDDiscount = new System.Windows.Forms.NumericUpDown();
             this.tbPlayedSum = new System.Windows.Forms.TextBox();
             this.tbActivationDate = new System.Windows.Forms.TextBox();
             this.tbEmail = new System.Windows.Forms.TextBox();
@@ -51,13 +51,12 @@
             this.lEmail = new System.Windows.Forms.Label();
             this.lBirthday = new System.Windows.Forms.Label();
             this.lName = new System.Windows.Forms.Label();
-            this.tbClientId = new System.Windows.Forms.TextBox();
+            this.cbAllDiscounts = new System.Windows.Forms.ComboBox();
             this.gbClientInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpdBYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpdBMonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpdBDay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDSavings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDDiscount)).BeginInit();
             this.SuspendLayout();
             // 
             // bApply
@@ -100,12 +99,12 @@
             // 
             // gbClientInfo
             // 
+            this.gbClientInfo.Controls.Add(this.cbAllDiscounts);
             this.gbClientInfo.Controls.Add(this.numUpdBYear);
             this.gbClientInfo.Controls.Add(this.numUpdBMonth);
             this.gbClientInfo.Controls.Add(this.numUpdBDay);
             this.gbClientInfo.Controls.Add(this.tbClientId);
             this.gbClientInfo.Controls.Add(this.numUpDSavings);
-            this.gbClientInfo.Controls.Add(this.numUpDDiscount);
             this.gbClientInfo.Controls.Add(this.tbPlayedSum);
             this.gbClientInfo.Controls.Add(this.tbActivationDate);
             this.gbClientInfo.Controls.Add(this.tbEmail);
@@ -125,7 +124,7 @@
             this.gbClientInfo.ForeColor = System.Drawing.Color.White;
             this.gbClientInfo.Location = new System.Drawing.Point(0, 0);
             this.gbClientInfo.Name = "gbClientInfo";
-            this.gbClientInfo.Size = new System.Drawing.Size(443, 362);
+            this.gbClientInfo.Size = new System.Drawing.Size(486, 362);
             this.gbClientInfo.TabIndex = 28;
             this.gbClientInfo.TabStop = false;
             this.gbClientInfo.Text = "Информация о клиенте";
@@ -205,6 +204,17 @@
             0,
             0});
             // 
+            // tbClientId
+            // 
+            this.tbClientId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbClientId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbClientId.ForeColor = System.Drawing.Color.White;
+            this.tbClientId.Location = new System.Drawing.Point(510, 39);
+            this.tbClientId.MaxLength = 15;
+            this.tbClientId.Name = "tbClientId";
+            this.tbClientId.Size = new System.Drawing.Size(160, 29);
+            this.tbClientId.TabIndex = 0;
+            // 
             // numUpDSavings
             // 
             this.numUpDSavings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -221,26 +231,6 @@
             this.numUpDSavings.ReadOnly = true;
             this.numUpDSavings.Size = new System.Drawing.Size(160, 29);
             this.numUpDSavings.TabIndex = 999;
-            // 
-            // numUpDDiscount
-            // 
-            this.numUpDDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.numUpDDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numUpDDiscount.ForeColor = System.Drawing.Color.White;
-            this.numUpDDiscount.Location = new System.Drawing.Point(169, 248);
-            this.numUpDDiscount.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numUpDDiscount.Name = "numUpDDiscount";
-            this.numUpDDiscount.Size = new System.Drawing.Size(160, 29);
-            this.numUpDDiscount.TabIndex = 999;
-            this.numUpDDiscount.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
             // 
             // tbPlayedSum
             // 
@@ -394,23 +384,24 @@
             this.lName.TabIndex = 29;
             this.lName.Text = "Имя";
             // 
-            // tbClientId
+            // cbAllDiscounts
             // 
-            this.tbClientId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.tbClientId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbClientId.ForeColor = System.Drawing.Color.White;
-            this.tbClientId.Location = new System.Drawing.Point(510, 39);
-            this.tbClientId.MaxLength = 15;
-            this.tbClientId.Name = "tbClientId";
-            this.tbClientId.Size = new System.Drawing.Size(160, 29);
-            this.tbClientId.TabIndex = 0;
+            this.cbAllDiscounts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.cbAllDiscounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbAllDiscounts.ForeColor = System.Drawing.Color.White;
+            this.cbAllDiscounts.FormattingEnabled = true;
+            this.cbAllDiscounts.Location = new System.Drawing.Point(169, 248);
+            this.cbAllDiscounts.Name = "cbAllDiscounts";
+            this.cbAllDiscounts.Size = new System.Drawing.Size(160, 29);
+            this.cbAllDiscounts.TabIndex = 1000;
+            this.cbAllDiscounts.SelectedIndexChanged += new System.EventHandler(this.cbAllClients_SelectedIndexChanged);
             // 
             // ClientManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(443, 425);
+            this.ClientSize = new System.Drawing.Size(486, 425);
             this.ControlBox = false;
             this.Controls.Add(this.gbClientInfo);
             this.Controls.Add(this.bCancel);
@@ -431,7 +422,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpdBMonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpdBDay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDSavings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDDiscount)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -441,7 +431,6 @@
         private System.Windows.Forms.Button bApply;
         private System.Windows.Forms.Button bCancel;
         private System.Windows.Forms.GroupBox gbClientInfo;
-        private System.Windows.Forms.NumericUpDown numUpDDiscount;
         private System.Windows.Forms.TextBox tbPlayedSum;
         private System.Windows.Forms.TextBox tbActivationDate;
         private System.Windows.Forms.TextBox tbEmail;
@@ -462,6 +451,7 @@
         private System.Windows.Forms.NumericUpDown numUpdBMonth;
         private System.Windows.Forms.NumericUpDown numUpdBDay;
         private System.Windows.Forms.TextBox tbClientId;
+        private System.Windows.Forms.ComboBox cbAllDiscounts;
 
     }
 }

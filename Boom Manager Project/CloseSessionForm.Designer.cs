@@ -35,6 +35,8 @@
             this.lProbleDescription = new System.Windows.Forms.Label();
             this.bSubmitAndClose = new System.Windows.Forms.Button();
             this.rtbComments = new System.Windows.Forms.RichTextBox();
+            this.rbCheckConsole = new System.Windows.Forms.RadioButton();
+            this.rbProblemHappened = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // bClientHasGone
@@ -84,9 +86,9 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(314, 141);
+            this.bCancel.Location = new System.Drawing.Point(314, 134);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(138, 41);
+            this.bCancel.Size = new System.Drawing.Size(138, 54);
             this.bCancel.TabIndex = 2;
             this.bCancel.Text = "Отмена";
             this.bCancel.UseVisualStyleBackColor = false;
@@ -107,7 +109,7 @@
             this.lProbleDescription.AutoSize = true;
             this.lProbleDescription.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lProbleDescription.ForeColor = System.Drawing.Color.White;
-            this.lProbleDescription.Location = new System.Drawing.Point(132, 265);
+            this.lProbleDescription.Location = new System.Drawing.Point(131, 246);
             this.lProbleDescription.Name = "lProbleDescription";
             this.lProbleDescription.Size = new System.Drawing.Size(217, 20);
             this.lProbleDescription.TabIndex = 8;
@@ -122,7 +124,7 @@
             this.bSubmitAndClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bSubmitAndClose.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bSubmitAndClose.ForeColor = System.Drawing.Color.White;
-            this.bSubmitAndClose.Location = new System.Drawing.Point(136, 405);
+            this.bSubmitAndClose.Location = new System.Drawing.Point(135, 466);
             this.bSubmitAndClose.Name = "bSubmitAndClose";
             this.bSubmitAndClose.Size = new System.Drawing.Size(213, 34);
             this.bSubmitAndClose.TabIndex = 7;
@@ -136,11 +138,37 @@
             this.rtbComments.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbComments.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.rtbComments.ForeColor = System.Drawing.Color.White;
-            this.rtbComments.Location = new System.Drawing.Point(12, 288);
+            this.rtbComments.Location = new System.Drawing.Point(11, 349);
             this.rtbComments.Name = "rtbComments";
             this.rtbComments.Size = new System.Drawing.Size(440, 111);
             this.rtbComments.TabIndex = 6;
             this.rtbComments.Text = "";
+            // 
+            // rbCheckConsole
+            // 
+            this.rbCheckConsole.AutoSize = true;
+            this.rbCheckConsole.ForeColor = System.Drawing.Color.White;
+            this.rbCheckConsole.Location = new System.Drawing.Point(135, 287);
+            this.rbCheckConsole.Name = "rbCheckConsole";
+            this.rbCheckConsole.Size = new System.Drawing.Size(97, 25);
+            this.rbCheckConsole.TabIndex = 9;
+            this.rbCheckConsole.Text = "Проверка";
+            this.rbCheckConsole.UseVisualStyleBackColor = true;
+            this.rbCheckConsole.CheckedChanged += new System.EventHandler(this.rbCheckConsole_CheckedChanged);
+            // 
+            // rbProblemHappened
+            // 
+            this.rbProblemHappened.AutoSize = true;
+            this.rbProblemHappened.Checked = true;
+            this.rbProblemHappened.ForeColor = System.Drawing.Color.White;
+            this.rbProblemHappened.Location = new System.Drawing.Point(12, 287);
+            this.rbProblemHappened.Name = "rbProblemHappened";
+            this.rbProblemHappened.Size = new System.Drawing.Size(100, 25);
+            this.rbProblemHappened.TabIndex = 9;
+            this.rbProblemHappened.TabStop = true;
+            this.rbProblemHappened.Text = "Проблема";
+            this.rbProblemHappened.UseVisualStyleBackColor = true;
+            this.rbProblemHappened.CheckedChanged += new System.EventHandler(this.rbProblemHappened_CheckedChanged);
             // 
             // CloseSessionForm
             // 
@@ -149,8 +177,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.CancelButton = this.bCancel;
-            this.ClientSize = new System.Drawing.Size(464, 245);
+            this.ClientSize = new System.Drawing.Size(464, 250);
             this.ControlBox = false;
+            this.Controls.Add(this.rbProblemHappened);
+            this.Controls.Add(this.rbCheckConsole);
             this.Controls.Add(this.lProbleDescription);
             this.Controls.Add(this.bSubmitAndClose);
             this.Controls.Add(this.rtbComments);
@@ -187,5 +217,7 @@
         private System.Windows.Forms.Label lProbleDescription;
         private System.Windows.Forms.Button bSubmitAndClose;
         private System.Windows.Forms.RichTextBox rtbComments;
+        private System.Windows.Forms.RadioButton rbCheckConsole;
+        private System.Windows.Forms.RadioButton rbProblemHappened;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.Models;

@@ -63,6 +63,7 @@
             this.cbPlaystationId.Name = "cbPlaystationId";
             this.cbPlaystationId.Size = new System.Drawing.Size(95, 29);
             this.cbPlaystationId.TabIndex = 21;
+            this.cbPlaystationId.SelectedIndexChanged += new System.EventHandler(this.cbPlaystationId_SelectedIndexChanged);
             // 
             // lNewPlaystationId
             // 

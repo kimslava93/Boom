@@ -34,7 +34,10 @@ namespace Boom_Manager_Project
 
         private void ChangeNumberOfItem_Load(object sender, EventArgs e)
         {
-            numUpDNumber.Value = _numberwas;
+            if (_numberwas < 0)
+                numUpDNumber.Value = 0;
+            else
+                numUpDNumber.Value = _numberwas;
         }
 
         private void bClose_Click(object sender, EventArgs e)
@@ -44,7 +47,7 @@ namespace Boom_Manager_Project
 
         private void bApply_Click(object sender, EventArgs e)
         {
-            if (numUpDNumber.Value < numUpDNumber.Maximum && numUpDNumber.Value > numUpDNumber.Minimum)
+            if (numUpDNumber.Value <= numUpDNumber.Maximum && numUpDNumber.Value >= numUpDNumber.Minimum)
             {
                 DataBaseClass.Instancedb().ChangeItemNumber(_itemId, (int)numUpDNumber.Value);
                 Close();

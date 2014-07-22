@@ -34,6 +34,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BoomMainForm));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
+            this.bScreenshot = new System.Windows.Forms.Button();
             this.lOperator = new System.Windows.Forms.Label();
             this.lAdmin = new System.Windows.Forms.Label();
             this.bExpenses = new System.Windows.Forms.Button();
@@ -51,9 +53,10 @@
             this.lCurrentTime = new System.Windows.Forms.Label();
             this.dgvOpenedSessions = new System.Windows.Forms.DataGridView();
             this.gbManageGroup = new System.Windows.Forms.GroupBox();
+            this.bStaff = new System.Windows.Forms.Button();
+            this.bCEditlients = new System.Windows.Forms.Button();
             this.bItems = new System.Windows.Forms.Button();
             this.bDiscountSteps = new System.Windows.Forms.Button();
-            this.bClientManager = new System.Windows.Forms.Button();
             this.bWithdrawMoney = new System.Windows.Forms.Button();
             this.bExitProgram = new System.Windows.Forms.Button();
             this.bDevicesManager = new System.Windows.Forms.Button();
@@ -86,6 +89,8 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
+            this.splitContainer.Panel1.Controls.Add(this.button1);
+            this.splitContainer.Panel1.Controls.Add(this.bScreenshot);
             this.splitContainer.Panel1.Controls.Add(this.lOperator);
             this.splitContainer.Panel1.Controls.Add(this.lAdmin);
             this.splitContainer.Panel1.Controls.Add(this.bExpenses);
@@ -115,13 +120,56 @@
             this.splitContainer.SplitterWidth = 1;
             this.splitContainer.TabIndex = 3;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(1076, 7);
+            this.button1.Margin = new System.Windows.Forms.Padding(5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 44);
+            this.button1.TabIndex = 1008;
+            this.button1.Text = "ПОСЛЕДНИЕ СЕССИИ";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // bScreenshot
+            // 
+            this.bScreenshot.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bScreenshot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bScreenshot.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bScreenshot.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bScreenshot.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bScreenshot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bScreenshot.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bScreenshot.ForeColor = System.Drawing.Color.White;
+            this.bScreenshot.Location = new System.Drawing.Point(774, -8);
+            this.bScreenshot.Margin = new System.Windows.Forms.Padding(10);
+            this.bScreenshot.Name = "bScreenshot";
+            this.bScreenshot.Size = new System.Drawing.Size(80, 28);
+            this.bScreenshot.TabIndex = 1007;
+            this.bScreenshot.Text = "скриншот";
+            this.bScreenshot.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.bScreenshot.UseVisualStyleBackColor = false;
+            this.bScreenshot.Visible = false;
+            this.bScreenshot.Click += new System.EventHandler(this.bScreenshot_Click);
+            this.bScreenshot.MouseLeave += new System.EventHandler(this.bScreenshot_MouseLeave);
+            this.bScreenshot.MouseHover += new System.EventHandler(this.bScreenshot_MouseHover);
+            // 
             // lOperator
             // 
             this.lOperator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lOperator.AutoSize = true;
             this.lOperator.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lOperator.ForeColor = System.Drawing.Color.White;
-            this.lOperator.Location = new System.Drawing.Point(1309, 38);
+            this.lOperator.Location = new System.Drawing.Point(1375, 38);
             this.lOperator.Name = "lOperator";
             this.lOperator.Size = new System.Drawing.Size(81, 21);
             this.lOperator.TabIndex = 1006;
@@ -134,7 +182,7 @@
             this.lAdmin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lAdmin.AutoSize = true;
             this.lAdmin.ForeColor = System.Drawing.Color.White;
-            this.lAdmin.Location = new System.Drawing.Point(1309, 13);
+            this.lAdmin.Location = new System.Drawing.Point(1375, 13);
             this.lAdmin.Name = "lAdmin";
             this.lAdmin.Size = new System.Drawing.Size(123, 21);
             this.lAdmin.TabIndex = 1005;
@@ -152,7 +200,7 @@
             this.bExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bExpenses.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bExpenses.ForeColor = System.Drawing.Color.White;
-            this.bExpenses.Location = new System.Drawing.Point(1124, 61);
+            this.bExpenses.Location = new System.Drawing.Point(1190, 61);
             this.bExpenses.Margin = new System.Windows.Forms.Padding(5);
             this.bExpenses.Name = "bExpenses";
             this.bExpenses.Size = new System.Drawing.Size(83, 44);
@@ -172,7 +220,7 @@
             this.bLightCutOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bLightCutOff.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bLightCutOff.ForeColor = System.Drawing.Color.White;
-            this.bLightCutOff.Location = new System.Drawing.Point(1217, 61);
+            this.bLightCutOff.Location = new System.Drawing.Point(1283, 61);
             this.bLightCutOff.Margin = new System.Windows.Forms.Padding(5);
             this.bLightCutOff.Name = "bLightCutOff";
             this.bLightCutOff.Size = new System.Drawing.Size(83, 44);
@@ -192,7 +240,7 @@
             this.bBarRevision.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bBarRevision.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bBarRevision.ForeColor = System.Drawing.Color.White;
-            this.bBarRevision.Location = new System.Drawing.Point(1217, 7);
+            this.bBarRevision.Location = new System.Drawing.Point(1283, 7);
             this.bBarRevision.Margin = new System.Windows.Forms.Padding(5);
             this.bBarRevision.Name = "bBarRevision";
             this.bBarRevision.Size = new System.Drawing.Size(83, 44);
@@ -212,7 +260,7 @@
             this.bChangeShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bChangeShift.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bChangeShift.ForeColor = System.Drawing.Color.White;
-            this.bChangeShift.Location = new System.Drawing.Point(1124, 7);
+            this.bChangeShift.Location = new System.Drawing.Point(1190, 7);
             this.bChangeShift.Margin = new System.Windows.Forms.Padding(5);
             this.bChangeShift.Name = "bChangeShift";
             this.bChangeShift.Size = new System.Drawing.Size(83, 44);
@@ -254,7 +302,7 @@
             this.bSolItemsList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bSolItemsList.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bSolItemsList.ForeColor = System.Drawing.Color.White;
-            this.bSolItemsList.Location = new System.Drawing.Point(581, 39);
+            this.bSolItemsList.Location = new System.Drawing.Point(582, 39);
             this.bSolItemsList.Margin = new System.Windows.Forms.Padding(10);
             this.bSolItemsList.Name = "bSolItemsList";
             this.bSolItemsList.Size = new System.Drawing.Size(70, 48);
@@ -363,7 +411,7 @@
             this.lCurrentDate.AutoSize = true;
             this.lCurrentDate.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lCurrentDate.ForeColor = System.Drawing.Color.White;
-            this.lCurrentDate.Location = new System.Drawing.Point(729, 75);
+            this.lCurrentDate.Location = new System.Drawing.Point(730, 93);
             this.lCurrentDate.Name = "lCurrentDate";
             this.lCurrentDate.Size = new System.Drawing.Size(92, 30);
             this.lCurrentDate.TabIndex = 5;
@@ -375,12 +423,14 @@
             this.lCurrentTime.AutoSize = true;
             this.lCurrentTime.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lCurrentTime.ForeColor = System.Drawing.Color.White;
-            this.lCurrentTime.Location = new System.Drawing.Point(664, 0);
+            this.lCurrentTime.Location = new System.Drawing.Point(665, 18);
             this.lCurrentTime.Name = "lCurrentTime";
             this.lCurrentTime.Size = new System.Drawing.Size(291, 86);
             this.lCurrentTime.TabIndex = 4;
             this.lCurrentTime.Text = "CurTime";
             this.lCurrentTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lCurrentTime.MouseLeave += new System.EventHandler(this.lCurrentTime_MouseLeave);
+            this.lCurrentTime.MouseHover += new System.EventHandler(this.lCurrentTime_MouseHover);
             // 
             // dgvOpenedSessions
             // 
@@ -431,9 +481,10 @@
             // 
             // gbManageGroup
             // 
+            this.gbManageGroup.Controls.Add(this.bStaff);
+            this.gbManageGroup.Controls.Add(this.bCEditlients);
             this.gbManageGroup.Controls.Add(this.bItems);
             this.gbManageGroup.Controls.Add(this.bDiscountSteps);
-            this.gbManageGroup.Controls.Add(this.bClientManager);
             this.gbManageGroup.Controls.Add(this.bWithdrawMoney);
             this.gbManageGroup.Controls.Add(this.bExitProgram);
             this.gbManageGroup.Controls.Add(this.bDevicesManager);
@@ -449,6 +500,46 @@
             this.gbManageGroup.TabStop = false;
             this.gbManageGroup.Text = "MANAGE";
             // 
+            // bStaff
+            // 
+            this.bStaff.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bStaff.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bStaff.BackgroundImage")));
+            this.bStaff.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bStaff.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.bStaff.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bStaff.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bStaff.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bStaff.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bStaff.ForeColor = System.Drawing.Color.White;
+            this.bStaff.Location = new System.Drawing.Point(3, 313);
+            this.bStaff.Name = "bStaff";
+            this.bStaff.Size = new System.Drawing.Size(88, 36);
+            this.bStaff.TabIndex = 14;
+            this.bStaff.Text = "Персонал";
+            this.bStaff.UseVisualStyleBackColor = false;
+            this.bStaff.Click += new System.EventHandler(this.bStaff_Click);
+            // 
+            // bCEditlients
+            // 
+            this.bCEditlients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCEditlients.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bCEditlients.BackgroundImage")));
+            this.bCEditlients.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bCEditlients.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.bCEditlients.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCEditlients.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bCEditlients.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bCEditlients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bCEditlients.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bCEditlients.ForeColor = System.Drawing.Color.White;
+            this.bCEditlients.Location = new System.Drawing.Point(3, 277);
+            this.bCEditlients.Name = "bCEditlients";
+            this.bCEditlients.Size = new System.Drawing.Size(88, 36);
+            this.bCEditlients.TabIndex = 13;
+            this.bCEditlients.Text = "Клиенты";
+            this.bCEditlients.UseVisualStyleBackColor = false;
+            this.bCEditlients.Click += new System.EventHandler(this.bCEditlients_Click);
+            // 
             // bItems
             // 
             this.bItems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
@@ -461,9 +552,9 @@
             this.bItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bItems.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bItems.ForeColor = System.Drawing.Color.White;
-            this.bItems.Location = new System.Drawing.Point(3, 265);
+            this.bItems.Location = new System.Drawing.Point(3, 241);
             this.bItems.Name = "bItems";
-            this.bItems.Size = new System.Drawing.Size(88, 33);
+            this.bItems.Size = new System.Drawing.Size(88, 36);
             this.bItems.TabIndex = 12;
             this.bItems.Text = "Предметы";
             this.bItems.UseVisualStyleBackColor = false;
@@ -481,33 +572,13 @@
             this.bDiscountSteps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bDiscountSteps.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bDiscountSteps.ForeColor = System.Drawing.Color.White;
-            this.bDiscountSteps.Location = new System.Drawing.Point(3, 232);
+            this.bDiscountSteps.Location = new System.Drawing.Point(3, 205);
             this.bDiscountSteps.Name = "bDiscountSteps";
-            this.bDiscountSteps.Size = new System.Drawing.Size(88, 33);
+            this.bDiscountSteps.Size = new System.Drawing.Size(88, 36);
             this.bDiscountSteps.TabIndex = 11;
             this.bDiscountSteps.Text = "Уровни скидок";
             this.bDiscountSteps.UseVisualStyleBackColor = false;
             this.bDiscountSteps.Click += new System.EventHandler(this.bDiscountSteps_Click);
-            // 
-            // bClientManager
-            // 
-            this.bClientManager.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bClientManager.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bClientManager.BackgroundImage")));
-            this.bClientManager.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bClientManager.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.bClientManager.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bClientManager.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
-            this.bClientManager.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
-            this.bClientManager.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bClientManager.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bClientManager.ForeColor = System.Drawing.Color.White;
-            this.bClientManager.Location = new System.Drawing.Point(3, 199);
-            this.bClientManager.Name = "bClientManager";
-            this.bClientManager.Size = new System.Drawing.Size(88, 33);
-            this.bClientManager.TabIndex = 10;
-            this.bClientManager.Text = "Клиенты";
-            this.bClientManager.UseVisualStyleBackColor = false;
-            this.bClientManager.Click += new System.EventHandler(this.bClientManager_Click);
             // 
             // bWithdrawMoney
             // 
@@ -521,9 +592,9 @@
             this.bWithdrawMoney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bWithdrawMoney.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bWithdrawMoney.ForeColor = System.Drawing.Color.White;
-            this.bWithdrawMoney.Location = new System.Drawing.Point(3, 166);
+            this.bWithdrawMoney.Location = new System.Drawing.Point(3, 169);
             this.bWithdrawMoney.Name = "bWithdrawMoney";
-            this.bWithdrawMoney.Size = new System.Drawing.Size(88, 33);
+            this.bWithdrawMoney.Size = new System.Drawing.Size(88, 36);
             this.bWithdrawMoney.TabIndex = 9;
             this.bWithdrawMoney.Text = "Снять";
             this.bWithdrawMoney.UseVisualStyleBackColor = false;
@@ -563,7 +634,7 @@
             this.bDevicesManager.ForeColor = System.Drawing.Color.White;
             this.bDevicesManager.Location = new System.Drawing.Point(3, 133);
             this.bDevicesManager.Name = "bDevicesManager";
-            this.bDevicesManager.Size = new System.Drawing.Size(88, 33);
+            this.bDevicesManager.Size = new System.Drawing.Size(88, 36);
             this.bDevicesManager.TabIndex = 7;
             this.bDevicesManager.Text = "Устройства";
             this.bDevicesManager.UseVisualStyleBackColor = false;
@@ -686,7 +757,6 @@
         private System.Windows.Forms.Button bTimezoneManager;
         private System.Windows.Forms.Button bExitProgram;
         private System.Windows.Forms.Button bWithdrawMoney;
-        private System.Windows.Forms.Button bClientManager;
         private System.Windows.Forms.Button bDiscountSteps;
         private System.Windows.Forms.Button bExpenses;
         private System.Windows.Forms.Label lOperator;
@@ -697,6 +767,10 @@
         private System.Windows.Forms.Button bSellBarItem;
         private System.Windows.Forms.Button bBarRevision;
         private System.Windows.Forms.Button bSolItemsList;
+        private System.Windows.Forms.Button bCEditlients;
+        private System.Windows.Forms.Button bScreenshot;
+        private System.Windows.Forms.Button bStaff;
+        private System.Windows.Forms.Button button1;
     }
 }
 

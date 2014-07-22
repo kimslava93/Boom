@@ -17,6 +17,9 @@ namespace Boom_Manager_Project.DataBaseClasses
 
         private void bCancel_Click(object sender, EventArgs e)
         {
+            TextFileWriter.TextFileWriterInstance()
+               .AddSomeDataToLogReport("В форме смена приставки, была нажата кнопка отмена " + cbPlaystationId.Text,
+                   Options.FileTypeActionsLogs);
             Close();
         }
 
@@ -58,6 +61,9 @@ namespace Boom_Manager_Project.DataBaseClasses
         }
         private void bAddSession_Click(object sender, EventArgs e)
         {
+            TextFileWriter.TextFileWriterInstance()
+               .AddSomeDataToLogReport("В форме смена приставки, была нажата кнопка добавить " + cbPlaystationId.Text,
+                   Options.FileTypeActionsLogs);
             if (rtbComments.Text.Length > 5 && TableIsAvailable())
             {
                 ChangePlaystationController.ChangePlaystationControllerInstance().ReplaceClient(_ds, cbPlaystationId.Text, rtbComments.Text);
@@ -68,6 +74,13 @@ namespace Boom_Manager_Project.DataBaseClasses
                     ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(1));
             }
             Close();
+        }
+
+        private void cbPlaystationId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("В форме смена приставки, была выбрана приставка " + cbPlaystationId.Text,
+                    Options.FileTypeActionsLogs);
         }
 
     

@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.DataBaseClasses;
 
-namespace Boom_Manager_Project.Controllers
+namespace Boom_Manager_Project
 {
     public partial class ClientManager : Form
     {
@@ -21,6 +16,7 @@ namespace Boom_Manager_Project.Controllers
         {
             InitializeComponent();
             _command = command;
+            LoadDiscountsComboBox();
         }
 
         private void ClientManager_Load(object sender, EventArgs e)
@@ -28,12 +24,27 @@ namespace Boom_Manager_Project.Controllers
             LoadMode();
         }
 
+        private void LoadDiscountsComboBox()
+        {
+            cbAllDiscounts.DataSource =
+                ClientManagerController.ClientManagerControllerInstance().GetListOfAvailableDiscounts();
+            cbAllDiscounts.Invalidate();
+            if (cbAllDiscounts.Items.Count > 0)
+            {
+                cbAllDiscounts.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(51));
+            }
+        }
+
         private void LoadMode()
         {
             if (!String.IsNullOrWhiteSpace(_command) && _command == CREATE)
             {
-                bApply.Text = "Create";
-                gbClientInfo.Text = "Create client";
+                bApply.Text = @"Create";
+                gbClientInfo.Text = @"Create client";
                 cbClients.Location = ClientManagerController.ClientManagerControllerInstance().CREATEMode;
                 tbClientId.Location = ClientManagerController.ClientManagerControllerInstance().EDITMode;
                 cbClients.Enabled = false;
@@ -41,7 +52,7 @@ namespace Boom_Manager_Project.Controllers
                 numUpdBDay.Enabled = true;
                 numUpdBMonth.Enabled = true;
                 numUpdBYear.Enabled = true;
-                numUpDDiscount.Enabled = true;
+                cbAllDiscounts.Enabled = true;
                 numUpDSavings.Enabled = true;
                 tbPlayedSum.Enabled = false;
                 tbActivationDate.Text = DateTime.Now.ToShortDateString();
@@ -55,8 +66,8 @@ namespace Boom_Manager_Project.Controllers
                         cbClients.SelectedIndex = 0;
                 }
                 
-                bApply.Text = "Apply";
-                gbClientInfo.Text = "Edit client info";
+                bApply.Text = @"Применить";
+                gbClientInfo.Text = @"Правка клиента";
                 cbClients.Location = ClientManagerController.ClientManagerControllerInstance().EDITMode;
                 tbClientId.Location = ClientManagerController.ClientManagerControllerInstance().CREATEMode;
                 cbClients.Enabled = true;
@@ -92,7 +103,7 @@ namespace Boom_Manager_Project.Controllers
             tbEmail.Text = c.email;
             
             if (c.pers_discount != null)
-                numUpDDiscount.Value = (decimal)c.pers_discount;
+                cbAllDiscounts.Text = c.pers_discount.ToString();
 
             tbPlayedSum.Text = c.played_sum.ToString(CultureInfo.InvariantCulture);
             
@@ -105,7 +116,7 @@ namespace Boom_Manager_Project.Controllers
                 numUpdBYear.Enabled = false;
                 tbEmail.Enabled = false;
                 tbPlayedSum.Enabled = false;
-                numUpDDiscount.Enabled = false;
+                cbAllDiscounts.Enabled = false;
                 tbPhone.Enabled = false;
                 numUpDSavings.Value = 0;
                 numUpDSavings.Enabled = false;
@@ -115,7 +126,7 @@ namespace Boom_Manager_Project.Controllers
                 account_savings_t s =
                 ClientManagerController.ClientManagerControllerInstance().GetClientSavings(cbClients.Text);
                 numUpDSavings.Value = (decimal)s.savings;
-                numUpDDiscount.Enabled = false;
+                cbAllDiscounts.Enabled = false;
                 numUpdBDay.Enabled = true;
                 numUpdBMonth.Enabled = true;
                 numUpdBYear.Enabled = true;
@@ -143,8 +154,17 @@ namespace Boom_Manager_Project.Controllers
             var bday = new DateTime((int)numUpdBYear.Value, (int)numUpdBMonth.Value, (int)numUpdBDay.Value);
             ClientManagerController.ClientManagerControllerInstance()
                 .CreateNewClient(tbClientId.Text, tbName.Text, tbEmail.Text, bday,
-                    tbPhone.Text, tbActivationDate.Text, (double) numUpDDiscount.Value, 0);
+                    tbPhone.Text, tbActivationDate.Text, double.Parse(cbAllDiscounts.Text), int.Parse(tbPlayedSum.Text));
             Close();
+        }
+
+
+        private void cbAllClients_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+             var t = ClientManagerController.ClientManagerControllerInstance().GetPriceForDiscount(int.Parse(cbAllDiscounts.Text)).ToString(CultureInfo.InvariantCulture);
+            if (!string.IsNullOrEmpty(cbAllDiscounts.Text))
+                tbPlayedSum.Text = t;
         }
 
 

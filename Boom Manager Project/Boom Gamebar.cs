@@ -81,6 +81,7 @@ namespace Boom_Manager_Project
         private void CheckSoonToCloseClients()
         {
             _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().CheckSoonToCloseClients(_currentOpenedSessionsList);
+            CheckWhichSessionToPaint();
         }
 
         private void TimeOutChecking()
@@ -89,6 +90,8 @@ namespace Boom_Manager_Project
         }
         private void bSlideMenu_Click(object sender, EventArgs e)
         {
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Скрытая кнопка\" была нажата.", Options.FileTypeActionsLogs);
             if (splitContainer.Panel2Collapsed)
             {
                 if (BoomGamebarController.InstanceBgController().AskManagerPassword())
@@ -97,7 +100,9 @@ namespace Boom_Manager_Project
                 }
                 else
                 {
-                    MessageBox.Show(@"Access denied!");
+                    TextFileWriter.TextFileWriterInstance()
+                        .AddSomeDataToLogReport("сообщение \"Доступ запрещен\" было показано.", Options.FileTypeActionsLogs);
+                    MessageBox.Show(@"Доступ запрещен!");
                 }
             }
             else
@@ -109,6 +114,8 @@ namespace Boom_Manager_Project
         private void bAddNewSession_Click(object sender, EventArgs e)
         {
             var newSessionForm = new FAddNewSession();
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Добавить сессию\" была нажата.", Options.FileTypeActionsLogs);
             newSessionForm.ShowDialog();
             _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().GetAllOpenedDaySessions();
             dgvOpenedSessions.DataSource = _currentOpenedSessionsList;
@@ -128,6 +135,8 @@ namespace Boom_Manager_Project
         {
             if (dgvOpenedSessions.CurrentRow != null)
             {
+                TextFileWriter.TextFileWriterInstance()
+                    .AddSomeDataToLogReport("кнопка \"Закрыть сессию\" была нажата.", Options.FileTypeActionsLogs);
                 var sessionToClose = BoomGamebarController.InstanceBgController()
                     .GetSelectedSessionData(_currentOpenedSessionsList,
                         (int) dgvOpenedSessions.CurrentRow.Cells[0].Value);
@@ -150,6 +159,8 @@ namespace Boom_Manager_Project
         {
             if (dgvOpenedSessions.CurrentRow != null)
             {
+                TextFileWriter.TextFileWriterInstance()
+                    .AddSomeDataToLogReport("Кнопка \"Продлить сессию\" была нажата.", Options.FileTypeActionsLogs);
                 BoomGamebarController.InstanceBgController()
                     .ExtendTime((int) dgvOpenedSessions.CurrentRow.Cells[0].Value, _currentOpenedSessionsList);
                 _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().GetAllOpenedDaySessions();
@@ -164,6 +175,8 @@ namespace Boom_Manager_Project
         private void bChangeShift_Click(object sender, EventArgs e)
         {
             var cs = new ChangeShift(false);
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Смена\" была нажата.", Options.FileTypeActionsLogs);
             cs.ShowDialog();
             UpdateWorkingStaff();
         }
@@ -283,12 +296,15 @@ namespace Boom_Manager_Project
         private void bExpenses_Click(object sender, EventArgs e)
         {
             var ex = new Expences();
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Затраты\" была нажата.", Options.FileTypeActionsLogs);
             ex.ShowDialog();
         }
 
         private void lOperator_Click(object sender, EventArgs e)
         {
             var ol = new OperatorLogin();
+            TextFileWriter.TextFileWriterInstance().AddSomeDataToLogReport("Кнопка \"Логин оператора\" нажато\n",Options.FileTypeActionsLogs);
             ol.ShowDialog();
             UpdateWorkingStaff();
         }
@@ -297,6 +313,8 @@ namespace Boom_Manager_Project
         {
             if (dgvOpenedSessions.CurrentRow != null)
             {
+                TextFileWriter.TextFileWriterInstance()
+                    .AddSomeDataToLogReport("кнопка \"Смена приставки\" была нажата.", Options.FileTypeActionsLogs);
                 DaySessionClass sessionToReplace = _currentOpenedSessionsList.FirstOrDefault(ds => ds.Сессия == (int) dgvOpenedSessions.CurrentRow.Cells[0].Value);
                 if (sessionToReplace != null)
                 {
@@ -317,6 +335,8 @@ namespace Boom_Manager_Project
 
         private void bLightCutOff_Click(object sender, EventArgs e)
         {
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Выключить свет\" была нажата.", Options.FileTypeActionsLogs);
             var ep = new EnterPassword("ADMINISTRATOR");
             ep.ShowDialog();
             if (ep.Passed)
@@ -338,20 +358,108 @@ namespace Boom_Manager_Project
         private void bSellBarItem_Click(object sender, EventArgs e)
         {
             var si = new SellBarItem();
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Продать товар\" была нажата.", Options.FileTypeActionsLogs);
             si.ShowDialog();
         }
 
         private void bBarRevision_Click(object sender, EventArgs e)
         {
             var r = new BarRevision();
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Ревизия\" была нажата.", Options.FileTypeActionsLogs);
             r.ShowDialog();
         }
 
         private void bSolItemsList_Click(object sender, EventArgs e)
         {
             var si = new SoldItems();
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Бар\" была нажата.", Options.FileTypeActionsLogs);
             si.ShowDialog();
         }
-        //4970
+
+        private void bCEditlients_Click(object sender, EventArgs e)
+        {
+            var ac = new AllClients();
+            ac.ShowDialog();
+        }
+
+        private void bScreenshot_MouseHover(object sender, EventArgs e)
+        {
+            bScreenshot.Visible = true;
+        }
+
+        private void lCurrentTime_MouseHover(object sender, EventArgs e)
+        {
+            bScreenshot.Visible = true;
+        }
+
+        private void lCurrentTime_MouseLeave(object sender, EventArgs e)
+        {
+//            bScreenshot.Visible = false;
+        }
+
+        private void bScreenshot_Click(object sender, EventArgs e)
+        {
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("кнопка \"Скриншот\" была нажата.", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
+        }
+
+        private void bScreenshot_MouseLeave(object sender, EventArgs e)
+        {
+            bScreenshot.Visible = false;
+        }
+
+        private void bStaff_Click(object sender, EventArgs e)
+        {
+            var ansu = new AddNewStaffUser();
+            ansu.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var ls = new LastSessions();
+            TextFileWriter.TextFileWriterInstance()
+                .AddSomeDataToLogReport("Кнопка последние 10 сессий была нажата!", Options.FileTypeActionsLogs);
+            ls.ShowDialog();
+        }
+
+        private void CheckWhichSessionToPaint()
+        {
+            foreach (DataGridViewRow r in dgvOpenedSessions.Rows)
+            {
+                if(TimeSpan.Parse(r.Cells[4].Value.ToString()) < TimeSpan.FromMinutes(5))
+                {
+                    PaintSoonToCloseSession(r.Index);
+                }
+//                if (r.Оставшееся_время < TimeSpan.FromMinutes(5))
+//                {
+////                    PaintSoonToCloseSession(dgvOpenedSessions.Rows[]);
+//                }
+            }
+        }
+
+        private void PaintSoonToCloseSession(int row)
+        {
+            if (dgvOpenedSessions.Rows[row].DefaultCellStyle.BackColor != Color.Red)
+            {
+                dgvOpenedSessions.Rows[row].DefaultCellStyle.BackColor = Color.Red;
+                dgvOpenedSessions.Rows[row].DefaultCellStyle.ForeColor = Color.Black;
+                dgvOpenedSessions.Rows[row].DefaultCellStyle.SelectionBackColor = Color.Tomato;
+                dgvOpenedSessions.Rows[row].DefaultCellStyle.SelectionForeColor = Color.Black;
+            }
+        }
+        private void PaintSessionToDefaultColor(int row)
+        {
+            if (dgvOpenedSessions.Rows[row].DefaultCellStyle.BackColor != Color.FromArgb(40, 40, 40))
+            {
+                dgvOpenedSessions.Rows[row].DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
+                dgvOpenedSessions.Rows[row].DefaultCellStyle.ForeColor = Color.White;
+                dgvOpenedSessions.Rows[row].DefaultCellStyle.SelectionBackColor = Color.White;
+                dgvOpenedSessions.Rows[row].DefaultCellStyle.SelectionForeColor = Color.FromArgb(40, 40, 40);
+            }
+        }
     }
 }

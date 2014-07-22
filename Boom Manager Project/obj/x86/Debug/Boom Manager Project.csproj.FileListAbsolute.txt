@@ -34,19 +34,30 @@ D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Pr
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csprojResolveAssemblyReference.cache
 D:\My Files\Dropbox\project diploma\Diploma\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.EditDevice.resources
 E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.exe.config
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.exe
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.pdb
+E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.exe
+E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.pdb
+E:\Boom Manager Project\Boom Manager Project\bin\Debug\DocX.dll
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csprojResolveAssemblyReference.cache
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddDiscountCardToSession.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewClientWithDiscountCard.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.FAddNewSession.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewStaffUser.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AllClients.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.BarRevision.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.BoomMainForm.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CashAccept.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ChangeNumberOfItem.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ChangePlaystationPrice.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ConsoleManager.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewDevice.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.Controllers.ClientManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ClientManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.LastSessions.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CreateNewConsole.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CreateNewDiscountStep.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewItem.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AllBarItems.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.DataBaseClasses.ChangePlaystation.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.LightCutOff.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.DeviceManager.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ChangeEndpointConsoleID.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.DiscountStepsManager.resources
@@ -54,7 +65,9 @@ E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.Expences.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ManagerCardReader.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.OperatorLogin.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.SellBarItem.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ShiftsManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.SoldItems.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.TimeZoneManager.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.WithdrawMoney.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ChangeShift.resources
@@ -64,14 +77,6 @@ E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.EnterPassword.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.Properties.Resources.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csproj.GenerateResource.Cache
-E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.exe
-E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.pdb
-E:\Boom Manager Project\Boom Manager Project\bin\Debug\DocX.dll
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.DataBaseClasses.ChangePlaystation.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewItem.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AllBarItems.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.LightCutOff.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.SellBarItem.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ChangeNumberOfItem.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.BarRevision.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.SoldItems.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.exe
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.pdb
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CheckoutPriceAndTime.resources

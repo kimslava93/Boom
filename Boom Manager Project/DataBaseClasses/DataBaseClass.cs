@@ -14,6 +14,7 @@ namespace Boom_Manager_Project.DataBaseClasses
     public class DataBaseClass
     {
         private static DataBaseClass _dbClass;
+
         public static DataBaseClass Instancedb()
         {
             return _dbClass ?? (_dbClass = new DataBaseClass());
@@ -30,25 +31,27 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return userInfo;
             }
         }
+
         public personal_info_t GetUserInfoByName(string name)
         {
             var db = new dbDataContext();
             lock (db)
             {
                 personal_info_t userInfo = (from a in db.GetTable<personal_info_t>()
-                                            where a.name == name
-                                            select a).SingleOrDefault();
+                    where a.name == name
+                    select a).SingleOrDefault();
                 return userInfo;
             }
         }
+
         public personal_info_t GetUserInfoByPersonId(string personId)
         {
             var db = new dbDataContext();
             lock (db)
             {
                 personal_info_t userInfo = (from a in db.GetTable<personal_info_t>()
-                                            where a.person_id == personId
-                                            select a).SingleOrDefault();
+                    where a.person_id == personId
+                    select a).SingleOrDefault();
                 return userInfo;
             }
         }
@@ -58,24 +61,39 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                var r =  (from gs in db.GetTable<global_session_t>()
+                var r = (from gs in db.GetTable<global_session_t>()
                     where gs.end_session == gs.start_session
                     select gs).SingleOrDefault();
                 return r;
             }
         }
+
         public void CloseLastOpenedGlobalSession()
         {
             var db = new dbDataContext();
             lock (db)
             {
-                var globalSession = (from gs in db.GetTable<global_session_t>()
-                         where gs.end_session == gs.start_session
-                         select gs).SingleOrDefault();
-                if (globalSession != null)
+                for (int i = 0; i < 5; i++)
                 {
-                    globalSession.end_session = DateTime.Now;
-                    db.SubmitChanges();
+                    try
+                    {
+                        var globalSession = (from gs in db.GetTable<global_session_t>()
+                            where gs.end_session == gs.start_session
+                            select gs).SingleOrDefault();
+                        if (globalSession != null)
+                        {
+                            globalSession.end_session = DateTime.Now;
+                            db.SubmitChanges();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
+                    }
                 }
             }
         }
@@ -85,23 +103,41 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                var operatorInfo = GetUserInfoByLogin(login);
-                var lastGlobalSession = (from gs in db.GetTable<global_session_t>()
-                    where gs.end_session == gs.start_session
-                    select gs).SingleOrDefault();
-                if (lastGlobalSession != null && operatorInfo != null)
+                for (int i = 0; i < 5; i++)
                 {
-                    lastGlobalSession.operator_id = operatorInfo.person_id;
                     try
                     {
-                        db.SubmitChanges();
+                        var operatorInfo = GetUserInfoByLogin(login);
+                        var prevOperatorInfo = GetUserInfoByLogin(GetOpenedGlobalSession().operator_id);
+                        var lastGlobalSession = (from gs in db.GetTable<global_session_t>()
+                            where gs.end_session == gs.start_session
+                            select gs).SingleOrDefault();
+                        if (lastGlobalSession != null && operatorInfo != null)
+                        {
+                            lastGlobalSession.operator_id = operatorInfo.person_id;
+                            try
+                            {
+                                db.SubmitChanges();
+                                TextFileWriter.TextFileWriterInstance()
+                                    .RecordLoginTime(operatorInfo.name, prevOperatorInfo.name, Options.StaffTypeOperator);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(31));
+                            }
+
+                        }
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(31));
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
                     }
-                    
                 }
+
             }
         }
 
@@ -110,22 +146,37 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                if (numberOfLastSessons > 0)
+                for (int i = 0; i < 5; i++)
                 {
-                    return (from a in db.GetTable<global_session_t>()
-                        orderby a.daily_id descending 
-                        select new ShiftsMyClass
+                    try
+                    {
+                        if (numberOfLastSessons > 0)
                         {
-                            DailyId = a.daily_id,
-                            AdministratorID = a.administrator_id,
-                            OperatorId = a.operator_id,
-                            StartTime = a.start_session,
-                            EndTime = a.end_session
-                        }).Take(numberOfLastSessons).ToList();
+                            return (from a in db.GetTable<global_session_t>()
+                                orderby a.daily_id descending
+                                select new ShiftsMyClass
+                                {
+                                    DailyId = a.daily_id,
+                                    AdministratorID = a.administrator_id,
+                                    OperatorId = a.operator_id,
+                                    StartTime = a.start_session,
+                                    EndTime = a.end_session
+                                }).Take(numberOfLastSessons).ToList();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
+                    }
                 }
                 return new List<ShiftsMyClass>();
             }
         }
+
         public List<clients_per_session_t> GetListOfAllClientsPerSessionT()
         {
             var db = new dbDataContext();
@@ -147,14 +198,14 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        public days_sessions_t GetDaySessionBySessionId(int sessionId, int dailyId)
+        public days_sessions_t GetDaySessionBySessionId(int sessionId) //, int dailyId)
         {
             var db = new dbDataContext();
             lock (db)
             {
                 return (from s in db.GetTable<days_sessions_t>()
                     where s.session_id == sessionId
-                    where s.daily_id == dailyId
+//                    where s.daily_id == dailyId
                     select s).SingleOrDefault();
             }
         }
@@ -212,48 +263,109 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                foreach (string t in playstationsToChange)
+                for (int i = 0; i < 5; i++)
                 {
-                    var matchedRecord = (from price in db.GetTable<playstation_timezone>()
-                        where price.playstation_id == t
-                        where price.timezone_name == timeZoneName
-                        select price).SingleOrDefault();
-                    if (matchedRecord == null) continue;
                     try
                     {
-                        matchedRecord.timezone_cost_per_hour = newPrice;
-                        db.SubmitChanges();
+                        foreach (string t in playstationsToChange)
+                        {
+                            var matchedRecord = (from price in db.GetTable<playstation_timezone>()
+                                where price.playstation_id == t
+                                where price.timezone_name == timeZoneName
+                                select price).SingleOrDefault();
+                            if (matchedRecord == null) continue;
+                            try
+                            {
+                                matchedRecord.timezone_cost_per_hour = newPrice;
+                                db.SubmitChanges();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString());
+                            }
+                        }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        MessageBox.Show(ex.ToString());
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
                     }
                 }
             }
         }
+
         public void UpdateClientInfo(client_info_t cInfo)
         {
             var db = new dbDataContext();
             lock (db)
             {
-                var matchedRecord = (from c in db.GetTable<client_info_t>()
-                    where c.client_id == cInfo.client_id
-                    select c).SingleOrDefault();
-                if (matchedRecord != null)
+                for (int i = 0; i < 5; i++)
                 {
-                    matchedRecord.name = cInfo.name;
-                    matchedRecord.birthday = cInfo.birthday;
-                    matchedRecord.email = cInfo.email;
-                    matchedRecord.phone = cInfo.phone;
+                    try
+                    {
+                        var matchedRecord = (from c in db.GetTable<client_info_t>()
+                            where c.client_id == cInfo.client_id
+                            select c).SingleOrDefault();
+                        if (matchedRecord != null)
+                        {
+                            matchedRecord.name = cInfo.name;
+                            matchedRecord.birthday = cInfo.birthday;
+                            matchedRecord.email = cInfo.email;
+                            matchedRecord.phone = cInfo.phone;
+                        }
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
+                    }
                 }
-                db.SubmitChanges();
             }
         }
+
+        public void AddToSessionDiscountSum(int sessionId, double discountToAdd)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    try
+                    {
+                        var matchedRecord = (from c in db.GetTable<days_sessions_t>()
+                            where c.session_id == sessionId
+                            select c).SingleOrDefault();
+                        if (matchedRecord != null)
+                        {
+                            matchedRecord.session_discount = discountToAdd;
+                        }
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
+                    }
+                }
+            }
+        }
+
         public List<string> GetAllStaffNamesByPositionList(string position)
         {
             var db = new dbDataContext();
             lock (db)
             {
+
                 var allStaff = (from s in db.GetTable<personal_info_t>()
                     where s.position == position
                     select s.name).ToList();
@@ -306,7 +418,39 @@ namespace Boom_Manager_Project.DataBaseClasses
                     }).ToList<DaySessionClass>();
             }
         }
-        public List<MyString> GetOpenedConsolesWithSessionIds(/*int dailyId, List<clients_per_session_t> clientsList*/)
+
+        public DaySessionClass GetDaySessionMyClassBySessionId(int sessionId, List<clients_per_session_t> clientsList)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from days in db.GetTable<days_sessions_t>()
+                    orderby days.end_game ascending
+                    where days.session_id == sessionId
+                    let startGame = days.start_game
+                    where startGame != null
+                    let endGame = days.end_game
+                    where endGame != null
+                    let sessionDiscount = days.session_discount
+                    where sessionDiscount != null
+                    select new DaySessionClass
+                    {
+                        Сессия = days.session_id,
+                        Приставка = days.playstation_id,
+                        Начало = (DateTime) startGame,
+                        Конец = (DateTime) endGame,
+                        Оставшееся_время = GetTimeLeft((DateTime) endGame),
+                        //----------------------------------------------------------
+                        Клиент = ListToString(days.session_id, clientsList),
+                        //to show all clients in one line and column instead of one as string
+                        Счетчик = days.played_money,
+                        Скидка_сессии = (double) sessionDiscount,
+                        Оплачено = days.payed_sum
+                    }).SingleOrDefault();
+            }
+        }
+
+        public List<MyString> GetOpenedConsolesWithSessionIds( /*int dailyId, List<clients_per_session_t> clientsList*/)
         {
             var db = new dbDataContext();
             lock (db)
@@ -330,33 +474,61 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                var device = (from d in db.GetTable<devices_t>()
-                    where d.device_id == deviceId
-                    select d).SingleOrDefault();
-                if (device != null)
+                for (int i = 0; i < 5; i++)
                 {
-                    device.ip_address = ipAddress;
+                    try
+                    {
+                        var device = (from d in db.GetTable<devices_t>()
+                            where d.device_id == deviceId
+                            select d).SingleOrDefault();
+                        if (device != null)
+                        {
+                            device.ip_address = ipAddress;
+                        }
+                        db.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
+                    }
                 }
-                db.SubmitChanges();
             }
         }
+
         public void TransferOpenedSessionToNextGlobalSession(int sessionId)
         {
             var db = new dbDataContext();
             lock (db)
             {
-                var sessionToTransfer = (from s in db.GetTable<days_sessions_t>()
-                    where s.session_id == sessionId
-                    select s).SingleOrDefault();
-//                sessionToTransfer.daily_id = sessionToTransfer.daily_id + 1;
-
-                var lastOpenedGlobalSession = GetOpenedGlobalSession();
-                 int dailyId = GetOpenedGlobalSession().daily_id;
-                if (sessionToTransfer != null)
+                for (int i = 0; i < 5; i++)
                 {
-                    sessionToTransfer.daily_id = lastOpenedGlobalSession.daily_id;
-                    AddMoneyToCash(sessionToTransfer.payed_sum, dailyId);
-                    db.SubmitChanges();
+                    try
+                    {
+                        var sessionToTransfer = (from s in db.GetTable<days_sessions_t>()
+                            where s.session_id == sessionId
+                            select s).SingleOrDefault();
+//                sessionToTransfer.daily_id = sessionToTransfer.daily_id + 1;
+                        var lastOpenedGlobalSession = GetOpenedGlobalSession();
+                        int dailyId = GetOpenedGlobalSession().daily_id;
+                        if (sessionToTransfer != null)
+                        {
+                            sessionToTransfer.daily_id = lastOpenedGlobalSession.daily_id;
+                            AddMoneyToCash(sessionToTransfer.payed_sum, dailyId);
+                            db.SubmitChanges();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
+                    }
                 }
             }
         }
@@ -382,7 +554,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             string result = "";
             var clientsInfo = Instancedb().GetAllClients();
             var clientsInSession = (from c in clientsList
-                                    from allclients in clientsInfo
+                from allclients in clientsInfo
                 where c.session_id == sessionId
                 where allclients.client_id == c.client_id
                 select allclients.name).ToList();
@@ -400,68 +572,118 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                 var clientsList = (from c in db.GetTable<clients_per_session_t>()
-                                  select c).ToList();
+                var clientsList = (from c in db.GetTable<clients_per_session_t>()
+                    select c).ToList();
                 var daySessionsReport = (from d in db.GetTable<days_sessions_t>()
-                                     from c in db.GetTable<clients_per_session_t>()
-                                     orderby d.start_game, d.end_game
-                                     where d.daily_id == dailyId
-                                     where c.session_id == d.session_id
-                                     let startGame = d.start_game
-                                     where startGame != null
-                                     let endGame = d.end_game
-                                     where endGame != null
-                                     select new DaySessionForShiftReport
-                                     {
-                                         Сессия = d.client_num,//to see manager num of clients
-                                         Приставка = d.playstation_id,
-                                         Начало = (DateTime)startGame,
-                                         Конец = (DateTime)endGame,
-                                         Оставшееся_время = GetTimeLeft((DateTime)endGame),//----------------------------------------------------------
-                                         Клиент = ListToString(d.session_id, clientsList), //to show all clients in one line and column instead of one
-                                         Комментарии = d.comments,
-                                         Счетчик = d.played_money,
-                                         Скидка_сессии = (double)d.session_discount,
-                                         Оплачено = d.payed_sum
-                                     }).ToList<DaySessionForShiftReport>();
+                    from c in db.GetTable<clients_per_session_t>()
+                    orderby d.start_game, d.end_game
+                    where d.daily_id == dailyId
+                    where c.session_id == d.session_id
+                    let startGame = d.start_game
+                    where startGame != null
+                    let endGame = d.end_game
+                    where endGame != null
+                    select new DaySessionForShiftReport
+                    {
+                        Сессия = d.client_num, //to see manager num of clients
+                        Приставка = d.playstation_id,
+                        Начало = (DateTime) startGame,
+                        Конец = (DateTime) endGame,
+                        Оставшееся_время = GetTimeLeft((DateTime) endGame),
+                        //----------------------------------------------------------
+                        Клиент = ListToString(d.session_id, clientsList),
+                        //to show all clients in one line and column instead of one
+                        Комментарии = d.comments,
+                        Счетчик = d.played_money,
+                        Скидка_сессии = (double) d.session_discount,
+                        Оплачено = d.payed_sum
+                    }).ToList<DaySessionForShiftReport>();
+                return daySessionsReport;
+            }
+        }
+
+        public List<DaySessionsForLastSessions> GetLastDaySessions(int numOfLastSessions)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var clientsList = (from c in db.GetTable<clients_per_session_t>()
+                    select c).ToList();
+                var daySessionsReport = (from d in db.GetTable<days_sessions_t>()
+                    from c in db.GetTable<clients_per_session_t>()
+                    orderby d.end_game descending
+                    where d.daily_id == GetOpenedGlobalSession().daily_id
+                    where c.session_id == d.session_id
+                    let startGame = d.start_game
+                    where startGame != null
+                    let endGame = d.end_game
+                    where endGame != null
+                    select new DaySessionsForLastSessions
+                    {
+                        Сессия = d.session_id, //to see manager num of clients
+                        Приставка = d.playstation_id,
+                        Начало = (DateTime) startGame,
+                        Конец = (DateTime) endGame,
+                        Клиент = ListToString(d.session_id, clientsList),
+                        Счетчик = d.played_money,
+                        Скидка_сессии = (double) d.session_discount,
+                        Оплачено = d.payed_sum
+                    }).ToList();
                 return daySessionsReport;
             }
         }
 
         public void ChangePlaystation(DaySessionClass ds, string newPlaystation, string comments)
         {
-             var db = new dbDataContext();
+            var db = new dbDataContext();
             lock (db)
             {
-                var matchDs = (from os in db.GetTable<days_sessions_t>()
-                    where os.session_id == ds.Сессия
-                    select os).SingleOrDefault();
-                if (matchDs != null)
+                for (int i = 0; i < 5; i++)
                 {
-                    UpdatePlaystationState(matchDs.playstation_id, "free");
-                    db.SubmitChanges();
-                    matchDs.playstation_id = newPlaystation;
-                    TimeSpan paidTime =
-                        AddNewSessionController.AddNewSessionControllerInstance()
-                            .UpdateTimeLeft((decimal)matchDs.payed_sum, newPlaystation, 0, 18900);
-                    if (matchDs.start_game != null) matchDs.end_game = matchDs.start_game.Value.Add(paidTime);
-                    if (String.IsNullOrWhiteSpace(matchDs.comments))
+                    try
                     {
-                        matchDs.comments = "Пересел с " + ds.Приставка + " на "+newPlaystation +" " + comments;
+                        var matchDs = (from os in db.GetTable<days_sessions_t>()
+                            where os.session_id == ds.Сессия
+                            select os).SingleOrDefault();
+                        if (matchDs != null)
+                        {
+                            UpdatePlaystationState(matchDs.playstation_id, "free");
+                            db.SubmitChanges();
+                            matchDs.playstation_id = newPlaystation;
+                            TimeSpan paidTime =
+                                AddNewSessionController.AddNewSessionControllerInstance()
+                                    .UpdateTimeLeft((decimal) matchDs.payed_sum, newPlaystation, 0, 18900);
+                            if (matchDs.start_game != null) matchDs.end_game = matchDs.start_game.Value.Add(paidTime);
+                            if (String.IsNullOrWhiteSpace(matchDs.comments))
+                            {
+                                matchDs.comments = "Пересел с " + ds.Приставка + " на " + newPlaystation + " " +
+                                                   comments;
+                            }
+                            else
+                            {
+                                matchDs.comments += "\n" + "Пересел с " + ds.Приставка + " на " + newPlaystation + " " +
+                                                    comments;
+                            }
+                            UpdatePlaystationState(newPlaystation, "busy");
+                            //                    matchDs.session_discount += 5;// Discount because of replacing
+                            //                    matchDs.end_game
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(39));
+                        }
                     }
-                    else
+                    catch (Exception)
                     {
-                        matchDs.comments += "\n" + "Пересел с " + ds.Приставка + " на "+newPlaystation +" " + comments;
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
                     }
-                    UpdatePlaystationState(newPlaystation, "busy");
-//                    matchDs.session_discount += 5;// Discount because of replacing
-//                    matchDs.end_game
-                    db.SubmitChanges();
                 }
-                else
-                {
-                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(39));
-                }
+
             }
         }
 
@@ -482,48 +704,84 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
-                Table<devices_t> devicesTable = db.GetTable<devices_t>();
-                var device = new devices_t
+                for (int i = 0; i < 5; i++)
                 {
-                    device_id = deviceId, 
-                    ip_address = ipAddress
-                };
-                devicesTable.InsertOnSubmit(device); 
-                db.SubmitChanges();
+                    try
+                    {
+                        Table<devices_t> devicesTable = db.GetTable<devices_t>();
+                        var device = new devices_t
+                        {
+                            device_id = deviceId,
+                            ip_address = ipAddress
+                        };
+                        devicesTable.InsertOnSubmit(device);
+                        db.SubmitChanges();
 //                List<string> allConsoles = GetAllTables().Select(t => t.playstation_id).ToList();
 
-                for(int i = 1;i<=16;i++)
-                {
-                    InsertNewEndPoint(deviceId, i);
+                        for (int j = 1; j <= 16; j++)
+                        {
+                            InsertNewEndPoint(deviceId, j);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
+                        else
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(39));
+                        }
+                    }
                 }
-               
             }
         }
+
 
         public void AddNewDiscountStep(string name, double requrements, double discount)
         {
             var db = new dbDataContext();
             lock (db)
             {
-                var match = (from m in db.GetTable<steps_of_discount_upgrading>()
-                    where m.name == name
-                    select m).SingleOrDefault();
-                if (match == null)
+                for (int i = 0; i < 5; i++)
                 {
-                    Table<steps_of_discount_upgrading> stepsOfDiscountUpgradingsTable =
-                        db.GetTable<steps_of_discount_upgrading>();
-                    var steps = new steps_of_discount_upgrading
+                    try
                     {
-                        name = name,
-                        discount = discount,
-                        required_played_sum = requrements
-                    };
-                    stepsOfDiscountUpgradingsTable.InsertOnSubmit(steps);
-                    db.SubmitChanges();
-                }
-                else
-                {
-                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(27));
+                        var match = (from m in db.GetTable<steps_of_discount_upgrading>()
+                            where m.name == name
+                            select m).SingleOrDefault();
+                        if (match == null)
+                        {
+                            Table<steps_of_discount_upgrading> stepsOfDiscountUpgradingsTable =
+                                db.GetTable<steps_of_discount_upgrading>();
+                            var steps = new steps_of_discount_upgrading
+                            {
+                                name = name,
+                                discount = discount,
+                                required_played_sum = requrements
+                            };
+                            stepsOfDiscountUpgradingsTable.InsertOnSubmit(steps);
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(27));
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        if (i <= 0)
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance()
+                                .GetErrorWithLine(1, 88));
+                        }
+                        else
+                        {
+                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(39));
+                        }
+                    }
                 }
             }
         }
@@ -588,7 +846,26 @@ namespace Boom_Manager_Project.DataBaseClasses
                 AddNewSaVingsForClient(user.client_id);
             }
         }
-
+        public void DeleteClient(string clientId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                Table<client_info_t> personalInfoTable = db.GetTable<client_info_t>();
+                var client = (from c in db.GetTable<client_info_t>()
+                    where c.client_id == clientId
+                    select c).SingleOrDefault();
+                if (client != null)
+                {
+                    personalInfoTable.DeleteOnSubmit(client);
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(52));
+                }
+            }
+        }
         private void AddNewSaVingsForClient(string clientId)
         {
             var db = new dbDataContext();
@@ -896,6 +1173,29 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
+        public void AssignNewValueToCash(double newCashValue, int dailyId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                //                int dId = GetOpenedGlobalSession().daily_id;
+                var getCashFromCurrentSession = (from c in db.GetTable<cash_t>()
+                                                 where c.daily_id == dailyId
+                                                 select c).SingleOrDefault();
+                if (getCashFromCurrentSession != null)
+                {
+                    getCashFromCurrentSession.cash_amount = newCashValue;
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    var cashTable = db.GetTable<cash_t>();
+                    var cashT = new cash_t { cash_amount = newCashValue, daily_id = dailyId };
+                    cashTable.InsertOnSubmit(cashT);
+                    db.SubmitChanges();
+                }
+            }
+        }
         public double? GetCashFromDailyId(int dailyId)
         {
             var db = new dbDataContext();
@@ -970,6 +1270,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 return (from t in db.GetTable<timezones_t>()
+                        orderby t.timezone_start ascending 
                     select t).ToList();
             }
         }
@@ -1014,7 +1315,26 @@ namespace Boom_Manager_Project.DataBaseClasses
                     select lc).ToList();
             }
         }
+        public List<ClientMyClass> GetAllClientsForEditing()
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                return (from lc in db.GetTable<client_info_t>()
+                    select new ClientMyClass
+                    {
+                        ID_Клиента = lc.client_id,
+                        Имя = lc.name,
+                        Email = lc.email,
+                        День_рождение = (DateTime) lc.birthday,
+                        Дата_активации = lc.activation_date,
+                        Наигранная_сумма = lc.played_sum,
+                        Персональная_скидка = (double) lc.pers_discount,
+                        Телефон = lc.phone
+                    }).ToList();
 
+            }
+        }
         
 
         public int GetLastOpenedGlobalSessionDailyId()//used to get last dailyID
@@ -1488,6 +1808,37 @@ namespace Boom_Manager_Project.DataBaseClasses
 //-----------------------------------------------------------------------------------------------------------------------------------------------
         }
 
+        public void AddPlayedMoneyToClientAndChangeHisDiscount(string clientId, double moneyToAdd)
+        {
+            if (moneyToAdd > 0)
+            {
+                var db = new dbDataContext();
+                lock (db)
+                {
+                    var clientInfo = GetClientInfoByName(clientId);
+                    if (clientInfo != null)
+                    {
+                        clientInfo.played_sum += moneyToAdd;
+                        var allDicountLevels = GetAllDiscountSteps();
+                        var maxDiscount = allDicountLevels[0].discount;
+                        foreach (var step in allDicountLevels)
+                        {
+                            if (clientInfo.played_sum >= step.required_played_sum)
+                            {
+                                maxDiscount = step.discount;
+//                                clientInfo.pers_discount = step.discount;
+                            }
+                        }
+                        if (maxDiscount > clientInfo.pers_discount)
+                        {
+                            clientInfo.pers_discount = maxDiscount;
+                            db.SubmitChanges();
+                        }
+                    }
+                }
+            }
+        }
+
         public void CloseSessionWithCard(DaySessionClass dsc, string comments, DateTime endTime)
         {
             var db = new dbDataContext();
@@ -1516,6 +1867,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 //                    dsc.Счетчик = dsc.Оплачено - dsc.Счетчик;
                 //                }
                 sessionIdtoDelete.played_money = dsc.Счетчик;
+                AddPlayedMoneyToClientAndChangeHisDiscount(dsc.Клиент, dsc.Счетчик);
                 if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
                 {
                     sessionIdtoDelete.comments = comments;
@@ -1758,6 +2110,14 @@ namespace Boom_Manager_Project.DataBaseClasses
                 {
                     session.end_game += timeToExtend;
                     session.payed_sum += moneyToExtend;
+                    if (String.IsNullOrWhiteSpace(session.comments))
+                    {
+                        session.comments = "Доплачено на" + timeToExtend +" и "+ moneyToExtend + " сом.";
+                    }
+                    else
+                    {
+                        session.comments += "\n" + "Доплачено на" + timeToExtend + " " + moneyToExtend + " сом.";
+                    } 
                     try
                     {
                         db.SubmitChanges();
