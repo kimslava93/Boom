@@ -84,6 +84,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                         {
                             globalSession.end_session = DateTime.Now;
                             db.SubmitChanges();
+                            break;
                         }
                     }
                     catch (Exception)
@@ -120,6 +121,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                                 db.SubmitChanges();
                                 TextFileWriter.TextFileWriterInstance()
                                     .RecordLoginTime(operatorInfo.name, prevOperatorInfo.name, Options.StaffTypeOperator);
+                                break;
                             }
                             catch (Exception)
                             {
@@ -162,6 +164,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                                     StartTime = a.start_session,
                                     EndTime = a.end_session
                                 }).Take(numberOfLastSessons).ToList();
+                            break;
                         }
                     }
                     catch (Exception)
@@ -278,6 +281,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                             {
                                 matchedRecord.timezone_cost_per_hour = newPrice;
                                 db.SubmitChanges();
+                                break;
                             }
                             catch (Exception ex)
                             {
@@ -317,6 +321,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                             matchedRecord.phone = cInfo.phone;
                         }
                         db.SubmitChanges();
+                        break;
                     }
                     catch (Exception)
                     {
@@ -344,9 +349,13 @@ namespace Boom_Manager_Project.DataBaseClasses
                             select c).SingleOrDefault();
                         if (matchedRecord != null)
                         {
-                            matchedRecord.session_discount = discountToAdd;
+                            if (matchedRecord.session_discount == 0 || matchedRecord.session_discount == null)
+                                matchedRecord.session_discount = discountToAdd;
+                            else
+                                matchedRecord.session_discount += discountToAdd;
                         }
                         db.SubmitChanges();
+                        break;
                     }
                     catch (Exception)
                     {
@@ -486,6 +495,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                             device.ip_address = ipAddress;
                         }
                         db.SubmitChanges();
+                        break;
                     }
                     catch (Exception)
                     {
@@ -519,6 +529,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                             sessionToTransfer.daily_id = lastOpenedGlobalSession.daily_id;
                             AddMoneyToCash(sessionToTransfer.payed_sum, dailyId);
                             db.SubmitChanges();
+                            break;
                         }
                     }
                     catch (Exception)
@@ -652,7 +663,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                             matchDs.playstation_id = newPlaystation;
                             TimeSpan paidTime =
                                 AddNewSessionController.AddNewSessionControllerInstance()
-                                    .UpdateTimeLeft((decimal) matchDs.payed_sum, newPlaystation, 0, 18900);
+                                    .UpdateTimeLeft((decimal)matchDs.payed_sum, newPlaystation, 0, 18900, DateTime.Now);
                             if (matchDs.start_game != null) matchDs.end_game = matchDs.start_game.Value.Add(paidTime);
                             if (String.IsNullOrWhiteSpace(matchDs.comments))
                             {
@@ -668,11 +679,9 @@ namespace Boom_Manager_Project.DataBaseClasses
                             //                    matchDs.session_discount += 5;// Discount because of replacing
                             //                    matchDs.end_game
                             db.SubmitChanges();
+                            break;
                         }
-                        else
-                        {
-                            MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(39));
-                        }
+                        MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(39));
                     }
                     catch (Exception)
                     {
@@ -716,6 +725,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                         };
                         devicesTable.InsertOnSubmit(device);
                         db.SubmitChanges();
+                        break;
 //                List<string> allConsoles = GetAllTables().Select(t => t.playstation_id).ToList();
 
                         for (int j = 1; j <= 16; j++)
@@ -764,6 +774,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                             };
                             stepsOfDiscountUpgradingsTable.InsertOnSubmit(steps);
                             db.SubmitChanges();
+                            break;
                         }
                         else
                         {

@@ -131,13 +131,14 @@ namespace Boom_Manager_Project.Models
         public TimeSpan GetTimeToPlay(double paidSum, string playstationId, DateTime fromTime)
         {
             var result = new TimeSpan(0, 0, 0, 0);
-            DateTime currentTime = DateTime.Now;
-            if (Math.Abs(paidSum - GetPriceForPlaystationForOneHourWithAllTimeZoneTransferring(playstationId, currentTime)) <= 1)
+            DateTime currentTime = fromTime;//DateTime.Now;
+            if (Math.Abs(paidSum - GetPriceForPlaystationForOneHourWithAllTimeZoneTransferring(playstationId, fromTime)) >= 1)
             {
                 if (currentTime.Minute != 0)
                 {
                     TimeSpan toAccurateTime = TimeSpan.FromMinutes(60 - currentTime.Minute) +
-                                              TimeSpan.FromSeconds(60 - currentTime.Second);
+                                              TimeSpan.FromSeconds(60 - currentTime.Second) + 
+                                              TimeSpan.FromMilliseconds(1000 - currentTime.Millisecond);
                     result = result.Add(toAccurateTime);
                     paidSum -= toAccurateTime.Minutes * GetCurrentPriceForPlaystation(playstationId, currentTime) / 60;
                     currentTime = currentTime.Add(toAccurateTime);
@@ -163,10 +164,12 @@ namespace Boom_Manager_Project.Models
                 if (paidSum > priceForDifference)
                 {
                     paidSum -= priceForDifference;
-                    result.Add(difference);
-                    return result.Add(TimeSpan.FromMinutes(paidSum*60/GetCurrentPriceForPlaystation(playstationId, currentTime)));
+                    result = result.Add(difference);
+                    result = result.Add(TimeSpan.FromMinutes(paidSum * 60 / GetCurrentPriceForPlaystation(playstationId, currentTime)));
+                    return result;
                 }
-                return result.Add(TimeSpan.FromMinutes(paidSum*60/GetCurrentPriceForPlaystation(playstationId, currentTime)));//by cross formula
+                result = result.Add(TimeSpan.FromMinutes(paidSum * 60 / GetCurrentPriceForPlaystation(playstationId, currentTime)));
+                return result; //by cross formula
 //
 //            if (difference < TimeSpan.FromHours(1))
 //            {

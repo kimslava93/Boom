@@ -142,6 +142,7 @@ namespace Boom_Manager_Project
                         (int) dgvOpenedSessions.CurrentRow.Cells[0].Value);
                 if (sessionToClose != null)
                 {
+                    Options.OptionsInstance().TakeScreenShot();
                     _currentOpenedSessionsList =
                         BoomGamebarController.InstanceBgController().CloseSessionBeforeTimer(sessionToClose);
                     dgvOpenedSessions.Invalidate();
@@ -161,6 +162,7 @@ namespace Boom_Manager_Project
             {
                 TextFileWriter.TextFileWriterInstance()
                     .AddSomeDataToLogReport("Кнопка \"Продлить сессию\" была нажата.", Options.FileTypeActionsLogs);
+                Options.OptionsInstance().TakeScreenShot();
                 BoomGamebarController.InstanceBgController()
                     .ExtendTime((int) dgvOpenedSessions.CurrentRow.Cells[0].Value, _currentOpenedSessionsList);
                 _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().GetAllOpenedDaySessions();
@@ -177,6 +179,7 @@ namespace Boom_Manager_Project
             var cs = new ChangeShift(false);
             TextFileWriter.TextFileWriterInstance()
                 .AddSomeDataToLogReport("кнопка \"Смена\" была нажата.", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
             cs.ShowDialog();
             UpdateWorkingStaff();
         }
@@ -298,6 +301,7 @@ namespace Boom_Manager_Project
             var ex = new Expences();
             TextFileWriter.TextFileWriterInstance()
                 .AddSomeDataToLogReport("кнопка \"Затраты\" была нажата.", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
             ex.ShowDialog();
         }
 
@@ -305,6 +309,7 @@ namespace Boom_Manager_Project
         {
             var ol = new OperatorLogin();
             TextFileWriter.TextFileWriterInstance().AddSomeDataToLogReport("Кнопка \"Логин оператора\" нажато\n",Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
             ol.ShowDialog();
             UpdateWorkingStaff();
         }
@@ -315,6 +320,7 @@ namespace Boom_Manager_Project
             {
                 TextFileWriter.TextFileWriterInstance()
                     .AddSomeDataToLogReport("кнопка \"Смена приставки\" была нажата.", Options.FileTypeActionsLogs);
+                Options.OptionsInstance().TakeScreenShot();
                 DaySessionClass sessionToReplace = _currentOpenedSessionsList.FirstOrDefault(ds => ds.Сессия == (int) dgvOpenedSessions.CurrentRow.Cells[0].Value);
                 if (sessionToReplace != null)
                 {
@@ -337,6 +343,7 @@ namespace Boom_Manager_Project
         {
             TextFileWriter.TextFileWriterInstance()
                 .AddSomeDataToLogReport("кнопка \"Выключить свет\" была нажата.", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
             var ep = new EnterPassword("ADMINISTRATOR");
             ep.ShowDialog();
             if (ep.Passed)
@@ -360,6 +367,7 @@ namespace Boom_Manager_Project
             var si = new SellBarItem();
             TextFileWriter.TextFileWriterInstance()
                 .AddSomeDataToLogReport("кнопка \"Продать товар\" была нажата.", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
             si.ShowDialog();
         }
 
@@ -368,6 +376,7 @@ namespace Boom_Manager_Project
             var r = new BarRevision();
             TextFileWriter.TextFileWriterInstance()
                 .AddSomeDataToLogReport("кнопка \"Ревизия\" была нажата.", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
             r.ShowDialog();
         }
 
@@ -376,6 +385,7 @@ namespace Boom_Manager_Project
             var si = new SoldItems();
             TextFileWriter.TextFileWriterInstance()
                 .AddSomeDataToLogReport("кнопка \"Бар\" была нажата.", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
             si.ShowDialog();
         }
 
@@ -423,6 +433,7 @@ namespace Boom_Manager_Project
             var ls = new LastSessions();
             TextFileWriter.TextFileWriterInstance()
                 .AddSomeDataToLogReport("Кнопка последние 10 сессий была нажата!", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
             ls.ShowDialog();
         }
 
@@ -460,6 +471,12 @@ namespace Boom_Manager_Project
                 dgvOpenedSessions.Rows[row].DefaultCellStyle.SelectionBackColor = Color.White;
                 dgvOpenedSessions.Rows[row].DefaultCellStyle.SelectionForeColor = Color.FromArgb(40, 40, 40);
             }
+        }
+
+        private void bTimeTester_Click(object sender, EventArgs e)
+        {
+            var t = new TimeTester();
+            t.ShowDialog();
         }
     }
 }

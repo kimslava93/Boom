@@ -27,6 +27,7 @@ namespace Boom_Manager_Project
             lQuestion.Text = ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(3);
             DailyId = DataBaseClass.Instancedb().GetLastOpenedGlobalSessionDailyId();
             _clientsPerSession = DataBaseClass.Instancedb().GetListOfClientsPerExactSession(_sessionToClose.Сессия);
+            Options.OptionsInstance().TakeScreenShot();
         }
 
         private void bCancel_Click(object sender, EventArgs e)
@@ -68,7 +69,7 @@ namespace Boom_Manager_Project
                     CloseSessionController.InstanceCloseSessionController()
                         .CloseClientBeforeTimeOut(_sessionToClose, _clientsPerSession, currentTime, rtbComments.Text);
                 }
-
+                Options.OptionsInstance().TakeScreenShot();
                 Close();
             }
             else

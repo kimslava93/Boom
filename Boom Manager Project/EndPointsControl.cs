@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
@@ -54,7 +53,10 @@ namespace Boom_Manager_Project
                             if (!ep.On())
                             {
                                 DialogResult dr = MessageBox.Show(
-                                    "Нет соединения! Нажмите Повторить чтобы попытатся снова.", "Ошибка", MessageBoxButtons.RetryCancel);
+                                    @"Нет соединения! Нажмите Повторить чтобы попытатся снова.", @"Ошибка", MessageBoxButtons.RetryCancel);
+                                TextFileWriter.TextFileWriterInstance()
+                                    .AddSomeDataToLogReport("Нет соединения с приставкой " + consoleId,
+                                        Options.FileTypeErrorsLogs);
                                 if (dr == DialogResult.Cancel)
                                 {
                                     return false;
@@ -106,7 +108,10 @@ namespace Boom_Manager_Project
                             if (!ep.Off())
                             {
                                 DialogResult dr = MessageBox.Show(
-                                    "Нет соединения! Нажмите Повторить чтобы попытатся снова.", "Ошибка", MessageBoxButtons.RetryCancel);
+                                    @"Нет соединения! Нажмите Повторить чтобы попытатся снова.", @"Ошибка", MessageBoxButtons.RetryCancel);
+                                TextFileWriter.TextFileWriterInstance()
+                                    .AddSomeDataToLogReport("Нет соединения с приставкой " + consoleId,
+                                        Options.FileTypeErrorsLogs);
                                 if (dr == DialogResult.Cancel)
                                 {
                                     return false;

@@ -81,6 +81,7 @@
             this.dgvLastSessions.TabStop = false;
             this.dgvLastSessions.VirtualMode = true;
             this.dgvLastSessions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLastSessions_CellClick);
+            this.dgvLastSessions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLastSessions_CellDoubleClick);
             this.dgvLastSessions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLastSessions_CellFormatting);
             // 
             // bClose

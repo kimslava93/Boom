@@ -39,6 +39,11 @@ namespace Boom_Manager_Project
 
         private void dgvLastSessions_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+           
+        }
+
+        private void dgvLastSessions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
             if (dgvLastSessions.CurrentRow != null)
             {
                 var cs = new CheckoutPriceAndTime((int)dgvLastSessions.CurrentRow.Cells[0].Value);

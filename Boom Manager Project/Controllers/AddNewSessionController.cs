@@ -111,7 +111,7 @@ namespace Boom_Manager_Project.Controllers
             return null;
         }
 
-        public decimal UpdatePrice(string discountSize, string playstationId, decimal hoursLeft, decimal minutesLeft,DateTime fromTime)
+        public decimal UpdatePrice(/*string discountSize,*/ string playstationId, decimal hoursLeft, decimal minutesLeft,DateTime fromTime)
         {
             var currentDateTime = fromTime;
             if (hoursLeft < 0 || minutesLeft < 0)
@@ -181,13 +181,13 @@ namespace Boom_Manager_Project.Controllers
             return false;
         }
         public TimeSpan UpdateTimeLeft(decimal priceValue, string playstationId, decimal minimumValue,
-            decimal maximumValue)
+            decimal maximumValue,DateTime currentTime)
         {
             if (!CheckOnNormalPrice(priceValue, minimumValue, maximumValue))
             {
                 priceValue = minimumValue;
             }
-            TimeSpan result = UpdateRemainedTimeOnPaidPriceChanged((double) priceValue, playstationId);
+            TimeSpan result = UpdateRemainedTimeOnPaidPriceChanged((double) priceValue, playstationId,currentTime);
             return result;
         }
 
@@ -201,14 +201,14 @@ namespace Boom_Manager_Project.Controllers
             return true;
         }
 
-        private TimeSpan UpdateRemainedTimeOnPaidPriceChanged(double remainedMoney, string playstationId)
+        private TimeSpan UpdateRemainedTimeOnPaidPriceChanged(double remainedMoney, string playstationId,DateTime cuurentTime)
         {
             AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime = DateTime.Now;
             try
             {
-                if (AddNewSessionModel.InstanceAddNewSessionModel().GetCurrentPriceForPlaystation(playstationId, AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime) > 0)
+                if (AddNewSessionModel.InstanceAddNewSessionModel().GetCurrentPriceForPlaystation(playstationId, cuurentTime) > 0)
                 {
-                    TimeSpan paidTime = AddNewSessionModel.InstanceAddNewSessionModel().GetTimeToPlay(remainedMoney, playstationId, AddNewSessionModel.InstanceAddNewSessionModel().CurrentDateTime);
+                    TimeSpan paidTime = AddNewSessionModel.InstanceAddNewSessionModel().GetTimeToPlay(remainedMoney, playstationId, cuurentTime);
 
                     if ((paidTime.Days) * 24 + paidTime.Hours > 0 || paidTime.Minutes > 0)
                     {

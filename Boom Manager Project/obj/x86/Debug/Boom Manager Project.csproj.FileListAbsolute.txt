@@ -37,7 +37,6 @@ E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.exe.
 E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.exe
 E:\Boom Manager Project\Boom Manager Project\bin\Debug\Boom Manager Project.pdb
 E:\Boom Manager Project\Boom Manager Project\bin\Debug\DocX.dll
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csprojResolveAssemblyReference.cache
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddDiscountCardToSession.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewClientWithDiscountCard.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.FAddNewSession.resources
@@ -51,6 +50,7 @@ E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ConsoleManager.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.AddNewDevice.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.ClientManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CheckoutPriceAndTime.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.LastSessions.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CreateNewConsole.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CreateNewDiscountStep.resources
@@ -79,4 +79,5 @@ E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csproj.GenerateResource.Cache
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.exe
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.pdb
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.CheckoutPriceAndTime.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom Manager Project.csprojResolveAssemblyReference.cache
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Debug\Boom_Manager_Project.TimeTester.resources

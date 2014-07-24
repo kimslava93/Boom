@@ -1,8 +1,6 @@
-﻿
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Net.Mime;
 using System.Windows.Forms;
 
 namespace Boom_Manager_Project
@@ -27,7 +25,17 @@ namespace Boom_Manager_Project
            var bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
            var graphics = Graphics.FromImage(bitmap);
            graphics.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
-           bitmap.Save("C:\\Users\\user\\Desktop\\" + DateTime.Now.ToString("MMM-dd-HH-mm") + "_screenshot.jpeg", ImageFormat.Jpeg);
+//           bitmap.Save("C:\\Users\\user\\Desktop\\" + DateTime.Now.ToString("MMM-dd-HH-mm") + "_screenshot.jpeg", ImageFormat.Jpeg);
+           bitmap.Save("ScreenShotLogs\\" + DateTime.Now.ToString("MMM-dd-HH-mm-ss") + "_screenshot.jpeg", ImageFormat.Jpeg);
         }
+//        public void TakeScreenShotLog(string nameOfFile)
+//        {
+//            var bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+//            var graphics = Graphics.FromImage(bitmap);
+//            graphics.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
+//            //           bitmap.Save("C:\\Users\\user\\Desktop\\" + DateTime.Now.ToString("MMM-dd-HH-mm") + "_screenshot.jpeg", ImageFormat.Jpeg);
+//            bitmap.Save("ScreenShotLogs\\" + DateTime.Now.ToString("MMM-dd-HH-mm-ss") + "_" + nameOfFile + ".jpeg",
+//                ImageFormat.Jpeg);
+//        }
     }
 }

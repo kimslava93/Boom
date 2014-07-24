@@ -17,6 +17,7 @@ namespace Boom_Manager_Project
         {
             SetDefaultValues();
             CalculatePrice();
+            Options.OptionsInstance().TakeScreenShot();
         }
         private void LoadDgv()
         {
@@ -40,6 +41,7 @@ namespace Boom_Manager_Project
                     .AddSomeDataToLogReport(
                         "В форме \"Продать товар\" была нажата кнопка Продать с введеными данными: Товар " + dgvAllItems.CurrentRow.Cells[1].Value + @" в количестве " + numUpDNumber.Value + @"шт. был успешно занесен в список проданных товаров!",
                         Options.FileTypeActionsLogs);
+                Options.OptionsInstance().TakeScreenShot();
                 SetDefaultValues();
             }
             else

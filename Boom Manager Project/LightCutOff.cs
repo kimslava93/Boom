@@ -30,7 +30,8 @@ namespace Boom_Manager_Project
         {
             LoadDgv();
             dgvSessionsToClose.Columns[0].HeaderText = @"Приставки";
-
+            TextFileWriter.TextFileWriterInstance().AddSomeDataToLogReport("Форма ВЫкл Свет Была открыта", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
         }
 
         private void LoadDgv()
@@ -49,6 +50,8 @@ namespace Boom_Manager_Project
         {
             if (dgvSessionsToClose.CurrentRow != null)
             {
+                TextFileWriter.TextFileWriterInstance().AddSomeDataToLogReport("Форма ВЫкл Свет Была открыта", Options.FileTypeActionsLogs);
+                Options.OptionsInstance().TakeScreenShot();
                 var clickedSession = (from s in _allSessions
                     where s.Приставка == (string) dgvSessionsToClose.CurrentRow.Cells[0].Value
                     select s).SingleOrDefault();
@@ -57,6 +60,8 @@ namespace Boom_Manager_Project
                     List<clients_per_session_t> clientsPerSession =
                         DataBaseClass.Instancedb().GetListOfClientsPerExactSession(clickedSession.Сессия);
                 }
+                TextFileWriter.TextFileWriterInstance().AddSomeDataToLogReport("Форма ВЫкл Свет Была открыта", Options.FileTypeActionsLogs);
+                Options.OptionsInstance().TakeScreenShot();
             }
         }
 
@@ -75,9 +80,13 @@ namespace Boom_Manager_Project
                         .CloseClientBecauseOfLightCutsOff(clickedSession, clientsPerSession, DateTime.Now,
                             "Выключение света");
                 }
+                TextFileWriter.TextFileWriterInstance().AddSomeDataToLogReport("Форма ВЫкл Свет Была открыта", Options.FileTypeActionsLogs);
+                Options.OptionsInstance().TakeScreenShot();
             }
             LoadDgv();
             dgvSessionsToClose.Columns[0].HeaderText = @"Приставки";
+            TextFileWriter.TextFileWriterInstance().AddSomeDataToLogReport("Форма ВЫкл Свет Была открыта", Options.FileTypeActionsLogs);
+            Options.OptionsInstance().TakeScreenShot();
         }
 
         private void bSwitchOff_Click(object sender, EventArgs e)

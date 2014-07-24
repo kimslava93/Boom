@@ -27,6 +27,7 @@ namespace Boom_Manager_Project.DataBaseClasses
         {
             tbOldPLaystationId.Text = _ds.Приставка;
             UpdatePlaystationList();
+            Options.OptionsInstance().TakeScreenShot();
         }
         private void UpdatePlaystationList()
         {
@@ -64,9 +65,15 @@ namespace Boom_Manager_Project.DataBaseClasses
             TextFileWriter.TextFileWriterInstance()
                .AddSomeDataToLogReport("В форме смена приставки, была нажата кнопка добавить " + cbPlaystationId.Text,
                    Options.FileTypeActionsLogs);
-            if (rtbComments.Text.Length > 5 && TableIsAvailable())
+            Options.OptionsInstance().TakeScreenShot();
+            if ((rtbComments.Text.Length > 5 && TableIsAvailable() && rbCustom.Checked) || (TableIsAvailable() && (rbClientWish.Checked || rbChecking.Checked)))
             {
-                ChangePlaystationController.ChangePlaystationControllerInstance().ReplaceClient(_ds, cbPlaystationId.Text, rtbComments.Text);
+                if(rbClientWish.Checked)
+                    ChangePlaystationController.ChangePlaystationControllerInstance().ReplaceClient(_ds, cbPlaystationId.Text, "Желание клиента");
+                else if(rbChecking.Checked)
+                    ChangePlaystationController.ChangePlaystationControllerInstance().ReplaceClient(_ds, cbPlaystationId.Text, "Проверка");
+                else
+                    ChangePlaystationController.ChangePlaystationControllerInstance().ReplaceClient(_ds, cbPlaystationId.Text, rtbComments.Text);
             }
             else
             {
@@ -81,6 +88,39 @@ namespace Boom_Manager_Project.DataBaseClasses
             TextFileWriter.TextFileWriterInstance()
                 .AddSomeDataToLogReport("В форме смена приставки, была выбрана приставка " + cbPlaystationId.Text,
                     Options.FileTypeActionsLogs);
+        }
+
+        private void rbCustom_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbCustom.Checked)
+            {
+                rbChecking.Checked = false;
+                rbClientWish.Checked = false;
+                rtbComments.Enabled = true;
+                rtbComments.ReadOnly = false;
+            }
+        }
+
+        private void rbProblem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbChecking.Checked)
+            {
+                rbCustom.Checked = false;
+                rbClientWish.Checked = false;
+                rtbComments.Enabled = false;
+                rtbComments.ReadOnly = true;
+            }
+        }
+
+        private void rbClientWish_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbClientWish.Checked)
+            {
+                rbCustom.Checked = false;
+                rbChecking.Checked = false;
+                rtbComments.Enabled = false;
+                rtbComments.ReadOnly = true;
+            }
         }
 
     

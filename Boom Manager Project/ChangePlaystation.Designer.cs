@@ -36,6 +36,9 @@
             this.bCancel = new System.Windows.Forms.Button();
             this.bAddSession = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.rbCustom = new System.Windows.Forms.RadioButton();
+            this.rbClientWish = new System.Windows.Forms.RadioButton();
+            this.rbChecking = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // rtbComments
@@ -44,7 +47,7 @@
             this.rtbComments.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbComments.DetectUrls = false;
             this.rtbComments.ForeColor = System.Drawing.Color.White;
-            this.rtbComments.Location = new System.Drawing.Point(28, 152);
+            this.rtbComments.Location = new System.Drawing.Point(28, 205);
             this.rtbComments.MaxLength = 100;
             this.rtbComments.Name = "rtbComments";
             this.rtbComments.ShortcutsEnabled = false;
@@ -111,7 +114,7 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(12, 314);
+            this.bCancel.Location = new System.Drawing.Point(12, 360);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(96, 38);
             this.bCancel.TabIndex = 25;
@@ -128,7 +131,7 @@
             this.bAddSession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddSession.ForeColor = System.Drawing.Color.White;
-            this.bAddSession.Location = new System.Drawing.Point(279, 314);
+            this.bAddSession.Location = new System.Drawing.Point(279, 360);
             this.bAddSession.Name = "bAddSession";
             this.bAddSession.Size = new System.Drawing.Size(96, 38);
             this.bAddSession.TabIndex = 24;
@@ -141,11 +144,46 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(124, 128);
+            this.label1.Location = new System.Drawing.Point(136, 181);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 21);
             this.label1.TabIndex = 22;
             this.label1.Text = "Комментарии";
+            // 
+            // rbCustom
+            // 
+            this.rbCustom.AutoSize = true;
+            this.rbCustom.Checked = true;
+            this.rbCustom.Location = new System.Drawing.Point(28, 119);
+            this.rbCustom.Name = "rbCustom";
+            this.rbCustom.Size = new System.Drawing.Size(123, 25);
+            this.rbCustom.TabIndex = 26;
+            this.rbCustom.TabStop = true;
+            this.rbCustom.Text = "Комментарии";
+            this.rbCustom.UseVisualStyleBackColor = true;
+            this.rbCustom.CheckedChanged += new System.EventHandler(this.rbCustom_CheckedChanged);
+            // 
+            // rbClientWish
+            // 
+            this.rbClientWish.AutoSize = true;
+            this.rbClientWish.Location = new System.Drawing.Point(28, 150);
+            this.rbClientWish.Name = "rbClientWish";
+            this.rbClientWish.Size = new System.Drawing.Size(150, 25);
+            this.rbClientWish.TabIndex = 26;
+            this.rbClientWish.Text = "Желание клиента";
+            this.rbClientWish.UseVisualStyleBackColor = true;
+            this.rbClientWish.CheckedChanged += new System.EventHandler(this.rbClientWish_CheckedChanged);
+            // 
+            // rbChecking
+            // 
+            this.rbChecking.AutoSize = true;
+            this.rbChecking.Location = new System.Drawing.Point(215, 119);
+            this.rbChecking.Name = "rbChecking";
+            this.rbChecking.Size = new System.Drawing.Size(97, 25);
+            this.rbChecking.TabIndex = 26;
+            this.rbChecking.Text = "Проверка";
+            this.rbChecking.UseVisualStyleBackColor = true;
+            this.rbChecking.CheckedChanged += new System.EventHandler(this.rbProblem_CheckedChanged);
             // 
             // ChangePlaystation
             // 
@@ -153,8 +191,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(387, 364);
+            this.ClientSize = new System.Drawing.Size(387, 410);
             this.ControlBox = false;
+            this.Controls.Add(this.rbClientWish);
+            this.Controls.Add(this.rbChecking);
+            this.Controls.Add(this.rbCustom);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bAddSession);
             this.Controls.Add(this.tbOldPLaystationId);
@@ -188,5 +229,8 @@
         private System.Windows.Forms.Button bCancel;
         private System.Windows.Forms.Button bAddSession;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton rbCustom;
+        private System.Windows.Forms.RadioButton rbClientWish;
+        private System.Windows.Forms.RadioButton rbChecking;
     }
 }

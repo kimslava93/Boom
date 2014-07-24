@@ -28,10 +28,12 @@ namespace Boom_Manager_Project
         private void EnterPassword_Load(object sender, EventArgs e)
         {
             lWarning.Text = ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(5);
+            Options.OptionsInstance().TakeScreenShot();
         }
 
         private void CheckValidityOfPassword()
         {
+            Options.OptionsInstance().TakeScreenShot();
             if (!String.IsNullOrEmpty(tbLogin.Text))
             {
                 personal_info_t matchedStaff = (from l in _db.GetTable<personal_info_t>()
@@ -49,6 +51,7 @@ namespace Boom_Manager_Project
                         }
                         else
                         {
+                            Options.OptionsInstance().TakeScreenShot();
                             MessageWrongInput();
                         }
                     }
@@ -65,6 +68,7 @@ namespace Boom_Manager_Project
                         }
                         else
                         {
+                            Options.OptionsInstance().TakeScreenShot();
                             MessageWrongInput();
                         }
                     }
@@ -78,6 +82,7 @@ namespace Boom_Manager_Project
             {
                 MessageWrongInput();
             }
+            Options.OptionsInstance().TakeScreenShot();
         }
 
         private void MessageWrongInput()
