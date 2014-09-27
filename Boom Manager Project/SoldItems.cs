@@ -26,5 +26,14 @@ namespace Boom_Manager_Project
             dgvAllItems.DataSource = DataBaseClass.Instancedb().GetListOfSoldItems(DataBaseClass.Instancedb().GetOpenedGlobalSession().daily_id);
             dgvAllItems.Invalidate();
         }
+
+        private void bDeleteSpend_Click(object sender, EventArgs e)
+        {
+            if (dgvAllItems.CurrentRow != null)
+            {
+                DataBaseClass.Instancedb().DeleteSoldItem((int)dgvAllItems.CurrentRow.Cells[0].Value);
+                LoadDgv();
+            }
+        }
     }
 }

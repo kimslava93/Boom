@@ -188,7 +188,7 @@ namespace Boom_Manager_Project.Controllers
                 priceValue = minimumValue;
             }
             TimeSpan result = UpdateRemainedTimeOnPaidPriceChanged((double) priceValue, playstationId,currentTime);
-            return result;
+            return Options.OptionsInstance().RoundTimeSpan(result);
         }
 
         private bool CheckOnNormalPrice(decimal priceToCheck, decimal minimum, decimal maximum)

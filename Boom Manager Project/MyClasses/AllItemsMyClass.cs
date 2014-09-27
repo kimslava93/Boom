@@ -2,6 +2,7 @@
 {
     public class AllItemsMyClass
     {
+        public int Num { get; set; }
         public string ItemId { get; set; }
         public string CategoryName { get; set; }
         public double Cost { get; set; }

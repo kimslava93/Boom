@@ -81,12 +81,12 @@ namespace Boom_Manager_Project.DataBaseClasses
     partial void Inserttimezones_t(timezones_t instance);
     partial void Updatetimezones_t(timezones_t instance);
     partial void Deletetimezones_t(timezones_t instance);
-    partial void Insertitems_table(items_table instance);
-    partial void Updateitems_table(items_table instance);
-    partial void Deleteitems_table(items_table instance);
     partial void Insertsold_bar_history_table(sold_bar_history_table instance);
     partial void Updatesold_bar_history_table(sold_bar_history_table instance);
     partial void Deletesold_bar_history_table(sold_bar_history_table instance);
+    partial void Insertitems_table(items_table instance);
+    partial void Updateitems_table(items_table instance);
+    partial void Deleteitems_table(items_table instance);
     partial void Insertbar_revision_t(bar_revision_t instance);
     partial void Updatebar_revision_t(bar_revision_t instance);
     partial void Deletebar_revision_t(bar_revision_t instance);
@@ -258,19 +258,19 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
-		public System.Data.Linq.Table<items_table> items_tables
-		{
-			get
-			{
-				return this.GetTable<items_table>();
-			}
-		}
-		
 		public System.Data.Linq.Table<sold_bar_history_table> sold_bar_history_tables
 		{
 			get
 			{
 				return this.GetTable<sold_bar_history_table>();
+			}
+		}
+		
+		public System.Data.Linq.Table<items_table> items_tables
+		{
+			get
+			{
+				return this.GetTable<items_table>();
 			}
 		}
 		
@@ -4321,220 +4321,6 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.items_table")]
-	public partial class items_table : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _item_id;
-		
-		private System.Nullable<double> _cost;
-		
-		private string _category_name;
-		
-		private string _item_description;
-		
-		private System.Nullable<int> _number_left;
-		
-		private EntitySet<sold_bar_history_table> _sold_bar_history_tables;
-		
-		private EntitySet<bar_revision_t> _bar_revision_ts;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onitem_idChanging(string value);
-    partial void Onitem_idChanged();
-    partial void OncostChanging(System.Nullable<double> value);
-    partial void OncostChanged();
-    partial void Oncategory_nameChanging(string value);
-    partial void Oncategory_nameChanged();
-    partial void Onitem_descriptionChanging(string value);
-    partial void Onitem_descriptionChanged();
-    partial void Onnumber_leftChanging(System.Nullable<int> value);
-    partial void Onnumber_leftChanged();
-    #endregion
-		
-		public items_table()
-		{
-			this._sold_bar_history_tables = new EntitySet<sold_bar_history_table>(new Action<sold_bar_history_table>(this.attach_sold_bar_history_tables), new Action<sold_bar_history_table>(this.detach_sold_bar_history_tables));
-			this._bar_revision_ts = new EntitySet<bar_revision_t>(new Action<bar_revision_t>(this.attach_bar_revision_ts), new Action<bar_revision_t>(this.detach_bar_revision_ts));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_item_id", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string item_id
-		{
-			get
-			{
-				return this._item_id;
-			}
-			set
-			{
-				if ((this._item_id != value))
-				{
-					this.Onitem_idChanging(value);
-					this.SendPropertyChanging();
-					this._item_id = value;
-					this.SendPropertyChanged("item_id");
-					this.Onitem_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cost", DbType="Float")]
-		public System.Nullable<double> cost
-		{
-			get
-			{
-				return this._cost;
-			}
-			set
-			{
-				if ((this._cost != value))
-				{
-					this.OncostChanging(value);
-					this.SendPropertyChanging();
-					this._cost = value;
-					this.SendPropertyChanged("cost");
-					this.OncostChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_category_name", DbType="VarChar(20)")]
-		public string category_name
-		{
-			get
-			{
-				return this._category_name;
-			}
-			set
-			{
-				if ((this._category_name != value))
-				{
-					this.Oncategory_nameChanging(value);
-					this.SendPropertyChanging();
-					this._category_name = value;
-					this.SendPropertyChanged("category_name");
-					this.Oncategory_nameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_item_description", DbType="VarChar(50)")]
-		public string item_description
-		{
-			get
-			{
-				return this._item_description;
-			}
-			set
-			{
-				if ((this._item_description != value))
-				{
-					this.Onitem_descriptionChanging(value);
-					this.SendPropertyChanging();
-					this._item_description = value;
-					this.SendPropertyChanged("item_description");
-					this.Onitem_descriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number_left", DbType="Int")]
-		public System.Nullable<int> number_left
-		{
-			get
-			{
-				return this._number_left;
-			}
-			set
-			{
-				if ((this._number_left != value))
-				{
-					this.Onnumber_leftChanging(value);
-					this.SendPropertyChanging();
-					this._number_left = value;
-					this.SendPropertyChanged("number_left");
-					this.Onnumber_leftChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="items_table_sold_bar_history_table", Storage="_sold_bar_history_tables", ThisKey="item_id", OtherKey="item_id")]
-		public EntitySet<sold_bar_history_table> sold_bar_history_tables
-		{
-			get
-			{
-				return this._sold_bar_history_tables;
-			}
-			set
-			{
-				this._sold_bar_history_tables.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="items_table_bar_revision_t", Storage="_bar_revision_ts", ThisKey="item_id", OtherKey="item_id")]
-		public EntitySet<bar_revision_t> bar_revision_ts
-		{
-			get
-			{
-				return this._bar_revision_ts;
-			}
-			set
-			{
-				this._bar_revision_ts.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_sold_bar_history_tables(sold_bar_history_table entity)
-		{
-			this.SendPropertyChanging();
-			entity.items_table = this;
-		}
-		
-		private void detach_sold_bar_history_tables(sold_bar_history_table entity)
-		{
-			this.SendPropertyChanging();
-			entity.items_table = null;
-		}
-		
-		private void attach_bar_revision_ts(bar_revision_t entity)
-		{
-			this.SendPropertyChanging();
-			entity.items_table = this;
-		}
-		
-		private void detach_bar_revision_ts(bar_revision_t entity)
-		{
-			this.SendPropertyChanging();
-			entity.items_table = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.sold_bar_history_table")]
 	public partial class sold_bar_history_table : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4799,6 +4585,244 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.items_table")]
+	public partial class items_table : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _item_id;
+		
+		private System.Nullable<double> _cost;
+		
+		private string _category_name;
+		
+		private string _item_description;
+		
+		private System.Nullable<int> _number_left;
+		
+		private System.Nullable<int> _item_num;
+		
+		private EntitySet<sold_bar_history_table> _sold_bar_history_tables;
+		
+		private EntitySet<bar_revision_t> _bar_revision_ts;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onitem_idChanging(string value);
+    partial void Onitem_idChanged();
+    partial void OncostChanging(System.Nullable<double> value);
+    partial void OncostChanged();
+    partial void Oncategory_nameChanging(string value);
+    partial void Oncategory_nameChanged();
+    partial void Onitem_descriptionChanging(string value);
+    partial void Onitem_descriptionChanged();
+    partial void Onnumber_leftChanging(System.Nullable<int> value);
+    partial void Onnumber_leftChanged();
+    partial void Onitem_numChanging(System.Nullable<int> value);
+    partial void Onitem_numChanged();
+    #endregion
+		
+		public items_table()
+		{
+			this._sold_bar_history_tables = new EntitySet<sold_bar_history_table>(new Action<sold_bar_history_table>(this.attach_sold_bar_history_tables), new Action<sold_bar_history_table>(this.detach_sold_bar_history_tables));
+			this._bar_revision_ts = new EntitySet<bar_revision_t>(new Action<bar_revision_t>(this.attach_bar_revision_ts), new Action<bar_revision_t>(this.detach_bar_revision_ts));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_item_id", DbType="VarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string item_id
+		{
+			get
+			{
+				return this._item_id;
+			}
+			set
+			{
+				if ((this._item_id != value))
+				{
+					this.Onitem_idChanging(value);
+					this.SendPropertyChanging();
+					this._item_id = value;
+					this.SendPropertyChanged("item_id");
+					this.Onitem_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cost", DbType="Float")]
+		public System.Nullable<double> cost
+		{
+			get
+			{
+				return this._cost;
+			}
+			set
+			{
+				if ((this._cost != value))
+				{
+					this.OncostChanging(value);
+					this.SendPropertyChanging();
+					this._cost = value;
+					this.SendPropertyChanged("cost");
+					this.OncostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_category_name", DbType="VarChar(20)")]
+		public string category_name
+		{
+			get
+			{
+				return this._category_name;
+			}
+			set
+			{
+				if ((this._category_name != value))
+				{
+					this.Oncategory_nameChanging(value);
+					this.SendPropertyChanging();
+					this._category_name = value;
+					this.SendPropertyChanged("category_name");
+					this.Oncategory_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_item_description", DbType="VarChar(50)")]
+		public string item_description
+		{
+			get
+			{
+				return this._item_description;
+			}
+			set
+			{
+				if ((this._item_description != value))
+				{
+					this.Onitem_descriptionChanging(value);
+					this.SendPropertyChanging();
+					this._item_description = value;
+					this.SendPropertyChanged("item_description");
+					this.Onitem_descriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_number_left", DbType="Int")]
+		public System.Nullable<int> number_left
+		{
+			get
+			{
+				return this._number_left;
+			}
+			set
+			{
+				if ((this._number_left != value))
+				{
+					this.Onnumber_leftChanging(value);
+					this.SendPropertyChanging();
+					this._number_left = value;
+					this.SendPropertyChanged("number_left");
+					this.Onnumber_leftChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_item_num", DbType="Int")]
+		public System.Nullable<int> item_num
+		{
+			get
+			{
+				return this._item_num;
+			}
+			set
+			{
+				if ((this._item_num != value))
+				{
+					this.Onitem_numChanging(value);
+					this.SendPropertyChanging();
+					this._item_num = value;
+					this.SendPropertyChanged("item_num");
+					this.Onitem_numChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="items_table_sold_bar_history_table", Storage="_sold_bar_history_tables", ThisKey="item_id", OtherKey="item_id")]
+		public EntitySet<sold_bar_history_table> sold_bar_history_tables
+		{
+			get
+			{
+				return this._sold_bar_history_tables;
+			}
+			set
+			{
+				this._sold_bar_history_tables.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="items_table_bar_revision_t", Storage="_bar_revision_ts", ThisKey="item_id", OtherKey="item_id")]
+		public EntitySet<bar_revision_t> bar_revision_ts
+		{
+			get
+			{
+				return this._bar_revision_ts;
+			}
+			set
+			{
+				this._bar_revision_ts.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_sold_bar_history_tables(sold_bar_history_table entity)
+		{
+			this.SendPropertyChanging();
+			entity.items_table = this;
+		}
+		
+		private void detach_sold_bar_history_tables(sold_bar_history_table entity)
+		{
+			this.SendPropertyChanging();
+			entity.items_table = null;
+		}
+		
+		private void attach_bar_revision_ts(bar_revision_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.items_table = this;
+		}
+		
+		private void detach_bar_revision_ts(bar_revision_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.items_table = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bar_revision_t")]
 	public partial class bar_revision_t : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4816,6 +4840,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		private System.Nullable<int> _left_num;
 		
 		private int _bar_revision_id;
+		
+		private System.Nullable<int> _bar_item_num;
 		
 		private EntityRef<global_session_t> _global_session_t;
 		
@@ -4837,6 +4863,8 @@ namespace Boom_Manager_Project.DataBaseClasses
     partial void Onleft_numChanged();
     partial void Onbar_revision_idChanging(int value);
     partial void Onbar_revision_idChanged();
+    partial void Onbar_item_numChanging(System.Nullable<int> value);
+    partial void Onbar_item_numChanged();
     #endregion
 		
 		public bar_revision_t()
@@ -4970,6 +4998,26 @@ namespace Boom_Manager_Project.DataBaseClasses
 					this._bar_revision_id = value;
 					this.SendPropertyChanged("bar_revision_id");
 					this.Onbar_revision_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bar_item_num", DbType="Int")]
+		public System.Nullable<int> bar_item_num
+		{
+			get
+			{
+				return this._bar_item_num;
+			}
+			set
+			{
+				if ((this._bar_item_num != value))
+				{
+					this.Onbar_item_numChanging(value);
+					this.SendPropertyChanging();
+					this._bar_item_num = value;
+					this.SendPropertyChanged("bar_item_num");
+					this.Onbar_item_numChanged();
 				}
 			}
 		}

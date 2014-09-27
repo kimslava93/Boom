@@ -174,6 +174,7 @@
             this.numUpDCurMinute.Name = "numUpDCurMinute";
             this.numUpDCurMinute.Size = new System.Drawing.Size(72, 29);
             this.numUpDCurMinute.TabIndex = 39;
+            this.numUpDCurMinute.ValueChanged += new System.EventHandler(this.numUpDCurMinute_ValueChanged);
             // 
             // numUpDCurHour
             // 
@@ -191,6 +192,7 @@
             this.numUpDCurHour.Name = "numUpDCurHour";
             this.numUpDCurHour.Size = new System.Drawing.Size(72, 29);
             this.numUpDCurHour.TabIndex = 38;
+            this.numUpDCurHour.ValueChanged += new System.EventHandler(this.numUpDCurHour_ValueChanged);
             // 
             // label1
             // 
@@ -358,6 +360,7 @@
             this.numUpDCurTimeSeconds.Name = "numUpDCurTimeSeconds";
             this.numUpDCurTimeSeconds.Size = new System.Drawing.Size(72, 29);
             this.numUpDCurTimeSeconds.TabIndex = 39;
+            this.numUpDCurTimeSeconds.ValueChanged += new System.EventHandler(this.numUpDCurTimeSeconds_ValueChanged);
             // 
             // bSetCurTime
             // 

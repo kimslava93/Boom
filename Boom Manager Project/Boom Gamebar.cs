@@ -441,14 +441,10 @@ namespace Boom_Manager_Project
         {
             foreach (DataGridViewRow r in dgvOpenedSessions.Rows)
             {
-                if(TimeSpan.Parse(r.Cells[4].Value.ToString()) < TimeSpan.FromMinutes(5))
+                if(TimeSpan.Parse(r.Cells[4].Value.ToString()) < TimeSpan.FromMinutes(10))
                 {
                     PaintSoonToCloseSession(r.Index);
                 }
-//                if (r.Оставшееся_время < TimeSpan.FromMinutes(5))
-//                {
-////                    PaintSoonToCloseSession(dgvOpenedSessions.Rows[]);
-//                }
             }
         }
 
@@ -477,6 +473,12 @@ namespace Boom_Manager_Project
         {
             var t = new TimeTester();
             t.ShowDialog();
+        }
+
+        private void bAllExpenses_Click(object sender, EventArgs e)
+        {
+            var ae = new AllExpences();
+            ae.ShowDialog();
         }
     }
 }

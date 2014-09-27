@@ -195,17 +195,6 @@
       <Association Name="timezones_t_playstation_timezone" Member="playstation_timezones" ThisKey="timezone_name" OtherKey="timezone_name" Type="playstation_timezone" />
     </Type>
   </Table>
-  <Table Name="dbo.items_table" Member="items_tables">
-    <Type Name="items_table">
-      <Column Name="item_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="cost" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="category_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="item_description" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="number_left" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="items_table_sold_bar_history_table" Member="sold_bar_history_tables" ThisKey="item_id" OtherKey="item_id" Type="sold_bar_history_table" />
-      <Association Name="items_table_bar_revision_t" Member="bar_revision_ts" ThisKey="item_id" OtherKey="item_id" Type="bar_revision_t" />
-    </Type>
-  </Table>
   <Table Name="dbo.sold_bar_history_table" Member="sold_bar_history_tables">
     <Type Name="sold_bar_history_table">
       <Column Name="daily_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -218,6 +207,18 @@
       <Association Name="items_table_sold_bar_history_table" Member="items_table" ThisKey="item_id" OtherKey="item_id" Type="items_table" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.items_table" Member="items_tables">
+    <Type Name="items_table">
+      <Column Name="item_id" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cost" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="category_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="item_description" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="number_left" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="item_num" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="items_table_sold_bar_history_table" Member="sold_bar_history_tables" ThisKey="item_id" OtherKey="item_id" Type="sold_bar_history_table" />
+      <Association Name="items_table_bar_revision_t" Member="bar_revision_ts" ThisKey="item_id" OtherKey="item_id" Type="bar_revision_t" />
+    </Type>
+  </Table>
   <Table Name="dbo.bar_revision_t" Member="bar_revision_ts">
     <Type Name="bar_revision_t">
       <Column Name="daily_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -226,6 +227,7 @@
       <Column Name="amount_bought" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="left_num" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="bar_revision_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="bar_item_num" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="global_session_t_bar_revision_t" Member="global_session_t" ThisKey="daily_id" OtherKey="daily_id" Type="global_session_t" IsForeignKey="true" />
       <Association Name="items_table_bar_revision_t" Member="items_table" ThisKey="item_id" OtherKey="item_id" Type="items_table" IsForeignKey="true" />
     </Type>

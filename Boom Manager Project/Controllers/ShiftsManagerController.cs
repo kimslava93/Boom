@@ -154,6 +154,7 @@ namespace Boom_Manager_Project.Controllers
             }
 
             PrintExpenses(expenses, doc);
+            PrintRevision(DataBaseClass.Instancedb().GetAllBarRevisionItems(dailyId), doc);
             PrintSoldBarRevision(DataBaseClass.Instancedb().GetListOfSoldItems(dailyId), doc);
             PrintWithdrownMoney(allWithdrownMoney, doc);
             try
@@ -220,6 +221,33 @@ namespace Boom_Manager_Project.Controllers
                 double price = DataBaseClass.Instancedb().GetItemDataById(si.Наименование).Цена;
                 doc.InsertParagraph(si.Время + ":     " + si.Наименование + "          " + price
                                     + "    " + si.Количество  +"        " + (price*si.Количество) + " сом");
+            }
+        }
+        private void PrintRevision(IEnumerable<BarRevisionMyClass> revision, DocX doc)
+        {
+            BarRevisionController.BarRevisionControllerInstance().InsertOrUpdateAllItemsInBar();
+            for (int i = 0; i < 5; i++)
+            {
+                doc.InsertParagraph();
+            }
+            doc.InsertParagraph("Ревизия:");
+            var barRevisionMyClasses = revision as IList<BarRevisionMyClass> ?? revision.ToList();
+            doc.InsertTable(barRevisionMyClasses.Count()+2, 2);
+            doc.PageLayout.Orientation = Orientation.Landscape;
+            Table revisionTable = doc.Tables[2];
+            revisionTable.AutoFit = AutoFit.Contents;
+            revisionTable.Design = TableDesign.TableGrid;
+
+            revisionTable.Rows[0].Cells[0].Paragraphs[0].InsertText("Наименование");
+            revisionTable.Rows[0].Cells[1].Paragraphs[0].InsertText("Продано");
+            for (int i = 0; i < barRevisionMyClasses.Count(); i++)
+            {
+                revisionTable.Rows[i + 1].Cells[0].Paragraphs[0].InsertText(barRevisionMyClasses[i].Наименование);
+                revisionTable.Rows[i + 1].Cells[1].Paragraphs[0].InsertText(barRevisionMyClasses[i].Продано.ToString(CultureInfo.InvariantCulture));
+            }
+            foreach (var si in barRevisionMyClasses)
+            {
+                
             }
         }
         private void PrintExpenses(IEnumerable<expenses_t> allExpenses, DocX doc)

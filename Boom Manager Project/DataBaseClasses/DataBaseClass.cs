@@ -594,6 +594,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     where startGame != null
                     let endGame = d.end_game
                     where endGame != null
+                    where d.session_state != "opened" 
                     select new DaySessionForShiftReport
                     {
                         Сессия = d.client_num, //to see manager num of clients
@@ -953,6 +954,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     orderby i.sale_time
                     select new SoldItemMyClass()
                     {
+                        Id = i.sale_id,
                         Время = (DateTime) i.sale_time,
                         Наименование = i.item_id,
                         Количество = (int) i.amount_sold
@@ -960,7 +962,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             }
         }
 
-        public void ChangeItemNumber(string itemId, int newNumber)
+        public void ChangeItemAmount(string itemId, int newNumber)
         {
             var db = new dbDataContext();
             lock (db)
@@ -979,7 +981,25 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
-
+        public void ChangeItemNumber(string itemId, int newNumber)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var match = (from i in db.GetTable<items_table>()
+                             where i.item_id == itemId
+                             select i).SingleOrDefault();
+                if (match != null)
+                {
+                    match.item_num = newNumber;
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(42));
+                }
+            }
+        }
         public List<sold_bar_history_table> GetListOfSoldItemId(string itemId, int dailyId)
         {
             var db = new dbDataContext();
@@ -998,9 +1018,10 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 return (from i in db.GetTable<items_table>()
-                        orderby i.category_name
+                        orderby i.item_num
                     select new AllItemsMyClass
                     {
+                        Num = (int)i.item_num,
                         ItemId = i.item_id,
                         CategoryName = i.category_name,
                         Cost = (double) i.cost,
@@ -1016,9 +1037,10 @@ namespace Boom_Manager_Project.DataBaseClasses
             {
                 return (from i in db.GetTable<bar_revision_t>()
                         where i.daily_id == dailyId
-                        orderby i.item_id
+                        orderby i.bar_item_num
                         select new BarRevisionMyClass
                         {
+//                            Номер = (int)i.bar_item_num,
                             Наименование = i.item_id,
                             Продано = (int)i.amount_sold,
                             Куплено = (int)i.amount_bought,
@@ -1032,7 +1054,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             lock (db)
             {
                 return (from i in db.GetTable<items_table>()
-                        orderby i.category_name
+                        orderby i.item_num
                         select new ListOfItemsWithPrice
                         {
                             Категория = i.category_name,
@@ -1078,6 +1100,26 @@ namespace Boom_Manager_Project.DataBaseClasses
                 AddItemToRevision(itemId, number*(-1));
             }
         }
+
+        public void DeleteSoldItem(int saleId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                int dailyId = GetLastOpenedGlobalSessionDailyId();
+                var item = (from i in db.GetTable<sold_bar_history_table>()
+                    where i.sale_id == saleId
+                    select i).SingleOrDefault();
+                if (item != null)
+                {
+                    AddMoneyToCash((double)(GetItemDataById(item.item_id).Цена*item.amount_sold), dailyId);
+                    Table<sold_bar_history_table> soldItemsTable = db.GetTable<sold_bar_history_table>();
+                    soldItemsTable.DeleteOnSubmit(item);
+                    db.SubmitChanges();
+                }
+            }
+        }
+
         public void AddItemToRevision(string itemId, int newNumber)
         {
             var db = new dbDataContext();
@@ -1106,7 +1148,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 //            }
 //        }
 
-        public void AddNewOrUpdateBarRevisionRecord(int dailyId, string itemId, int amountSold, int amountBought,int left)
+        public void AddNewOrUpdateBarRevisionRecord(int dailyId, string itemId, int amountSold, int amountBought,int left, int num)
         {
             var db = new dbDataContext();
             lock (db)
@@ -1120,6 +1162,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                     Table<bar_revision_t> soldBarTable = db.GetTable<bar_revision_t>();
                     var revisionItem = new bar_revision_t
                     {
+                        bar_item_num = num,
                         daily_id = dailyId,
                         item_id = itemId,
                         amount_sold = amountSold,
@@ -1131,6 +1174,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
                 else
                 {
+                    match.bar_item_num = num;
                     match.amount_sold = amountSold;
                     match.amount_bought = amountBought;
                     match.left_num = left;
@@ -1296,16 +1340,16 @@ namespace Boom_Manager_Project.DataBaseClasses
                     select c).SingleOrDefault();
             }
         }
-        public client_info_t GetClientInfoByName(string name)
-        {
-            var db = new dbDataContext();
-            lock (db)
-            {
-                return (from c in db.GetTable<client_info_t>()
-                        where c.name == name
-                        select c).SingleOrDefault();
-            }
-        }
+//        public client_info_t GetClientInfoByName(string name,string id)
+//        {
+//            var db = new dbDataContext();
+//            lock (db)
+//            {
+//                return (from c in db.GetTable<client_info_t>()
+//                        where c.name == name
+//                        select c).SingleOrDefault();
+//            }
+//        }
         public account_savings_t GetClientSavingsById(string id)
         {
             var db = new dbDataContext();
@@ -1826,7 +1870,9 @@ namespace Boom_Manager_Project.DataBaseClasses
                 var db = new dbDataContext();
                 lock (db)
                 {
-                    var clientInfo = GetClientInfoByName(clientId);
+                    var clientInfo = (from c in db.GetTable<client_info_t>()
+                        where c.client_id == clientId
+                        select c).SingleOrDefault();
                     if (clientInfo != null)
                     {
                         clientInfo.played_sum += moneyToAdd;
@@ -1840,16 +1886,17 @@ namespace Boom_Manager_Project.DataBaseClasses
 //                                clientInfo.pers_discount = step.discount;
                             }
                         }
-                        if (maxDiscount > clientInfo.pers_discount)
-                        {
+//                        if (maxDiscount > clientInfo.pers_discount)
+//                        {
                             clientInfo.pers_discount = maxDiscount;
+                            
                             db.SubmitChanges();
-                        }
+//                        }
                     }
                 }
             }
         }
-
+        
         public void CloseSessionWithCard(DaySessionClass dsc, string comments, DateTime endTime)
         {
             var db = new dbDataContext();
@@ -1860,10 +1907,13 @@ namespace Boom_Manager_Project.DataBaseClasses
                                          where s.daily_id == dayId
                                          where s.session_id == dsc.Сессия
                                          select s).SingleOrDefault();
+                var clients = GetListOfClientsPerExactSession(dsc.Сессия);
 
                 var clientInfo = (from c in db.GetTable<client_info_t>()
                     where c.name == dsc.Клиент
+                    where c.client_id == clients[0].client_id
                     select c).SingleOrDefault();
+
                 if (sessionIdtoDelete == null) return;
                 
                 sessionIdtoDelete.end_game = endTime;
@@ -1878,7 +1928,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                 //                    dsc.Счетчик = dsc.Оплачено - dsc.Счетчик;
                 //                }
                 sessionIdtoDelete.played_money = dsc.Счетчик;
-                AddPlayedMoneyToClientAndChangeHisDiscount(dsc.Клиент, dsc.Счетчик);
+                
                 if (String.IsNullOrWhiteSpace(sessionIdtoDelete.comments))
                 {
                     sessionIdtoDelete.comments = comments;
@@ -1901,6 +1951,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                             ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(3));
                     }
                 }
+                AddPlayedMoneyToClientAndChangeHisDiscount(clients[0].client_id, dsc.Счетчик);
             }
         }
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -2089,6 +2140,22 @@ namespace Boom_Manager_Project.DataBaseClasses
                 return (from m in db.GetTable<expenses_t>()
                     where m.daily_id == dailyId
                     select m).ToList();
+            }
+        }
+        public void DeleteExpense(int expensesId)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var item = (from i in db.GetTable<expenses_t>()
+                    where i.expense_id == expensesId
+                    select i).SingleOrDefault();
+                if (item != null)
+                {
+                    Table<expenses_t> expensesTable = db.GetTable<expenses_t>();
+                    expensesTable.DeleteOnSubmit(item);
+                    db.SubmitChanges();
+                }
             }
         }
         private void InsertNewPaymentToClientHistory(string clientId, double cash)

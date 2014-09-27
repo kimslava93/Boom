@@ -22,7 +22,7 @@ namespace Boom_Manager_Project.Controllers
                 int numberSold = AccountHowManyWasSoldByItemId(item.ItemId, dailyId);
                 int numberBought = 0;
                 DataBaseClass.Instancedb()
-                    .AddNewOrUpdateBarRevisionRecord(dailyId, item.ItemId, numberSold, numberBought, item.NumberLeft);
+                    .AddNewOrUpdateBarRevisionRecord(dailyId, item.ItemId, numberSold, numberBought, item.NumberLeft, item.Num);
             }
         }
 

@@ -60,8 +60,8 @@ namespace Boom_Manager_Project
         {
             if (dgvAllItems.CurrentRow != null)
             {
-                var cni = new ChangeNumberOfItem((int) dgvAllItems.CurrentRow.Cells[4].Value,
-                    (string) dgvAllItems.CurrentRow.Cells[0].Value);
+                var cni = new ChangeAmountOfItem((int) dgvAllItems.CurrentRow.Cells[5].Value,
+                    (string) dgvAllItems.CurrentRow.Cells[1].Value);
                 cni.ShowDialog();
                 LoadDgv();
             }
@@ -71,9 +71,22 @@ namespace Boom_Manager_Project
         {
             if (dgvAllItems.CurrentRow != null)
             {
-                DataBaseClass.Instancedb().RemoveItem((string)dgvAllItems.CurrentRow.Cells[0].Value);
+                DataBaseClass.Instancedb().RemoveItem((string)dgvAllItems.CurrentRow.Cells[1].Value);
                 MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetWarning(12));
                 LoadDgv();
+            }
+        }
+
+        private void dgvAllItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvAllItems.CurrentCell.Value != null && dgvAllItems.CurrentCell.ColumnIndex == 0)
+            {
+                if (dgvAllItems.CurrentRow != null)
+                {
+                    var cnoi = new ChangeNumberOfItem((string)dgvAllItems.CurrentRow.Cells[1].Value);
+                    cnoi.ShowDialog();
+                    LoadDgv();
+                }
             }
         }
     }

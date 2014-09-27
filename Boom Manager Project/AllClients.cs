@@ -38,7 +38,7 @@ namespace Boom_Manager_Project
         {
             if (dgvAllClients.CurrentRow != null)
             {
-                if (dgvAllClients.CurrentRow.Cells[0].Value.Equals("0"))
+                if (dgvAllClients.CurrentRow.Cells[0].Value.Equals("0") || dgvAllClients.CurrentRow.Cells[0].Value.Equals("Usual Client"))
                 {
                     MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(53));
                 }

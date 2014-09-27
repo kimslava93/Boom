@@ -95,42 +95,19 @@ namespace Boom_Manager_Project.Controllers
 //            MessageBox.Show("paid time = " + paidTime + "\n" + t.ToString(CultureInfo.InvariantCulture));
             return t;
         }
+
         public List<DaySessionClass> CheckSoonToCloseClients(List<DaySessionClass> dSessions)
         {
-//            List<DaySessionClass> dSessions = GetAllOpenedConsoles();
             foreach (DaySessionClass os in dSessions)
             {
-//                if (os.Оставшееся_время > TimeSpan.FromMinutes(5))
-//                {
-//                    //continue;
-//                }
-//                if (os.Оставшееся_время > TimeSpan.FromMinutes(3) && os.Оставшееся_время < TimeSpan.FromMinutes(6))
-//                {
-//                    HighLight(os.Сессия, 0);
-                    //warning highlight
-//                }
-//                else if (os.Оставшееся_время > TimeSpan.FromMinutes(0) && os.Оставшееся_время <= TimeSpan.FromMinutes(3))
-//                {
-//                    HighLight(os.Сессия, 1);
-//                }
                 if (os.Оставшееся_время <= TimeSpan.FromMinutes(0))
                 {
-                    //if (os.Клиент.Equals(Options.OptionsInstance().UsualClient))
-                    //{
-                    List<clients_per_session_t> clientPerSession = DataBaseClass.Instancedb().GetListOfClientsPerExactSession(os.Сессия);
+                    List<clients_per_session_t> clientPerSession =
+                        DataBaseClass.Instancedb().GetListOfClientsPerExactSession(os.Сессия);
                     CloseSessionController.InstanceCloseSessionController()
                         .CloseClientBeforeTimeOut(os, clientPerSession, DateTime.Now, "");
-                        //DataBaseClass.Instancedb().CloseSessionWithUsualClient(os, "", DateTime.Now);
-                    //}
-                    //else if(os.Клиент.Length > 1 && !string.IsNullOrWhiteSpace(os.Клиент))
-                    //{
-                    //    DataBaseClass.Instancedb().CloseSessionWithCard(os, "", DateTime.Now);
-                    //}
-//                    GetExactGlobalSession();
                     dSessions = GetAllOpenedDaySessions();
-//                    SyncDbContextAndDaySessionList();
                 }
-//                dataGridViewDaysSession.Invalidate();
             }
             return dSessions;
         }

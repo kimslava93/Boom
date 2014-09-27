@@ -345,7 +345,7 @@ namespace Boom_Manager_Project
                 TimeSpan t = AddNewSessionController.AddNewSessionControllerInstance()
                     .UpdateTimeLeft(paidPrice, cbPlaystationId.Text, numUpDPaidPrice.Minimum, numUpDPaidPrice.Maximum, DateTime.Now);
 
-                if (numUpDMinutesLeft.Value < numUpDMinutesLeft.Minimum)
+                if (t.Minutes < numUpDMinutesLeft.Minimum)
                 {
                     numUpDMinutesLeft.Value = numUpDMinutesLeft.Minimum;
                 }
@@ -469,7 +469,8 @@ namespace Boom_Manager_Project
         {
             if (_buttonPressCounter-- <= 0)
             {
-                if (tbDiscountCards.Text == Options.OptionsInstance().UsualClient || tbDiscountCards.Text == @"Usual Client")
+                if (tbDiscountCards.Text == Options.OptionsInstance().UsualClient ||
+                    tbDiscountCards.Text == @"Usual Client")
                 {
                     TimeSpan paidTime =
                         TimeSpan.FromMinutes((double) numUpDHoursLeft.Value*60 + (double) numUpDMinutesLeft.Value);
@@ -538,16 +539,8 @@ namespace Boom_Manager_Project
                 Options.OptionsInstance().TakeScreenShot();
                 IsDiscountValid(tbDiscountCards.Text);
                 CheckTable();
-//                if ((tbDiscountCards.Text.Length > 2 && AreBonusLablesEmpty(lPlusTime.Text, lPlusMoney.Text)))
-//                {
-//                    ClientPriceChanged();
-//                }
-//                else if (tbDiscountCards.Text == Options.OptionsInstance().UsualClient)
-//                {
-                    UsualClientPriceChanged();
-//                }
+                UsualClientPriceChanged();
                 Options.OptionsInstance().TakeScreenShot();
-                
             }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------

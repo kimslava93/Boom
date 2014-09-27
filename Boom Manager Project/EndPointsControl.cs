@@ -64,7 +64,8 @@ namespace Boom_Manager_Project
                             }
                             else
                             {
-                                return true;
+                                SwitchOff(consoleId);
+                                return false;
                             }
 
                         }

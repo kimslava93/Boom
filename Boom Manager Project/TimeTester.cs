@@ -421,5 +421,21 @@ namespace Boom_Manager_Project
             numUpDCurTimeSeconds.Value = DateTime.Now.Second;
 
         }
+
+        private void numUpDCurHour_ValueChanged(object sender, EventArgs e)
+        {
+            SetDefaultPropertiesForFields();
+        }
+
+        private void numUpDCurMinute_ValueChanged(object sender, EventArgs e)
+        {
+            SetDefaultPropertiesForFields();
+        }
+
+        private void numUpDCurTimeSeconds_ValueChanged(object sender, EventArgs e)
+        {
+            SetDefaultPropertiesForFields();
+        }
+        
     }
 }

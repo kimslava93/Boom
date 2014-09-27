@@ -46,10 +46,12 @@
             this.tbDiscountCards.Location = new System.Drawing.Point(146, 25);
             this.tbDiscountCards.MaxLength = 50;
             this.tbDiscountCards.Name = "tbDiscountCards";
+            this.tbDiscountCards.PasswordChar = '*';
             this.tbDiscountCards.ShortcutsEnabled = false;
             this.tbDiscountCards.Size = new System.Drawing.Size(148, 29);
             this.tbDiscountCards.TabIndex = 0;
             this.tbDiscountCards.Text = "0";
+            this.tbDiscountCards.UseSystemPasswordChar = true;
             this.tbDiscountCards.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDiscountCards_KeyPress);
             // 
             // lClientDiscountId
@@ -59,9 +61,9 @@
             this.lClientDiscountId.ForeColor = System.Drawing.Color.White;
             this.lClientDiscountId.Location = new System.Drawing.Point(12, 28);
             this.lClientDiscountId.Name = "lClientDiscountId";
-            this.lClientDiscountId.Size = new System.Drawing.Size(125, 21);
+            this.lClientDiscountId.Size = new System.Drawing.Size(124, 21);
             this.lClientDiscountId.TabIndex = 28;
-            this.lClientDiscountId.Text = "Карточки сессии";
+            this.lClientDiscountId.Text = "Карточка сессии";
             // 
             // bCancel
             // 
@@ -102,7 +104,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(307, 108);
+            this.ClientSize = new System.Drawing.Size(307, 106);
             this.Controls.Add(this.lTime);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);

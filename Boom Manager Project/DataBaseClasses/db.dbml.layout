@@ -111,7 +111,7 @@
         <classShapeMoniker Id="2bc542ae-3c49-4dda-9060-628125da51c1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11.25 : 20.3069482421875); (12.09375 : 20.3069482421875); (12.09375 : 16.5785953776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(11.25 : 20.3069482421875); (11.3229166666667 : 20.3069482421875 : JumpStart); (11.4895833333333 : 20.3069482421875 : JumpEnd); (12.09375 : 20.3069482421875); (12.09375 : 16.5785953776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/dbDataContext/client_info_t/client_info_t_clients_per_session_t" />
       <nodes>
         <classShapeMoniker Id="06e6966e-c7cd-4774-b713-06f2b83c21ea" />
@@ -202,7 +202,7 @@
         <classShapeMoniker Id="976a2878-1fd4-4337-8642-491e262b2cbf" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.5 : 18.5112939453125); (7.5 : 21.53125); (9.26041666666667 : 21.53125 : JumpStart); (9.42708333333333 : 21.53125 : JumpEnd); (11.3229166666667 : 21.53125 : JumpStart); (11.4895833333333 : 21.53125 : JumpEnd); (12.25 : 21.53125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.5 : 18.5112939453125); (7.5 : 21.53125); (12.25 : 21.53125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/dbDataContext/tables_t/tables_t_playstation_timezone" />
       <nodes>
         <classShapeMoniker Id="eff89ab1-8b9b-4281-bf25-3fa3092cf44a" />
@@ -216,12 +216,6 @@
         <classShapeMoniker Id="847ddcf1-e291-4248-866d-97f3640e3b47" />
       </nodes>
     </associationConnector>
-    <classShape Id="83359f8c-973e-468f-9202-9f4957e7315e" absoluteBounds="10.125, 8.5, 2, 1.7708968098958344">
-      <DataClassMoniker Name="/dbDataContext/items_table" />
-      <nestedChildShapes>
-        <elementListCompartment Id="1be512a2-fe5f-4e32-aced-dd367446c1ca" absoluteBounds="10.14, 8.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="d03775f5-d217-4a1e-b03f-2d01e8587416" absoluteBounds="7.5, 8.375, 2, 1.9631982421874987">
       <DataClassMoniker Name="/dbDataContext/sold_bar_history_table" />
       <nestedChildShapes>
@@ -235,31 +229,37 @@
         <classShapeMoniker Id="d03775f5-d217-4a1e-b03f-2d01e8587416" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.125 : 9.38544840494792); (9.5 : 9.38544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <classShape Id="a390ce19-670f-4c2b-a015-e31ddbb2ffb4" absoluteBounds="11, 9, 2, 1.9631982421875">
+      <DataClassMoniker Name="/dbDataContext/items_table" />
+      <nestedChildShapes>
+        <elementListCompartment Id="039930bc-3109-49d5-8233-f4f5c103fd6b" absoluteBounds="11.015, 9.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11 : 9.66909912109375); (9.5 : 9.66909912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/dbDataContext/items_table/items_table_sold_bar_history_table" />
       <nodes>
-        <classShapeMoniker Id="83359f8c-973e-468f-9202-9f4957e7315e" />
+        <classShapeMoniker Id="a390ce19-670f-4c2b-a015-e31ddbb2ffb4" />
         <classShapeMoniker Id="d03775f5-d217-4a1e-b03f-2d01e8587416" />
       </nodes>
     </associationConnector>
-    <classShape Id="cd37481c-eac5-49ce-83f0-323c00a87028" absoluteBounds="8.25, 11.25, 2, 1.9631982421875">
+    <classShape Id="4d63d33a-cd08-4421-9d8e-b8fa5218364a" absoluteBounds="7.875, 11.125, 2, 2.1554996744791666">
       <DataClassMoniker Name="/dbDataContext/bar_revision_t" />
       <nestedChildShapes>
-        <elementListCompartment Id="9e20208d-924f-4a71-9010-7d7e6b94e3e2" absoluteBounds="8.265, 11.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6a960bb7-984b-49fe-b3e6-2fabd024b194" absoluteBounds="7.8900000000000006, 11.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.984375 : 10.1458968098958); (5.984375 : 12.2315991210937); (6.41666666666667 : 12.2315991210937 : JumpStart); (6.58333333333333 : 12.2315991210937 : JumpEnd); (8.25 : 12.2315991210937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.984375 : 10.1458968098958); (5.984375 : 12.2027498372396); (6.41666666666667 : 12.2027498372396 : JumpStart); (6.58333333333333 : 12.2027498372396 : JumpEnd); (7.875 : 12.2027498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/dbDataContext/global_session_t/global_session_t_bar_revision_t" />
       <nodes>
         <classShapeMoniker Id="a98a5682-7ddf-4e25-b4f9-721e58f32cc5" />
-        <classShapeMoniker Id="cd37481c-eac5-49ce-83f0-323c00a87028" />
+        <classShapeMoniker Id="4d63d33a-cd08-4421-9d8e-b8fa5218364a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(10.9375005 : 10.2708968098958); (10.9375005 : 11.53125); (10.25 : 11.53125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11 : 10.6819482421875); (9.71875 : 10.6819482421875); (9.71875 : 11.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/dbDataContext/items_table/items_table_bar_revision_t" />
       <nodes>
-        <classShapeMoniker Id="83359f8c-973e-468f-9202-9f4957e7315e" />
-        <classShapeMoniker Id="cd37481c-eac5-49ce-83f0-323c00a87028" />
+        <classShapeMoniker Id="a390ce19-670f-4c2b-a015-e31ddbb2ffb4" />
+        <classShapeMoniker Id="4d63d33a-cd08-4421-9d8e-b8fa5218364a" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
 {
@@ -27,6 +28,15 @@ namespace Boom_Manager_Project
            graphics.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
 //           bitmap.Save("C:\\Users\\user\\Desktop\\" + DateTime.Now.ToString("MMM-dd-HH-mm") + "_screenshot.jpeg", ImageFormat.Jpeg);
            bitmap.Save("ScreenShotLogs\\" + DateTime.Now.ToString("MMM-dd-HH-mm-ss") + "_screenshot.jpeg", ImageFormat.Jpeg);
+        }
+
+        public TimeSpan RoundTimeSpan(TimeSpan input)
+        {
+            if (input != new TimeSpan())
+            {
+                input = new RoundedTimeSpan(input.Ticks, 0).TimeSpan;
+            }
+            return input;
         }
 //        public void TakeScreenShotLog(string nameOfFile)
 //        {

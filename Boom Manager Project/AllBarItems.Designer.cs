@@ -79,10 +79,11 @@
             this.dgvAllItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvAllItems.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvAllItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAllItems.Size = new System.Drawing.Size(499, 522);
+            this.dgvAllItems.Size = new System.Drawing.Size(589, 522);
             this.dgvAllItems.TabIndex = 4;
             this.dgvAllItems.TabStop = false;
             this.dgvAllItems.VirtualMode = true;
+            this.dgvAllItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAllItems_CellClick);
             // 
             // bAddNewItem
             // 
@@ -113,7 +114,7 @@
             this.bClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bClose.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bClose.ForeColor = System.Drawing.Color.White;
-            this.bClose.Location = new System.Drawing.Point(392, 14);
+            this.bClose.Location = new System.Drawing.Point(482, 14);
             this.bClose.Margin = new System.Windows.Forms.Padding(5);
             this.bClose.Name = "bClose";
             this.bClose.Size = new System.Drawing.Size(93, 48);
@@ -165,7 +166,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(499, 592);
+            this.ClientSize = new System.Drawing.Size(589, 592);
             this.ControlBox = false;
             this.Controls.Add(this.bChangeNumber);
             this.Controls.Add(this.bClose);

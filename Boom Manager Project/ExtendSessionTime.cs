@@ -215,7 +215,7 @@ namespace Boom_Manager_Project
 //                _repeatCallOfMethodCounter++;
                 decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice(_sessionToExtend.Приставка,
                     numUpDHoursExtend.Value,
-                    numUpDMinutesExtend.Value, DateTime.Now);
+                    numUpDMinutesExtend.Value, _sessionToExtend.Конец);
                 if (t > numUpDMoneyExtend.Maximum)
                     numUpDMoneyExtend.Value = numUpDMoneyExtend.Maximum;
                 else if (t < numUpDMoneyExtend.Minimum)
@@ -256,7 +256,7 @@ namespace Boom_Manager_Project
                 toChange = false;
 //                _repeatCallOfMethodCounter++;
                 decimal t = AddNewSessionController.AddNewSessionControllerInstance().UpdatePrice(_sessionToExtend.Приставка,
-                    numUpDHoursExtend.Value, numUpDMinutesExtend.Value, DateTime.Now);
+                    numUpDHoursExtend.Value, numUpDMinutesExtend.Value, _sessionToExtend.Конец);
                 if (t < numUpDMoneyExtend.Minimum)
                 {
                     numUpDMoneyExtend.Value = numUpDMoneyExtend.Minimum;
