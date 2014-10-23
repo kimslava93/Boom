@@ -102,6 +102,7 @@
     <Compile Include="ChangeNumberOfItem.Designer.cs">
       <DependentUpon>ChangeNumberOfItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckDiscountAvailibily.cs" />
     <Compile Include="Controllers\AllClientsController.cs" />
     <Compile Include="BarRevision.cs">
       <SubType>Form</SubType>
@@ -159,7 +160,22 @@
     <Compile Include="CheckoutPriceAndTime.Designer.cs">
       <DependentUpon>CheckoutPriceAndTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataBaseClasses\CheckoutPriceAndTimeController.cs" />
+    <Compile Include="Controllers\CheckoutPriceAndTimeController.cs" />
+    <Compile Include="Controllers\DiscountRedactorController.cs" />
+    <Compile Include="DiscountsRedactor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DiscountsRedactor.Designer.cs">
+      <DependentUpon>DiscountsRedactor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MultipleAddingDataToString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MultipleAddingDataToString.Designer.cs">
+      <DependentUpon>MultipleAddingDataToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyClasses\BonusesMyClass.cs" />
+    <Compile Include="MyClasses\BonusPromoTimeTemplateMyClass.cs" />
     <Compile Include="MyClasses\ExpensesMyClass.cs" />
     <Compile Include="LastSessions.cs">
       <SubType>Form</SubType>
@@ -201,7 +217,14 @@
       <DependentUpon>ChangePlaystation.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ChangePlaystationController.cs" />
+    <Compile Include="MyClasses\RequirementsMyClass.cs" />
     <Compile Include="MyClasses\RoundTimeSpan.cs" />
+    <Compile Include="PersonalAccountEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonalAccountEditor.Designer.cs">
+      <DependentUpon>PersonalAccountEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimeTester.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -440,6 +463,9 @@
     <EmbeddedResource Include="CheckoutPriceAndTime.resx">
       <DependentUpon>CheckoutPriceAndTime.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DiscountsRedactor.resx">
+      <DependentUpon>DiscountsRedactor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LastSessions.resx">
       <DependentUpon>LastSessions.cs</DependentUpon>
     </EmbeddedResource>
@@ -483,6 +509,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerCardReader.resx">
       <DependentUpon>ManagerCardReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultipleAddingDataToString.resx">
+      <DependentUpon>MultipleAddingDataToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonalAccountEditor.resx">
+      <DependentUpon>PersonalAccountEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TimeTester.resx">
       <DependentUpon>TimeTester.cs</DependentUpon>

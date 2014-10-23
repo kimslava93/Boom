@@ -20,7 +20,7 @@ namespace Boom_Manager_Project
         }
         private void bSubmit_Click(object sender, EventArgs e)
         {
-            if (AllFieldsAreFullFilled())
+            if (AllFieldsAreFullFilled() && !IsThereTheSameLogins())
             {
                 var newUser = new personal_info_t
                 {
@@ -55,6 +55,16 @@ namespace Boom_Manager_Project
         private void bCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private bool IsThereTheSameLogins()
+        {
+            var userLogin = DataBaseClass.Instancedb().GetUserInfoByLogin(tbLogin.Text);
+            if (userLogin != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool AllFieldsAreFullFilled()

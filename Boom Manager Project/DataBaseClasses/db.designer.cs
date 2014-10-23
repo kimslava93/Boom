@@ -90,6 +90,21 @@ namespace Boom_Manager_Project.DataBaseClasses
     partial void Insertbar_revision_t(bar_revision_t instance);
     partial void Updatebar_revision_t(bar_revision_t instance);
     partial void Deletebar_revision_t(bar_revision_t instance);
+    partial void Insertpromo_bonus(promo_bonus instance);
+    partial void Updatepromo_bonus(promo_bonus instance);
+    partial void Deletepromo_bonus(promo_bonus instance);
+    partial void Insertpromo_requirement(promo_requirement instance);
+    partial void Updatepromo_requirement(promo_requirement instance);
+    partial void Deletepromo_requirement(promo_requirement instance);
+    partial void Insertpromos_t(promos_t instance);
+    partial void Updatepromos_t(promos_t instance);
+    partial void Deletepromos_t(promos_t instance);
+    partial void Insertpromo_usage_history(promo_usage_history instance);
+    partial void Updatepromo_usage_history(promo_usage_history instance);
+    partial void Deletepromo_usage_history(promo_usage_history instance);
+    partial void Insertshifts_log_in(shifts_log_in instance);
+    partial void Updateshifts_log_in(shifts_log_in instance);
+    partial void Deleteshifts_log_in(shifts_log_in instance);
     #endregion
 		
 		public dbDataContext() : 
@@ -279,6 +294,46 @@ namespace Boom_Manager_Project.DataBaseClasses
 			get
 			{
 				return this.GetTable<bar_revision_t>();
+			}
+		}
+		
+		public System.Data.Linq.Table<promo_bonus> promo_bonus
+		{
+			get
+			{
+				return this.GetTable<promo_bonus>();
+			}
+		}
+		
+		public System.Data.Linq.Table<promo_requirement> promo_requirements
+		{
+			get
+			{
+				return this.GetTable<promo_requirement>();
+			}
+		}
+		
+		public System.Data.Linq.Table<promos_t> promos_ts
+		{
+			get
+			{
+				return this.GetTable<promos_t>();
+			}
+		}
+		
+		public System.Data.Linq.Table<promo_usage_history> promo_usage_histories
+		{
+			get
+			{
+				return this.GetTable<promo_usage_history>();
+			}
+		}
+		
+		public System.Data.Linq.Table<shifts_log_in> shifts_log_ins
+		{
+			get
+			{
+				return this.GetTable<shifts_log_in>();
 			}
 		}
 	}
@@ -1385,6 +1440,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private EntitySet<clients_per_session_t> _clients_per_session_ts;
 		
+		private EntitySet<promo_usage_history> _promo_usage_histories;
+		
 		private EntityRef<global_session_t> _global_session_t;
 		
 		private EntityRef<tables_t> _tables_t;
@@ -1420,6 +1477,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 		public days_sessions_t()
 		{
 			this._clients_per_session_ts = new EntitySet<clients_per_session_t>(new Action<clients_per_session_t>(this.attach_clients_per_session_ts), new Action<clients_per_session_t>(this.detach_clients_per_session_ts));
+			this._promo_usage_histories = new EntitySet<promo_usage_history>(new Action<promo_usage_history>(this.attach_promo_usage_histories), new Action<promo_usage_history>(this.detach_promo_usage_histories));
 			this._global_session_t = default(EntityRef<global_session_t>);
 			this._tables_t = default(EntityRef<tables_t>);
 			OnCreated();
@@ -1666,6 +1724,19 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="days_sessions_t_promo_usage_history", Storage="_promo_usage_histories", ThisKey="session_id", OtherKey="session_id")]
+		public EntitySet<promo_usage_history> promo_usage_histories
+		{
+			get
+			{
+				return this._promo_usage_histories;
+			}
+			set
+			{
+				this._promo_usage_histories.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_days_sessions_t", Storage="_global_session_t", ThisKey="daily_id", OtherKey="daily_id", IsForeignKey=true)]
 		public global_session_t global_session_t
 		{
@@ -1761,6 +1832,18 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 		
 		private void detach_clients_per_session_ts(clients_per_session_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.days_sessions_t = null;
+		}
+		
+		private void attach_promo_usage_histories(promo_usage_history entity)
+		{
+			this.SendPropertyChanging();
+			entity.days_sessions_t = this;
+		}
+		
+		private void detach_promo_usage_histories(promo_usage_history entity)
 		{
 			this.SendPropertyChanging();
 			entity.days_sessions_t = null;
@@ -2722,6 +2805,8 @@ namespace Boom_Manager_Project.DataBaseClasses
 		
 		private EntitySet<bar_revision_t> _bar_revision_ts;
 		
+		private EntitySet<promo_usage_history> _promo_usage_histories;
+		
 		private EntityRef<personal_info_t> _personal_info_t;
 		
 		private EntityRef<personal_info_t> _personal_info_t1;
@@ -2750,6 +2835,7 @@ namespace Boom_Manager_Project.DataBaseClasses
 			this._expenses_ts = new EntitySet<expenses_t>(new Action<expenses_t>(this.attach_expenses_ts), new Action<expenses_t>(this.detach_expenses_ts));
 			this._sold_bar_history_tables = new EntitySet<sold_bar_history_table>(new Action<sold_bar_history_table>(this.attach_sold_bar_history_tables), new Action<sold_bar_history_table>(this.detach_sold_bar_history_tables));
 			this._bar_revision_ts = new EntitySet<bar_revision_t>(new Action<bar_revision_t>(this.attach_bar_revision_ts), new Action<bar_revision_t>(this.detach_bar_revision_ts));
+			this._promo_usage_histories = new EntitySet<promo_usage_history>(new Action<promo_usage_history>(this.attach_promo_usage_histories), new Action<promo_usage_history>(this.detach_promo_usage_histories));
 			this._personal_info_t = default(EntityRef<personal_info_t>);
 			this._personal_info_t1 = default(EntityRef<personal_info_t>);
 			OnCreated();
@@ -2941,6 +3027,19 @@ namespace Boom_Manager_Project.DataBaseClasses
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_promo_usage_history", Storage="_promo_usage_histories", ThisKey="daily_id", OtherKey="daily_id")]
+		public EntitySet<promo_usage_history> promo_usage_histories
+		{
+			get
+			{
+				return this._promo_usage_histories;
+			}
+			set
+			{
+				this._promo_usage_histories.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="personal_info_t_global_session_t", Storage="_personal_info_t", ThisKey="administrator_id", OtherKey="person_id", IsForeignKey=true)]
 		public personal_info_t personal_info_t
 		{
@@ -3096,6 +3195,18 @@ namespace Boom_Manager_Project.DataBaseClasses
 		}
 		
 		private void detach_bar_revision_ts(bar_revision_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = null;
+		}
+		
+		private void attach_promo_usage_histories(promo_usage_history entity)
+		{
+			this.SendPropertyChanging();
+			entity.global_session_t = this;
+		}
+		
+		private void detach_promo_usage_histories(promo_usage_history entity)
 		{
 			this.SendPropertyChanging();
 			entity.global_session_t = null;
@@ -5086,6 +5197,1160 @@ namespace Boom_Manager_Project.DataBaseClasses
 						this._item_id = default(string);
 					}
 					this.SendPropertyChanged("items_table");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.promo_bonus")]
+	public partial class promo_bonus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _promo_bonus_id;
+		
+		private System.Nullable<System.TimeSpan> _promo_bonus_hours;
+		
+		private string _promo_bonus_item_to_buy;
+		
+		private System.Nullable<int> _promo_bonus_num_of_item;
+		
+		private System.Nullable<double> _promo_bonus_money_sum;
+		
+		private System.Nullable<double> _promo_bonus_sum_discount;
+		
+		private EntitySet<promos_t> _promos_ts;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onpromo_bonus_idChanging(int value);
+    partial void Onpromo_bonus_idChanged();
+    partial void Onpromo_bonus_hoursChanging(System.Nullable<System.TimeSpan> value);
+    partial void Onpromo_bonus_hoursChanged();
+    partial void Onpromo_bonus_item_to_buyChanging(string value);
+    partial void Onpromo_bonus_item_to_buyChanged();
+    partial void Onpromo_bonus_num_of_itemChanging(System.Nullable<int> value);
+    partial void Onpromo_bonus_num_of_itemChanged();
+    partial void Onpromo_bonus_money_sumChanging(System.Nullable<double> value);
+    partial void Onpromo_bonus_money_sumChanged();
+    partial void Onpromo_bonus_sum_discountChanging(System.Nullable<double> value);
+    partial void Onpromo_bonus_sum_discountChanged();
+    #endregion
+		
+		public promo_bonus()
+		{
+			this._promos_ts = new EntitySet<promos_t>(new Action<promos_t>(this.attach_promos_ts), new Action<promos_t>(this.detach_promos_ts));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_bonus_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int promo_bonus_id
+		{
+			get
+			{
+				return this._promo_bonus_id;
+			}
+			set
+			{
+				if ((this._promo_bonus_id != value))
+				{
+					this.Onpromo_bonus_idChanging(value);
+					this.SendPropertyChanging();
+					this._promo_bonus_id = value;
+					this.SendPropertyChanged("promo_bonus_id");
+					this.Onpromo_bonus_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_bonus_hours", DbType="Time")]
+		public System.Nullable<System.TimeSpan> promo_bonus_hours
+		{
+			get
+			{
+				return this._promo_bonus_hours;
+			}
+			set
+			{
+				if ((this._promo_bonus_hours != value))
+				{
+					this.Onpromo_bonus_hoursChanging(value);
+					this.SendPropertyChanging();
+					this._promo_bonus_hours = value;
+					this.SendPropertyChanged("promo_bonus_hours");
+					this.Onpromo_bonus_hoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_bonus_item_to_buy", DbType="VarChar(1000)")]
+		public string promo_bonus_item_to_buy
+		{
+			get
+			{
+				return this._promo_bonus_item_to_buy;
+			}
+			set
+			{
+				if ((this._promo_bonus_item_to_buy != value))
+				{
+					this.Onpromo_bonus_item_to_buyChanging(value);
+					this.SendPropertyChanging();
+					this._promo_bonus_item_to_buy = value;
+					this.SendPropertyChanged("promo_bonus_item_to_buy");
+					this.Onpromo_bonus_item_to_buyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_bonus_num_of_item", DbType="Int")]
+		public System.Nullable<int> promo_bonus_num_of_item
+		{
+			get
+			{
+				return this._promo_bonus_num_of_item;
+			}
+			set
+			{
+				if ((this._promo_bonus_num_of_item != value))
+				{
+					this.Onpromo_bonus_num_of_itemChanging(value);
+					this.SendPropertyChanging();
+					this._promo_bonus_num_of_item = value;
+					this.SendPropertyChanged("promo_bonus_num_of_item");
+					this.Onpromo_bonus_num_of_itemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_bonus_money_sum", DbType="Float")]
+		public System.Nullable<double> promo_bonus_money_sum
+		{
+			get
+			{
+				return this._promo_bonus_money_sum;
+			}
+			set
+			{
+				if ((this._promo_bonus_money_sum != value))
+				{
+					this.Onpromo_bonus_money_sumChanging(value);
+					this.SendPropertyChanging();
+					this._promo_bonus_money_sum = value;
+					this.SendPropertyChanged("promo_bonus_money_sum");
+					this.Onpromo_bonus_money_sumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_bonus_sum_discount", DbType="Float")]
+		public System.Nullable<double> promo_bonus_sum_discount
+		{
+			get
+			{
+				return this._promo_bonus_sum_discount;
+			}
+			set
+			{
+				if ((this._promo_bonus_sum_discount != value))
+				{
+					this.Onpromo_bonus_sum_discountChanging(value);
+					this.SendPropertyChanging();
+					this._promo_bonus_sum_discount = value;
+					this.SendPropertyChanged("promo_bonus_sum_discount");
+					this.Onpromo_bonus_sum_discountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="promo_bonus_promos_t", Storage="_promos_ts", ThisKey="promo_bonus_id", OtherKey="discount_bonus_id")]
+		public EntitySet<promos_t> promos_ts
+		{
+			get
+			{
+				return this._promos_ts;
+			}
+			set
+			{
+				this._promos_ts.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_promos_ts(promos_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.promo_bonus = this;
+		}
+		
+		private void detach_promos_ts(promos_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.promo_bonus = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.promo_requirements")]
+	public partial class promo_requirement : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _promo_requirement_id;
+		
+		private System.Nullable<System.TimeSpan> _promo_requirements_hours;
+		
+		private string _promo_requirements_item_to_buy;
+		
+		private System.Nullable<int> _promo_requirements_num_of_item;
+		
+		private System.Nullable<double> _promo_requirements_money_sum;
+		
+		private EntitySet<promos_t> _promos_ts;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onpromo_requirement_idChanging(int value);
+    partial void Onpromo_requirement_idChanged();
+    partial void Onpromo_requirements_hoursChanging(System.Nullable<System.TimeSpan> value);
+    partial void Onpromo_requirements_hoursChanged();
+    partial void Onpromo_requirements_item_to_buyChanging(string value);
+    partial void Onpromo_requirements_item_to_buyChanged();
+    partial void Onpromo_requirements_num_of_itemChanging(System.Nullable<int> value);
+    partial void Onpromo_requirements_num_of_itemChanged();
+    partial void Onpromo_requirements_money_sumChanging(System.Nullable<double> value);
+    partial void Onpromo_requirements_money_sumChanged();
+    #endregion
+		
+		public promo_requirement()
+		{
+			this._promos_ts = new EntitySet<promos_t>(new Action<promos_t>(this.attach_promos_ts), new Action<promos_t>(this.detach_promos_ts));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_requirement_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int promo_requirement_id
+		{
+			get
+			{
+				return this._promo_requirement_id;
+			}
+			set
+			{
+				if ((this._promo_requirement_id != value))
+				{
+					this.Onpromo_requirement_idChanging(value);
+					this.SendPropertyChanging();
+					this._promo_requirement_id = value;
+					this.SendPropertyChanged("promo_requirement_id");
+					this.Onpromo_requirement_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_requirements_hours", DbType="Time")]
+		public System.Nullable<System.TimeSpan> promo_requirements_hours
+		{
+			get
+			{
+				return this._promo_requirements_hours;
+			}
+			set
+			{
+				if ((this._promo_requirements_hours != value))
+				{
+					this.Onpromo_requirements_hoursChanging(value);
+					this.SendPropertyChanging();
+					this._promo_requirements_hours = value;
+					this.SendPropertyChanged("promo_requirements_hours");
+					this.Onpromo_requirements_hoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_requirements_item_to_buy", DbType="VarChar(1000)")]
+		public string promo_requirements_item_to_buy
+		{
+			get
+			{
+				return this._promo_requirements_item_to_buy;
+			}
+			set
+			{
+				if ((this._promo_requirements_item_to_buy != value))
+				{
+					this.Onpromo_requirements_item_to_buyChanging(value);
+					this.SendPropertyChanging();
+					this._promo_requirements_item_to_buy = value;
+					this.SendPropertyChanged("promo_requirements_item_to_buy");
+					this.Onpromo_requirements_item_to_buyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_requirements_num_of_item", DbType="Int")]
+		public System.Nullable<int> promo_requirements_num_of_item
+		{
+			get
+			{
+				return this._promo_requirements_num_of_item;
+			}
+			set
+			{
+				if ((this._promo_requirements_num_of_item != value))
+				{
+					this.Onpromo_requirements_num_of_itemChanging(value);
+					this.SendPropertyChanging();
+					this._promo_requirements_num_of_item = value;
+					this.SendPropertyChanged("promo_requirements_num_of_item");
+					this.Onpromo_requirements_num_of_itemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_requirements_money_sum", DbType="Float")]
+		public System.Nullable<double> promo_requirements_money_sum
+		{
+			get
+			{
+				return this._promo_requirements_money_sum;
+			}
+			set
+			{
+				if ((this._promo_requirements_money_sum != value))
+				{
+					this.Onpromo_requirements_money_sumChanging(value);
+					this.SendPropertyChanging();
+					this._promo_requirements_money_sum = value;
+					this.SendPropertyChanged("promo_requirements_money_sum");
+					this.Onpromo_requirements_money_sumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="promo_requirement_promos_t", Storage="_promos_ts", ThisKey="promo_requirement_id", OtherKey="promo_requirements_id")]
+		public EntitySet<promos_t> promos_ts
+		{
+			get
+			{
+				return this._promos_ts;
+			}
+			set
+			{
+				this._promos_ts.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_promos_ts(promos_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.promo_requirement = this;
+		}
+		
+		private void detach_promos_ts(promos_t entity)
+		{
+			this.SendPropertyChanging();
+			entity.promo_requirement = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.promos_t")]
+	public partial class promos_t : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _promo_id;
+		
+		private string _promo_description;
+		
+		private System.DateTime _promo_start;
+		
+		private System.DateTime _promo_end;
+		
+		private string _promo_state;
+		
+		private string _promo_timezones;
+		
+		private string _promo_playstations;
+		
+		private string _promo_auditory;
+		
+		private System.Nullable<int> _promo_requirements_id;
+		
+		private System.Nullable<int> _discount_bonus_id;
+		
+		private EntityRef<promo_bonus> _promo_bonus;
+		
+		private EntityRef<promo_requirement> _promo_requirement;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onpromo_idChanging(int value);
+    partial void Onpromo_idChanged();
+    partial void Onpromo_descriptionChanging(string value);
+    partial void Onpromo_descriptionChanged();
+    partial void Onpromo_startChanging(System.DateTime value);
+    partial void Onpromo_startChanged();
+    partial void Onpromo_endChanging(System.DateTime value);
+    partial void Onpromo_endChanged();
+    partial void Onpromo_stateChanging(string value);
+    partial void Onpromo_stateChanged();
+    partial void Onpromo_timezonesChanging(string value);
+    partial void Onpromo_timezonesChanged();
+    partial void Onpromo_playstationsChanging(string value);
+    partial void Onpromo_playstationsChanged();
+    partial void Onpromo_auditoryChanging(string value);
+    partial void Onpromo_auditoryChanged();
+    partial void Onpromo_requirements_idChanging(System.Nullable<int> value);
+    partial void Onpromo_requirements_idChanged();
+    partial void Ondiscount_bonus_idChanging(System.Nullable<int> value);
+    partial void Ondiscount_bonus_idChanged();
+    #endregion
+		
+		public promos_t()
+		{
+			this._promo_bonus = default(EntityRef<promo_bonus>);
+			this._promo_requirement = default(EntityRef<promo_requirement>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int promo_id
+		{
+			get
+			{
+				return this._promo_id;
+			}
+			set
+			{
+				if ((this._promo_id != value))
+				{
+					this.Onpromo_idChanging(value);
+					this.SendPropertyChanging();
+					this._promo_id = value;
+					this.SendPropertyChanged("promo_id");
+					this.Onpromo_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_description", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string promo_description
+		{
+			get
+			{
+				return this._promo_description;
+			}
+			set
+			{
+				if ((this._promo_description != value))
+				{
+					this.Onpromo_descriptionChanging(value);
+					this.SendPropertyChanging();
+					this._promo_description = value;
+					this.SendPropertyChanged("promo_description");
+					this.Onpromo_descriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_start", DbType="DateTime NOT NULL")]
+		public System.DateTime promo_start
+		{
+			get
+			{
+				return this._promo_start;
+			}
+			set
+			{
+				if ((this._promo_start != value))
+				{
+					this.Onpromo_startChanging(value);
+					this.SendPropertyChanging();
+					this._promo_start = value;
+					this.SendPropertyChanged("promo_start");
+					this.Onpromo_startChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_end", DbType="DateTime NOT NULL")]
+		public System.DateTime promo_end
+		{
+			get
+			{
+				return this._promo_end;
+			}
+			set
+			{
+				if ((this._promo_end != value))
+				{
+					this.Onpromo_endChanging(value);
+					this.SendPropertyChanging();
+					this._promo_end = value;
+					this.SendPropertyChanged("promo_end");
+					this.Onpromo_endChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_state", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string promo_state
+		{
+			get
+			{
+				return this._promo_state;
+			}
+			set
+			{
+				if ((this._promo_state != value))
+				{
+					this.Onpromo_stateChanging(value);
+					this.SendPropertyChanging();
+					this._promo_state = value;
+					this.SendPropertyChanged("promo_state");
+					this.Onpromo_stateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_timezones", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string promo_timezones
+		{
+			get
+			{
+				return this._promo_timezones;
+			}
+			set
+			{
+				if ((this._promo_timezones != value))
+				{
+					this.Onpromo_timezonesChanging(value);
+					this.SendPropertyChanging();
+					this._promo_timezones = value;
+					this.SendPropertyChanged("promo_timezones");
+					this.Onpromo_timezonesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_playstations", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string promo_playstations
+		{
+			get
+			{
+				return this._promo_playstations;
+			}
+			set
+			{
+				if ((this._promo_playstations != value))
+				{
+					this.Onpromo_playstationsChanging(value);
+					this.SendPropertyChanging();
+					this._promo_playstations = value;
+					this.SendPropertyChanged("promo_playstations");
+					this.Onpromo_playstationsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_auditory", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string promo_auditory
+		{
+			get
+			{
+				return this._promo_auditory;
+			}
+			set
+			{
+				if ((this._promo_auditory != value))
+				{
+					this.Onpromo_auditoryChanging(value);
+					this.SendPropertyChanging();
+					this._promo_auditory = value;
+					this.SendPropertyChanged("promo_auditory");
+					this.Onpromo_auditoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_requirements_id", DbType="Int")]
+		public System.Nullable<int> promo_requirements_id
+		{
+			get
+			{
+				return this._promo_requirements_id;
+			}
+			set
+			{
+				if ((this._promo_requirements_id != value))
+				{
+					if (this._promo_requirement.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onpromo_requirements_idChanging(value);
+					this.SendPropertyChanging();
+					this._promo_requirements_id = value;
+					this.SendPropertyChanged("promo_requirements_id");
+					this.Onpromo_requirements_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_discount_bonus_id", DbType="Int")]
+		public System.Nullable<int> discount_bonus_id
+		{
+			get
+			{
+				return this._discount_bonus_id;
+			}
+			set
+			{
+				if ((this._discount_bonus_id != value))
+				{
+					if (this._promo_bonus.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondiscount_bonus_idChanging(value);
+					this.SendPropertyChanging();
+					this._discount_bonus_id = value;
+					this.SendPropertyChanged("discount_bonus_id");
+					this.Ondiscount_bonus_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="promo_bonus_promos_t", Storage="_promo_bonus", ThisKey="discount_bonus_id", OtherKey="promo_bonus_id", IsForeignKey=true)]
+		public promo_bonus promo_bonus
+		{
+			get
+			{
+				return this._promo_bonus.Entity;
+			}
+			set
+			{
+				promo_bonus previousValue = this._promo_bonus.Entity;
+				if (((previousValue != value) 
+							|| (this._promo_bonus.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._promo_bonus.Entity = null;
+						previousValue.promos_ts.Remove(this);
+					}
+					this._promo_bonus.Entity = value;
+					if ((value != null))
+					{
+						value.promos_ts.Add(this);
+						this._discount_bonus_id = value.promo_bonus_id;
+					}
+					else
+					{
+						this._discount_bonus_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("promo_bonus");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="promo_requirement_promos_t", Storage="_promo_requirement", ThisKey="promo_requirements_id", OtherKey="promo_requirement_id", IsForeignKey=true)]
+		public promo_requirement promo_requirement
+		{
+			get
+			{
+				return this._promo_requirement.Entity;
+			}
+			set
+			{
+				promo_requirement previousValue = this._promo_requirement.Entity;
+				if (((previousValue != value) 
+							|| (this._promo_requirement.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._promo_requirement.Entity = null;
+						previousValue.promos_ts.Remove(this);
+					}
+					this._promo_requirement.Entity = value;
+					if ((value != null))
+					{
+						value.promos_ts.Add(this);
+						this._promo_requirements_id = value.promo_requirement_id;
+					}
+					else
+					{
+						this._promo_requirements_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("promo_requirement");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.promo_usage_history")]
+	public partial class promo_usage_history : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _daily_id;
+		
+		private System.Nullable<int> _session_id;
+		
+		private int _promo_usage_history_id;
+		
+		private string _promo_bonus_comment;
+		
+		private double _promo_discount_sum;
+		
+		private EntityRef<global_session_t> _global_session_t;
+		
+		private EntityRef<days_sessions_t> _days_sessions_t;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Ondaily_idChanging(int value);
+    partial void Ondaily_idChanged();
+    partial void Onsession_idChanging(System.Nullable<int> value);
+    partial void Onsession_idChanged();
+    partial void Onpromo_usage_history_idChanging(int value);
+    partial void Onpromo_usage_history_idChanged();
+    partial void Onpromo_bonus_commentChanging(string value);
+    partial void Onpromo_bonus_commentChanged();
+    partial void Onpromo_discount_sumChanging(double value);
+    partial void Onpromo_discount_sumChanged();
+    #endregion
+		
+		public promo_usage_history()
+		{
+			this._global_session_t = default(EntityRef<global_session_t>);
+			this._days_sessions_t = default(EntityRef<days_sessions_t>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_daily_id", DbType="Int NOT NULL")]
+		public int daily_id
+		{
+			get
+			{
+				return this._daily_id;
+			}
+			set
+			{
+				if ((this._daily_id != value))
+				{
+					if (this._global_session_t.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Ondaily_idChanging(value);
+					this.SendPropertyChanging();
+					this._daily_id = value;
+					this.SendPropertyChanged("daily_id");
+					this.Ondaily_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_id", DbType="Int")]
+		public System.Nullable<int> session_id
+		{
+			get
+			{
+				return this._session_id;
+			}
+			set
+			{
+				if ((this._session_id != value))
+				{
+					if (this._days_sessions_t.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onsession_idChanging(value);
+					this.SendPropertyChanging();
+					this._session_id = value;
+					this.SendPropertyChanged("session_id");
+					this.Onsession_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_usage_history_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int promo_usage_history_id
+		{
+			get
+			{
+				return this._promo_usage_history_id;
+			}
+			set
+			{
+				if ((this._promo_usage_history_id != value))
+				{
+					this.Onpromo_usage_history_idChanging(value);
+					this.SendPropertyChanging();
+					this._promo_usage_history_id = value;
+					this.SendPropertyChanged("promo_usage_history_id");
+					this.Onpromo_usage_history_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_bonus_comment", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string promo_bonus_comment
+		{
+			get
+			{
+				return this._promo_bonus_comment;
+			}
+			set
+			{
+				if ((this._promo_bonus_comment != value))
+				{
+					this.Onpromo_bonus_commentChanging(value);
+					this.SendPropertyChanging();
+					this._promo_bonus_comment = value;
+					this.SendPropertyChanged("promo_bonus_comment");
+					this.Onpromo_bonus_commentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_promo_discount_sum", DbType="Float NOT NULL")]
+		public double promo_discount_sum
+		{
+			get
+			{
+				return this._promo_discount_sum;
+			}
+			set
+			{
+				if ((this._promo_discount_sum != value))
+				{
+					this.Onpromo_discount_sumChanging(value);
+					this.SendPropertyChanging();
+					this._promo_discount_sum = value;
+					this.SendPropertyChanged("promo_discount_sum");
+					this.Onpromo_discount_sumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="global_session_t_promo_usage_history", Storage="_global_session_t", ThisKey="daily_id", OtherKey="daily_id", IsForeignKey=true)]
+		public global_session_t global_session_t
+		{
+			get
+			{
+				return this._global_session_t.Entity;
+			}
+			set
+			{
+				global_session_t previousValue = this._global_session_t.Entity;
+				if (((previousValue != value) 
+							|| (this._global_session_t.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._global_session_t.Entity = null;
+						previousValue.promo_usage_histories.Remove(this);
+					}
+					this._global_session_t.Entity = value;
+					if ((value != null))
+					{
+						value.promo_usage_histories.Add(this);
+						this._daily_id = value.daily_id;
+					}
+					else
+					{
+						this._daily_id = default(int);
+					}
+					this.SendPropertyChanged("global_session_t");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="days_sessions_t_promo_usage_history", Storage="_days_sessions_t", ThisKey="session_id", OtherKey="session_id", IsForeignKey=true)]
+		public days_sessions_t days_sessions_t
+		{
+			get
+			{
+				return this._days_sessions_t.Entity;
+			}
+			set
+			{
+				days_sessions_t previousValue = this._days_sessions_t.Entity;
+				if (((previousValue != value) 
+							|| (this._days_sessions_t.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._days_sessions_t.Entity = null;
+						previousValue.promo_usage_histories.Remove(this);
+					}
+					this._days_sessions_t.Entity = value;
+					if ((value != null))
+					{
+						value.promo_usage_histories.Add(this);
+						this._session_id = value.session_id;
+					}
+					else
+					{
+						this._session_id = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("days_sessions_t");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.shifts_log_in")]
+	public partial class shifts_log_in : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _log_in_id;
+		
+		private System.DateTime _log_in_datetime;
+		
+		private string _person_name;
+		
+		private string _person_position;
+		
+		private string _comments;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onlog_in_idChanging(int value);
+    partial void Onlog_in_idChanged();
+    partial void Onlog_in_datetimeChanging(System.DateTime value);
+    partial void Onlog_in_datetimeChanged();
+    partial void Onperson_nameChanging(string value);
+    partial void Onperson_nameChanged();
+    partial void Onperson_positionChanging(string value);
+    partial void Onperson_positionChanged();
+    partial void OncommentsChanging(string value);
+    partial void OncommentsChanged();
+    #endregion
+		
+		public shifts_log_in()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_log_in_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int log_in_id
+		{
+			get
+			{
+				return this._log_in_id;
+			}
+			set
+			{
+				if ((this._log_in_id != value))
+				{
+					this.Onlog_in_idChanging(value);
+					this.SendPropertyChanging();
+					this._log_in_id = value;
+					this.SendPropertyChanged("log_in_id");
+					this.Onlog_in_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_log_in_datetime", DbType="DateTime NOT NULL")]
+		public System.DateTime log_in_datetime
+		{
+			get
+			{
+				return this._log_in_datetime;
+			}
+			set
+			{
+				if ((this._log_in_datetime != value))
+				{
+					this.Onlog_in_datetimeChanging(value);
+					this.SendPropertyChanging();
+					this._log_in_datetime = value;
+					this.SendPropertyChanged("log_in_datetime");
+					this.Onlog_in_datetimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_person_name", DbType="VarChar(50)")]
+		public string person_name
+		{
+			get
+			{
+				return this._person_name;
+			}
+			set
+			{
+				if ((this._person_name != value))
+				{
+					this.Onperson_nameChanging(value);
+					this.SendPropertyChanging();
+					this._person_name = value;
+					this.SendPropertyChanged("person_name");
+					this.Onperson_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_person_position", DbType="VarChar(50)")]
+		public string person_position
+		{
+			get
+			{
+				return this._person_position;
+			}
+			set
+			{
+				if ((this._person_position != value))
+				{
+					this.Onperson_positionChanging(value);
+					this.SendPropertyChanging();
+					this._person_position = value;
+					this.SendPropertyChanged("person_position");
+					this.Onperson_positionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comments", DbType="VarChar(500)")]
+		public string comments
+		{
+			get
+			{
+				return this._comments;
+			}
+			set
+			{
+				if ((this._comments != value))
+				{
+					this.OncommentsChanging(value);
+					this.SendPropertyChanging();
+					this._comments = value;
+					this.SendPropertyChanged("comments");
+					this.OncommentsChanged();
 				}
 			}
 		}

@@ -64,14 +64,17 @@ namespace Boom_Manager_Project
             tbSessionID.Text = _sessionToExtend.Сессия.ToString(CultureInfo.InvariantCulture);
             tbDiscountCards.Text = _sessionToExtend.Клиент;
 
+            numUpDMinutesExtend.Minimum = 15;
             numUpDMinutesExtend.Value = 30; //minimum is 30 minutes
 //            numUpDMoneyExtend.Minimum = AddNewSessionController.AddNewSessionControllerInstance()
 //                .UpdatePrice(Options.OptionsInstance().UsualClient, _sessionToExtend.Приставка, 0, 30,
 //                    _sessionToExtend.Конец);
-            var minimum = AddNewSessionController.AddNewSessionControllerInstance()
+            var halfHour = AddNewSessionController.AddNewSessionControllerInstance()
                 .UpdatePrice(_sessionToExtend.Приставка, 0, 30, _sessionToExtend.Конец);
+            var minimum = AddNewSessionController.AddNewSessionControllerInstance()
+                .UpdatePrice(_sessionToExtend.Приставка, 0, 15, _sessionToExtend.Конец);
             numUpDMoneyExtend.Minimum = minimum;
-            numUpDMoneyExtend.Value = minimum;
+            numUpDMoneyExtend.Value = halfHour;
 
             tbEndTimeWas.Text = _sessionToExtend.Конец.ToString("dd-MMMM HH:mm");
             if (_sessionToExtend.Клиент != @"Usual Client" && !string.IsNullOrEmpty(_sessionToExtend.Клиент)) //Options.OptionsInstance().UsualClient)
@@ -207,7 +210,7 @@ namespace Boom_Manager_Project
         private void numUpDHoursExtend_ValueChanged(object sender, EventArgs e)
         {
             buttonPressCounter = 1;
-            numUpDMinutesExtend.Minimum = numUpDHoursExtend.Value == 0 ? 30 : 0;
+            numUpDMinutesExtend.Minimum = numUpDHoursExtend.Value == 0 ? 15 : 0;
 //            if (_repeatCallOfMethodCounter <= 0)
             if (toChange)
             {
@@ -244,7 +247,7 @@ namespace Boom_Manager_Project
         private void numUpDMinutesExtend_ValueChanged(object sender, EventArgs e)
         {
             buttonPressCounter = 1;
-            numUpDMinutesExtend.Minimum = numUpDHoursExtend.Value == 0 ? 30 : 0;
+            numUpDMinutesExtend.Minimum = numUpDHoursExtend.Value == 0 ? 15 : 0;
 //            if (_repeatCallOfMethodCounter <= 0)
             if (toChange)
             {

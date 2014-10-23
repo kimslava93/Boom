@@ -480,5 +480,11 @@ namespace Boom_Manager_Project
             var ae = new AllExpences();
             ae.ShowDialog();
         }
+
+        private void bPromoRedactor_Click(object sender, EventArgs e)
+        {
+            var promo = new DiscountsRedactor();
+            promo.ShowDialog();
+        }
     }
 }

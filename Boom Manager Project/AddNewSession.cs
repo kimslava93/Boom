@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.HardwareConnectionDriver;
 using Boom_Manager_Project.Models;
+using Boom_Manager_Project.MyClasses;
 
 namespace Boom_Manager_Project
 {
@@ -16,7 +18,7 @@ namespace Boom_Manager_Project
         private int _repeatCallOfMethodCounter;
         private List<Endpoint> _endpoints;
         private List<Device> _allDevices;
-        private static readonly TimeSpan MinimumTime = new TimeSpan(0, 0, 30, 0);
+        private static readonly TimeSpan MinimumTime = new TimeSpan(0, 0, 15, 0);
         private int _buttonPressCounter = 1;
         private readonly List<DevicesWithEndPoints> _devicesWithEndPointsList; 
 //        private Device _device1;
@@ -25,6 +27,7 @@ namespace Boom_Manager_Project
             _devicesWithEndPointsList = new List<DevicesWithEndPoints>();
             _repeatCallOfMethodCounter = 0;
             InitializeComponent();
+            Options.OptionsInstance().BonusTime = new List<BonusPromoTimeTemplateMyClass>(); 
         }
 
         private void AddNewSession_Load(object sender, EventArgs e)
@@ -41,6 +44,7 @@ namespace Boom_Manager_Project
             UpdatePlaystationList();
             IsClientWithCardOrNot();
             Options.OptionsInstance().TakeScreenShot();
+            DiscountCheckAndShow();
         }
 
         private void UpdatePlaystationList()
@@ -231,7 +235,7 @@ namespace Boom_Manager_Project
                         Options.FileTypeActionsLogs);
                 if (numUpDHoursLeft.Value <= 0)
                 {
-                    numUpDMinutesLeft.Minimum = 30;
+                    numUpDMinutesLeft.Minimum = 15;
                 }
                 else
                 {
@@ -259,7 +263,7 @@ namespace Boom_Manager_Project
                 _repeatCallOfMethodCounter = 0;
             }
             CheckDiscount();
-           
+            DiscountCheckAndShow();
         }
 
         private void numUpDMinutesLeft_ValueChanged(object sender, EventArgs e)
@@ -275,7 +279,7 @@ namespace Boom_Manager_Project
                 _repeatCallOfMethodCounter++;
                 if (numUpDHoursLeft.Value == 0)
                 {
-                    numUpDMinutesLeft.Minimum = 30;
+                    numUpDMinutesLeft.Minimum = 15;
                 }
                 else
                 {
@@ -312,7 +316,7 @@ namespace Boom_Manager_Project
                 _repeatCallOfMethodCounter = 0;
             }
             CheckDiscount();
-           
+            DiscountCheckAndShow();
         }
 
         private void numUpDPaidPrice_ValueChanged(object sender, EventArgs e)//without card
@@ -330,6 +334,8 @@ namespace Boom_Manager_Project
                 SetDefaultPropertiesForFields();
             }
             UsualClientPriceChanged();
+            DefaultValuesForBonusFields();
+            DiscountCheckAndShow();
             Options.OptionsInstance().TakeScreenShot();
         }
         private void numUpDClientMoneyLeft_ValueChanged(object sender, EventArgs e)//client with card
@@ -472,9 +478,18 @@ namespace Boom_Manager_Project
                 if (tbDiscountCards.Text == Options.OptionsInstance().UsualClient ||
                     tbDiscountCards.Text == @"Usual Client")
                 {
+                    double discountSum = 0;
                     TimeSpan paidTime =
                         TimeSpan.FromMinutes((double) numUpDHoursLeft.Value*60 + (double) numUpDMinutesLeft.Value);
-
+                    if (gbBonus.Visible)
+                    {
+                        if (numUpDPromoMinutes.Value > 0 || numUpDPromoHoursTime.Value > 0)
+                        {
+                            var additionalTime = new TimeSpan(0, (int) numUpDPromoHoursTime.Value,
+                            (int) numUpDPromoMinutes.Value,0);
+                            paidTime = paidTime.Add(additionalTime);
+                        }
+                    }
                     if (AddNewSessionController.AddNewSessionControllerInstance()
                         .CheckFieldsOnNull(cbPlaystationId.Text, tbDiscountCards.Text, paidTime,
                             (double) numUpDPaidPrice.Value))
@@ -488,6 +503,32 @@ namespace Boom_Manager_Project
                                 numUpDPaidPrice.Value + " сом. Оплаченное время = " + paidTime + ", на приставку " +
                                 cbPlaystationId.Text + ", с Карточкой " + tbDiscountCards.Text,
                                 Options.FileTypeActionsLogs);
+                        
+                        if (gbBonus.Visible)
+                        {
+                            bool checkTime = false;
+                            foreach (var b in Options.OptionsInstance().BonusTime)
+                            {
+                                if (b.TimeName == (string) cbBonusItem.SelectedItem)
+                                {
+                                    checkTime = true;
+                                }
+                            }
+                            if (cbBonusItem.SelectedItem != null && !checkTime)
+                            {
+                                AddNewSessionController.AddNewSessionControllerInstance().SellBonusItem(cbBonusItem.SelectedItem.ToString());
+                            }
+                            else if (cbBonusItem.SelectedItem == null)
+                            {
+                                DataBaseClass.Instancedb()
+                                    .AddNewPromoUsage(
+                                        DataBaseClass.Instancedb()
+                                            .GetLastClientNumInSession(
+                                                DataBaseClass.Instancedb().GetLastOpenedGlobalSessionDailyId()),
+                                        "Бонус игровое время " + (numUpDPromoHoursTime.Value + numUpDPromoMinutes.Value) +" минут", discountSum);
+                            }
+                        }
+                        
                         Options.OptionsInstance().TakeScreenShot();
                         Close();
                     }
@@ -539,7 +580,17 @@ namespace Boom_Manager_Project
                 Options.OptionsInstance().TakeScreenShot();
                 IsDiscountValid(tbDiscountCards.Text);
                 CheckTable();
+                DiscountCheckAndShow();
+//                DefaultValuesForBonusFields();
+//                if (gbBonus.Enabled)
+//                    {
+//                        var additionalTime = new TimeSpan(0, (int) numUpDPromoHoursTime.Value,
+//                            (int) numUpDPromoMinutes.Value);
+//                        numUpDHoursLeft.Value = (int) (numUpDHoursLeft.Value) + additionalTime.Hours;
+//                        numUpDMinutesLeft.Value = (int) (numUpDMinutesLeft.Value) + additionalTime.Minutes;
+//                    }
                 UsualClientPriceChanged();
+
                 Options.OptionsInstance().TakeScreenShot();
             }
 
@@ -714,6 +765,7 @@ namespace Boom_Manager_Project
             {
                 UpdatePlaystationList();
                 SetDefaultPropertiesForFields();
+                DiscountCheckAndShow();
             }
 //            else
 //            {
@@ -732,6 +784,7 @@ namespace Boom_Manager_Project
             {
                 cbPlaystationId.SelectedIndex = 0;
             }
+            DiscountCheckAndShow();
         }
 
         private void tbDiscountCards_MouseClick(object sender, MouseEventArgs e)
@@ -746,6 +799,7 @@ namespace Boom_Manager_Project
         private void tbDiscountSize_TextChanged(object sender, EventArgs e)
         {
             CheckDiscount();
+            DiscountCheckAndShow();
             Options.OptionsInstance().TakeScreenShot();
 
             //            if (tbDiscountCards.Text != Options.OptionsInstance().UsualClient)
@@ -888,6 +942,125 @@ namespace Boom_Manager_Project
             {
                 bAddSession.Focus();
             }
+        }
+
+        private void DiscountCheckAndShow()
+        {
+            numUpDPromoHoursTime.Enabled = false;
+            numUpDPromoMinutes.Enabled = false;
+            
+//            DefaultValuesForBonusFields();
+            var filtered =
+                CheckDiscountAvailibily.InstanceCheckDiscountAvailibily()
+                    .FilterAvailablePromos(tbDiscountCards.Text, cbPlaystationId.Text, cbNighTime.Checked,
+                        new TimeSpan(0, (int) numUpDHoursLeft.Value, (int) numUpDMinutesLeft.Value, 0),
+                        (int) numUpDPaidPrice.Value, double.Parse(tbDiscountSize.Text));
+            if (filtered.Count > 0)
+            {
+                ShowBonusPromo(true);
+//                DefaultValuesForBonusFields();
+                foreach (var p in filtered)
+                {
+//                    DefaultValuesForBonusFields();
+                    var bonus = DataBaseClass.Instancedb().GetBonusById(p);
+                    if (bonus.BonusHours != null)
+                    {
+                        var t = new BonusPromoTimeTemplateMyClass(bonus.BonusHours.ToString(), (TimeSpan)bonus.BonusHours);
+                        bool repeated = false;
+                        foreach (var b in Options.OptionsInstance().BonusTime)
+                        {
+                            if (b.TimeName == t.TimeName)
+                            {
+                                repeated = true;
+                            }
+                        }
+                        if (!repeated)
+                        {
+                            Options.OptionsInstance().BonusTime.Add(t);
+                            cbBonusItem.Items.Add(t.TimeName);
+                        }
+                        if (string.IsNullOrEmpty(cbBonusItem.Text))
+                        {
+                            numUpDPromoHoursTime.Value = t.BonusTime.Hours;
+                            numUpDPromoMinutes.Value = t.BonusTime.Minutes;
+                        }
+                    }
+                    else if (bonus.BonusDiscountSum != null)
+                    {
+                        tbDiscountSize.Text =
+                            (double.Parse(tbDiscountSize.Text) + (double) bonus.BonusDiscountSum).ToString(
+                                CultureInfo.InvariantCulture);
+                    }
+                    else if (bonus.BonusItemToBuy != null)
+                    {
+                        var items = Options.OptionsInstance().SplitStringToList(bonus.BonusItemToBuy, "@@");
+
+                        foreach (var item in items)
+                        {
+                            cbBonusItem.Items.Add(item);
+//                            cbBonusItem.SelectedIndex = 0;
+                        }
+                    }
+                }
+//                foreach (var bi in bonusTime)
+//                {
+//                    cbBonusItem.Items.Add(bi.TimeName);
+//                }
+            }
+            else
+            {
+                DefaultValuesForBonusFields();
+                ShowBonusPromo(false);
+            }
+        }
+
+        private void DefaultValuesForBonusFields()
+        {
+            numUpDPromoHoursTime.Value = 0;
+            numUpDPromoMinutes.Value = 0;
+            Options.OptionsInstance().BonusTime = new List<BonusPromoTimeTemplateMyClass>();
+            gbBonus.Text = @"Акций нет!";
+            cbBonusItem.Items.Clear();
+            cbBonusItem.Text = "";
+        }
+
+        private void ShowBonusPromo(bool open)
+        {
+            if (open)
+            {
+                Height = 512;
+                gbBonus.Visible = true;
+            }
+            else
+            {
+                Height = 385;
+                gbBonus.Visible = false;
+            }
+        }
+
+        private void cbBonusItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbBonusItem.SelectedItem != null)
+            {
+                var t = (from b in Options.OptionsInstance().BonusTime
+                    where b.TimeName == cbBonusItem.Text
+                    select b).SingleOrDefault();
+                if (Options.OptionsInstance().BonusTime.Count > 0 && t != null)
+                {
+                    numUpDPromoHoursTime.Value = t.BonusTime.Hours;
+                    numUpDPromoMinutes.Value = t.BonusTime.Minutes;
+                }
+                else
+                {
+                    numUpDPromoHoursTime.Value = 0;
+                    numUpDPromoMinutes.Value = 0;
+                }
+            }
+        }
+
+        private void cbBonusItem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

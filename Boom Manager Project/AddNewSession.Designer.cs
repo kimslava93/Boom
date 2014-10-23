@@ -59,6 +59,12 @@
             this.tbDiscountSize = new System.Windows.Forms.TextBox();
             this.lDiscount = new System.Windows.Forms.Label();
             this.cbNighTime = new System.Windows.Forms.CheckBox();
+            this.gbBonus = new System.Windows.Forms.GroupBox();
+            this.lBonusItem = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numUpDPromoMinutes = new System.Windows.Forms.NumericUpDown();
+            this.numUpDPromoHoursTime = new System.Windows.Forms.NumericUpDown();
+            this.cbBonusItem = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDMinutesLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDHoursLeft)).BeginInit();
             this.gbClientInfo.SuspendLayout();
@@ -67,6 +73,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDClientMoneyLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDPaidPrice)).BeginInit();
             this.gbDepositPayment.SuspendLayout();
+            this.gbBonus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDPromoMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDPromoHoursTime)).BeginInit();
             this.SuspendLayout();
             // 
             // numUpDMinutesLeft
@@ -88,6 +97,7 @@
             // 
             // bCancel
             // 
+            this.bCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bCancel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
@@ -95,7 +105,7 @@
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bCancel.ForeColor = System.Drawing.Color.White;
-            this.bCancel.Location = new System.Drawing.Point(12, 333);
+            this.bCancel.Location = new System.Drawing.Point(12, 474);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(96, 38);
             this.bCancel.TabIndex = 3;
@@ -386,6 +396,7 @@
             // 
             // bAddSession
             // 
+            this.bAddSession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bAddSession.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bAddSession.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bAddSession.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
@@ -393,7 +404,7 @@
             this.bAddSession.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddSession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bAddSession.ForeColor = System.Drawing.Color.White;
-            this.bAddSession.Location = new System.Drawing.Point(281, 333);
+            this.bAddSession.Location = new System.Drawing.Point(281, 474);
             this.bAddSession.Name = "bAddSession";
             this.bAddSession.Size = new System.Drawing.Size(96, 38);
             this.bAddSession.TabIndex = 2;
@@ -514,13 +525,101 @@
             this.cbNighTime.UseVisualStyleBackColor = true;
             this.cbNighTime.CheckedChanged += new System.EventHandler(this.cbNighTime_CheckedChanged);
             // 
+            // gbBonus
+            // 
+            this.gbBonus.Controls.Add(this.lBonusItem);
+            this.gbBonus.Controls.Add(this.label1);
+            this.gbBonus.Controls.Add(this.numUpDPromoMinutes);
+            this.gbBonus.Controls.Add(this.numUpDPromoHoursTime);
+            this.gbBonus.Controls.Add(this.cbBonusItem);
+            this.gbBonus.ForeColor = System.Drawing.Color.Red;
+            this.gbBonus.Location = new System.Drawing.Point(12, 334);
+            this.gbBonus.Name = "gbBonus";
+            this.gbBonus.Size = new System.Drawing.Size(370, 122);
+            this.gbBonus.TabIndex = 102;
+            this.gbBonus.TabStop = false;
+            this.gbBonus.Text = "Акция";
+            this.gbBonus.Visible = false;
+            // 
+            // lBonusItem
+            // 
+            this.lBonusItem.AutoSize = true;
+            this.lBonusItem.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lBonusItem.ForeColor = System.Drawing.Color.White;
+            this.lBonusItem.Location = new System.Drawing.Point(6, 63);
+            this.lBonusItem.Name = "lBonusItem";
+            this.lBonusItem.Size = new System.Drawing.Size(142, 21);
+            this.lBonusItem.TabIndex = 10;
+            this.lBonusItem.Text = "Выберите подарок";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(6, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(158, 21);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Доп. время по акции";
+            // 
+            // numUpDPromoMinutes
+            // 
+            this.numUpDPromoMinutes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpDPromoMinutes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpDPromoMinutes.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numUpDPromoMinutes.ForeColor = System.Drawing.Color.White;
+            this.numUpDPromoMinutes.Location = new System.Drawing.Point(238, 25);
+            this.numUpDPromoMinutes.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numUpDPromoMinutes.Name = "numUpDPromoMinutes";
+            this.numUpDPromoMinutes.ReadOnly = true;
+            this.numUpDPromoMinutes.Size = new System.Drawing.Size(62, 29);
+            this.numUpDPromoMinutes.TabIndex = 8;
+            // 
+            // numUpDPromoHoursTime
+            // 
+            this.numUpDPromoHoursTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.numUpDPromoHoursTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numUpDPromoHoursTime.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.numUpDPromoHoursTime.ForeColor = System.Drawing.Color.White;
+            this.numUpDPromoHoursTime.Location = new System.Drawing.Point(170, 24);
+            this.numUpDPromoHoursTime.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.numUpDPromoHoursTime.Name = "numUpDPromoHoursTime";
+            this.numUpDPromoHoursTime.ReadOnly = true;
+            this.numUpDPromoHoursTime.Size = new System.Drawing.Size(62, 29);
+            this.numUpDPromoHoursTime.TabIndex = 7;
+            // 
+            // cbBonusItem
+            // 
+            this.cbBonusItem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbBonusItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.cbBonusItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBonusItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbBonusItem.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbBonusItem.ForeColor = System.Drawing.Color.White;
+            this.cbBonusItem.Location = new System.Drawing.Point(160, 60);
+            this.cbBonusItem.Name = "cbBonusItem";
+            this.cbBonusItem.Size = new System.Drawing.Size(205, 29);
+            this.cbBonusItem.TabIndex = 5;
+            this.cbBonusItem.SelectedIndexChanged += new System.EventHandler(this.cbBonusItem_SelectedIndexChanged);
+            this.cbBonusItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbBonusItem_KeyPress);
+            // 
             // FAddNewSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
-            this.ClientSize = new System.Drawing.Size(389, 383);
+            this.ClientSize = new System.Drawing.Size(389, 524);
             this.ControlBox = false;
+            this.Controls.Add(this.gbBonus);
             this.Controls.Add(this.cbNighTime);
             this.Controls.Add(this.bCancel);
             this.Controls.Add(this.tbDiscountCards);
@@ -555,6 +654,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDPaidPrice)).EndInit();
             this.gbDepositPayment.ResumeLayout(false);
             this.gbDepositPayment.PerformLayout();
+            this.gbBonus.ResumeLayout(false);
+            this.gbBonus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDPromoMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDPromoHoursTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -592,5 +695,11 @@
         private System.Windows.Forms.Label lPlusTime;
         private System.Windows.Forms.Label lPercentage;
         private System.Windows.Forms.CheckBox cbNighTime;
+        private System.Windows.Forms.GroupBox gbBonus;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numUpDPromoMinutes;
+        private System.Windows.Forms.NumericUpDown numUpDPromoHoursTime;
+        private System.Windows.Forms.Label lBonusItem;
+        private System.Windows.Forms.ComboBox cbBonusItem;
     }
 }

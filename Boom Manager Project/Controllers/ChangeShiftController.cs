@@ -89,6 +89,7 @@ namespace Boom_Manager_Project.Controllers
             {
                 DataBaseClass.Instancedb()
                     .AddNewGlobalSession(adminInfo.person_id, operatorInfo.person_id, DateTime.Now);
+//                DataBaseClass.Instancedb().MakeLogInRecord(DateTime.Now, adminInfo.name, adminInfo.position);
                 TextFileWriter.TextFileWriterInstance().RecordLoginTime(adminInfo.name, prevAdminName,Options.StaffTypeAdmnistrator);
             }
             else if (adminInfo != null)

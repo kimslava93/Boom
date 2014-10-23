@@ -218,6 +218,9 @@
                 case 53:
                     error ="Клиент Usual Client запрещен на удаление! В случае проблем свяжитесь с разрабочиком!";//"Some playstations has null prices. Please set prices to all timezones!"
                     break;
+                case 54:
+                    error ="Невозможно внести данные в таблицу discount_requirements";//"Some playstations has null prices. Please set prices to all timezones!"
+                    break;
 
                 default:
                     error = "Неизвестная оценка!"; //"Unknown error!";

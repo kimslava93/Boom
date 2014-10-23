@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Boom_Manager_Project.MyClasses;
+using Novacode;
 
 namespace Boom_Manager_Project
 {
@@ -13,6 +17,7 @@ namespace Boom_Manager_Project
         public const string FileTypeErrorsLogs = "errors";
         public const string StaffTypeAdmnistrator = "Администратор";
         public const string StaffTypeOperator = "Оператор";
+        public List<BonusPromoTimeTemplateMyClass> BonusTime = new List<BonusPromoTimeTemplateMyClass>(); 
         private static Options _opt;
         public static Options OptionsInstance()
         {
@@ -37,6 +42,26 @@ namespace Boom_Manager_Project
                 input = new RoundedTimeSpan(input.Ticks, 0).TimeSpan;
             }
             return input;
+        }
+
+        public bool FindSubString(string stringList, string stringToFind)
+        {
+            List<string> subStrings = stringList.Split(';').ToList();
+            if (subStrings.Any(s => s.Equals(stringToFind)))
+            {
+                return true;
+            }
+            return false;
+        }
+        public List<string> SplitAllAtems(string stringList)
+        {
+            List<string> subStrings = stringList.Split(';').ToList();
+            return subStrings;
+        }
+        public List<string> SplitStringToList(string stringList, string divider)
+        {
+            List<string> subStrings = Regex.Split(stringList,divider).ToList();
+            return subStrings;
         }
 //        public void TakeScreenShotLog(string nameOfFile)
 //        {

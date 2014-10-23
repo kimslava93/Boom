@@ -10,7 +10,7 @@ namespace Boom_Manager_Project
     public partial class TimeTester : Form
     {
         private int _buttonPressCounter = 1;
-        private static readonly TimeSpan MinimumTime = new TimeSpan(0, 0, 30, 0);
+        private static readonly TimeSpan MinimumTime = new TimeSpan(0, 0, 15, 0);
         private int _repeatCallOfMethodCounter;
         public TimeTester()
         {
@@ -81,7 +81,8 @@ namespace Boom_Manager_Project
                 TimeSpan t = AddNewSessionController.AddNewSessionControllerInstance()
                     .UpdateTimeLeft(paidPrice, cbPlaystationId.Text, numUpDPaidPrice.Minimum, numUpDPaidPrice.Maximum, DateTime.Parse(DateTime.Now.Year+"-"+DateTime.Now.Month+"-"+DateTime.Now.Day+" "+ numUpDCurHour.Value + ":" + numUpDCurMinute.Value + ":" + numUpDCurTimeSeconds.Value));
 
-                if (numUpDMinutesLeft.Value < numUpDMinutesLeft.Minimum)
+                if (numUpDMinutesLeft.Value < numUpDMinutesLeft.Minimum||
+                    t.Minutes < numUpDMinutesLeft.Minimum)
                 {
                     numUpDMinutesLeft.Value = numUpDMinutesLeft.Minimum;
                 }
@@ -137,7 +138,7 @@ namespace Boom_Manager_Project
             {
                 if (numUpDHoursLeft.Value <= 0)
                 {
-                    numUpDMinutesLeft.Minimum = 30;
+                    numUpDMinutesLeft.Minimum = 15;
                 }
                 else
                 {
@@ -170,7 +171,7 @@ namespace Boom_Manager_Project
                 _repeatCallOfMethodCounter++;
                 if (numUpDHoursLeft.Value == 0)
                 {
-                    numUpDMinutesLeft.Minimum = 30;
+                    numUpDMinutesLeft.Minimum = 15;
                 }
                 else
                 {

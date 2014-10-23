@@ -54,6 +54,7 @@
             this.lCurrentTime = new System.Windows.Forms.Label();
             this.dgvOpenedSessions = new System.Windows.Forms.DataGridView();
             this.gbManageGroup = new System.Windows.Forms.GroupBox();
+            this.bPromoRedactor = new System.Windows.Forms.Button();
             this.bTimeTester = new System.Windows.Forms.Button();
             this.bStaff = new System.Windows.Forms.Button();
             this.bCEditlients = new System.Windows.Forms.Button();
@@ -504,6 +505,7 @@
             // 
             // gbManageGroup
             // 
+            this.gbManageGroup.Controls.Add(this.bPromoRedactor);
             this.gbManageGroup.Controls.Add(this.bTimeTester);
             this.gbManageGroup.Controls.Add(this.bStaff);
             this.gbManageGroup.Controls.Add(this.bCEditlients);
@@ -523,6 +525,26 @@
             this.gbManageGroup.TabIndex = 4;
             this.gbManageGroup.TabStop = false;
             this.gbManageGroup.Text = "MANAGE";
+            // 
+            // bPromoRedactor
+            // 
+            this.bPromoRedactor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bPromoRedactor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bPromoRedactor.BackgroundImage")));
+            this.bPromoRedactor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bPromoRedactor.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.bPromoRedactor.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bPromoRedactor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bPromoRedactor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bPromoRedactor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bPromoRedactor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bPromoRedactor.ForeColor = System.Drawing.Color.White;
+            this.bPromoRedactor.Location = new System.Drawing.Point(3, 385);
+            this.bPromoRedactor.Name = "bPromoRedactor";
+            this.bPromoRedactor.Size = new System.Drawing.Size(88, 36);
+            this.bPromoRedactor.TabIndex = 16;
+            this.bPromoRedactor.Text = "Акции";
+            this.bPromoRedactor.UseVisualStyleBackColor = false;
+            this.bPromoRedactor.Click += new System.EventHandler(this.bPromoRedactor_Click);
             // 
             // bTimeTester
             // 
@@ -817,6 +839,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bTimeTester;
         private System.Windows.Forms.Button bAllExpenses;
+        private System.Windows.Forms.Button bPromoRedactor;
     }
 }
 

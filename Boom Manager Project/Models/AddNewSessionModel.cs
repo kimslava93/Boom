@@ -184,7 +184,7 @@ namespace Boom_Manager_Project.Models
             }
             return result;
         }
-        private string WhichTimeZoneIs(DateTime timeToFind)
+        public string WhichTimeZoneIs(DateTime timeToFind)
         {
             try
             {

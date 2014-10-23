@@ -47,7 +47,6 @@ E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Projec
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangePlaystationPrice.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ConsoleManager.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddNewDevice.resources
-E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.Controllers.ClientManager.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CreateNewConsole.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CreateNewDiscountStep.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.DeviceManager.resources
@@ -67,3 +66,22 @@ E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Projec
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.EnterPassword.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.Properties.Resources.resources
 E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom Manager Project.csproj.GenerateResource.Cache
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AllClients.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AllExpences.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.BarRevision.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CashAccept.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangeAmountOfItem.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ChangeNumberOfItem.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.ClientManager.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.CheckoutPriceAndTime.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.DiscountsRedactor.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.LastSessions.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AddNewItem.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.AllBarItems.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.DataBaseClasses.ChangePlaystation.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.LightCutOff.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.MultipleAddingDataToString.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.TimeTester.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.SellBarItem.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.SoldItems.resources
+E:\Boom Manager Project\Boom Manager Project\obj\x86\Release\Boom_Manager_Project.PersonalAccountEditor.resources

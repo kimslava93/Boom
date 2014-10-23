@@ -66,6 +66,7 @@
       <Column Name="session_discount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="session_state" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Association Name="days_sessions_t_clients_per_session_t" Member="clients_per_session_ts" ThisKey="session_id" OtherKey="session_id" Type="clients_per_session_t" />
+      <Association Name="days_sessions_t_promo_usage_history" Member="promo_usage_histories" ThisKey="session_id" OtherKey="session_id" Type="promo_usage_history" />
       <Association Name="global_session_t_days_sessions_t" Member="global_session_t" ThisKey="daily_id" OtherKey="daily_id" Type="global_session_t" IsForeignKey="true" />
       <Association Name="tables_t_days_sessions_t" Member="tables_t" ThisKey="playstation_id" OtherKey="playstation_id" Type="tables_t" IsForeignKey="true" />
     </Type>
@@ -129,6 +130,7 @@
       <Association Name="global_session_t_expenses_t" Member="expenses_ts" ThisKey="daily_id" OtherKey="daily_id" Type="expenses_t" />
       <Association Name="global_session_t_sold_bar_history_table" Member="sold_bar_history_tables" ThisKey="daily_id" OtherKey="daily_id" Type="sold_bar_history_table" />
       <Association Name="global_session_t_bar_revision_t" Member="bar_revision_ts" ThisKey="daily_id" OtherKey="daily_id" Type="bar_revision_t" />
+      <Association Name="global_session_t_promo_usage_history" Member="promo_usage_histories" ThisKey="daily_id" OtherKey="daily_id" Type="promo_usage_history" />
       <Association Name="personal_info_t_global_session_t" Member="personal_info_t" ThisKey="administrator_id" OtherKey="person_id" Type="personal_info_t" IsForeignKey="true" />
       <Association Name="personal_info_t_global_session_t1" Member="personal_info_t1" ThisKey="operator_id" OtherKey="person_id" Type="personal_info_t" IsForeignKey="true" />
     </Type>
@@ -230,6 +232,63 @@
       <Column Name="bar_item_num" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="global_session_t_bar_revision_t" Member="global_session_t" ThisKey="daily_id" OtherKey="daily_id" Type="global_session_t" IsForeignKey="true" />
       <Association Name="items_table_bar_revision_t" Member="items_table" ThisKey="item_id" OtherKey="item_id" Type="items_table" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.promo_bonus" Member="promo_bonus">
+    <Type Name="promo_bonus">
+      <Column Name="promo_bonus_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="promo_bonus_hours" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="promo_bonus_item_to_buy" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="promo_bonus_num_of_item" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="promo_bonus_money_sum" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="promo_bonus_sum_discount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="promo_bonus_promos_t" Member="promos_ts" ThisKey="promo_bonus_id" OtherKey="discount_bonus_id" Type="promos_t" />
+    </Type>
+  </Table>
+  <Table Name="dbo.promo_requirements" Member="promo_requirements">
+    <Type Name="promo_requirement">
+      <Column Name="promo_requirement_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="promo_requirements_hours" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="promo_requirements_item_to_buy" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="promo_requirements_num_of_item" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="promo_requirements_money_sum" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="promo_requirement_promos_t" Member="promos_ts" ThisKey="promo_requirement_id" OtherKey="promo_requirements_id" Type="promos_t" />
+    </Type>
+  </Table>
+  <Table Name="dbo.promos_t" Member="promos_ts">
+    <Type Name="promos_t">
+      <Column Name="promo_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="promo_description" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="promo_start" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="promo_end" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="promo_state" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="promo_timezones" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="promo_playstations" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="promo_auditory" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="promo_requirements_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="discount_bonus_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="promo_bonus_promos_t" Member="promo_bonus" ThisKey="discount_bonus_id" OtherKey="promo_bonus_id" Type="promo_bonus" IsForeignKey="true" />
+      <Association Name="promo_requirement_promos_t" Member="promo_requirement" ThisKey="promo_requirements_id" OtherKey="promo_requirement_id" Type="promo_requirement" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.promo_usage_history" Member="promo_usage_histories">
+    <Type Name="promo_usage_history">
+      <Column Name="daily_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="session_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="promo_usage_history_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="promo_bonus_comment" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="promo_discount_sum" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="global_session_t_promo_usage_history" Member="global_session_t" ThisKey="daily_id" OtherKey="daily_id" Type="global_session_t" IsForeignKey="true" />
+      <Association Name="days_sessions_t_promo_usage_history" Member="days_sessions_t" ThisKey="session_id" OtherKey="session_id" Type="days_sessions_t" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.shifts_log_in" Member="shifts_log_ins">
+    <Type Name="shifts_log_in">
+      <Column Name="log_in_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="log_in_datetime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="person_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="person_position" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="comments" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

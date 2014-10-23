@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Boom_Manager_Project.DataBaseClasses;
@@ -287,6 +288,32 @@ namespace Boom_Manager_Project.Controllers
         {
 //            var allClients = (List<string>) DiscountSplitter(clients);
             //NOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHEDNOT FINISHED
+        }
+
+        public void SellBonusItem(string listOfitems)
+        {
+            List<string> itemsToSell = Options.OptionsInstance().SplitStringToList(listOfitems, ";");
+            foreach (var i in itemsToSell)
+            {
+                var itemdata = DataBaseClass.Instancedb().GetItemDataByName(i);
+                if (itemdata.cost != null)
+                {
+                    SellBarItemController.SellBarItemControllerInstance()
+                        .SellItem(itemdata.item_id, 1, (double) itemdata.cost);
+                    ExpensesController.ExpensesInstance()
+                        .InsertNewRecordExpensesMoney((double) itemdata.cost, "Акция! " + i + " отдано.",
+                            DateTime.Now);
+                }
+            }
+//            SellBarItemController.SellBarItemControllerInstance()
+//                   .SellItem((string)dgvAllItems.CurrentRow.Cells[1].Value, (int)numUpDNumber.Value,
+//                       double.Parse(tbSum.Text.ToString(CultureInfo.InvariantCulture)));
+//            MessageBox.Show(@"Товар " + dgvAllItems.CurrentRow.Cells[1].Value + @" в количестве " + numUpDNumber.Value + @"шт. был успешно занесен в список проданных товаров!");
+//            TextFileWriter.TextFileWriterInstance()
+//                .AddSomeDataToLogReport(
+//                    "В форме \"Продать товар\" была нажата кнопка Продать с введеными данными: Товар " + dgvAllItems.CurrentRow.Cells[1].Value + @" в количестве " + numUpDNumber.Value + @"шт. был успешно занесен в список проданных товаров!",
+//                    Options.FileTypeActionsLogs);
+//            Options.OptionsInstance().TakeScreenShot();
         }
     }
 
