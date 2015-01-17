@@ -351,7 +351,7 @@ namespace Boom_Manager_Project
                 TimeSpan t = AddNewSessionController.AddNewSessionControllerInstance()
                     .UpdateTimeLeft(paidPrice, cbPlaystationId.Text, numUpDPaidPrice.Minimum, numUpDPaidPrice.Maximum, DateTime.Now);
 
-                if (t.Minutes < numUpDMinutesLeft.Minimum)
+                if (t.Minutes < numUpDMinutesLeft.Minimum && t.Hours <= 0)
                 {
                     numUpDMinutesLeft.Value = numUpDMinutesLeft.Minimum;
                 }
@@ -865,20 +865,20 @@ namespace Boom_Manager_Project
 
         private bool IsTimeIncludedIntoNightTime()
         {
-            return DateTime.Now.Hour >= 0 && DateTime.Now.Hour <= 7;
+            return DateTime.Now.Hour >= 1 && DateTime.Now.Hour <= 5;
         }
 
         private TimeSpan GetTimeUntil7()
         {
-            if (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0) > (DateTime.Now))
-                return (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0) - (DateTime.Now));
+            if (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 0, 0) > (DateTime.Now))
+                return (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 0, 0) - (DateTime.Now));
             
-                return ((DateTime.Now) - new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 0, 0));
+                return ((DateTime.Now) - new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 0, 0));
         }
 
         private bool IsTimeNotExeed7Hours(TimeSpan time)
         {
-            return time > TimeSpan.FromHours(1) && time < TimeSpan.FromHours(7);
+            return time > TimeSpan.FromHours(0) && time < TimeSpan.FromHours(6);
         }
 
         private void cbNighTime_CheckedChanged(object sender, EventArgs e)

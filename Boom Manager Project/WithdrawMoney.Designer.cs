@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.gbWithdrawMoney = new System.Windows.Forms.GroupBox();
-            this.cbManager = new System.Windows.Forms.ComboBox();
             this.numUpDCashAmount = new System.Windows.Forms.NumericUpDown();
             this.tbTime = new System.Windows.Forms.TextBox();
             this.lManager = new System.Windows.Forms.Label();
@@ -37,13 +36,14 @@
             this.lTime = new System.Windows.Forms.Label();
             this.bCancel = new System.Windows.Forms.Button();
             this.bApply = new System.Windows.Forms.Button();
+            this.tbManager = new System.Windows.Forms.TextBox();
             this.gbWithdrawMoney.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDCashAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // gbWithdrawMoney
             // 
-            this.gbWithdrawMoney.Controls.Add(this.cbManager);
+            this.gbWithdrawMoney.Controls.Add(this.tbManager);
             this.gbWithdrawMoney.Controls.Add(this.numUpDCashAmount);
             this.gbWithdrawMoney.Controls.Add(this.tbTime);
             this.gbWithdrawMoney.Controls.Add(this.lManager);
@@ -57,17 +57,7 @@
             this.gbWithdrawMoney.TabIndex = 0;
             this.gbWithdrawMoney.TabStop = false;
             this.gbWithdrawMoney.Text = "Снять кассу";
-            // 
-            // cbManager
-            // 
-            this.cbManager.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.cbManager.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cbManager.ForeColor = System.Drawing.Color.White;
-            this.cbManager.FormattingEnabled = true;
-            this.cbManager.Location = new System.Drawing.Point(166, 107);
-            this.cbManager.Name = "cbManager";
-            this.cbManager.Size = new System.Drawing.Size(161, 29);
-            this.cbManager.TabIndex = 4;
+            this.gbWithdrawMoney.Enter += new System.EventHandler(this.gbWithdrawMoney_Enter);
             // 
             // numUpDCashAmount
             // 
@@ -131,7 +121,7 @@
             this.bCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bCancel.Location = new System.Drawing.Point(12, 164);
+            this.bCancel.Location = new System.Drawing.Point(17, 164);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(86, 35);
             this.bCancel.TabIndex = 1;
@@ -148,7 +138,7 @@
             this.bApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
             this.bApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bApply.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bApply.Location = new System.Drawing.Point(247, 164);
+            this.bApply.Location = new System.Drawing.Point(252, 164);
             this.bApply.Name = "bApply";
             this.bApply.Size = new System.Drawing.Size(75, 35);
             this.bApply.TabIndex = 1;
@@ -156,13 +146,26 @@
             this.bApply.UseVisualStyleBackColor = false;
             this.bApply.Click += new System.EventHandler(this.bApply_Click);
             // 
+            // tbManager
+            // 
+            this.tbManager.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.tbManager.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbManager.ForeColor = System.Drawing.Color.White;
+            this.tbManager.Location = new System.Drawing.Point(166, 108);
+            this.tbManager.MaxLength = 50;
+            this.tbManager.Name = "tbManager";
+            this.tbManager.ReadOnly = true;
+            this.tbManager.ShortcutsEnabled = false;
+            this.tbManager.Size = new System.Drawing.Size(161, 29);
+            this.tbManager.TabIndex = 5;
+            // 
             // WithdrawMoney
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(339, 209);
+            this.ClientSize = new System.Drawing.Size(339, 206);
             this.ControlBox = false;
             this.Controls.Add(this.bApply);
             this.Controls.Add(this.bCancel);
@@ -188,7 +191,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbWithdrawMoney;
-        private System.Windows.Forms.ComboBox cbManager;
         private System.Windows.Forms.NumericUpDown numUpDCashAmount;
         private System.Windows.Forms.TextBox tbTime;
         private System.Windows.Forms.Label lManager;
@@ -196,5 +198,6 @@
         private System.Windows.Forms.Label lTime;
         private System.Windows.Forms.Button bCancel;
         private System.Windows.Forms.Button bApply;
+        private System.Windows.Forms.TextBox tbManager;
     }
 }

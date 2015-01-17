@@ -117,6 +117,7 @@
             this.Name = "ChangeNumberOfItem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChangeNumberOfItem";
+            this.Load += new System.EventHandler(this.ChangeNumberOfItem_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChangeNumberOfItem_MouseDown);
             this.MouseLeave += new System.EventHandler(this.ChangeNumberOfItem_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ChangeNumberOfItem_MouseMove);

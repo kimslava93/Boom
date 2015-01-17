@@ -1,18 +1,19 @@
 ﻿using System;
-using System.Data.Linq.Mapping;
 using System.Windows.Forms;
 using Boom_Manager_Project.Controllers;
+using Boom_Manager_Project.DataBaseClasses;
 using Boom_Manager_Project.MyClasses;
 
-namespace Boom_Manager_Project.DataBaseClasses
+namespace Boom_Manager_Project
 {
     public partial class ChangePlaystation : Form
     {
         private DaySessionClass _ds;
-        public ChangePlaystation(DaySessionClass sessionToReplace)
+        public ChangePlaystation(DaySessionClass sessionToReplace, double playedMoney)
         {
             InitializeComponent();
             _ds = sessionToReplace;
+            _ds.Счетчик = playedMoney;
         }
 
         private void bCancel_Click(object sender, EventArgs e)
@@ -66,6 +67,7 @@ namespace Boom_Manager_Project.DataBaseClasses
                .AddSomeDataToLogReport("В форме смена приставки, была нажата кнопка добавить " + cbPlaystationId.Text,
                    Options.FileTypeActionsLogs);
             Options.OptionsInstance().TakeScreenShot();
+            
             if ((rtbComments.Text.Length > 5 && TableIsAvailable() && rbCustom.Checked) || (TableIsAvailable() && (rbClientWish.Checked || rbChecking.Checked)))
             {
                 if(rbClientWish.Checked)

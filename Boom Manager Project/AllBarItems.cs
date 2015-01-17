@@ -89,5 +89,15 @@ namespace Boom_Manager_Project
                 }
             }
         }
+
+        private void bChangePrice_Click(object sender, EventArgs e)
+        {
+            if (dgvAllItems.CurrentRow != null)
+            {
+                var cpoi = new ChangePriceOfBarItem((string)dgvAllItems.CurrentRow.Cells[1].Value);
+                cpoi.ShowDialog();
+                LoadDgv();
+            }
+        }
     }
 }

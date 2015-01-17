@@ -280,8 +280,13 @@ namespace Boom_Manager_Project
 
         private void bWithdrawMoney_Click(object sender, EventArgs e)
         {
-            var wm = new WithdrawMoney();
-            wm.ShowDialog();
+            var ep = new EnterPassword("MANAGER");
+            ep.ShowDialog();
+            if (ep.Passed)
+            {
+                var wm = new WithdrawMoney(ep.LogginedPerson);
+                wm.ShowDialog();
+            }
         }
 
         private void bClientManager_Click(object sender, EventArgs e)
@@ -318,19 +323,31 @@ namespace Boom_Manager_Project
         {
             if (dgvOpenedSessions.CurrentRow != null)
             {
+                var playedMoney = (double)GetHeaderOfPlayedTime(dgvOpenedSessions.CurrentRow);
                 TextFileWriter.TextFileWriterInstance()
                     .AddSomeDataToLogReport("кнопка \"Смена приставки\" была нажата.", Options.FileTypeActionsLogs);
                 Options.OptionsInstance().TakeScreenShot();
                 DaySessionClass sessionToReplace = _currentOpenedSessionsList.FirstOrDefault(ds => ds.Сессия == (int) dgvOpenedSessions.CurrentRow.Cells[0].Value);
                 if (sessionToReplace != null)
                 {
-
-                    var cp = new ChangePlaystation(sessionToReplace);
+                    var cp = new ChangePlaystation(sessionToReplace, playedMoney);
                     cp.ShowDialog();
                     _currentOpenedSessionsList = BoomGamebarController.InstanceBgController().GetAllOpenedDaySessions();
                     dgvOpenedSessions.Invalidate();
                 }
             }
+        }
+
+        private object GetHeaderOfPlayedTime(DataGridViewRow row)
+        {
+            if (row != null)
+            {
+                if (row.Cells["Счетчик"].Value != null)
+                {
+                    return row.Cells["Счетчик"].Value;
+                }
+            }
+            return 0; //result;
         }
 
         private void bItems_Click(object sender, EventArgs e)

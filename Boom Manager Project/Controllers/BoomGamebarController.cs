@@ -14,7 +14,7 @@ namespace Boom_Manager_Project.Controllers
         private List<clients_per_session_t> _clentsList;
         private global_session_t _currentGlobalSession;
         private static BoomGamebarController _boomGamebarController;
-
+        private string LastLoginedManager;
         public void ShowErrorMessage(int id)
         {
             switch (id)
@@ -177,6 +177,7 @@ namespace Boom_Manager_Project.Controllers
             ep.ShowDialog();
             if (ep.Passed)
             {
+                LastLoginedManager = ep.LogginedPerson;
                 return true;
             }
             return false;

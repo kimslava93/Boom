@@ -57,5 +57,10 @@ namespace Boom_Manager_Project
         {
             _old = null;
         }
+
+        private void ChangeNumberOfItem_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

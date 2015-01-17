@@ -684,6 +684,7 @@ namespace Boom_Manager_Project.DataBaseClasses
             var db = new dbDataContext();
             lock (db)
             {
+                DateTime curTime = DateTime.Now;
                 for (int i = 0; i < 5; i++)
                 {
                     try
@@ -696,10 +697,12 @@ namespace Boom_Manager_Project.DataBaseClasses
                             UpdatePlaystationState(matchDs.playstation_id, "free");
                             db.SubmitChanges();
                             matchDs.playstation_id = newPlaystation;
+                            decimal moneyLeftFromLastGame = (decimal) (matchDs.payed_sum - ds.Счетчик);
                             TimeSpan paidTime =
                                 AddNewSessionController.AddNewSessionControllerInstance()
-                                    .UpdateTimeLeft((decimal) matchDs.payed_sum, newPlaystation, 0, 18900, DateTime.Now);
-                            if (matchDs.start_game != null) matchDs.end_game = matchDs.start_game.Value.Add(paidTime);
+                                    .UpdateTimeLeft(moneyLeftFromLastGame, newPlaystation, 0, 18900, DateTime.Now);
+                            if (matchDs.start_game != null && matchDs.end_game != null)
+                                matchDs.end_game = curTime.Add(paidTime);
                             if (String.IsNullOrWhiteSpace(matchDs.comments))
                             {
                                 matchDs.comments = "Пересел с " + ds.Приставка + " на " + newPlaystation + " " +
@@ -1038,7 +1041,25 @@ namespace Boom_Manager_Project.DataBaseClasses
                 }
             }
         }
-
+        public void ChangeBarItemPrice(string itemId, int newPrice)
+        {
+            var db = new dbDataContext();
+            lock (db)
+            {
+                var match = (from i in db.GetTable<items_table>()
+                             where i.item_id == itemId
+                             select i).SingleOrDefault();
+                if (match != null)
+                {
+                    match.cost = newPrice;
+                    db.SubmitChanges();
+                }
+                else
+                {
+                    MessageBox.Show(ErrorsAndWarningsMessages.ErrorsAndWarningsInstance().GetError(42));
+                }
+            }
+        }
         public List<sold_bar_history_table> GetListOfSoldItemId(string itemId, int dailyId)
         {
             var db = new dbDataContext();

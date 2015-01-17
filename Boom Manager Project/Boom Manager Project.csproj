@@ -102,6 +102,12 @@
     <Compile Include="ChangeNumberOfItem.Designer.cs">
       <DependentUpon>ChangeNumberOfItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChangePriceOfBarItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePriceOfBarItem.Designer.cs">
+      <DependentUpon>ChangePriceOfBarItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="CheckDiscountAvailibily.cs" />
     <Compile Include="Controllers\AllClientsController.cs" />
     <Compile Include="BarRevision.cs">
@@ -447,6 +453,9 @@
     <EmbeddedResource Include="ChangePlaystationPrice.resx">
       <DependentUpon>ChangePlaystationPrice.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePriceOfBarItem.resx">
+      <DependentUpon>ChangePriceOfBarItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConsoleManager.resx">
       <DependentUpon>ConsoleManager.cs</DependentUpon>

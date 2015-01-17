@@ -1,4 +1,4 @@
-﻿namespace Boom_Manager_Project.DataBaseClasses
+﻿namespace Boom_Manager_Project
 {
     partial class ChangePlaystation
     {

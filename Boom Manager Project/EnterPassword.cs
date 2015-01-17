@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Boom_Manager_Project.Controllers;
 using Boom_Manager_Project.DataBaseClasses;
 
 namespace Boom_Manager_Project
@@ -24,6 +25,7 @@ namespace Boom_Manager_Project
         }
 
         public bool Passed { get; set; }
+        public string LogginedPerson { get; set; }
 
         private void EnterPassword_Load(object sender, EventArgs e)
         {
@@ -47,6 +49,9 @@ namespace Boom_Manager_Project
                         if (_accessPosition == Manager && matchedStaff.staff_password == tbPassword.Text)
                         {
                             Passed = true;
+                            LogginedPerson = ManagerCardReaderController.ManagerCardReaderControllerInstance()
+                                .GetManagerById(LogginedPerson).person_id;
+//                            MessageBox.Show("Loggined " + LogginedPerson);
                             Close();
                         }
                         else
@@ -202,6 +207,8 @@ namespace Boom_Manager_Project
             Passed = mcr.Passed;
             if (Passed)
             {
+                LogginedPerson = mcr.ManagerLoggined;
+//                MessageBox.Show("Loggined " + LogginedPerson);
                 Close();
             }
             else

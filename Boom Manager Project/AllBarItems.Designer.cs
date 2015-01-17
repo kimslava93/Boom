@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvAllItems = new System.Windows.Forms.DataGridView();
             this.bAddNewItem = new System.Windows.Forms.Button();
             this.bClose = new System.Windows.Forms.Button();
             this.bDeleteItem = new System.Windows.Forms.Button();
             this.bChangeNumber = new System.Windows.Forms.Button();
+            this.bChangePrice = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllItems)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,24 +50,24 @@
             this.dgvAllItems.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvAllItems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvAllItems.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAllItems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAllItems.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvAllItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAllItems.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAllItems.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAllItems.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvAllItems.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvAllItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvAllItems.EnableHeadersVisualStyles = false;
@@ -133,7 +134,7 @@
             this.bDeleteItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bDeleteItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bDeleteItem.ForeColor = System.Drawing.Color.White;
-            this.bDeleteItem.Location = new System.Drawing.Point(265, 14);
+            this.bDeleteItem.Location = new System.Drawing.Point(248, 14);
             this.bDeleteItem.Margin = new System.Windows.Forms.Padding(5);
             this.bDeleteItem.Name = "bDeleteItem";
             this.bDeleteItem.Size = new System.Drawing.Size(93, 48);
@@ -152,7 +153,7 @@
             this.bChangeNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bChangeNumber.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bChangeNumber.ForeColor = System.Drawing.Color.White;
-            this.bChangeNumber.Location = new System.Drawing.Point(137, 14);
+            this.bChangeNumber.Location = new System.Drawing.Point(128, 14);
             this.bChangeNumber.Margin = new System.Windows.Forms.Padding(5);
             this.bChangeNumber.Name = "bChangeNumber";
             this.bChangeNumber.Size = new System.Drawing.Size(93, 48);
@@ -160,6 +161,25 @@
             this.bChangeNumber.Text = "ИЗМЕНИТЬ КОЛ-ВО";
             this.bChangeNumber.UseVisualStyleBackColor = false;
             this.bChangeNumber.Click += new System.EventHandler(this.bChangeNumber_Click);
+            // 
+            // bChangePrice
+            // 
+            this.bChangePrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bChangePrice.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bChangePrice.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bChangePrice.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.bChangePrice.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(103)))));
+            this.bChangePrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bChangePrice.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bChangePrice.ForeColor = System.Drawing.Color.White;
+            this.bChangePrice.Location = new System.Drawing.Point(360, 14);
+            this.bChangePrice.Margin = new System.Windows.Forms.Padding(5);
+            this.bChangePrice.Name = "bChangePrice";
+            this.bChangePrice.Size = new System.Drawing.Size(93, 48);
+            this.bChangePrice.TabIndex = 2;
+            this.bChangePrice.Text = "ИЗМЕНИТЬ ЦЕНУ";
+            this.bChangePrice.UseVisualStyleBackColor = false;
+            this.bChangePrice.Click += new System.EventHandler(this.bChangePrice_Click);
             // 
             // AllBarItems
             // 
@@ -170,6 +190,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.bChangeNumber);
             this.Controls.Add(this.bClose);
+            this.Controls.Add(this.bChangePrice);
             this.Controls.Add(this.bDeleteItem);
             this.Controls.Add(this.bAddNewItem);
             this.Controls.Add(this.dgvAllItems);
@@ -197,5 +218,6 @@
         private System.Windows.Forms.Button bClose;
         private System.Windows.Forms.Button bDeleteItem;
         private System.Windows.Forms.Button bChangeNumber;
+        private System.Windows.Forms.Button bChangePrice;
     }
 }

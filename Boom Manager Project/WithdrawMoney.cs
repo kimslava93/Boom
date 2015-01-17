@@ -7,9 +7,11 @@ namespace Boom_Manager_Project
 {
     public partial class WithdrawMoney : Form
     {
-        public WithdrawMoney()
+        private string _logginedManager;
+        public WithdrawMoney(string logginedManager)
         {
             InitializeComponent();
+            _logginedManager = logginedManager;
         }
 
         private void bCancel_Click(object sender, EventArgs e)
@@ -25,16 +27,17 @@ namespace Boom_Manager_Project
 
         private void LoadManagersList()
         {
-            cbManager.DataSource = WithdrawMoneyController.WithdrawMoneyControllerInstance().GetAllManagersList();
+            //cbManager.DataSource = WithdrawMoneyController.WithdrawMoneyControllerInstance().GetAllManagersList();
+            tbManager.Text = DataBaseClass.Instancedb().GetUserInfoByPersonId(_logginedManager).name;
         }
 
         private void bApply_Click(object sender, EventArgs e)
         {
-            if (CheckStringOnNull(tbTime.Text) && CheckStringOnNull(cbManager.Text) &&
+            if (CheckStringOnNull(tbTime.Text) && CheckStringOnNull(tbManager.Text) &&
                 CheckNumberOnNull(numUpDCashAmount.Value))
             {
                 WithdrawMoneyController.WithdrawMoneyControllerInstance()
-                    .InsertNewRecordWithdrawMoney((double)numUpDCashAmount.Value, cbManager.Text, DateTime.Parse(tbTime.Text));
+                    .InsertNewRecordWithdrawMoney((double)numUpDCashAmount.Value, tbManager.Text, DateTime.Parse(tbTime.Text));
                 Close();
             }
             else
@@ -60,6 +63,11 @@ namespace Boom_Manager_Project
                 return true;
             }
             return false;
+        }
+
+        private void gbWithdrawMoney_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

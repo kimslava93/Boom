@@ -9,12 +9,16 @@ namespace Boom_Manager_Project
     public partial class ManagerCardReader : Form
     {
         private bool _passed;
+        private string _manager;
         private int _ticks = 3;
         public bool Passed
         {
             get { return _passed; }
         }
-
+        public string ManagerLoggined
+        {
+            get { return _manager; }
+        }
         public ManagerCardReader()
         {
             InitializeComponent();
@@ -36,6 +40,7 @@ namespace Boom_Manager_Project
                     if (c != null)
                     {
                         _passed = true;
+                        _manager = c.person_id;
                     }
                     else
                     {
